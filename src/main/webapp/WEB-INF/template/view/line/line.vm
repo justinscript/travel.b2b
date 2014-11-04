@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>线路添加</title>
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <link href="/static/css/line.css" rel="stylesheet"/>
+    <link href="/static/css/core.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/static/js/tooltip/tip-yellowsimple/tip-yellowsimple.css" type="text/css" />
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+    <script src="/static/js/jquery.nav.js"></script>
+	<script src="/static/js/jquery.printPage.js"></script>
+    <script src="/static/js/tooltip/jquery.poshytip.min.js"></script>
+    <script src="/static/js/jq-zuobian-order.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox/jquery.mousewheel-3.0.4.pack.js"></script>
+	<script type="text/javascript" src="/static/js/fancybox/jquery.fancybox-1.3.4.pack.js"></script>
+	<link rel="stylesheet" type="text/css" href="/static/js/fancybox/jquery.fancybox-1.3.4.css" media="screen" />
+	<script src="/static/js/qr.js"></script>
+</head>
+<body>
+##成人门市价
+#set($AdultPrice=$!{format.formatFloat($!line.lCrPrice)})
+##儿童门市价
+#set($ChildrenPrice=$!{format.formatFloat($!line.lXhPrice)})
+##婴儿门市价
+#set($BabyPrice=$!{format.formatFloat($!line.lYPrice)})
+#if($!{webUser.getCid()}!=0)
+	##成人结算价
+	#set($AdultPrice=$!{format.formatFloat($!line.lJCrPrice)})
+	##儿童结算价
+	#set($ChildrenPrice=$!{format.formatFloat($!line.lJXhPrice)})
+	##婴儿结算价
+	#set($BabyPrice=$!{format.formatFloat($!line.lJYPrice)})
+#end
+<div id="line_head">
+    <div id="line_Menu">
+        <a href="/" class="icon logo">左边网</a>
+        <div class="Menu_list">
+            <ul id="nav">
+                <li class="current"><a href="#line_info"><i class="icon i2"></i>周边短线</a></li>
+                <li><a href="#line_traffic"><i class="icon i1"></i>国内长线</a></li>
+                <li><a href="#line_price"><i class="icon i3"></i>国际长线</a></li>
+                <li><a href="#line_memo"><i class="icon i4"></i>相关信息</a></li>
+                <li><a href="#line_desc"><i class="icon i5"></i>线路说明</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="line_main">
+
+<h1>$!line.lTile</h1>
+<div class="line-box1">
+    <div class="line-img">
+        <div class="zoombox">
+            <div class="zoompic"><img src="$!line.lPhotoCover" width="513" height="360" /></div>
+            <div class="sliderbox">
+                <div id="btn-left" class="arrow-btn dasabled"></div>
+                <div class="slider" id="thumbnail">
+                    <ul id="listPic">
+
+                    </ul>
+                </div>
+                <div id="btn-right" class="arrow-btn "></div>
+            </div>
+
+        </div><!--slider end-->
+    </div>
+    <div class="line-desc">
+        <div class="line-jb">
+            <dl><dd>线路编号：</dd><dt>$!line.lGroupNumber</dt></dl>
+            <dl class="price">
+                <dd>成人价格：</dd><dt><span>¥<i>$!{AdultPrice}</i></span>起</dt>
+                <dd class="ll">儿童价格：</dd><dt><span>¥<i>$!{ChildrenPrice}</i></span>起</dt>
+                <input type="hidden" value="$!line.lJCrPrice" id="crprice" />
+                <input type="hidden" value="$!line.lJXhPrice" id="xhprice" />
+            </dl>
+            <dl class="price">
+                <dd>婴儿价格：</dd><dt><span>¥<i>$!{BabyPrice}</i></span>起</dt>
+                <dd class="ll">单房差：</dd><dt><span>¥<i>$!{format.formatFloat($!line.lFangPrice)}</i></span></dt>
+                <input type="hidden" value="$!line.lJYPrice" id="yrprice" name=""/>
+                <input type="hidden" value="$!line.lFangPrice" id="dfcprice" name=""/>
+            </dl>
+            <dl>
+                <dd>优惠活动：</dd>
+					<dt>
+						#if($!line.lIsIntegral == 1)
+						<span class="jf">积分：$!line.lAdultIntegral/成人|$!line.lChildrenIntegral/儿童</span>
+						#end
+						#if($!line.lIsVouchers==1)
+						<span class="yhj">券200</span>
+						#end
+					</dt>
+            </dl>
+            <dl>
+                <dd>旅游天数：</dd><dt>$!line.lDay天  </dt><dt class="ll"><span>$!line.lGoGroupTimeString</span> 至 <span>$!line.lBackTimeString</span></dt>
+            </dl>
+            <dl>
+                <dd>往返交通：</dd><dt>$!line.lTrafficyTypeString</dt><dt style="background:url(/static/img/line.jpg) no-repeat 0 -2px;width:40px;height:10px;margin:0 5px;"></dt><dt>$!line.lTrafficBackTypeString</dt>
+            </dl>
+            <dl>
+                <dd>集合时间：</dd><dt>$!line.lJhdTime</dt>
+            </dl>
+        </div>
+        <div class="line-company">
+            <ul>
+                <li><span>供应商：</span><font color="blue">$!company.cName</font></li>
+                <li><span><i></i>联系人：</span>$!company.cCustomname</li>
+                <li><span><i></i>联系电话：</span>$!company.cTel</li>
+                <li><span><i></i>在线QQ：</span>
+					#foreach($!service in $servicelist)
+						<a target="_blank" href="http://wpa.qq.com/msgrd?v=3&amp;uin=$!service.sQQ&amp;site=qq&amp;menu=yes" title=""><img border="0" src="http://wpa.qq.com/pa?p=2:1398345486:51" alt="$!service.sName" title="$!service.sName"></a>
+					#end
+                </li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="line-box2">
+    <div class="rilis" id="GetCalendar"></div>
+    <div class="line-order">
+        <div class="line-form">
+            <div class="icl tit">
+                <span class="fl">剩余人数：
+					#if($!line.lStateString == "客满")
+						<i>0</i>人<input type="hidden" value="0" id="syren"/> </span>
+						#else
+					<i>$!line.lSurplusCount</i>人<input type="hidden" value="$!line.lSurplusCount" id="syren"/> </span>
+					#end
+                <span class="fr">建议提前$!line.lEndTimeInteger个自然日以上</span>
+            </div>
+            <input type="hidden" value="$!line.lId" id="lineId"/>
+            <div class="rili_select icl">
+                <div class="itemvalue">${dateViewTools.format($!line.lGoGroupTime,'MM-dd EEEE')}出发,<span class="price">$!{AdultPrice}</span>元/成人价,<span class="price">$!{ChildrenPrice}</span>元/儿童价</div>
+                <div class="itemlist">
+
+                </div>
+            </div>
+			<form action="/order/linecart.htm" id="submitor" method="post">
+			<input type="hidden" name="lId" value="$line.lId"/>
+            </ins>
+            <div class="order-num">
+                <dl>
+                    <dd>成人</dd>
+                    <dt>
+                        <em class="minus">-</em>
+                        <input type="text" class="number" name="lPeople" id="crcount" maxlength="2" value="0">
+                        <em class="plus">+</em>
+                    </dt>
+                    <dd>儿童</dd>
+                    <dt>
+                        <em class="minus">-</em>
+                        <input type="text" class="number J_peoplenum" name="lPeople" id="xhcount" maxlength="2" value="0">
+                        <em class="plus">+</em>
+                    </dt>
+                    <dd>婴儿</dd>
+                    <dt>
+                        <em class="minus">
+                            -</em>
+                        <input type="text" class="number J_peoplenum" name="lPeople" id="yrcount" maxlength="2" value="0">
+                        <em class="plus">+</em>
+                    </dt>
+                </dl>
+            </div>
+            <div class="order-submit">
+                <span>订单总金额：¥<i id="countprice">0</i></span>
+				#if($!line.lStateString == "预定")
+					<a id="submitorder" class="icl button">立即预订</a>
+					#else
+						<a  class="icl button">停售</a>
+				#end
+            </div>
+		 </form>
+        </div>
+
+        <div class="line-fx">
+            <p>微信扫描二维码，推荐给客户！</p>
+            <div class="wx" style="margin:auto; position:relative;z-index:1;"></div>
+            <div class="print">
+            	#set($url_line="/line/"+$!{line.lId}+".htm")
+                <a href="${url_line}" class="btnPrint icl pr">打印行程</a>
+				#set($url="/printdoc/"+$!{line.lId}+".htm")
+                <a href="${url}" class="icl down">下载文档</a>
+            </div>
+            <div class="bdsharebuttonbox"><a href="#" class="bds_more" data-cmd="more"></a><a href="#" class="bds_qzone" data-cmd="qzone" title="分享到QQ空间"></a><a href="#" class="bds_tsina" data-cmd="tsina" title="分享到新浪微博"></a><a href="#" class="bds_tqq" data-cmd="tqq" title="分享到腾讯微博"></a><a href="#" class="bds_renren" data-cmd="renren" title="分享到人人网"></a><a href="#" class="bds_weixin" data-cmd="weixin" title="分享到微信"></a></div>
+            <script>window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdPic":"","bdStyle":"0","bdSize":"16"},"share":{}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];</script>
+        </div>
+    </div>
+</div>
+<div class="line-content">
+    <div class="title-tabl">
+        <div class="tab">
+            <ul id="line-nav">
+                <li class="cu"><a href="#linedesc">线路说明</a></li>
+                <li><a href="#lineroute">详细行程</a></li>
+                <li><a href="#lineprice">费用说明</a></li>
+                <li><a href="#lineinfo">相关事项</a></li>
+            </ul>
+        </div>
+    </div>
+    <div class="line-text1" id="linedesc">$!line.lMode</div>
+    <div id="lineroute">
+        <div class="line-title icl">
+            <h3 class="icl ico-xc">行程介绍</h3>
+            <span>以下行程、交通仅供参考，最终确认以出团通知书为准</span>
+        </div>
+        <div class="line-route">
+            <table width="100%" cellpadding="0" cellspacing="0">
+				#foreach($!route in $routelist)
+                <tr>
+                    <TD WIDTH="50"><DIV CLASS="DAY"></DIV></TD>
+                    <td width="30" class="day_ico">
+                        <div class="icl d">D$!{velocityCount}</div>
+                    </td>
+                    <td>
+                        <div class="desc">
+                            <div class="tit">$!route.rCar</div>
+                            <span class="icl catering"><em>餐饮</em>#foreach($!eat in $!route.rCanStrings)$!eat&nbsp;#end<i class="icl icl-bj"></i></span>
+                            <div class="clear"></div>
+                            <span class="icl hotel"><em>住宿</em>$!route.rZhu<i class="icl icl-bj"></i></span>
+                            <div class="text">$!route.rContent</div>
+							<div class="img">
+								#foreach($!img in $!route.rPicpathStrings)
+									#if($!img && $!img!='null' && $!img!='')
+									<a href="$!img" rel="example_group" target="_blank"><img src="$!img" class="listpic" width="280" height="200"/></a>
+									#end
+								#end
+							</div>
+                        </div>
+                    </td>
+                </tr>
+				#end
+            </table>
+        </div>
+    </div>
+
+    <div id="lineprice">
+        <div class="line-title icl">
+            <h3 class="icl ico-fy">费用说明</h3>
+        </div>
+        <div class="line-text1">
+            <h3>费用包含</h3>
+            <div class="txt">
+				$!line.lYesItem
+			</div>
+            <h3>费用不含</h3>
+            <div class="txt">
+				$!line.lNoItem
+			</div>
+        </div>
+    </div>
+
+    <div id="lineinfo">
+        <div class="line-title icl">
+            <h3 class="icl ico-sx">相关事项</h3>
+        </div>
+        <div class="line-text1">
+            <h3>儿童安排</h3>
+            <div class="txt">$!line.lChildren</div>
+            <h3>购物安排</h3>
+            <div class="txt">$!line.lShop</div>
+			<h3>可选项目</h3>
+            <div class="txt">$!line.lExpenseItem</div>
+			<h3>赠送项目</h3>
+            <div class="txt">$!line.lPreseItem</div>
+			<h3>注意事项</h3>
+            <div class="txt">$!line.lAttention</div>
+			<h3>其他事项</h3>
+            <div class="txt">$!line.lOther</div>
+			<h3>温馨提示</h3>
+            <div class="txt">$!line.lReminder</div>
+			<h3>法律信息</h3>
+            <div class="txt">$!line.lTourContent</div>
+        </div>
+    </div>
+</div>
+
+</div>
+<div id="tbox">
+    <ul>
+        <li class="tel"><a href="#">联系商家</a></li>
+        <li class="qq"><a href="#">在线客服</a>
+        </li>
+        <li class="top" id="top_btn"><a href="javascript:void(0)">返回顶端</a></li>
+    </ul>
+</div>
+<script>  
+  $(document).ready(function() {
+    $(".btnPrint").printPage();
+  });
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        ###$('.wx').html('<img src="http://www.esponce.com/api/v3/generate?format=png&padding=1&size=4&em=byte&ec=m&content='+location.href+'">');
+		
+		$('.wx').qrcode({
+            render : 'table', 
+            width: 120,    
+            height:120,  
+            foreground:'#000',
+			ecLevel: 'Q',
+            text:location.href
+        });
+    });
+</script>
+
+<script type="text/javascript">
+    $(function(){
+	
+		$("a[rel=example_group]").fancybox({
+				'transitionIn'		: 'none',
+				'transitionOut'		: 'none',
+				'titlePosition' 	: 'over',
+				'titleFormat'		: function(title, currentArray, currentIndex, currentOpts) {
+					return '<span id="fancybox-title-over">Image ' + (currentIndex + 1) + ' / ' + currentArray.length + (title.length ? ' &nbsp; ' + title : '') + '</span>';
+				}
+			});
+
+	
+        $(".title-tabl").TitleFixed({
+            Height:70,
+            cla:"fixed"
+        });
+        $('#line-nav').onePageNav({
+            currentClass:"cur"
+        });
+	    var dateTimeStr=('${dateViewTools.format($!line.lGoGroupTime,'yyyy-MM-dd')}').split("-")
+        
+		$("#GetCalendar").calendar({
+            ajax:"/line/getGroup.htm?id=$!line.lProduct",
+            multiple:false,
+			defDate:new Date(dateTimeStr[0],dateTimeStr[1],dateTimeStr[2]),
+            click:function(o){
+               location.href="/line/"+o.lGroupNumber+".htm"
+            },
+			
+            callblank:function(o){
+                $("div[isintegral='1']").poshytip({
+                    className: 'tip-yellowsimple',
+                    showTimeout: 1,
+                    alignTo: 'target',
+                    alignX: 'center',
+                    alignY:"bottom",
+                    offsetY: 5,
+                    allowTipHover: false ,
+                    fade: false,
+                    slide: false
+                });
+            },
+			blankJson:function(json){
+			var html=""
+				$.each(json,function(i){
+							html+='<li rel="'+json[i].lId+'">'+new Date(json[i].lGoGroupTime).format("MM-dd")+"	"+week(new Date(json[i].lGoGroupTime).format("yyyy-MM-dd"))+'出发,<span class="price">'+json[i].lCrPrice+'</span>元/成人价,<span class="price">'+json[i].lXhPrice+'</span>元/儿童价</li>'
+							$(".itemlist").html(html)
+						});
+			}
+        })
+    })
+</script>
+</body>
+</html>

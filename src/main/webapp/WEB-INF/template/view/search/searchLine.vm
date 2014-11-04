@@ -1,0 +1,104 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+<script src="/static/js/layer/layer.min.js"></script>
+<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+  <div id="line" class="c">
+    <div class="left">
+      <div class="search">
+        <div class="tit" style="display:none;">
+        <div>
+        <span><i class="i1"></i>已订人数：<b>$!{orderGuestCount}人</b></span>
+        <span><i class="i2"></i>已有线路：<b>$!{linecount}条</b></span>
+        </div>
+        </div>
+        <div class="search-box">
+          <dl>
+            <dd>目的地：</dd>
+            <dt>
+				<a href="/search/productSearch.htm?lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}" #if(!$!{city} || $!{city}=='') class="hover" #end>全部</a>
+				#foreach($citylist in $!citylists)
+					<a href="/search/productSearch.htm?lArrivalCity=$citylist&lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}" #if($!{citylist} == $!{city}) class="hover"#end>$citylist</a>
+				#end
+			</dt>
+          </dl>
+          <dl>
+            <dd>行程天数：</dd>
+            <dt>
+				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lType=$!{lType}&keyword=$!{keyword}" #if(!$!{lDay} || $!{lDay}=='') class="hover" #end>全部</a>
+				#foreach($!day in ${enumViewTools.getAllLineDay()})
+					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!day.value&lType=$!{lType}&keyword=$!{keyword}" #if($!day.value == $!{lDay})class="hover"#end>$!day.name</a>
+				#end
+			</dt>
+          </dl>
+          <dl>
+            <dd>类型：</dd>
+            <dt>
+				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&keyword=$!{keyword}"  #if(!$!{lType} || $!{lType}=='') class="hover" #end>全部</a>
+				#foreach($!typeenum in ${enumViewTools.getAllLineType()})
+					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&lType=$!typeenum.value&keyword=$!{keyword}" #if($!typeenum.value == $!{lType})class="hover"#end>$!typeenum.name</a>
+				#end
+			</dt>
+          </dl>                    
+        </div>
+      </div>
+      <div class="search-num">共为您找到<b>$!{searchcount}</b>条线路</div>
+      <div class="line-li">
+		#foreach($line in $linelist)
+        <div class="item">
+				#set($url='/line/' + $!{line.lGroupNumber} + '.htm')
+				<div class="img"><a href="$url" target="_blank"><img src="$!line.lPhotoCover" width="160" height="120" /></a></div>
+				<dl>
+					<dt class="title"><a href="$url" target="_blank">$!line.lTile</a></dt>
+					<dt class="desc"><b>$!{enumViewTools.lineTypeEnumName($!line.lType)}</b>$!line.lMode</dt>
+					<dt><span>行程天数：<em>$!line.lDay天</em></span></dt>
+					<dt class="time">
+						<span>最近团期：<em>10-1,10-210-1,10-210-1,10-210-1,10-2</em></span>
+						<span class="rili">更多团期</span>
+					</dt>
+					<dt class="route">行程概览：<em>苏州 > 上海 > 北京</em></dt>
+				</dl>
+				<div class="price"><span>￥$!{format.formatFloat($!line.lJCrPrice)}起</span></div>
+				<a href="#" class="order">预定</a>
+        </div>
+		#end
+      </div>
+	  $widget.setTemplate("pagination/pager").addParam('pagination',$pagination)
+    </div>
+	 
+    <div class="right">
+      <div class="r-column">
+        <div class="tit">周边短线</div>
+        <div class="list">
+          <a href="#">海南专线</a>
+        </div>
+      </div>
+
+      <div class="rbox">
+        <div class="tit"><span>商家推荐</span><a href="#">更多...</a></div>
+        <ul>
+            #foreach($companyDO in $!companyDOs)
+				<li>
+					<a href="/company_view/$!{companyDO.cId}.htm">$!companyDO.cName</a>
+					<p>$!companyDO.cAboutus</p>
+				</li>
+			#end 
+        </ul>
+    </div>
+
+    </div>
+  </div>
+#parse("/widget/common/index1409_footer.vm")
+</body>
+</html>

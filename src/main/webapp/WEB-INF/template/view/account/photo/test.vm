@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />    
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/swfupload.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/handlers.js"></script>
+    <script type="text/javascript">
+        var swfu;
+        window.onload = function () {
+            swfu = new SWFUpload({
+                upload_url: "/ajaxUpload.htm",
+                file_post_name: "files", 
+                post_params: {"accept" : "file"},
+                use_query_string:false,
+                // File Upload Settings
+                file_size_limit : "10 MB",  // 文件大小控制
+                file_types : "*.*",
+                file_types_description : "All Files",
+                file_upload_limit : "0",
+                                
+                file_queue_error_handler : fileQueueError,
+                file_dialog_complete_handler : fileDialogComplete,//选择好文件后提交
+                file_queued_handler : fileQueued,//选择好文件后
+                upload_progress_handler : uploadProgress,
+                upload_error_handler : uploadError,
+                upload_success_handler : uploadSuccess,
+                upload_complete_handler : uploadComplete,
+
+
+                button_image_url: "/static/js/swfupload/button.png",
+                button_placeholder_id : "spanButtonPlaceholder",
+                button_width: 180,
+                button_height: 45,
+                
+                button_text_top_padding: 0,
+                button_text_left_padding: 18,
+                button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+                button_cursor: SWFUpload.CURSOR.HAND,
+                // Flash Settings
+                flash_url : "/static/js/swfupload/flash/swfupload.swf",
+
+                custom_settings : {
+                    upload_target : "divFileProgressContainer",
+                },
+                // Debug Settings
+                debug: false  //是否显示调试窗口
+            });
+        };
+        function startUploadFile(){
+            swfu.startUpload();
+        }
+        
+    </script>
+    <style type="text/css">
+            .btn3_mouseout{display: none;}
+            th{text-align: left;padding: 10px; vertical-align: top;}
+            td{padding: 10px;}
+    </style>
+</head>
+<body>
+
+<div style="padding:10px;">
+<form id="OrgForm" method="post">
+<input type="hidden" name="act" value="SaveTraffic" />
+<table width="100%" cellpadding="0" cellspacing="0" >
+<tr><th width="100">类型：</th><td>
+    <Select name="lx" >
+        <option>景点</option>
+        <option>酒店</option>
+        <option>餐饮</option>
+    </Select>
+</td></tr>
+<tr><th>
+<span id="spanButtonPlaceholder"></span>
+</th>
+<td><input id="btnUpload" type="button" value="上  传" onclick="startUploadFile();" class="btn3_mouseout" 
+                        />
+                    <input id="btnCancel" type="button" value="取消所有上传" onclick="cancelUpload();" disabled="disabled" class="btn3_mouseout"  />
+               
+            <div id="divFileProgressContainer"></div>
+            <div id="thumbnails">
+                <table id="infoTable" border="0" >
+                </table>
+            </div></td>
+</tr>
+</table>
+</form>
+</div>
+</body>
+</html>

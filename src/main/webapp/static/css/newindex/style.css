@@ -1,0 +1,14 @@
+﻿h2.tit{
+    position:relative;padding:0 0 8px;border-bottom:2px solid #aaa;
+    font-size:16px;
+}
+h2.tit a{
+    position:absolute;right:0;font-size:12px;
+}
+/**/
+#ToolList {
+    border:1px solid #eee;border-top:none;overflow:auto;
+}
+#ToolList a{
+    float:left;display:block;width:77px;height:77px;text-align:center;margin-top:15px;
+}

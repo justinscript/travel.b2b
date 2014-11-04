@@ -1,0 +1,63 @@
+<table class="tbl table-striped table-hover" cellpadding="0" cellspacing="0">
+<tr>
+    <th width="80" align="center">状态</th>
+    <th>线路信息</th>
+    <th width="200">预订旅行社</th>
+    <th width="90">结算价</th>
+    <th width="80">订单总额</th>
+    <th width="90">人数</th>
+    <th width="100">操作时间</th>
+    <th width="80">操作</th>
+</tr>
+#foreach( $!order in $orderList )
+<tr>
+    <td>
+    #if($!order.orState==0)
+    	<font color="red">未确认</font><br/>
+    #elseif($!order.orState==3)
+    	<font color="#f4a460">名单不全</font><br/>
+   	#elseif($!order.orState==2)
+    	<font color="#E6E6E6">已取消</font><br/>
+    #elseif($!order.orState==1)
+    	<font color="green">已确认</font></td>
+    #end
+    <td>
+    $!order.orOrderId<br/>
+    $!order.orGoGroupTimeString<br/>
+    <a href="/account/lineOrder.htm?id=$!order.lId">$!order.lTile</a>      $!order.lViews
+    </td>
+    <td>
+      $!order.mName  $!order.mTel<br/>
+      $!order.cName
+    </td>
+    <td>成：$!format.formatFloat($!order.orFirstJcrPrice)<br/>儿：$!format.formatFloat($!order.orFirstJxhPrice)</td>
+    <td>
+    	￥#set ($ddje = $!order.orFirstJcrPrice * $!order.orAdultCount + $!order.orFirstJxhPrice * $!order.orChildCount + $!order.orFirstyPrice * $!order.orBabyCount)
+		$!format.formatFloat($!ddje)
+    </td>
+    <td>
+       $!order.orAdultCount大$!order.orChildCount小$!order.orBabyCount婴
+    </td>
+    <td>$!order.gmtModifiedString</td>
+    <td>
+    <div class="w120" style="line-height: 26px;">
+		#if($!order.orState==0)<a href="javascript:confirmorder($!order.orId)" class="btn btn-primary btn-mini"><i class="icon-ok icon-white"></i> 确认</a>#end
+		#if(${webUser.hasPermission(1)})
+        <a href="/order/orderdetails.htm?id=$!order.orId" class="btn btn-mini" target="_blank"><i class="icon-eye-open"></i> 查看</a>
+		#end
+        <a href="/printdoc/$!{order.lId}.htm" class="btn btn-mini" target="_blank"><i class="icon-print"></i> 导出</a>
+		#if(${webUser.hasPermission(2)})
+			#if($order.orState==2)
+				<a href="javascript:ClearOrder(1,$!order.orId)" class="btn btn-mini"><i class="icon-question-sign"></i> 取消原因</a>
+			#else
+        #if($order.orState!=1)<a href="javascript:ClearOrder(1,$!order.orId)" class="btn btn-mini"><i class="icon-remove"></i> 取消</a>#end
+			#end
+		#end
+		#if($!order.orState==1)<a href="/order/print/confirm.htm" class="btn btn-mini" target="_blank"><i class="icon-share"></i> 生成确认单</a>#end
+     </div>
+    </td>
+</tr>
+#end
+</table>
+
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

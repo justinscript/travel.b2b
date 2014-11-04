@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" 
+	xmlns:jee="http://www.springframework.org/schema/jee"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:websocket="http://www.springframework.org/schema/websocket"
+	xsi:schemaLocation="
+            http://www.springframework.org/schema/beans 
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+			http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+			http://www.springframework.org/schema/context 
+			http://www.springframework.org/schema/context/spring-context-4.0.xsd 
+			http://www.springframework.org/schema/jee 
+			http://www.springframework.org/schema/jee/spring-jee-4.0.xsd 
+			http://www.springframework.org/schema/tx 
+			http://www.springframework.org/schema/tx/spring-tx-4.0.xsd 
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd 
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util-4.0.xsd
+			http://www.springframework.org/schema/task
+			http://www.springframework.org/schema/task/spring-task-4.0.xsd
+			http://www.springframework.org/schema/websocket
+			http://www.springframework.org/schema/websocket/spring-websocket-4.0.xsd">
+		
+	<context:component-scan base-package="com.zb.app">
+		<context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>	
+	
+	<task:annotation-driven />
+	
+	<bean id="localeResolver" class="org.springframework.web.servlet.i18n.CookieLocaleResolver">
+		<property name="cookieName" value="language" /> 
+		<property name="cookieMaxAge" value="3600" /> 
+		<property name="defaultLocale" value="zh_CN" />
+	</bean>
+	
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource" 
+    	p:fallbackToSystemLocale="true" p:useCodeAsDefaultMessage="true" p:defaultEncoding="UTF-8" p:cacheSeconds="60">
+		<description>Base message source to handle internationalization</description>
+		<property name="basenames">
+			<list>
+				<value>classpath:error</value>
+			</list>
+		</property>
+	</bean> 
+	
+	<context:annotation-config />
+	
+	<bean id="taskExecutor" class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor" scope="singleton">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="200" />
+		<property name="queueCapacity" value="200" />
+	</bean>
+	
+	<bean id="websocket" class="com.zb.app.websocket.server.WebsocketEndPointHandler"/>
+
+	<websocket:handlers>
+	    <websocket:mapping path="/push/msg.htm"    handler="websocket"/>
+	    <websocket:mapping path="/push/msgjs.htm"  handler="websocket"/>
+	    <websocket:handshake-interceptors>
+	    	<bean class="com.zb.app.common.interceptor.WebSocketHandshakeInterceptor"/>
+	    </websocket:handshake-interceptors> 
+	</websocket:handlers>
+	
+	<context:property-placeholder location="classpath:/config/datasource.properties"  ignore-unresolvable="true" />
+	<context:property-placeholder location="classpath:/config/zuobian.properties"  ignore-unresolvable="true" />
+	
+	<bean name="dataSource"  class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" scope="singleton" lazy-init="true">
+		<property name="driverClassName" value="${log4jdbc.jdbc.driverClassName}" />
+		<property name="url" value="${log4jdbc.jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" /> 
+		<property name="initialSize" value="${jdbc.initialSize}" />
+		<property name="maxActive" value="${jdbc.maxActive}" />
+		<property name="minIdle" value="0" />
+		<property name="maxIdle" value="5" />
+		<property name="maxWait" value="100000" />
+		<property name="timeBetweenEvictionRunsMillis" value="600000" />
+		<property name="minEvictableIdleTimeMillis" value="300000" />
+	</bean>	
+	
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="mapperLocations" value="classpath:/config/mybatis/*.xml" />
+	</bean>
+	
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">  
+        <constructor-arg index="0" ref="sqlSessionFactory" />
+		<constructor-arg index="1" value="BATCH" /> 
+    </bean>
+	
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+     	<property name="basePackage" value="com.zb.app.biz.mapper" />
+  	</bean>
+  	
+  	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+		
+	<bean id="serviceExceptionCatcher" 		class="com.zb.app.common.exception.ServiceExceptionCatcher"></bean>
+	
+	<bean id="methodAroundAdvice" class="com.zb.app.comset.interceptor.ServiceMethodAdviceInterceptor" />
+	
+	<aop:config proxy-target-class="true">
+		<aop:advisor id="methodAroundAdviceAdvisor" advice-ref="methodAroundAdvice" pointcut="execution(* *..service.*..*Service*.*(..))" />
+	</aop:config>
+
+	<aop:config>
+		<aop:pointcut id="entryPointMethod"	expression="execution(* *..service.*..*Service*.*(..))" />
+		<aop:advisor pointcut-ref="entryPointMethod" advice-ref="txAdvice" />
+		<aop:aspect id="afterThrowing" ref="serviceExceptionCatcher">
+			<aop:after-throwing pointcut-ref="entryPointMethod"	method="log" throwing="exception" />
+		</aop:aspect>
+	</aop:config>
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			<tx:method name="import*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="upload*"			rollback-for="java.lang.Throwable" />
+			<tx:method name="insert*"			rollback-for="java.lang.Throwable" />
+			<tx:method name="add*"				rollback-for="java.lang.Throwable" />
+			<tx:method name="save*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="delete*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="update*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="modify*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="do*" 				rollback-for="java.lang.Throwable" />
+			<tx:method name="batch*" 			rollback-for="java.lang.Throwable" />
+			<tx:method name="transaction*" 		rollback-for="java.lang.Throwable" />
+			<tx:method name="get*" 				read-only="true" />
+			<tx:method name="list*" 			read-only="true" />
+			<tx:method name="find*" 			read-only="true" />
+			<tx:method name="show*" 			read-only="true" />
+		</tx:attributes>
+	</tx:advice>
+	
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<!-- 文件上传 限制 25M -->
+		<property name="maxUploadSize"	 	value="25971520" />
+		<property name="defaultEncoding" 	value="UTF-8" />
+		<property name="uploadTempDir"      value="${image.prefix.tmpDir}"/>
+	</bean>
+
+	<bean id="exceptionResolver" class="com.zb.app.common.exception.SystemExceptionResolver" />
+	
+	<!-- 处理异常，跳到404页 -->
+	<bean id="handlerExceptionResolver" class="com.zb.app.common.component.ComponentMappingExceptionResolver">
+		<property name="defaultErrorView" value="404" />
+		<property name="exceptionMappings">
+		<props>
+			<prop key="java.lang.Exception">404</prop>
+			<prop key="java.lang.RuntimeException">404</prop>
+		</props>
+		</property>
+	</bean>
+</beans>

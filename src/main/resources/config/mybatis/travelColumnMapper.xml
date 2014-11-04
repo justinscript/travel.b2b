@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelColumnMapper" >
+  <resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelColumnDO" >
+    <id column="z_Id" property="zId" jdbcType="INTEGER" />
+    <result column="gmt_Create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_Modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="s_Id" property="sId" jdbcType="INTEGER" />
+    <result column="s_ToId" property="sToId" jdbcType="INTEGER" />
+    <result column="z_Name" property="zName" jdbcType="VARCHAR" />
+    <result column="z_Cat" property="zCat" jdbcType="INTEGER" />
+    <result column="z_Desc" property="zDesc" jdbcType="INTEGER" />
+    <result column="z_Hot" property="zHot" jdbcType="INTEGER" />
+    <result column="z_Pic" property="zPic" jdbcType="VARCHAR" />
+    <result column="z_State" property="zState" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="columns" >
+  		z_id, gmt_create, gmt_modified, s_id, s_toid, z_name, z_cat, z_desc, z_hot, z_pic, z_state
+  </sql>
+  
+   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    	select <include refid="columns" /> from Travel_Column where z_id = #{zId, jdbcType = INTEGER}
+  </select>
+  
+  <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+  		select  <include refid="columns" /> from Travel_Column ORDER BY z_Desc DESC
+  </select>
+  
+  <select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelColumnQuery">
+   		select  <include refid="columns" /> 
+   		from TRAVEL_COLUMN where 1=1
+   		<if test="sId != null">
+	  		and s_Id = #{sId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToId != null">
+	  		and s_ToId = #{sToId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zCat != null">
+	  		and z_Cat = #{zCat,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zHot != null">
+	  		and z_Hot = #{zHot,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zState != null">
+	  		and z_State = #{zState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zName != null and zName != '' ">
+	  		and z_Name = #{zName,jdbcType=INTEGER}
+	  	</if>
+	  	ORDER BY z_Desc DESC
+  </select>
+  
+  <select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelColumnQuery">
+	 	<include refid="PAGINATION.paginationStart" />
+		SELECT 
+		<include refid="columns"/>
+		FROM TRAVEL_COLUMN where 1=1
+		<if test="sId != null">
+	  		and s_Id = #{sId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToId != null">
+	  		and s_ToId = #{sToId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zCat != null">
+	  		and z_Cat = #{zCat,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zHot != null">
+	  		and z_Hot = #{zHot,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zState != null">
+	  		and z_State = #{zState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zName != null and zName != '' ">
+	  		and z_Name = #{zName,jdbcType=INTEGER}
+	  	</if>
+		ORDER BY z_Desc DESC
+		<include refid="PAGINATION.paginationEnd" />
+   </select>
+   
+   <select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelColumnQuery">
+  		select count(1)
+        from TRAVEL_COLUMN  where 1=1
+		<if test="sId != null">
+	  		and s_Id = #{sId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToId != null">
+	  		and s_ToId = #{sToId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zCat != null">
+	  		and z_Cat = #{zCat,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zHot != null">
+	  		and z_Hot = #{zHot,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zState != null">
+	  		and z_State = #{zState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="zName != null and zName != '' ">
+	  		and z_Name = #{zName,jdbcType=INTEGER}
+	  	</if>
+   	</select>
+  
+   <insert id="insert" parameterType="com.zb.app.biz.domain.TravelColumnDO" useGeneratedKeys="true">
+	   	<selectKey resultType="java.lang.Long" keyProperty="zId" order="BEFORE">
+	      SELECT Travel_Column_SEQ.NEXTVAL AS zId FROM DUAL
+	   	</selectKey>
+	   	 insert into TRAVEL_COLUMN ( <include refid="columns"/>)
+	   	 values (#{zId},SYSTIMESTAMP,SYSTIMESTAMP,
+	   	 	#{sId, jdbcType=VARCHAR},
+	   	 	#{sToId, jdbcType=INTEGER},
+	   	 	#{zName, jdbcType=VARCHAR},
+	   	 	#{zCat, jdbcType=INTEGER},
+	   	 	#{zDesc, jdbcType=INTEGER},
+	   	 	#{zHot, jdbcType=INTEGER},
+	   	 	#{zPic, jdbcType=VARCHAR},
+	   	 	#{zState, jdbcType=INTEGER}
+	   	 )
+   </insert>
+  
+  <update id="deleteById" parameterType="java.lang.Integer">
+  		update TRAVEL_COLUMN set gmt_Modified = SYSTIMESTAMP, z_state = 1 where z_id = #{zId,jdbcType=INTEGER}
+  </update>
+  
+   <update id="updateById" parameterType="com.zb.app.biz.domain.TravelColumnDO">
+	    update TRAVEL_COLUMN set gmt_Modified = SYSTIMESTAMP,
+	    <!-- <if test="sId !=null">  
+			s_Id = #{sId, jdbcType=INTEGER},
+		</if>
+	    <if test="sToId !=null">  
+			s_ToId = #{sToId, jdbcType=INTEGER},
+		</if> -->
+		<if test="zName !=null">  
+			z_Name = #{zName, jdbcType=VARCHAR},
+		</if>
+		<if test="zCat != null">
+	  	    z_Cat = #{zCat,jdbcType=INTEGER},
+	  	</if>
+	  	<if test="zHot != null">
+	  		z_Hot = #{zHot,jdbcType=INTEGER},
+	  	</if>
+	  	<if test="zDesc != null">
+	  		z_Desc = #{zDesc,jdbcType=INTEGER},
+	  	</if>
+	  	<if test="zPic != null">
+	  		z_Pic = #{zPic,jdbcType=VARCHAR},
+	  	</if>
+	  	<if test="zState != null">
+	  		z_State = #{zState,jdbcType=INTEGER}
+	  	</if>
+	    where z_id = #{zId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

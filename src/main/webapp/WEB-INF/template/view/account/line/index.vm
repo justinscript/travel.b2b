@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>左边网</title>
+            #parse("/widget/pagination/account_js.vm")
+            <script type="text/javascript">
+                $(function(){
+                    $.Menu('产品中心','散客线路')
+                    SiteSelect();
+					laydate(start);laydate(end);
+                })
+            </script>
+</head>
+<body>
+    #parse("/widget/common/account_header.vm")
+    <div id="Bodyer">
+        #parse("/widget/common/account_nav.vm")
+        <div class="M_title">
+            <div class="tit">线路管理</div>
+            <div class="Page_option">
+                <ul>
+                    <li class="current tab">
+                        <a href="javascript:void(0)" rel="">信息列表</a>
+                    </li>
+                    <li class="disabled">
+                        <a href="lineadd.htm" target="_blank" >创建线路</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="Main">
+            <div id="tab1" >
+                <div class="clear"></div>
+                <div id="FilterList" url="/account/showlist.htm">
+	                <div class="SiteList"></div>
+                    <ul>
+                        <li>
+                            <span class="tit" name="lDay" hide="true">天 数：</span>
+							#foreach($!day in ${enumViewTools.getAllLineDay()})
+									<a href="#" rel="$!day.value">$!day.name</a>
+							#end
+                        </li>
+                        <li>
+                            <span class="tit" name="lType" hide="true">标 准：</span>
+							#foreach($!typeenum in ${enumViewTools.getAllLineType()})
+                            <a href="#" rel="$!typeenum.value">$!typeenum.name</a>
+							#end
+                        </li>
+                        <li>
+                            <span class="tit" name="lIsIntegral" hide="true">积 分：</span>
+                            <a href="#" rel="1">带积分</a>
+                            <a href="#" rel="0">不带积分</a>
+                        </li>
+                        <li>
+                            <span class="tit" name="lState" hide="true">状  态：</span>
+                            <a href="#" rel="0">正常</a>
+                            <a href="#" rel="1">停止</a>
+                            <a href="#" rel="2">客满</a>
+                            <a href="#" rel="3">过期</a>
+                        </li>
+                        #*<li>
+                            <span class="tit" name="s_js" hide="true">接 送：</span>
+                            <a href="#" rel="1">带接送</a>
+                            <a href="#" rel="2">不带接送</a>
+						</li>*#
+                        <li>
+                            <span class="tit" name="lDisplay" hide="true">隐 藏：</span>
+                            <a href="#" rel="0">显示</a>
+                            <a href="#" rel="1">隐藏</a>
+                        </li>
+						<li id="FilterSearch"><span class="tit">已选条件：</span></li>
+                    </ul>
+					
+                <div class="search-list">
+            <table>
+            <tr>
+            <th>名 称:</th><td><input type="text" value="" class="txt" name="lTile" /></td>
+            <th>团 期:</th><td><input type="text" value="" name="lGoGroupTime" class="w80"  id="startDate"/> - <input type="text" value="" name="lGoGroupEndTime" class="w80" id="endDate"/></td>
+            <td><button class="btn" type="smbmit"><i class="icon-search"></i> 查询</button></td>
+            </tr>
+                </table>
+                </div>
+                </div>
+				<div class="tableContent"></div>
+            </div>
+            <div id="tab2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

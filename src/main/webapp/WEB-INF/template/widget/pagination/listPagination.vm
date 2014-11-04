@@ -1,0 +1,44 @@
+#if($!{pagination.getTotalItem()} > $!couponQuery.pageSize)
+<p class="pager" align="right">
+		##<span class="info">共$!{pagination.getTotalItem()}条/$!{pagination.getAllPageNum()}页</span>
+		#if($pagination.query.nowPageIndex == 0)
+			##<span class="start">首页</span>
+		#else
+			#set($startUrl = $baseUrl + '&couponQuery.nowPageIndex=0')
+			<a href="$startUrl" class="start" title="首页">首页</a> 
+		#end
+		#if($pagination.query.nowPageIndex == 0)
+			##<span><i class="icon dart-l disable"></i> 上一页</span>
+		#else
+			#set($prevPageIndex=$!{pagination.query.nowPageIndex} - 1)
+			#set($prevUrl = $baseUrl + '&couponQuery.nowPageIndex=' + $prevPageIndex)
+			<a href="$prevUrl" class="prev" title="上一页"><i class="icon dart-l"></i>&nbsp;上一页</a>
+		#end
+		
+		#foreach($index in $!{pagination.query.skipPageIndex})
+          #set($count = $index + 1)
+          #if($index == $!{pagination.query.nowPageIndex})
+            <span class="current">$count</span>
+          #else
+			#set($indexUrl = $baseUrl + '&couponQuery.nowPageIndex=' + $index)
+            <a href="$indexUrl" title="第$count页">$count</a>
+          #end
+        #end
+		
+		#if($!{pagination.query.nowPageIndex} + 1 < $!{pagination.query.allPageNum})
+			#set($nextPageIndex=$!{pagination.query.nowPageIndex} + 1)
+			#set($nextUrl = $baseUrl + '&couponQuery.nowPageIndex=' + $nextPageIndex)			
+			<a href="$nextUrl" title="下一页">下一页&nbsp;<i class="icon dart-r"></i></a>
+		#else
+			##<span>下一页  <i class="icon dart-r disable"></i></span>
+		#end
+		
+		#if($!{pagination.query.nowPageIndex} !=  $!{pagination.query.allPageNum} - 1)
+			#set($endPageIndex=$!{pagination.query.allPageNum} - 1)
+			#set($endUrl = $baseUrl + '&couponQuery.nowPageIndex=' + $endPageIndex)			
+			<a href="$endUrl" class="end" title="最后一页">末页</a>
+		#else
+			##<span class="end">末页</span>
+		#end
+</p>
+#end

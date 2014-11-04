@@ -1,0 +1,4 @@
+#set($indexUrl="/index.htm")
+<script type="text/javascript">
+	window.location.href= "#if(!$!{returnurl}) $!indexUrl #else $!{returnurl} #end";
+</script>

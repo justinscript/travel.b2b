@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelIntegralDealMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelIntegralDealDO" id="baseResult">
+		<id 	column="ID_ID" 			property="idId" 		jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP"/>		
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP"/>
+		<result column="C_ID" 			property="cId" 			jdbcType="INTEGER"/>
+		<result column="M_ID" 			property="mId" 			jdbcType="INTEGER"/>
+		<result column="ID_TYPE" 		property="idType" 		jdbcType="VARCHAR"/>
+		<result column="ID_INTEGRAL" 	property="idIntegral" 	jdbcType="INTEGER"/>
+		<result column="GO_ID" 			property="goId" 		jdbcType="INTEGER"/>
+		<result column="G_ID" 			property="gId" 			jdbcType="INTEGER"/>
+		<result column="L_ID" 			property="lId" 			jdbcType="INTEGER"/>
+		<result column="ID_REMARK" 		property="idRemark" 	jdbcType="VARCHAR"/>
+	</resultMap>	
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		ID_ID,GMT_CREATE,GMT_MODIFIED,C_ID,M_ID,ID_TYPE,ID_INTEGRAL,GO_ID,G_ID,L_ID,ID_REMARK
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY ID_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="idId != null">
+				ID_ID=#{idId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="cId != null">
+				and C_ID=#{cId}
+			</if>
+			<if test="mId != null">
+				and M_ID=#{mId}
+			</if>
+			<if test="idType != null">
+				and ID_TYPE=#{idType}
+			</if>
+			<if test="idIntegral != null">
+				and ID_INTEGRAL=#{idIntegral}
+			</if>
+			<if test="goId != null">
+				and GO_ID=#{goId}
+			</if>
+			<if test="gId != null">
+				and G_ID=#{gId}
+			</if>
+			<if test="lId != null">
+				and L_ID=#{lId}
+			</if>
+			<if test="idRemark != null">
+				and id_Remark=#{idRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="cId != null">
+				C_ID=#{cId},
+			</if>
+			<if test="mId != null">
+				M_ID=#{mId},
+			</if>
+			<if test="idType != null">
+				ID_TYPE=#{idType},
+			</if>
+			<if test="idIntegral != null">
+				ID_INTEGRAL=#{idIntegral},
+			</if>
+			<if test="goId != null">
+				GO_ID=#{goId},
+			</if>
+			<if test="gId != null">
+				G_ID=#{gId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_INTEGRALDEAL
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelIntegralDealQuery">
+		select <include refid="column"/>
+		from TRAVEL_INTEGRALDEAL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelIntegralDealQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_INTEGRALDEAL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_INTEGRALDEAL where ID_ID=#{idId}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelIntegralDealDO">
+		<selectKey resultType="java.lang.Long" keyProperty="idId" order="BEFORE">
+			SELECT TRAVEL_INTEGRALDEAL_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_INTEGRALDEAL(<include refid="column"/>) values (
+				#{idId},SYSTIMESTAMP,SYSTIMESTAMP,#{cId,jdbcType=INTEGER},
+				#{mId,jdbcType=INTEGER},#{idType,jdbcType=VARCHAR},
+				#{idIntegral,jdbcType=INTEGER},#{goId,jdbcType=INTEGER},#{gId,jdbcType=INTEGER},
+				#{lId,jdbcType=INTEGER},#{idRemark,jdbcType=VARCHAR}
+				)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelIntegralDealDO">
+		update TRAVEL_INTEGRALDEAL <include refid="update_set_clause"/> WHERE ID_ID=#{idId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_INTEGRALDEAL where ID_ID=#{idId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelTrafficQuery">
+		select count(1) from TRAVEL_INTEGRALDEAL <include refid="query_where_clause"/>
+	</select>
+</mapper>

@@ -1,0 +1,20 @@
+#if($isCompany=="true")
+	#set($siteCacheList=$!{siteCache.getCurrentSite($!webUser.getCid())})
+#else
+    #set($siteCacheList=$!{siteCache.getAllSite()})
+#end
+#if($type=="update")
+	#set($disabled='disabled="disabled"')
+#end
+<select  $!{disabled} name="$name" id="$id" datatype="*" errormsg="$errormsg">
+    <option value="">请选择$!{siteCache.getCurrentSite()}</option>
+    #foreach($site in $!siteCacheList)
+        <optgroup label="$!{site.sName}"></optgroup>
+        #foreach($chu in $!{site.chufaList})
+            <optgroup label="&nbsp;&nbsp;$!{chu.cName}"></optgroup>
+            #foreach($column in $!{chu.columnList})
+                <option value="$!{column.zId}">$!{column.zName}</option>
+            #end
+        #end
+    #end
+</select>

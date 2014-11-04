@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelFinanceDetailMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelFinanceDetailDO" id="baseResult">
+		<id 	column="FD_ID" 			property="fdId" 		jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP"/>
+		<result column="F_ID" 			property="fId" 			jdbcType="INTEGER"/>
+		<result column="M_ID" 			property="mId" 			jdbcType="INTEGER"/>
+		<result column="FD_SAVETIME" 	property="fdSaveTime" 	jdbcType="TIMESTAMP"/>
+		<result column="FD_TYPE" 		property="fdType" 		jdbcType="INTEGER"/>
+		<result column="FD_PRICE" 		property="fdPrice" 		jdbcType="FLOAT"/>
+		<result column="FD_PAY" 		property="fdPay" 		jdbcType="INTEGER"/>
+		<result column="FD_PAYBANK" 	property="fdPayBank" 	jdbcType="VARCHAR"/>
+		<result column="FD_REMARK" 		property="fdRemark" 	jdbcType="VARCHAR"/>		
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		FD_ID,GMT_CREATE,GMT_MODIFIED,F_ID,M_ID,FD_SAVETIME,FD_TYPE,FD_PRICE,FD_PAY,FD_PAYBANK,FD_REMARK 	
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY FD_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="fdId != null">
+				FD_ID=#{fdId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="fId != null">
+				AND F_ID=#{fId}
+			</if>
+			<if test="mId != null">
+				AND M_ID=#{mId}
+			</if>
+			<if test="fdSaveTime != null">
+				AND FD_SAVETIME=#{fdSaveTime}
+			</if>
+			<if test="fdType != null">
+				AND FD_TYPE=#{fdType}
+			</if>
+			<if test="fdPrice != null">
+				AND FD_PRICE=#{fdPrice}
+			</if>
+			<if test="fdPay != null">
+				AND FD_PAY=#{fdPay}
+			</if>
+			<if test="fdPayBank != null">
+				AND FD_PAYBANK=#{fdPayBank}
+			</if>
+			<if test="fdRemark != null">
+				AND FD_REMARK=#{fdRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="fId != null">
+				F_ID=#{fId},
+			</if>
+			<if test="mId != null">
+				M_ID=#{mId},
+			</if>
+			<if test="fdSaveTime != null">
+				FD_SAVETIME=#{fdSaveTime},
+			</if>
+			<if test="fdType != null">
+				FD_TYPE=#{fdType},
+			</if>
+			<if test="fdPrice != null">
+				FD_PRICE=#{fdPrice},
+			</if>
+			<if test="fdPay != null">
+				FD_PAY=#{fdPay},
+			</if>
+			<if test="fdPayBank != null">
+				FD_PAYBANK=#{fdPayBank},
+			</if>
+			<if test="fdRemark != null">
+				FD_REMARK=#{fdRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_FINANCE_DETAIL
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelFinanceDetailQuery">
+		select <include refid="column"/>
+		from TRAVEL_FINANCE_DETAIL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelFinanceDetailQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_FINANCE_DETAIL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_FINANCE_DETAIL WHERE FD_ID=#{fdId}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelFinanceDetailDO">
+		<selectKey resultType="java.lang.Long" keyProperty="fdId" order="BEFORE">
+			SELECT TRAVEL_FINANCE_DETAIL_SEQ.NEXTVAL AS fdId FROM DUAL
+		</selectKey>
+		insert into TRAVEL_FINANCE_DETAIL(<include refid="column"/>) 
+		VALUES
+		(#{fdId},SYSTIMESTAMP,SYSTIMESTAMP,#{fId,jdbcType=INTEGER},#{mId,jdbcType=INTEGER},#{fdSaveTime,jdbcType=TIMESTAMP},#{fdType,jdbcType=INTEGER},
+		#{fdPrice,jdbcType=FLOAT},#{fdPay,jdbcType=INTEGER},#{fdPayBank,jdbcType=VARCHAR},#{fdRemark,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelFinanceDetailDO">
+		update TRAVEL_FINANCE_DETAIL
+		<include refid="update_set_clause"/>
+		<include refid="query_where_clause"/>
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_FINANCE_DETAIL WHERE FD_ID=#{fdId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelFinanceDetailQuery">
+		select count(1) from TRAVEL_FINANCE_DETAIL <include refid="query_where_clause"/>
+	</select>
+</mapper>

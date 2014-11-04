@@ -1,0 +1,25 @@
+<table class="tbl" cellpadding="0" cellspacing="0">
+<tr>
+    <th>公司名称</th>
+    <th width="60">姓名</th>
+    <th width="240">地址</th>
+    <th width="60">黑名单</th>
+    <th width="80">操作</th>
+</tr>
+#foreach($!company in $list)
+<tr>
+    <td>$!{company.cName}</td>
+    <td>$!{company.cCustomname}</td>
+    <td>$!{company.cProvince}-$!{company.cCity}-$!{company.cCounty}<br/>$!{company.cAddress}</td>
+    <td class="red">$!{map.get($company.cId)}</td>
+    <td>
+		<div class="w200" style="line-height: 26px;">
+           <a href="javascript:void(0)" class="btn btn-primary btn-mini" onclick="ajaxTemple(this,$!{company.cId})" url="customeradd.htm" title="黑名单反馈" rel="800,300"><i class="icon-thumbs-down icon-white"></i>黑名单反馈</a>
+           <a href="javascript:void(0)" class="btn btn-primary btn-mini" onclick="GetTemple(this)" title="查看用户" url="customeruser.htm?cid=$!{company.cId}"><i class="icon-user icon-white"></i>查看用户</a>
+        </div>     
+	</td>
+</tr>
+#end
+
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$!{list.getQuery()})

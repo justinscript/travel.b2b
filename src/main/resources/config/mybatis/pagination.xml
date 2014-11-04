@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="PAGINATION" >
+	<!-- MySql分页 -->
+   	<sql id="MYSQL_PAGINATION">
+		limit #{startRecordIndex,jdbcType=INTEGER}, #{pageSize,jdbcType=INTEGER}
+	</sql>
+	<!-- Oracle分页 -->
+	<sql id="paginationStart">
+			<![CDATA[
+	   select * from (select row_.*, rownum rownum_ from (
+	  ]]>
+	</sql>
+	<sql id="paginationEnd">
+			<![CDATA[
+	   )row_ where rownum <= #{endRecordIndex,jdbcType=INTEGER}) where rownum_ >= #{startRecordIndex,jdbcType=INTEGER}
+	  ]]>
+	</sql>
+</mapper>

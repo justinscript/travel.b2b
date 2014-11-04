@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    #parse("/widget/pagination/account_js.vm")
+    <script src="/static/js/city.js"></script>
+    <script type="text/javascript">
+        $(function(){
+        		   	$(".Page_option li").click(function(){
+        						Page_option($(this));
+        					})
+        			 $.Menu('产品中心','接送地管理');
+					 SiteSelect();
+        		   })
+	</script>
+</head>
+<body>
+    #parse("/widget/common/account_header.vm")
+    <div id="Bodyer">
+    #parse("/widget/common/account_nav.vm")
+        <div class="M_title">
+            <div class="tit">接送地</div>
+        	<div class="Page_option">
+            	<ul>
+                	<li class="current"><a href="#tabl1" rel="">信息列表</a></li>
+                    <li><a href="#tabl2" rel="roadadd.asp">创建地址</a></li>
+                </ul>
+            </div>
+            </div>
+
+        <div id="Main">
+        <div class="SiteList">
+                        </div>
+        	<div id="tab1" >
+          
+            <table class="tbl" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>地址</th>
+                    <th width="120">接送区域</th>
+                    <th width="120">接送价格</th>
+                    <th width="80">状态</th>
+                    <th width="80">操作</th>
+                </tr>
+                <tr>
+                    <td>哈站至机场2ddd</td>
+                    <td>屯昌</td>
+                    <td>300</td>
+                    <td>
+                       正常
+                    </td>
+                    <td>
+                    <div class="w120" style="line-height: 26px;">
+                           <a href="javascript:Page_Add(1,'roadadd.htm','修改接送')" class="btn btn-primary btn-mini" target="_blank"><i class="icon-edit icon-white"></i> 修改</a>
+                          <a href="javascript:void(0)" title="删除" onClick="DelList('delline',1,this,3);return false"  class="btn btn-mini"><i class="icon-remove"></i> 删除</a>
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>哈站至机场2ddd</td>
+                    <td>屯昌</td>
+                    <td>300</td>
+                    <td>
+                       正常
+                    </td>
+                    <td>
+                                                           <div class="w120" style="line-height: 26px;">
+                           <a href="javascript:Page_Add(1,'roadadd.htm','修改接送')" class="btn btn-primary btn-mini" target="_blank"><i class="icon-edit icon-white"></i> 修改</a>
+                          <a href="javascript:void(0)" title="删除" onClick="DelList('delline',1,this,3);return false"  class="btn btn-mini"><i class="icon-remove"></i> 删除</a>
+                      </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td>哈站至机场2ddd</td>
+                    <td>屯昌</td>
+                    <td>300</td>
+                    <td>
+                       正常
+                    </td>
+                    <td>
+                                        <div class="w120" style="line-height: 26px;">
+                           <a href="javascript:Page_Add(1,'roadadd.htm','修改接送')" class="btn btn-primary btn-mini" target="_blank"><i class="icon-edit icon-white"></i> 修改</a>
+                          <a href="javascript:void(0)" title="删除" onClick="DelList('delline',1,this,3);return false"  class="btn btn-mini"><i class="icon-remove"></i> 删除</a>
+                      </div>
+                    </td>
+                </tr>
+            </table>
+
+            <form action="" method="get">
+                <div id="Pager">
+                    <a href="#" class="prev">上一页</a>
+                    <a href="#">1</a>
+                    <a href="#" class="active">2</a>
+                    <a href="#">3</a>
+                    <a href="#">4</a>
+                    <a href="#">5</a>
+                    <label>...</label>
+                    <a href="#">10</a>
+                    <a href="#" class="next">下一页</a>
+
+                    <span>
+                        转到<input type="text" class="num" />页<input type="submit" value="确定" class="btn" />
+                    </span>
+                </div>
+            </form>
+            </div>
+            <div id="tab2" style="display: block;">
+
+            </div>
+        </div>
+    </div>
+
+</body>
+</html>

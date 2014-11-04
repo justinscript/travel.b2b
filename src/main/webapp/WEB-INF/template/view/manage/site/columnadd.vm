@@ -1,0 +1,91 @@
+	<script type="text/javascript" src="/static/js/swfupload/js/swfupload.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/handlers.js"></script>
+	<script type="text/javascript" src="/static/js/swfuploadone.js"></script>
+<script type="text/javascript">
+$(function(){
+
+	$("#NewColumnForm").Validform({
+		tiptype:1,
+		ajaxPost:true,
+		postonce:true,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+				$.Hidemsg();
+				layer.closeAll();
+				Add($("#sToId").val(), "chufaedit.htm");
+				}, 1000);
+			}
+		}
+	})
+	
+})
+</script>
+<div style="width:760px;margin:20px;">
+    <form id="NewColumnForm" action="/zbmanlogin/site/savecolumn.htm">
+        <input type="hidden" name="sToId" value="$!sToId" />
+        <input type="hidden" name="sId" value="$!sId" />
+		<input type="hidden" name="zId" value="$!zId" />
+        <input type="hidden" name="act" value="newcolumn" />
+		<table width="100%" class="tab2_1" >
+	        <tr>
+	            <td width="80">专线名称：</td>
+	            <td>
+	                <span><input type="text" datatype="*" name="zName" value="$!{column.zName}"></span>
+	                <div class="validform_checktip"></div>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td width="80">专线分类：</td>
+	            <td>
+	                <select name="zCat" class="w100">
+	                    <option value="0" #if($!{column.zCat}==0) selected #end>周边短线</option>
+	                    <option value="1" #if($!{column.zCat}==1) selected #end>国内长线</option>
+	                    <option value="2" #if($!{column.zCat}==2) selected #end>国际线路</option>
+	                </select>
+					专线类型：<select name="zHot" class="w100">
+	                	<option value="0" #if($!{column.zHot}==0) selected #end>普通专线</option>
+	                	<option value="1" #if($!{column.zHot}==1) selected #end>热门专线</option>
+						<option value="2" #if($!{column.zHot}==2) selected #end>推荐专线</option>
+	            	</select>
+	            </td>
+	        </tr>
+
+	        <tr>
+	            <td width="80">专线图片：</td>
+	            <td><div style="position:relative;padding:0;margin:0;">
+    				<span id="spanButtonPlaceholder"></span>              
+    				<div id="divFileProgressContainer" style="position:absolute;left:150px;top:0"></div>
+    			</div>
+				#if(!$!{column.zPic} || $!{column.zPic}=="")
+					<img style="width:113px;height:51px;" src="/static/img/nopic.jpg" id="showImage"/>
+				#else
+					<img style="width:113px;height:51px" src="$!{column.zPic}" id="showImage"/>
+				#end
+					<input type="hidden" value="$!{column.zPic}" name="zPic" id="uploadImage"/>
+				</td>
+	        </tr>
+	        <tr>
+	            <td width="80">状态：</td>
+	            <td>
+	                <label class="rad"><input type="radio"  name="zState" value="0" #if($!{column.zState}!=1) checked #end/>正常</label>
+	                <label class="rad"><input type="radio"  name="zState" value="1" #if($!{column.zState}==1) checked #end/>停止</label>
+	            </td>
+	        </tr>
+	        <tr>
+	            <td width="80">排序：</td>
+	            <td>
+	                <input type="text" value="#if(!$!{column.zDesc}) 0 #else $!{column.zDesc} #end" class="w40" name="zDesc" datatye="n" />
+	            </td>
+	        </tr>
+	        <tr>
+	        	<td colspan="2" align="center">
+					<input type="submit" value="保存" class="btn btn-primary"/>
+	            	<button type="button" class="btn btn-danger" onclick="delcolumn($!zId)">删除</button>
+	        	</td>
+	        </tr>
+	    </table>
+    </form>
+</div>

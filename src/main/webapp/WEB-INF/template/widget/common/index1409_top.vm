@@ -1,0 +1,26 @@
+  <div class="left">
+	#foreach($!object in ${enumViewTools.getallTheSidebar()})
+	<dl>
+	  #if($!{object.value} == 3)
+		<dd><a href="/company.htm"><i class="ico2 i3"></i>$!object.name</a></dd>
+	  #elseif($!{object.value} == 5)
+		<dd><a href="/shop.htm"><i class="ico2 i5"></i>$!object.name</a></dd>
+	  #else
+		<dd><a href="#"><i class="ico2 i$!{object.value}"></i>$!object.name</a></dd>
+	  #end
+		#if($!{object.value} == 1)
+			<dt style="display:block;">
+			#foreach($about in ${articleCacheTools.getAboutZuobian().keySet()})
+				<a href="/about/$!{about}.htm">$!{articleCacheTools.getAboutZuobian().get($about)}</a>
+			#end
+			</dt>
+		#elseif($!{object.value} == 4)
+			<dt style="display:block;">
+			#foreach($help in $!{articleCacheTools.getHelpCenter().keySet()})
+				<a href="/help/$!{help}.htm">$!{articleCacheTools.getHelpCenter().get($help)}</a>
+			#end
+			</dt>
+		#end
+    </dl>
+	#end
+  </div>

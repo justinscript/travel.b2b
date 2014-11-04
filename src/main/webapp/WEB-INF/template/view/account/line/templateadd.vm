@@ -1,0 +1,298 @@
+<script type="text/javascript">
+    $(function(){
+    #if($type)
+        $("#AddSelectColumn").val('$!temp.zId');
+        GetP('Province', 'City', 'County', ["$temp.lProvince", "$temp.lCity", "$temp.lArea"]);
+        GetP('Province2', 'City2', 'County2', ["$temp.lArrivalProvince", "$temp.lArrivalCity", "$temp.lArrivalArea"]);
+        #else
+            GetP('Province', 'City', 'County', ["", "", ""]);
+            GetP('Province2', 'City2', 'County2', ["", "", ""]);
+    #end
+    $("#linetemplate").Validform({
+    tiptype:2,
+    ajaxPost:true,
+    postonce:true,
+    callback:function(data)
+    {
+    if(data.code==0)
+    {
+    setTimeout(function () {
+    $.Hidemsg();
+    location.reload();
+    }, 1000);
+    }
+    }
+    })
+    })
+</script>
+#if($!type=="update")
+    <form id="linetemplate" action="/account/updatetemplate.htm" method="post">
+        <input type="hidden" value="$!temp.lId" name="lId">
+            #else
+                <form id="linetemplate" action="/account/addtemplate.htm" method="post">
+#end
+<div class="title_form">
+    <span>基本信息</span>
+</div>
+<table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+    <tr>
+        <th width="100">专线类别：</th>
+        <td>
+            <label>
+                $widget.setTemplate("site/site").addParam('name',"zId").addParam("id","AddSelectColumn").addParam("errormsg","请选择专线!").addParam("isCompany","true")
+            </label>
+        </td>
+    </tr>
+    <tr>
+        <th>线路名称</th>
+        <td>
+            <span>
+                <input style="width: 600px" type="text" id="R_Address" name="lTile" value="$!temp.lTile"  nullmsg="接送地不能为空" datatype="*" errormsg="接送地不能为空" />
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <th>出发城市</th>
+        <td>
+            <span>
+                <input type="hidden" id="R_Quyu" name="R_Quyu"  />
+                <select name="lProvince" id="Province" datatype="*" class="w100"  ></select>
+                <select name="lCity" id="City" datatype="*" class="w100"   ></select>
+                <select name="lArea" id="County" datatype="*"  class="w100"  ></select>
+                至
+                <select name="lArrivalProvince" id="Province2" datatype="*"  class="w100"  ></select>
+                <select name="lArrivalCity" id="City2" datatype="*"  class="w100"  ></select>
+                <select name="lArrivalArea" id="County2" datatype="*"  class="w100"  ></select>
+            </span>
+        </td>
+    </tr>
+    <tr>
+        <th>线路类型</th>
+        <td>
+            <select name="lType" id="L_Type"  style="width: 120px;">
+                #foreach($!typeenum in $!{enumViewTools.getAllLineType()})
+                    <option value="$!typeenum.value">$!typeenum.name</option>
+                #end
+            </select>
+        </td>
+    </tr>
+    <tr>
+        <th>行程天数</th>
+        <td>
+            <span>
+                <input type="text" id="L_DayCount" value="$!temp.lDay"  name="lDay" onblur="AddXC();"  onkeyup="value=value.replace(/[^\d]/g,'')" datatype="n" size="1"  style="width: 41px" nullmsg="请填写天数" datatype="n" errormsg="请正确填写天数，必须为数值"  />
+            </span>
+            <input type="hidden" value="0" id="L_DayCounts"/>
+        </td>
+    </tr>
+</table>
+<div id="RoteList" style="display:block">
+    #foreach($!ro in $!route)
+        #set($index=$!{velocityCount} - 1)
+        <table width="100%" cellspacing="0" cellpadding="0" >
+            <tr>
+                <td width="80" class="day">第$!{velocityCount}天</td>
+                <td>
+                    <input type="text" class="form-control" value="$!ro.rCar" name="routelist[${index}].rCar"  placeholder="交通" style="width:250px;margin-bottom:6px;">
+                        <br/>
+                        <textarea	class="form-control w500" name="routelist[${index}].rContent" placeholder="行程">$!ro.rContent</textarea>
+</td>
+<td width="200" class="c" valign="top">
+    <button type="button" class="btn btn-default btn-sm" onclick="ajaxTemple(this,${index})" title="导入图片" url="/account/resourcelist.htm" rel="980,540">导入图片</button>
+    <input type="hidden" value="$!ro.rPicpath" class="linephoto" name="routelist[${index}].rPicpath"/>
+    <div class="xc-photo">
+        <ul class="xc-photo-list">
+            #foreach($pic in $!ro.rPicpathStrings)
+                <li>
+                    <img width="50" height="50" src="$pic">
+</li>
+            #end
+</ul>
+</div>
+</td>
+<td width="200" class="c">
+    #set($checked="")
+    #set($noon="")
+    #set($night="")
+    ##多选框赋值
+    #foreach($eat in $!ro.rCanStrings)
+        #if($eat == "早")
+            #set($checked="checked='checked'")
+            #elseif($eat == "中")
+                #set($noon="checked='checked'")
+                #else
+                    #set($night="checked='checked'")
+        #end
+    #end
+    <label>
+        <input type="checkbox" $!{checked} value="早" name="routelist[${index}].rCan"/>
+        早</label>
+        <label>
+            <input type="checkbox" $!{noon}    value="中" name="routelist[${index}].rCan"/>
+            中</label>
+            <label>
+                <input type="checkbox" $!{night}   value="晚" name="routelist[${index}].rCan"/>
+                晚</label>
+                <br/>
+                <textarea name="routelist[${index}].rZhu"class="form-control" placeholder="酒店">$!ro.rZhu</textarea>
+</td>
+</tr>
+</table>
+    #end
+</div>
+<div id="line_memo">
+    <div class="title_form">
+        <span>相关信息</span>
+    </div>
+    <div class="tab3">
+        #*<dl>
+            <dd>是否接送：</dd>
+            <dt style="height: 24px; ">
+                <div class="jsd">
+                    <div id="js_switch" class="off">
+                        <span id="js_on"  class="trigger_isjs"></span>
+                        <span id="js_off"></span>
+                    </div>
+                    <div class="zd_selected" style="float: left;"></div>
+                    <span id="EditR" style="display:none ">
+                        <button type="button" class="btn btn-danger btn-xs trigger_isjs" src="targetBox">修改</button>
+                        &nbsp;&nbsp;接送模式：<label>
+                            <input type="radio"  name="L_IsJsType" value="0" checked />
+                        </label>
+                        含接送&nbsp;&nbsp;&nbsp;&nbsp;
+                        <label>
+                            <input type="radio" name="L_IsJsType" value="1" />
+                            可选接送</label>
+                    </span>
+                    <input type="hidden" name="L_Isjs" id="L_Isjs" value="0" />
+                </div>
+            </dt>
+        </dl>*#
+        <dl>
+            <dd>送团标志：</dd>
+            <dt>
+                <input type="text" value="$!temp.lIco" name="lIco"/>
+            </dt>
+            <dd>集合地点：</dd>
+            <dt>
+                <input type="text" value="$!temp.lJhd"  name="lJhd"/>
+            </dt>
+            <dd>地陪：</dd>
+            <dt>
+                <input type="text"  value="$!temp.lDipei"  name="lDipei"/>
+            </dt>
+        </dl>
+        <dl>
+            <dd>送团电话：</dd>
+            <dt>
+                <input type="text" value="$!temp.lGroupTel"  name="lGroupTel"/>
+            </dt>
+            <dd>集合时间：</dd>
+            <dt>
+                <input type="text" value="$!temp.lJhdTime"  name="lJhdTime"/>
+            </dt>
+        </dl>
+        <dl>
+            <dd>线路说明：</dd>
+            <dt>
+                <textarea cols="100" rows="3" class="w600"  name="lMode">$!temp.lMode</textarea>
+            </dt>
+        </dl>
+        <dl>
+            <dd>内部备注：</dd>
+            <dt>
+                <textarea cols="100" rows="3" class="w600" name="lNMode">$!temp.lNMode</textarea>
+            </dt>
+        </dl>
+    </div>
+</div>
+<div class="title_form">
+    <span>线路说明</span>
+</div>
+<table cellpadding="0" width="100%" cellspacing="0" class="tab4">
+    <tr>
+        <td width="45%" valign="bottom">
+            包含项目:
+        </td>
+        <td width="45%" valign="bottom">
+            不包含项目:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lYesItem">$!temp.lYesItem</textarea>
+        </td>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lNoItem">$!temp.lNoItem</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td valign="bottom">
+            儿童安排:
+        </td>
+        <td valign="bottom">
+            购物安排:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lChildren">$!temp.lChildren</textarea>
+        </td>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lShop">$!temp.lShop</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td valign="bottom">
+            可选项目:
+        </td>
+        <td valign="bottom">
+            赠送项目:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lExpenseItem">$!temp.lExpenseItem</textarea>
+        </td>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lPreseItem">$!temp.lPreseItem</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td valign="bottom">
+            注意事项:
+        </td>
+        <td valign="bottom">
+            其他事项:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lAttention">$!temp.lAttention</textarea>
+        </td>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lOther">$!temp.lOther</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td valign="bottom">
+            温馨提示:
+        </td>
+        <td>旅游法相关信息:
+        </td>
+    </tr>
+    <tr>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control"  name="lReminder">$!temp.lReminder</textarea>
+        </td>
+        <td>
+            <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lTourContent">$!temp.lTourContent</textarea>
+        </td>
+    </tr>
+    <tr>
+        <td colspan="2" align="center">
+            <button type="submit" class="btn btn-primary btn-lg">保存信息</button>
+        </td>
+    </tr>
+</table>
+</form>

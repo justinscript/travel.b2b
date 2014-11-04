@@ -1,0 +1,93 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta name="generator" content="HTML Tidy, see www.w3.org" />
+<meta charset="utf-8" />
+<meta name="keywords" content=
+"&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;,&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;API&iuml;&frac14;&OElig;&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&egrave;&Dagger;&ordf;&aring;&reg;&scaron;&auml;&sup1;&permil;&aring;&middot;&yen;&aring;&hellip;&middot;&iuml;&frac14;&OElig;&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&permil;&euro;&egrave;&sect;&aring;&sup3;&aelig;&permil;&euro;&aring;&frac34;&mdash;&aring;&middot;&yen;&aring;&hellip;&middot;" />
+<meta name="description" content=
+"&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;API&egrave;&Dagger;&ordf;&aring;&reg;&scaron;&auml;&sup1;&permil;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&iuml;&frac14;&OElig;&aring;&cedil;&reg;&aring;&Scaron;&copy;&ccedil;&rdquo;&uml;&aelig;&circ;&middot;&aring;&oelig;&uml;&aring;&macr;&egrave;&sect;&dagger;&aring;&OElig;&ndash;&aelig;&ldquo;&auml;&frac12;&oelig;&auml;&cedil;&lsaquo;&ccedil;&rdquo;&Yuml;&aelig;&circ;&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;" />
+<title>
+&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;API&egrave;&Dagger;&ordf;&aring;&reg;&scaron;&auml;&sup1;&permil;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;</title>
+<!--å¼"ç¨ç"¾åº¦åS°å:¾API-->
+<style type="text/css">
+    html,body{margin:0;padding:0;}
+    .iw_poi_title {color:#CC5522;font-size:14px;font-weight:bold;overflow:hidden;padding-right:13px;white-space:nowrap}
+    .iw_poi_content {font:12px arial,sans-serif;overflow:visible;padding-top:4px;white-space:-moz-pre-wrap;word-wrap:break-word}
+</style>
+
+<script type="text/javascript" src=
+"http://api.map.baidu.com/api?key=&amp;v=1.1&amp;services=true">
+</script>
+</head>
+<body onload="initMap();">
+<!--ç"¾åº¦åS°å:¾å®¹å"¨-->
+<div style="width:697px;height:550px;border:#ccc solid 1px;" id=
+"dituContent"></div>
+
+<script type="text/javascript">
+    function getParam(name) {
+        return location.href.match(new RegExp('[?&]' + name + '=([^?&]+)', 'i')) ? decodeURIComponent(RegExp.$1) : '';
+    }
+    var centerParam = getParam('center');
+    var zoomParam = getParam('zoom');
+    var widthParam = getParam('width');
+    var heightParam = getParam('height');
+    var markersParam = getParam('markers');
+    var markerStylesParam = getParam('markerStyles');
+
+    //&aring;&circ;&rsaquo;&aring;&raquo;&ordm;&aring;&rsquo;&OElig;&aring;&circ;&aring;&sect;&lsaquo;&aring;&OElig;&ndash;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aring;&Dagger;&frac12;&aelig;&bull;&deg;&iuml;&frac14;&scaron;
+    function initMap(){
+        // [FF]&aring;&circ;&Dagger;&aelig;&cent;&aelig;&uml;&iexcl;&aring;&frac14;&aring;&#381;&aelig;&Scaron;&yen;&eacute;&rdquo;&trade;
+        if (!window.BMap) {
+            return;
+        }
+        var dituContent = document.getElementById('dituContent');
+        dituContent.style.width = widthParam + 'px';
+        dituContent.style.height = heightParam + 'px';
+
+        createMap();//&aring;&circ;&rsaquo;&aring;&raquo;&ordm;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;
+        setMapEvent();//&egrave;&reg;&frac34;&ccedil;&frac12;&reg;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&ordm;&lsaquo;&auml;&raquo;&para;
+        addMapControl();//&aring;&lsquo;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&middot;&raquo;&aring;&Scaron; &aelig;&#381;&sect;&auml;&raquo;&para;
+
+        // &aring;&circ;&rsaquo;&aring;&raquo;&ordm;&aelig; &Dagger;&aelig;&sup3;&uml;
+        var markersArr = markersParam.split(',');
+        var point = new BMap.Point(markersArr[0], markersArr[1]);
+        var marker = new BMap.Marker(point);
+        map.addOverlay(marker); // &aring;&deg;&dagger;&aelig; &Dagger;&aelig;&sup3;&uml;&aelig;&middot;&raquo;&aring;&Scaron; &aring;&circ;&deg;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&cedil;&shy;
+    }
+
+    //&aring;&circ;&rsaquo;&aring;&raquo;&ordm;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aring;&Dagger;&frac12;&aelig;&bull;&deg;&iuml;&frac14;&scaron;
+    function createMap(){
+        var map = new BMap.Map("dituContent");//&aring;&oelig;&uml;&ccedil;&trade;&frac34;&aring;&ordm;&brvbar;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aring;&reg;&sup1;&aring;&trade;&uml;&auml;&cedil;&shy;&aring;&circ;&rsaquo;&aring;&raquo;&ordm;&auml;&cedil;&euro;&auml;&cedil;&ordf;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;
+        var centerArr = centerParam.split(',');
+        var point = new BMap.Point(centerArr[0], centerArr[1]);//&aring;&reg;&scaron;&auml;&sup1;&permil;&auml;&cedil;&euro;&auml;&cedil;&ordf;&auml;&cedil;&shy;&aring;&iquest;&fnof;&ccedil;&sbquo;&sup1;&aring;&aelig; &Dagger;
+        map.centerAndZoom(point, zoomParam);//&egrave;&reg;&frac34;&aring;&reg;&scaron;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&ccedil;&scaron;&bdquo;&auml;&cedil;&shy;&aring;&iquest;&fnof;&ccedil;&sbquo;&sup1;&aring;&rsquo;&OElig;&aring;&aelig; &Dagger;&aring;&sup1;&para;&aring;&deg;&dagger;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&tilde;&frac34;&ccedil;&curren;&ordm;&aring;&oelig;&uml;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aring;&reg;&sup1;&aring;&trade;&uml;&auml;&cedil;&shy;
+        window.map = map;//&aring;&deg;&dagger;map&aring;&tilde;&eacute;&Dagger;&aring;&shy;&tilde;&aring;&sbquo;&uml;&aring;&oelig;&uml;&aring;&hellip;&uml;&aring;&plusmn;&euro;
+    }
+
+    //&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&ordm;&lsaquo;&auml;&raquo;&para;&egrave;&reg;&frac34;&ccedil;&frac12;&reg;&aring;&Dagger;&frac12;&aelig;&bull;&deg;&iuml;&frac14;&scaron;
+    function setMapEvent(){
+        map.enableDragging();//&aring;&macr;&ccedil;&rdquo;&uml;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&lsaquo;&ndash;&aelig;&lsaquo;&frac12;&auml;&ordm;&lsaquo;&auml;&raquo;&para;&iuml;&frac14;&OElig;&eacute;&raquo;&tilde;&egrave;&reg;&curren;&aring;&macr;&ccedil;&rdquo;&uml;(&aring;&macr;&auml;&cedil;&aring;&dagger;&trade;)
+        map.enableScrollWheelZoom();//&aring;&macr;&ccedil;&rdquo;&uml;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&raquo;&scaron;&egrave;&frac12;&reg;&aelig;&rdquo;&frac34;&aring;&curren;&sect;&ccedil;&frac14;&copy;&aring;&deg;
+        map.enableDoubleClickZoom();//&aring;&macr;&ccedil;&rdquo;&uml;&eacute;&frac14; &aelig; &Dagger;&aring;&OElig;&aring;&Dagger;&raquo;&aelig;&rdquo;&frac34;&aring;&curren;&sect;&iuml;&frac14;&OElig;&eacute;&raquo;&tilde;&egrave;&reg;&curren;&aring;&macr;&ccedil;&rdquo;&uml;(&aring;&macr;&auml;&cedil;&aring;&dagger;&trade;)
+        map.enableKeyboard();//&aring;&macr;&ccedil;&rdquo;&uml;&eacute;&rdquo;&reg;&ccedil;&rsaquo;&tilde;&auml;&cedil;&Scaron;&auml;&cedil;&lsaquo;&aring;&middot;&brvbar;&aring;&sup3;&eacute;&rdquo;&reg;&ccedil;&sect;&raquo;&aring;&Scaron;&uml;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;
+    }
+
+    //&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&aelig;&#381;&sect;&auml;&raquo;&para;&aelig;&middot;&raquo;&aring;&Scaron; &aring;&Dagger;&frac12;&aelig;&bull;&deg;&iuml;&frac14;&scaron;
+    function addMapControl(){
+        //&aring;&lsquo;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&cedil;&shy;&aelig;&middot;&raquo;&aring;&Scaron; &ccedil;&frac14;&copy;&aelig;&rdquo;&frac34;&aelig;&#381;&sect;&auml;&raquo;&para;
+    var ctrl_nav = new BMap.NavigationControl({anchor:BMAP_ANCHOR_TOP_LEFT,type:BMAP_NAVIGATION_CONTROL_LARGE});
+    map.addControl(ctrl_nav);
+        //&aring;&lsquo;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&cedil;&shy;&aelig;&middot;&raquo;&aring;&Scaron; &ccedil;&frac14;&copy;&ccedil;&bull;&yen;&aring;&rsaquo;&frac34;&aelig;&#381;&sect;&auml;&raquo;&para;
+    var ctrl_ove = new BMap.OverviewMapControl({anchor:BMAP_ANCHOR_BOTTOM_RIGHT,isOpen:1});
+    map.addControl(ctrl_ove);
+        //&aring;&lsquo;&aring;&oelig;&deg;&aring;&rsaquo;&frac34;&auml;&cedil;&shy;&aelig;&middot;&raquo;&aring;&Scaron; &aelig;&macr;&rdquo;&auml;&frac34;&lsaquo;&aring;&deg;&ordm;&aelig;&#381;&sect;&auml;&raquo;&para;
+    var ctrl_sca = new BMap.ScaleControl({anchor:BMAP_ANCHOR_BOTTOM_LEFT});
+    map.addControl(ctrl_sca);
+    }
+</script>
+</body>
+</html>
+

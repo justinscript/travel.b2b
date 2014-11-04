@@ -1,0 +1,36 @@
+<ul class="nav">
+	<li #if($nav_selected >=0 && $nav_selected < 10) class="second-nav-open" #end>
+        <a href="javascript:void(0)">系统管理<span></span></a>
+		<ul class="second-nav" #if($nav_selected >=0 && $nav_selected < 10) style="display:block;" #end>
+			<li>
+				<a href="javascript:void(0)">用户管理</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)">用户组管理</a>
+            </li>
+        </ul>
+    </li>
+	<li #if($nav_selected >=10 && $nav_selected < 20) class="second-nav-open" #end>
+        <a href="javascript:void(0)">基础数据编辑<span></span></a>
+		<ul class="second-nav" #if($nav_selected >=10 && $nav_selected < 20) style="display:block;" #end>
+			<li>
+				<a href="javascript:void(0)">品牌管理</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)">分类管理</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)">网上商城管理</a>
+            </li>
+			<li>
+				<a href="javascript:void(0)">商品管理</a>
+            </li>
+			<li #if($nav_selected == 14) class="second-nav-selected" #end>
+				<a href="/preciseGoodInfo/index.htm">精确商品管理</a>
+            </li>
+			<li #if($nav_selected == 15) class="second-nav-selected" #end>
+				<a href="javascript:void(0)">商品链接管理</a>
+            </li>
+        </ul>
+    </li>
+</ul>

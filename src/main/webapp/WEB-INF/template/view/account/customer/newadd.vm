@@ -1,0 +1,82 @@
+<script type="text/javascript">
+    $(function(){
+	
+		#if($!type=="update")
+		$("#AddSelectColumn").val('$!news.zId');
+		#end
+		var editor = KindEditor.create('.kindcontent', {allowFileManager : true,afterBlur: function(){this.sync();}});	
+		
+		$("#NewUserForm").Validform({
+		ajaxPost:true,
+		postonce: false,
+		tiptype:2,
+		showAllError:false,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+					$.Hidemsg();
+					Page_back(0);
+				}, 1000);
+			}
+		}
+	})
+    })
+</script>
+#if($!type=="update")
+<form id="NewUserForm" method="post" action="/account/updateNews.htm">
+    <input type="hidden" name="nId" value="$!news.nId" />
+#else
+<form id="NewUserForm" method="post" action="/account/addNews.htm">
+#end
+    <input type="hidden" name="act" value="newuser" />
+    <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+        <tr>
+            <th width="90">
+                所在专线:
+            </th>
+            <td>
+                <span>$widget.setTemplate("site/site").addParam('name',"zId").addParam("id","AddSelectColumn").addParam("errormsg","请选择专线!").addParam("isCompany","true")
+                    </span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                新闻标题:
+            </th>
+            <td>
+                <span><input class="w300" nullmsg="标题不能为空" datatype="*" errormsg="标题不能为空"  type="text" name="nTitle" value="$!news.nTitle" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                新闻内容:
+            </th>
+            <td class="td_padding">
+                <span><textarea datatye="*" class="kindcontent" name="nContent" style="width: 100%;height:300px;">$!news.nContent</textarea></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                状态：
+            </th>
+            <td>
+                <label class="rad"><input type="radio" name="nState" value="0" checked="checked" id="s1" />正常</label>
+                <label class="rad"><input type="radio" name="nState" value="1" id="s2" />停止</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+                <button class="btn btn-primary" type="submit" onclick="OrgFormL(this)">提交</button>
+            </td>
+        </tr>
+    </table>
+    <div class="clear">
+    </div>
+</form>

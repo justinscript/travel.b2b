@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>哈尔滨左边信息技术有限公司《出票名单表》</title>
+    <link href="/static/css/print.css" rel="stylesheet" media="all"/>
+<style type="text/css" media="print">
+    #printBtn
+    {
+        display: none;
+    }
+    .printBtn
+    {
+        display: none;
+    }
+    #wrapper
+    {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+
+    .noprint{display:none}
+    input{border:0;}
+</style>
+</head>
+<body>
+<div id="printBtn">
+    <a href="#" onclick="javascript:window.print();return false;">[打印本页]</a> <a href="#"
+                                                                                onclick="javascript:window.close();">[关闭窗口]</a>&nbsp; <a href="/order/exportGoTicket/$!{line.lId}.htm">
+    [导出Word]</a>
+</div>
+<div class="height"></div>
+<div id="wrapper">
+
+
+    <table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000" style="border-collapse:collapse">
+        <tr>
+            <td>
+                <div align="center">
+                    <font size="4"><b>
+                        $!company.cName《出票名单表》</b></font></div>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <font size="3"><b></b></font>
+            </td>
+        </tr>
+        <tr>
+            <td align="left">
+                打印日期：2014/7/2 14:18:53
+            </td>
+        </tr>
+    </table>
+    <br />
+
+    <table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000" style="border-collapse:collapse">
+        <tr bgcolor="#FFFFFF">
+            <td colspan="2" align="left">
+                <b>
+                    $!company.cName</b>
+            </td>
+            <td align="left">
+                传至(To)： <span style="border-bottom: 1px solid #000; width: 130; text-align: left">
+                    <input id="Text4" name="to" size="5" type="text" value="" style="border: 0px" /></span>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td colspan="2" align="left">
+                发件人：
+            </td>
+            <td align="left">
+                收件人： <span style="border-bottom: 1px solid #000; width: 130; text-align: left">
+                    <input id="from" name="from" size="5" type="text"  value="" style="border: 0px" /></span>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td width="170" align="left">
+                电话：$!company.cTel
+            </td>
+            <td width="280" align="left">
+                传真：$!company.cFax
+            </td>
+            <td width="250" align="left">
+                传真： <span style="border-bottom: 1px solid #000; width: 130; text-align: left">
+                    <input id="fax" name="fax" size="5" type="text" value="" style="border: 0px" /></span>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td colspan="2" align="left">
+                团号：$!line.lGroupNumber
+            </td>
+            <td align="left">
+                人数： <span style="border-bottom: 1px solid #000; width: 130; text-align: left">
+                    <input id="num" name="num" size="5" type="text"  value="" style="border: 0px" /></span>
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td align="left">
+                出发日期：$!line.lGoGroupTimeString
+            </td>
+            <td align="left">
+                出发交通：$!line.lTrafficyTypeString
+            </td>
+            <td align="left">
+
+                #if($!line.lIsJs==0)
+                        		不接送
+                        	#else
+                        		接送
+                        	#end
+
+            </td>
+        </tr>
+        <tr bgcolor="#FFFFFF">
+            <td align="left">
+                返回日期：$!line.lBackTimeString
+            </td>
+            <td colspan="2" align="left">
+                返回交通：$!line.lTrafficBackTypeString
+            </td>
+        </tr>
+    </table>
+
+    <br />
+    <table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000" style="border-collapse:collapse">
+        <tr>
+            <th width="100" align="center">
+                编号
+            </th>
+            <th width="200" align="center">
+                姓名
+            </th>
+            <th width="400" align="center">
+                身份证
+            </th>
+        </tr>
+        
+		#foreach($guestDO in $!guestDOs)
+        	<tr>
+	                <td align="center">
+                    	$!guestDO.gId
+                	</td>
+	                <td align="center">
+                    	$!guestDO.gName
+                	</td>
+                	<td align="center">
+                    	$!guestDO.gCard
+                	</td>
+        	</tr>
+		#end
+    </table>
+
+
+</div>
+
+</body>
+</html>

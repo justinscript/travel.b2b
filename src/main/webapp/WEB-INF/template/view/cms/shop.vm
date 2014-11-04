@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>积分礼品-左边旅游同业平台</title>
+    <link href="/static/css/newindex/main.css" rel="stylesheet" />
+    <link href="/static/css/newindex/style.css" rel="stylesheet" />
+    <link href="/static/css/newindex/shop.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+	<script src="/static/js/layer/layer.min.js"></script>	
+    <script src="/static/js/jquery.cookie.js" language="javascript" type="text/javascript" ></script>
+    <script src="/static/js/home.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetMenu("积分商城");
+        })
+    </script>
+</head>
+<body>
+   #parse("/widget/common/index_top.vm")
+
+    <div id="ShopMaxShow">
+            <div><a href="#" target="_blank"><img src="http://www.zuobian.com/upload/link/20140414/20140414034139.jpg" alt="" /></a></div>
+    </div>
+    <div class="shop_main">
+        <div class="mb">
+            <div style="margin-top: 10px; overflow: hidden; _zoom: 1; width: 1180px;">
+                
+<div class="shop_search">
+    <div class="shop_title01">
+        <h2>
+            积分礼品</h2>
+        <from action="" id="SearchShop" method="post">
+        <div>
+          
+        </div>
+        </from>
+    </div>
+    <div class="search_lists">
+        <dl>
+            <dt>礼品类别：</dt>
+            <dd>
+    			  <a href="/shop.htm"  class="on">不限</a>
+            	#foreach($!gClass in $!gClassList)
+                  <a href="/shop.htm">$!gClass.gcName</a>
+                #end
+            </dd>
+        </dl>
+       
+    </div>
+</div>
+
+                <div class="shop_list">
+                    <h2>
+                        产品列表</h2>
+                    <div class="list">
+                        #foreach($!gift in $!giftList)
+                                <dl>
+                                    <dd>
+                                        <a href="/shop_view.htm?id=$!gift.gId" target="_blank">
+                                            <img src="$!gift.gPic" width="160" height="160"
+                                                title="$!gift.gTitle" alt="$!gift.gTitle" /></a></dd>
+                                    <dt style="padding-top: 5px;"><a href="#" title="$!gift.gTitle">
+                                        $!gift.gTitle</a></dt>
+                                    <dt><span class="jifen">
+                                        $!gift.gRedemption</span><a href="/shop_cart.htm?id=$!gift.gId"
+                                            class="cart" target="_blank">兑换</a></dt>
+                                </dl>
+                         #end
+                                
+                            
+                    </div>
+                    <div class="clear">
+                    </div>
+                    <div class="yahoo2">
+                        <div class="manu"><span class="disabled"> <  上一页</span><span class="current">1</span> 
+								<a href="/shop.htm">2</a> 
+								<a href="/shop.htm">3</a> 
+								<a href="/shop.htm">下一页  > </a>
+			            </div>
+                    </div>
+                </div>
+            </div>
+            <div class="clear">
+            </div>
+        </div>
+    </div>
+ #parse("/widget/common/index_footer.vm")
+</body>
+</html>

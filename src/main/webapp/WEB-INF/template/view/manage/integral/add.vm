@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网</title>
+<link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+<link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+<link href="/static/css/main.css" rel="stylesheet" />
+<script src="/static/js/jquery-1.11.0.min.js"></script>
+<script src="/static/js/bootstrap.min.js"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+<script src="/static/js/jq-zuobian-init.js"></script>
+<script src="/static/js/layer/layer.min.js"></script>
+<script type="text/javascript" src="/static/js/powerfloat/js/jquery-powerFloat.js"></script>
+<script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+<script src="/static/js/common.js"></script>
+<link rel="stylesheet" type="text/css" href="/static/js/autocomplete/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="/static/js/autocomplete/thickbox.css" />
+<script type="text/javascript" src="/static/js/autocomplete/jquery.bgiframe.min.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/jquery.ajaxQueue.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/thickbox-compressed.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/jquery.autocomplete.pack.js"></script>			
+<script type="text/javascript">
+    $(function(){
+        $.Menu("积分管理","积分充值");
+		$(".pr1").click(function(){
+			if($(this).val()==1){
+				$(".person").show();
+			}else
+			{
+				$(".person").hide();
+			}
+		})
+    })
+</script>			
+</head>
+<body>
+#parse("/widget/common/manage_header.vm")
+<div id="Bodyer">
+#parse("/widget/common/manage_nav.vm")
+<div id="Main">
+<div class="title-tabl">
+<div class="tab" style="height:30px;">
+<ul id="myTab">
+<li class="cur"><a href="javascript:void(0)">批发商充值</a></li>
+<li><a href="javascript:void(0)">组团社充值</a></li>
+</ul>
+</div>
+</div>	
+<div class="tab-pane">
+<ul>
+    <li style="margin:20px 0;display:block;">
+        <form id="IntegralForm" method="post" action="/zbmanlogin/addIntegral.htm">
+            <table width="100%" class="tab2_1">
+            <tr><th width="100">公司名称：</th><td>
+            <span><input type="hidden" value="" name="accountCid" id="cId" datatype="*" nullmsg="您查找的公司不存在"/>
+            <input type="text" class="accountName" name="accountName" value="" ></span><div class="Validform_checktip">请输入公司名称关键字</div>
+            </td></tr>
+            <tr><th>积分：</th><td><span><input type="text" value="" name="iAddintegral" datatype="n" nullmsg="积分不能为空" errormsg="积分必须为数字"/></span><div class="Validform_checktip"></div></td></tr>
+            <tr><th>备注：</th><td><input type="text" value="" name="iRemark"/></td></tr>
+            <tr><td></td>
+            <td>
+            <span><button class="btn btn-primary" type="submit" onclick="OrgFormL(this)" >提交</button></span>
+            <span id="msgdemo"></span>
+            </td>
+            </tr>
+            </table>
+        </form>
+    </li>
+    <li style="display:none;margin:20px 0;">
+        <form id="TourIntegralForm" method="post" action="/zbmanlogin/addIntegral.htm">
+            <table width="100%" cellpadding="0" cellspacing="0" class="tab2_1">
+            <tr><th colspan="2" height="50"><h4>充值方：</h4></th></tr>
+            <tr><th width="100">选择商家：</th><td>
+			<label class="rad"><input type="radio" name="property" value="0" id="person1" class="pr1" checked/>左边网</label>
+            <label class="rad"><input type="radio" name="property" value="1" id="person" class="pr1" />批发商</label>
+			</td></tr>
+            <tbody class="person" style="display:none;">
+			<tr><th width="100">公司名称：</th><td>
+            <span><input type="hidden" value="" name="accountCid" id="cId" datatype="*" nullmsg="您查找的公司不存在"/><input type="text" class="accountName" name="accountName" value="" datatype="*" nullmsg="批发商不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div>
+            </td></tr>
+			</tbody>
+            <tr><th colspan="2" height="50"><h4>接受方：</h4></th></tr>
+            <tr>
+            <th width="80" >组团名称：</th>
+            <td><span><input type="hidden" value="" name="tourCid" id="cId" datatype="*" nullmsg="您查找的组团社不存在"/><input type="text" id="tourName" name="tourName" value="" datatype="*" nullmsg="组团社不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div></td>
+            </tr>
+            <tr>
+            <th width="80">计调名称：</th>
+            <td>
+            <span><select name="mId" id="SelectMember" datatype="*" nullmsg="请选择计调"><option value="">请选择</option></select></span>
+            </td>
+            </tr>
+            <tr><th>积分：</th><td><span><input type="text" value="" name="iAddintegral" datatype="n" nullmsg="充值积分不能为空" errormsg="充值积分必须为数字"/></span></td></tr>
+            <tr>
+            <td></td>
+            <td>
+            <button class="btn btn-primary" type="submit" onclick="OrgFormH(this)">提交</button>
+            </td>
+            </tr>
+            </table>
+        </form>
+    </li>
+</ul>
+</div>			
+</div>
+</div>		  
+</body>
+<script type="text/javascript">
+$("#tourName").autocomplete("/queryCompanyByConditions.htm?cType=1",{
+    dataType:'json',
+    parse:function(da) {
+        var parsed = []; 
+		data=da.data;
+        for (var i = 0; i < data.length; i++) {  
+            parsed[parsed.length] = {  
+            data: data[i],  
+            value: data[i].cId,  
+            result: data[i].cName
+            };  
+        }  
+        return parsed;  
+    },  
+    formatItem: function(item) {
+    	return "<div>"+item.cName+"</div>";  
+     },  
+    formatMatch: function(item) {  
+        return item.cName;  
+    },  
+    formatResult: function(item) {  
+    	return item.cName;  
+    }  
+     }).result(function(event, item, formatted) {            
+        $("#cId").val(item.cId);
+		SelectMember(item.cId);
+    });  
+
+$(".accountName").autocomplete("/queryCompanyByConditions.htm?cType=2",{
+    dataType:'json',
+    parse:function(da) {
+        var parsed = []; 
+		data=da.data;
+        for (var i = 0; i < data.length; i++) {  
+            parsed[parsed.length] = {  
+            data: data[i],  
+            value: data[i].cId,  
+            result: data[i].cName
+            };  
+        }  
+        return parsed;  
+    },  
+    formatItem: function(item) {
+    	return "<div>"+item.cName+"</div>";  
+     },  
+    formatMatch: function(item) {  
+        return item.cName;  
+    },  
+    formatResult: function(item) {  
+    	return item.cName;  
+    }  
+ });  	
+</script>
+</html>

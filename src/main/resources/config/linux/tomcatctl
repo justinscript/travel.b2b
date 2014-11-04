@@ -1,0 +1,168 @@
+#! /bin/bash
+
+#################################################
+#         左边网服务器tomcat应用启动脚本
+#   (初始化tomcat启动参数,java运行参数,运行/重启/关闭应用）
+#
+#    V1.0      Writen by: zxc       Date:2014-08-18
+##################################################
+
+# check if root run the script
+if [ `id -u` = 0 ]; then
+    echo "****************************************************"
+    echo "*Error: root (the superuser) can't run this script.*"
+    echo "****************************************************"
+    exit 1
+fi
+
+BASE_BIN_DIR=`dirname $0`
+##. $BASE_BIN_DIR/env
+
+PROG_NAME=$0
+ACTION=$1
+
+usage() {
+	echo "Usage: $PROG_NAME {start|stop|restart}"
+	exit 1;
+}
+
+if [ $# -lt 1 ]; then
+	usage
+fi
+
+#Runtime tomcat directory
+TOMCAT_SERVER_HOME=${DEPLOY_HOME}/tomcat-server
+
+TMPDIR="$TOMCAT_SERVER_HOME/.tmp"
+START_INI="${DEPLOY_HOME}/conf/tomcat-start.ini"
+TOMCAT_ARGS="--ini=$START_INI"
+TOMCAT_PID="$OUTPUT_HOME/logs/tomcat.pid"
+TOMCAT_LOGS="$OUTPUT_HOME/logs"
+TOMCAT_WEBAPPS="$TOMCAT_SERVER_HOME/webapps"
+JAVA="$JAVA_HOME/bin/java" 
+JAVA_OPTIONS="$JAVA_OPTS"
+
+# we do not need TOMCAT_CONF, put empty file to avoid read $TOMCAT_HOME/etc/tomcat.conf
+TOMCAT_CONF=${TMPDIR}/__EMPTY_TOMCAT_CONF__
+
+# Export the env variables that tomcat need
+export TOMCAT_CONF TMPDIR TOMCAT_ARGS START_INI TOMCAT_PID TOMCAT_LOGS JAVA_OPTIONS JAVA
+
+#Define tomcat log file
+STDOUT_LOG=$OUTPUT_HOME/logs/tomcat_stdout.log
+
+# Check if a tomcat process already running, or if the war file is ready
+checkjavaps(){
+
+	STR=`netstat -ant | egrep "(\.|:)$APP_PORT " | grep LISTEN`
+	  
+	if [ ! -z "$STR" ]; then
+		echo "warn: Port ${APP_PORT} is already used, please check."
+		exit;
+	fi
+
+	##if [ ! -d "$TOMCAT_WEBAPPS/root.war" ]; then
+	if [ ! -f "$TOMCAT_WEBAPPS/root.war" ]; then
+		echo "warn: $TOMCAT_WEBAPPS/root.war is not exist, please check."
+		exit;
+   	fi
+	
+}
+
+prepare() {
+
+	echo -n "Start Preparing Tomcat server...... "
+	# create dir
+
+    for dir in "$OUTPUT_HOME/logs" "$TOMCAT_WEBAPPS" "$TOMCAT_LOGS" "$TMPDIR"; do
+        if [ ! -d $dir ]; then
+	        mkdir -p $dir
+        fi
+    done
+
+    # empty tomcat_conf
+    > ${TOMCAT_CONF}
+  	
+	if [ -f "$STDOUT_LOG.1" ]; then
+		mv -f $STDOUT_LOG.1 $STDOUT_LOG.2
+	fi
+
+	if [ -f "$STDOUT_LOG" ]; then
+		mv -f $STDOUT_LOG $STDOUT_LOG.1
+	fi
+    
+	if [ ! -f "$STDOUT_LOG" ] ; then 
+		touch "$STDOUT_LOG"
+	fi
+
+	if [ -f "$OUTPUT_HOME/logs/error_log" ]; then
+		mv -f $OUTPUT_HOME/logs/error_log $OUTPUT_HOME/logs/error_log.1
+	fi
+	
+	echo "Prepare ok"
+}
+
+start()
+{
+	checkjavaps
+
+	prepare
+
+	echo "run tomcat.sh start ......"
+	$TOMCAT_HOME/bin/catalina.sh start >$STDOUT_LOG 2>&1 &
+
+}
+
+stop()
+{
+    TIMESTAMP=`date +%Y_%m_%d_%H:%M`
+    KILL_LOG=$OUTPUT_HOME/logs/tomcat_kill_log
+
+    if [ -f $KILL_LOG ]; then
+        echo "`hostname` was stopted at $TIMESTAMP" >>$KILL_LOG
+    fi
+
+    $TOMCAT_HOME/bin/catalina.sh stop
+}
+
+check()
+{
+    STARTTIME=`date +"%s"`
+    COUNT=0
+    sleep 5
+    while true
+    do
+        echo " url=$CHECK_STARTUP_URL   not contains $STARTUP_SUCCESS_MSG" 
+        COUNT=`curl --connect-timeout 1 -s $CHECK_STARTUP_URL | grep -c "$STARTUP_SUCCESS_MSG"`
+        ENDTIME=`date +"%s"`
+        COSTTIME=$(($ENDTIME - $STARTTIME))
+        if [ $COUNT -lt 1 ]; then
+            sleep 1
+            echo -n -e "\rWait Tomcat Start: $COSTTIME seconds"
+        else
+            echo ""
+	    echo "tomcat start is ok! in $COSTTIME seconds."
+            return
+        fi
+    done
+}
+
+case "$ACTION" in
+    start)
+        start
+    ;;
+    check)
+        check
+    ;;
+    stop)
+        stop
+    ;;
+    restart)
+        stop
+        sleep 5
+        start
+    ;;
+    *)
+        usage
+    ;;
+esac

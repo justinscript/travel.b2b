@@ -1,0 +1,39 @@
+<script type="text/javascript">
+$(function(){
+GetP('p', 'c', 'c2', ["", "", ""]);
+})
+</script>
+<form action="/ajax.asp" method="post" id="OrgForm">
+<div class="title_form"><span>出发地添加</span></div>
+<table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+<tr><th>接送地址</th><td>
+<span><input  style="width: 400px" type="text" id="R_Address" name="R_Address"  nullmsg="接送地不能为空" datatype="*" errormsg="接送地不能为空" /></span>
+<span><label class="Validform_checktip"></label></span>
+</td></tr>
+<tr><th>接送价格</th><td>
+<span><input  style="width: 100px" type="text" id="R_Price" name="R_Price"  nullmsg="接送地价格不能为空" datatype="n" errormsg="接送地价格格式填写错误" /></span>
+<span><label class="Validform_checktip"></label></span>
+</td></tr>
+<tr><th>接送区域</th><td>
+<span><input type="hidden" id="R_Quyu" name="R_Quyu" datatype="*" nullmsg="请选择您接送的区域" />
+<select name="p" id="p" datatype="*" class="w120"  ></select>
+<select name="c" id="c" datatype="*" class="w120"></select>
+<select name="c2" id="c2" datatype="*" class="w120"></select>
+<button type="button" class="btn btn-primary btn-sm" onclick="RoadAdd(this)">添加</button>
+</span>
+<span><label class="Validform_checktip"></label></span>
+<div class="clear"></div>
+</td></tr>
+<tr><th></th><td><div class="road_box">
+                 <span>提示：移除直接点击下面的城市即可</span>
+                 <div id="road_list">
+                 </div>
+                 </div></td></tr>
+<tr><th>状态</th><td>
+<label><input type="radio" name="R_State" value="0" checked>正常</label>
+<label><input type="radio" name="R_State" value="1">停止</label>
+</td></tr>
+<tr><th>备注</th><td><textarea cols="" rows=""  class="form-control" style="height:80px;width:70%;" name="R_Mode"></textarea></td></tr>
+<tr><th></th><td><button type="submit" class="btn btn-primary btn-lg" onclick="OrgFormL(this)">保存信息</button></td></tr>
+</table>
+</form>

@@ -1,0 +1,188 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/css/1409/style.css">
+<script src="/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/js/layer/layer.min.js"></script>	
+<script src="/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<input type="hidden" id="index" value="0"/>
+<div class="banner c">
+    <div class="slide_box">
+        <div class="slide_list" id="banner">
+        <div><a href="#"><img src="/img/1409/show01.jpg"/></a></div>
+        <div><a href="#"><img src="/img/1409/show01.jpg"/></a></div>
+        </div>
+        <div class="slide_li">
+            <a href="#"><img src="/img/1409/show02.jpg"/></a><a href="#"><img src="/img/1409/show02.jpg"/></a><a href="#"><img src="/img/1409/show02.jpg"/></a>
+        </div>
+    </div>
+    <div class="b_right">
+        <div class="u_reg">
+            <a href="/userlogin.htm?type=tour" class="tour">组团社入驻</a>
+            <a href="/userlogin.htm?type=account" class="account">批发商入驻</a>
+        </div>
+        <div class="w_info">
+            <dl>
+                <dd>中国最大的旅游B2B平台</dd>
+                <dt>
+                <span class="linenum"><strong>11</strong> 条线路</span>
+                <span class="addline">昨日：<b>0</b>条</span>
+                </dt>
+            </dl>
+            <dl class="other">
+                <dt>
+                <span>可选择出发的城市<br/><b>1</b>个</span>
+                <span>为您服务的批发商<br/><b>4</b>个</span>
+                </dt>
+            </dl>
+        </div>
+        <div class="z_info">
+            <div class="tit"><span>左边公告</span><a href="#">更多</a></div>
+            <div class="list">
+                <ul>
+					                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="i_column c">
+    <div class="colist">
+        <div class="tit" id="icolumn">
+            <a href="#" class="hover"><i class="i1"></i>周边短线</a><a href="#"><i class="i2"></i>国内长线</a><a href="#"><i class="i3"></i>国际线路</a>
+        </div>
+        <div class="list">
+            <ul id="icolumnli">
+				                <li style="display:block">
+															<a href="/company/column/87.htm">漂流专线</a>
+									</li>
+                <li>
+  										                    <a href="/company/column/86.htm">北京专线</a>
+					                    <a href="/company/column/85.htm">云南专线</a>
+					                    <a href="/company/column/84.htm">海南专线</a>
+					                </li>
+                <li>
+                        				                    <a href="/company/column/88.htm">韩国专线</a>
+    				                </li>                
+            </ul>
+
+        </div>
+    </div>
+    <div class="rbox">
+        <div class="tit"><span>商家推荐</span><a href="#">更多...</a></div>
+        <ul>
+							<li>
+					<a href="/company_view/69.htm">中国国际旅行社信阳店</a>
+					<p></p>
+				</li>
+							<li>
+					<a href="/company_view/68.htm">中国国际旅行社</a>
+					<p></p>
+				</li>
+							<li>
+					<a href="/company_view/65.htm">哈尔滨测试账户</a>
+					<p></p>
+				</li>
+			        </ul>
+    </div>
+</div>
+<!--线路展示-->
+<div class="i_line c">
+    <div class="tit">
+      <span class="fl" id="ilinetit"><a href="" class="first hover">周边线路</a><a href="">国内线路</a><a href="">国际线路</a></span>
+      <span class="fr"><a href="#">更多...</a></span>
+    </div>
+    <div class="list" id="ilineli">
+					<div class="list-li" style="display:block;">
+		              <div class="pic">
+			              </div>
+              <div class="li">
+				              </div>
+		</div>
+					<div class="list-li" style="display:none;">
+		              <div class="pic">
+							                <dl>
+                  <dd><a href="/line/L2014092600052829.htm" target="_black"><img src="/img/67/repast/P2014092600001673.jpg" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p> 《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA</p>
+                  <div><span>最近团期：09/24,09/30</span><span class="reli">更多团期</span></div>
+                  </dt>
+                </dl>
+				    						                <dl>
+                  <dd><a href="/line/L2014092600051510.htm" target="_black"><img src="/img/67/repast/P2014092600001673.jpg" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p> 《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA</p>
+                  <div><span>最近团期：09/24,09/30</span><span class="reli">更多团期</span></div>
+                  </dt>
+                </dl>
+				    						                <dl>
+                  <dd><a href="/line/L2014092600050854.htm" target="_black"><img src="/img/67/repast/P2014092600001673.jpg" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p> 《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA</p>
+                  <div><span>最近团期：09/24,09/30</span><span class="reli">更多团期</span></div>
+                  </dt>
+                </dl>
+				    						                <dl>
+                  <dd><a href="/line/L2014092600049387.htm" target="_black"><img src="/img/67/repast/P2014092600001673.jpg" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p> 《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA</p>
+                  <div><span>最近团期：09/24,09/30</span><span class="reli">更多团期</span></div>
+                  </dt>
+                </dl>
+				    						    						    						    						    		              </div>
+              <div class="li">
+																																								                <dl>
+                  <dt><a href="/line/L2014092600048273.htm">《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA></a></dt>
+                  <dd class="desc"></dd>
+                  <dd class="time">最近出发班期： <b>10/21</b>,<b>10/22</b> <span class="rili">更多团期</span></dd>
+                </dl>
+												                <dl>
+                  <dt><a href="/line/L2014092600047382.htm">《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA></a></dt>
+                  <dd class="desc"></dd>
+                  <dd class="time">最近出发班期： <b>10/21</b>,<b>10/22</b> <span class="rili">更多团期</span></dd>
+                </dl>
+												                <dl>
+                  <dt><a href="/line/L2014092600046121.htm">《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA></a></dt>
+                  <dd class="desc"></dd>
+                  <dd class="time">最近出发班期： <b>10/21</b>,<b>10/22</b> <span class="rili">更多团期</span></dd>
+                </dl>
+												                <dl>
+                  <dt><a href="/line/L2014092600045583.htm">《尊贵游》昆明、石林、九乡、大理、丽江、版纳(大理环飞)九晚十天温泉SPA></a></dt>
+                  <dd class="desc"></dd>
+                  <dd class="time">最近出发班期： <b>10/21</b>,<b>10/22</b> <span class="rili">更多团期</span></dd>
+                </dl>
+								              </div>
+		</div>
+					<div class="list-li" style="display:none;">
+		              <div class="pic">
+			              </div>
+              <div class="li">
+				              </div>
+		</div>
+	    </div>
+</div>
+#parse("/widget/common/index1409_footer.vm")
+<script src="/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+        $("#banner").kinMaxShow({
+        height:315,
+        button:{
+            switchEvent:'mouseover',
+            showIndex:false,
+            normal:{width:'25px',height:'10px',lineHeight:'18px',right:'16px',bottom:'16px',fontSize:'12px',opacity:0.8,background:"#666666",border:"1px solid #999999",color:"#CCCCCC",marginRight:'6px'},
+            focus:{background:"#ff8800",border:"1px solid #ff8800",color:"#000000"}
+            }     
+    });
+  })
+</script>
+</body>
+</html>

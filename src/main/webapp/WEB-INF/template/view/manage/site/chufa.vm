@@ -1,0 +1,70 @@
+<script type="text/javascript">
+$(function(){
+	var prov="";
+	var city='$!{chufa.sCity}';
+	if($("#sId").val()==""){
+		prov=$(".zid"+$("#sToId").val()).val();
+	}else
+		{
+		prov='$!{chufa.sProvince}';
+		}
+	
+	GetP('P', 'C', 'Cm',[prov, city,'']);
+
+	$("#SiteForm").Validform({
+		tiptype:1,
+		ajaxPost:true,
+		postonce:true,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+				$.Hidemsg();
+				layer.closeAll();
+				Add($("#sToId").val(), "chufaedit.htm");
+				}, 1000);
+			}
+		}
+	})
+	
+})
+</script>
+<div style="width:760px;margin:20px;">
+	<form id="SiteForm" method="post" action="/zbmanlogin/site/savechufa.htm">
+		
+		<table class="tab2_1" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<th width="100">出港地：</th>
+				<td>
+					<span style="display:none"><select  id="P" class="w80" name="sProvince" value="$!{chufa.sProvince}"></select></span>
+					<select id="C" class="w80" name="sCity" value="$!{chufa.sCity}"></select>
+					<input type="hidden" name="sToid" value="$!sToId"  />
+					<input type="hidden" name="sId" value="$!{chufa.sId}"  id="sId"/>
+					
+					<div class="hidden"> 
+						<select id="Cm" class="w80"></select>
+					</div>
+				</td>
+			</tr>
+			<tr>
+				<th>状态：</th>
+				<td>
+					<label class="rad"><input type="radio" name="sState" id="optionsRadios1" value="0" #if($!{chufa.sState}!=1) checked #end>正常</label>
+					<label class="rad"><input type="radio" name="sState" id="optionsRadios1" value="1" #if($!{chufa.sState}==1) checked #end>停止</label>
+				</td>
+			</tr>
+			<tr>
+				<th>排序：</th>
+				<td>
+					<input type="text" class="w40" value="#if(!$!{chufa.sSort}) 0 #else $!{chufa.sSort} #end" name="sSort">
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center">
+					<input type="submit" value="保存" class="btn btn-primary"/>
+				</td>
+			</tr>
+		</table>
+	</form>
+</div>

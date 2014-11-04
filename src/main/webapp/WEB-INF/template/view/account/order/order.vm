@@ -1,0 +1,229 @@
+<form id="NewOrder" method="post" action="/ajax.asp">
+<input value="LineOrder" name="act" type="hidden">
+<input value="4686" name="lid" type="hidden">
+<input value="3" name="C_Id" type="hidden">
+<table width="100%" class="table table-bordered order-table2">
+    <tbody><tr>
+        <td colspan="4" class="order_h1">
+            $!line.lTile
+        </td>
+    </tr>
+    <tr>
+        <th>
+            团号
+        </th>
+        <td width="345">
+            $!line.lId
+        </td>
+        <th>
+            旅游天数
+        </th>
+        <td>
+            $!line.lDay天
+        </td>
+    </tr>
+    <tr>
+        <th>
+            出团日期
+        </th>
+        <td>
+            $!line.lGoGroupTimeString
+        </td>
+        <th>
+            返程日期
+        </th>
+        <td>
+            $!line.lBackTimeString
+        </td>
+    </tr>
+    <tr>
+        <th>
+            去程交通
+        </th>
+        <td>
+            $!line.lGoTraffic / $!line.lTrafficyTypeString
+        </td>
+        <th>
+            返程交通
+        </th>
+        <td>
+           	$!line.lBackTraffice / $!line.lTrafficBackTypeString
+        </td>
+    </tr>
+    <tr>
+        <th>
+            门市价格
+        </th>
+        <td>
+            成人：<b t="priceCr">$!line.lCrPrice</b>元/人&nbsp;儿童：<b t="priceXh">$!line.lXhPrice</b>元/人<input id="L_CrPrice" name="L_CrPrice" value="$!line.lCrPrice" type="hidden"><input id="L_XhPrice" name="L_XhPrice" value="$!line.lXhPrice" type="hidden">
+        </td>
+        <th>
+            结算价格
+        </th>
+        <td>
+            成人：<b t="jpriceCr">$!line.lJCrPrice</b>元/人&nbsp;儿童：<b t="jpriceXh">$!line.lJXhPrice</b>元/人<input name="L_JCrPrice" id="L_JCrPrice" value="$!line.lJCrPrice" type="hidden"><input name="L_JXhPrice" id="L_JXhPrice" value="$!line.lJXhPrice" type="hidden">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            婴儿价
+        </th>
+        <td>
+            门市价：$!line.lYPrice元&nbsp;&nbsp;结算价：$!line.lJYPrice元<input name="L_jYPrice" value="$!line.lJYPrice" type="hidden">
+            &nbsp; &nbsp;
+        </td>
+        <th>
+            单房差
+        </th>
+        <td>
+            $!line.lFangPrice元<input name="L_FangPrice" value="$!line.lFangPrice" type="hidden">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            积分活动
+        </th>
+        <td colspan="3">
+            <input name="L_IntegralRen" value="0" type="hidden">
+            <b style="color: red">成人$!line.lAdultIntegral</b> 个积分/<b style="color: blue">人,</b>
+            <b style="color: red">兒童$!line.lChildrenIntegral</b> 个积分/<b style="color: blue">人</b> 
+            <font color="red">(婴儿不包括活动范围)</font>
+        </td>
+    </tr>
+    </tbody></table>
+<br>
+<div class="title_form">以下预定信息请您填写</div>
+<br>
+<table width="100%" class="table table-bordered order-table2">
+    <tbody><tr>
+        <th>
+            剩余人数
+        </th>
+        <td colspan="3">
+            剩余
+            #set ($shenyu = $line.lRenCount - $line.lCrCount - $line.lXhCount)
+            $!shenyu
+            人可预订
+        </td>
+    </tr>
+    <tr>
+        <th>
+            成人人数<input value="$!shenyu" id="ShenRen" type="hidden">
+        </th>
+        <td width="345">
+            <input id="sCrCount" value="0" type="hidden"><select class="w60" name="CrCount" id="CrCount" onchange="AddCount(this)">
+			#foreach( $index in [0..$shenyu] )
+     			<option>$index</option>
+			#end
+        </select>
+        </td>
+        <th>
+            儿童人数
+        </th>
+        <td>
+            <input id="sXhCount" name="sXhCount" value="0" type="hidden"><select class="w60" name="XhCount" id="XhCount" onchange="AddCount(this)">
+
+            #foreach( $index in [0..$shenyu] )
+     			<option>$index</option>
+			#end
+
+        </select>
+            <input id="sYingErCount" name="sYingErCount" value="0" type="hidden">
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="margin-left:50px;">婴儿：</span><select class="w60" name="YingErCount" id="YingErCount" onchange="AddCount(this)">
+
+            #foreach( $index in [0..$shenyu] )
+     			<option>$index</option>
+			#end
+
+        </select>
+           <span style="margin-left:10px;"> (不占用机位)</span>
+        </td>
+    </tr>
+    <th>
+        组团社
+    </th>
+    <td>
+        <input style="width: 160px;" name="CompanyName" id="CompanyName" onkeyup="GetCompany();" type="text">
+        <br>
+        <select name="CustomCompany_Id" id="CustomCompany_Id" size="3" datatype="*" style="width: 300px;
+                    margin-top: 4px" onchange="GetMember(this);">
+        </select>
+    </td>
+    <th>
+        计调
+    </th>
+    <td>
+        <select name="Custom_Id" id="Custom_Id" datatype="*">
+        </select>
+    </td>
+    <tr>
+        <th>
+            联系人姓名
+        </th>
+        <td>
+            <input name="or_name" id="or_name" class="w200" datatype="*" type="text">
+        </td>
+        <th>
+            联系人手机
+        </th>
+        <td>
+            <input name="or_mobile" id="or_mobile" class="w200" datatype="*" type="text">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系人电话
+        </th>
+        <td>
+            <input name="or_tel" id="or_tel" class="w200" datatype="*" type="text">
+        </td>
+        <th>
+            联系人传真
+        </th>
+        <td>
+            <input name="or_fax" id="or_fax" class="w200" datatype="*" type="text">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            订单备注
+        </th>
+        <td colspan="3">
+            <textarea name="intro" id="intro" style="width: 90%;"></textarea>
+        </td>
+    </tr>
+    </tbody></table>
+
+<input name="Or_Js" value="0,0" type="hidden">
+
+<table width="100%" class="table table-bordered" id="MingDangTable">
+    <tr class="success">
+        <th width="74">
+            姓名
+        </th>
+        <th width="40">
+            性别
+        </th>
+        <th width="40">
+            类型
+        </th>
+        <th width="110">
+            手机
+        </th>
+        <th width="150">
+            证件号
+        </th>
+        <th width="40">
+            单房差
+        </th>
+        <th>
+            备注
+        </th>
+    </tr>
+
+</table>
+<div style="margin: 0 auto; width: 880px; text-align: center; margin-top: 10px; padding-bottom: 30px">
+    <div class="text-center"><button class="btn btn-large btn-primary w200" type="submit" onclick="OrgForm(1,this)">保存订单</button>
+    </div>
+</div>
+</form>

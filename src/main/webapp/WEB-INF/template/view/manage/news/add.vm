@@ -1,0 +1,61 @@
+<script type="text/javascript">
+$(function(){
+	var editor = KindEditor.create('.kindcontent', {allowFileManager : true,afterBlur: function(){this.sync();}});
+	DefProvince('$!{link.province}','$!{link.city}');//默认站点
+})
+</script>
+<form id="NewUserForm" method="post" action="/zbmanlogin/saveNews.htm">
+    <input type="hidden" name="nId" value="$!news.nId" />
+    <input type="hidden" name="act" value="newuser" />
+    <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+        <tr>
+            <th width="110">默认站点：</th>
+            <td>
+                <span>
+					<select name="siteId" id="DefProvince" class="w100" onchange="DefSelect(this)" nullmsge="站点不能为空" datatype="*">
+						<option value="">请选择</option>
+					</select>
+    				<select name="city" id="DefCity" class="w100" nullmsge="出发地不能为空" datatype="*" onchange="DefCitySelect(this)">
+                        <option value="">请选择</option>
+                    </select>
+				</span>
+            </td>
+        </tr>		
+        <tr>
+            <th>
+                新闻标题:
+            </th>
+            <td>
+                <span><input class="w300" nullmsg="标题不能为空" datatype="*" errormsg="标题不能为空"  type="text" name="nTitle" value="$!news.nTitle" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                新闻内容:
+            </th>
+            <td class="td_padding">
+                <span><textarea datatye="*" class="kindcontent" name="nContent" style="width: 100%;height:300px;">$!news.nContent</textarea></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                状态：
+            </th>
+            <td>
+                <label class="rad"><input type="radio" name="nState" value="0" id="s1"  #if($!{news.nState}!=1) checked #end />正常</label>
+                <label class="rad"><input type="radio" name="nState" value="1" id="s2"  #if($!{news.nState}==1) checked #end />停止</label>
+            </td>
+        </tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+				<input type="submit" value="提交" class="btn btn-primary" onclick="OrgFormL(this)"/>
+            </td>
+        </tr>
+    </table>
+    <div class="clear">
+    </div>
+</form>

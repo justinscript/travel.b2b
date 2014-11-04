@@ -1,0 +1,46 @@
+<script type="text/javascript">
+    $(function(){
+        $("#companyblack").Validform({
+            tiptype:2,
+            ajaxPost:true,
+            postonce:true,
+            callback:function(data){
+                if(data.code==0){
+                	setTimeout(function () {
+                	$.Hidemsg();
+                	layer.closeAll();
+                	location.reload();
+                	}, 1000);
+                }
+            }
+        });
+    });
+</script>
+<div style="margin:20px 0 20px 0;padding:0 20px;">
+    <form id="companyblack" method="post" action="/account/addBlack.htm">
+        <input type="hidden" name="act" value="companyblacklist" />
+        <input type="hidden" name="c_id" value="" />
+        <input type="hidden" name="CR_Id" value="" />
+        <table width="600" cellpadding="0" cellspacing="0" class="tab2">
+            <tr>
+                <th width="150">评论公司(计调)：</th>
+                <td>$!company.cName</td>
+            </tr>
+            <tr>
+                <th valign="top">评论内容：</th>
+                <td>
+                	<input type="hidden" name="beCId" value="$!beCId"/>
+                    <span>
+                        <textarea style="width:300px;height:100px;" name="bRemark" datatype="*" nullmsg="评论内容不能为空">$!{blackListDO.bRemark}</textarea>
+                    </span>
+                    <div class="Validform_checktip"></div>
+                </td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center;" height="40">
+                    <button type="submit" class="btn btn-primary">保存</button>
+                </td>
+            </tr>
+        </table>
+</from>
+</div>

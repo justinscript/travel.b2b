@@ -1,0 +1,21 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
+</head>
+<body>
+	<div align="center">
+	<a href="/comset/show.htm?sortcount=true">显示排序(调用次数)</a>&nbsp;
+	<a href="/comset/show.htm?sortcount=false">显示排序(平均时间)</a>&nbsp;
+	<a href="/comset/show.htm?clear=true">清空</a>&nbsp;
+	<a href="/comset/udas.htm">UDAS概要</a>&nbsp;
+	<span style="float:right">IP:$!{systemInfo.getIpaddress()}</span><br/>
+	<span style="float:right">DB:$!{systemInfo.getDbinfo()}</span>
+	</div>
+	<div align="center">
+		<br/>
+    </div>
+	<hr>
+		$body
+</body>
+</html>

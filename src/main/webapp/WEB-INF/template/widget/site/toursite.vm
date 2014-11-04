@@ -1,0 +1,32 @@
+#set($map=${siteCache.getTourSiteMap()})
+#set($zhandian="")
+#set($chufad="")
+#set($columns="")
+#foreach($column in $!{map.keySet()})
+		#set($zhandian=$!{zhandian}+'<a href="javascript:void(0)" rel='+$!{map.get($column).sId}+' >'+$!{map.get($column).sName}+'</a> ')
+		#foreach($chufa in $!{map.get($column).chufaList})
+			#set($chufad=$!{chufad}+'<dd zdianid="'+$!{map.get($column).sId}+'" style="display: none;"><a href="javascript:void(0)" class="chufa'+$!{map.get($column).sId}+'" rel="'+$chufa.cId+'">'+$chufa.cName+'</a></dd>')
+			#foreach($site in $chufa.columnList)
+				#if($type == $site.zCat)
+					#set($columns=$!{columns}+'<a href="javascript:void(0)" rel="'+$site.zId+'" class="zd'+$chufa.cId+'" zid="'+$chufa.cId+'" style="display: none;"><i class="icon iHot0"></i>'+$site.zName+'</a>')
+				#end
+			#end
+		#end
+#end
+
+
+<div class="tit SiteSelect">
+		$!{zhandian}
+</div> 
+<div class="box" style="display:none"> 
+    <div class="SiteCf myTab"> 
+     <dl> 
+		$!{chufad}
+     </dl>
+    </div>
+</div>
+<ul id="ButtonBox" style="" >
+    <li class="travelLines"><span class="tit none" name="zId">线 路：</span>
+		$!{columns}
+	</li>
+</ul>

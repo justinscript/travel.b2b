@@ -1,0 +1,203 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelMemberMapper" >
+	<!-- 返回集 -->
+  <resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelMemberDO" >
+    <id column="m_Id" property="mId" jdbcType="INTEGER" />
+    <result column="gmt_Create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_Modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="c_Id" property="cId" jdbcType="INTEGER" />
+    <result column="m_Pic" property="mPic" jdbcType="VARCHAR" />
+    <result column="m_UserName" property="mUserName" jdbcType="VARCHAR" />
+    <result column="m_Password" property="mPassword" jdbcType="VARCHAR" />
+    <result column="m_Name" property="mName" jdbcType="VARCHAR" />
+    <result column="m_Sex" property="mSex" jdbcType="INTEGER" />
+    <result column="m_Mobile" property="mMobile" jdbcType="VARCHAR" />
+    <result column="m_Tel" property="mTel" jdbcType="VARCHAR" />
+    <result column="m_Email" property="mEmail" jdbcType="VARCHAR" />
+    <result column="m_Fax" property="mFax" jdbcType="VARCHAR" />
+    <result column="m_QQ" property="mQQ" jdbcType="VARCHAR" />
+    <result column="m_Type" property="mType" jdbcType="INTEGER" />
+    <result column="m_Role" property="mRole" jdbcType="VARCHAR" />
+    <result column="m_State" property="mState" jdbcType="INTEGER" />
+    <result column="m_LastLoginTime" property="mLastLoginTime" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <!-- 字段集 -->
+  <sql id="columns" >
+  	m_id, 
+  	gmt_create, 
+  	gmt_modified, 
+  	c_id, 
+  	m_pic, 
+  	m_username, 
+  	m_password, 
+  	m_name, 
+  	m_sex, 
+  	m_mobile, 
+  	m_tel, 
+  	m_email, 
+  	m_fax, 
+  	m_qq, 
+  	m_type, 
+  	m_role,
+  	m_state,
+  	m_LastLoginTime
+  </sql>
+  <!-- 排序 -->
+  <sql id="orderby_clause">
+		order by GMT_MODIFIED desc
+	</sql>
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="mId !=  null">
+				m_Id=#{mId}
+			</if>
+			<if test="cId !=  null">
+				and c_Id=#{cId}
+			</if>
+			<if test="cType !=  null">
+				and c_type=#{cType}
+			</if>
+			<if test="mUserName !=  null">
+				and m_UserName=#{mUserName, jdbcType = VARCHAR}
+			</if>
+			<if test="mPassword !=  null">
+				and m_Password=#{mPassword, jdbcType = VARCHAR}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+		<if test="mUserName !=null">  
+			,m_UserName = #{mUserName, jdbcType = VARCHAR}
+		</if>
+		<if test="mPassword !=null">  
+			,m_Password = #{mPassword, jdbcType = VARCHAR}
+		</if>
+		<if test="mName !=null">  
+			,m_Name = #{mName, jdbcType = VARCHAR}
+		</if>
+		<if test="mSex != null">
+			,m_Sex = #{mSex, jdbcType = INTEGER}
+		</if>
+		<if test="mPic != null">
+			,m_Pic = #{mPic, jdbcType = INTEGER}
+		</if>
+		<if test="mMobile != null">
+			,m_Mobile = #{mMobile, jdbcType = VARCHAR}
+		</if>
+		<if test="mTel != null">
+			,m_Tel = #{mTel, jdbcType = VARCHAR}
+		</if>
+		<if test="mFax != null">
+			,m_Fax = #{mFax, jdbcType = VARCHAR}
+		</if>
+		<if test="mEmail != null">
+			,m_Email = #{mEmail, jdbcType = VARCHAR}
+		</if>
+		<if test="mQQ != null">
+			,m_QQ = #{mQQ, jdbcType = VARCHAR}
+		</if>
+		<if test="mType != null">
+			,m_Type = #{mType, jdbcType = INTEGER}
+		</if>
+		<if test="mRole != null">
+			,m_Role = #{mRole, jdbcType = VARCHAR}
+		</if>
+		<if test="mState != null">
+			,m_State = #{mState, jdbcType = INTEGER}
+		</if>
+		<if test="mLastLoginTime != null">
+			,m_LastLoginTime = SYSTIMESTAMP
+		</if>
+		</trim>
+	</sql>
+	
+   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select  <include refid="columns" /> from Travel_Member where m_id = #{mId ,jdbcType = INTEGER}
+  </select>
+  
+  <!-- 根据姓名查找 -->
+  <select id="getByName" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMemberQuery" >
+    select a.* from Travel_Member a join Travel_Company b on a.c_id = b.c_id <include refid="query_where_clause"/>
+  </select>
+  
+   <!-- 查询所有 -->
+	<select id="list" resultMap="BaseResultMap" >
+		select <include refid="columns"/> from Travel_Member
+	</select>
+	
+	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMemberQuery">
+   		select  <include refid="columns" /> 
+   		from travel_member 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+	
+  <!-- 分页查询 -->
+  <select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMemberQuery">
+ 	<include refid="PAGINATION.paginationStart" />
+	SELECT  <include refid="columns"/>
+	from travel_member
+	<include refid="query_where_clause"/>
+	<include refid="orderby_clause"/>
+	<include refid="PAGINATION.paginationEnd" />
+  </select>
+  
+  <select id="showMemberPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMemberQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="columns" />
+		from travel_member
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  </select>
+  <!-- 总条数 -->
+  <select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelMemberQuery">
+		select count(1)
+		from travel_member
+		<include refid="query_where_clause"/>
+	</select>
+	<!-- 添加 -->
+  <insert id="insert" parameterType="com.zb.app.biz.domain.TravelMemberDO" useGeneratedKeys="true" >
+   	<selectKey resultType="java.lang.Long" keyProperty="mId"  order="BEFORE">
+      SELECT Travel_Member_SEQ.NEXTVAL AS mID FROM DUAL
+   	</selectKey>
+   	 insert into Travel_Member (
+		<include refid="columns"/>
+	 )
+   	 values (
+   	 	#{mId},
+   	 	SYSTIMESTAMP,
+   	 	SYSTIMESTAMP, 
+   	 	#{cId,jdbcType = INTEGER},
+   	 	#{mPic,jdbcType = VARCHAR},
+   	 	#{mUserName, jdbcType = VARCHAR},
+   	 	#{mPassword,jdbcType = VARCHAR},
+   	 	#{mName, jdbcType = VARCHAR},
+   	 	#{mSex, jdbcType = INTEGER},
+   	 	#{mMobile, jdbcType = VARCHAR},
+   	 	#{mTel, jdbcType = VARCHAR},
+   	 	#{mEmail, jdbcType = VARCHAR},
+   	 	#{mFax, jdbcType = VARCHAR},
+   	 	#{mQQ, jdbcType = VARCHAR},
+   	 	#{mType, jdbcType = INTEGER},
+   	 	#{mRole, jdbcType = VARCHAR},
+   	 	#{mState, jdbcType = INTEGER},
+   	 	#{mLastLoginTime, jdbcType = TIMESTAMP}
+   	 )
+   </insert>
+  <!-- 删除 -->
+  <update id="deleteById" parameterType="java.lang.Integer">
+  		update Travel_Member set gmt_Modified = SYSTIMESTAMP, m_state = 1 where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  <!-- 修改 -->
+   <update id="updateById" parameterType="com.zb.app.biz.domain.TravelMemberDO">
+    update Travel_Member <include refid="update_set_clause"/>
+    where m_id = #{mId,jdbcType=INTEGER}
+  </update>
+  
+</mapper>

@@ -1,0 +1,188 @@
+<style type="text/css"> 
+.expand{ 
+cursor:pointer; 
+} 
+.hide{ 
+cursor:pointer; 
+} 
+</style> 
+
+<script type="text/javascript"> 
+function toggleChild(o) 
+{ 
+    var cls = o.getAttribute("class"); 
+    if (cls == "expand") 
+    { 
+    	var sb = o.nextSibling; 
+    	if (window.innerWidth) 
+		{
+			sb = sb.nextSibling; 
+		}
+    	while (sb != null && sb.tagName.toLowerCase() == 'dd') 
+    	{ 
+    		sb.style.display = "none"; 
+   		 	sb = sb.nextSibling; 
+    		if (window.innerWidth)
+			{
+				sb = sb.nextSibling; 
+			}
+    	} 
+        o.removeAttribute("class"); 
+        o.setAttribute("class", "hide"); 
+    	if (window.innerWidth) //ff 
+    	{
+			o.textContent = "田" + o.textContent.substring(1); 
+		}
+    	else 
+   	 	{
+			o.innerText = "田" + o.innerText.substring(1); 
+		}
+	} 
+	else 
+    { 
+        var sb = o.nextSibling; 
+        if (window.innerWidth) 
+		{
+			sb = sb.nextSibling; 
+		}
+        while (sb != null && sb.tagName.toLowerCase() == 'dd') 
+        { 
+            sb.style.display = ""; 
+            sb = sb.nextSibling; 
+        	if (window.innerWidth) 
+			{
+				sb = sb.nextSibling; 
+			}
+        } 
+        o.removeAttribute("class"); 
+        o.setAttribute("class", "expand"); 
+        if (window.innerWidth) //ff 
+        {
+			o.textContent = "曰" + o.textContent.substring(1); 
+		}
+        else 
+		{
+        	o.innerText = "曰" + o.innerText.substring(1); 
+		}
+    } 
+} 
+
+
+function maketree(obj) 
+{ 
+    var dts = obj.getElementsByTagName('dt'); 
+    for (var i = 0; i < dts.length; i++) 
+    { 
+    	dts[i].setAttribute("class", "none"); 
+    	if (window.innerWidth) //ff 
+    	{
+			dts[i].textContent = "曰" + dts[i].textContent; 
+		}
+    	else 
+		{
+    		dts[i].innerText = "曰" + dts[i].innerText; 
+		}
+		
+    	dts[i].onclick = function()
+		{
+			toggleChild(this); 
+		}; 
+    } 
+} 
+
+window.onload = function() 
+{ 
+	maketree(document.getElementById("tree")); 
+}; 
+</script> 
+<div align="center">
+<h3>URL调用时间次数以及时间分配(#if ($sort_type==1) 按调用次数排序 #else 按平均时间排序 #end)：</h3> 
+</div>
+<dl id="tree"> 
+
+#if ($comsetList_TEST)
+	#foreach($tmp in $comsetList)
+		<dt>$!tmp.name $!tmp.getShowTxt($!{sort_type}) </dt> 
+		<dd> 
+			<dl style="margin-top:5px; margin-bottom:5px;"> 
+				#set ($tagList = $tmp.getLeafList())
+				#if ($tagList)
+				#foreach($tag in $tagList)
+                <dt><font color=yellow>$!tag.getShowTxt($!{sort_type}) $!tag.name</font></dt> 
+				
+					#set ($leafList = $tag.getLeafList())
+    				#if ($leafList)
+    				#foreach($leaf in $leafList)
+                        <dd><font color=blue>$!leaf.getShowTxt($!{sort_type}) $!leaf.name</font></dd> 
+					#end
+					#end
+				#end
+				#end
+			</dl> 
+		</dd>
+	#end
+#end
+
+
+</dl> 
+
+<table class="new-spec" cellpadding="0" cellspacing="1" border="1" width="100%">
+ 	<tr class="table-head">
+    	<td align="center">序号</td>
+		<td align="center">url</td>
+		<td align="center">调用次数</td>
+        <td align="center">平均时间</td>
+		<td align="center">DB－－调用次数－－平均时间</td>
+		<td align="center">SERVICE－－调用次数－－平均时间</td>
+		<td align="center">CACHE－－调用次数－－平均时间</td>
+	</tr>		
+	#if ($comsetList)
+		#foreach($tmp in $comsetList)
+		<tr>
+			<td width="5%" align="center">${velocityCount}</td>
+            <td align="center">$!tmp.name</td>
+			<td align="center"align="center">$!tmp.count</td>
+			<td >$!tmp.getAvg()</td>
+			#set ($dbTag = $tmp.getTypeUnit(0))
+			<td>
+				#set ($leafList = $dbTag.getLeafList())
+				#if ($leafList)
+				<table class="new-spec" cellpadding="0" cellspacing="1" border="1" width="98%">
+				<tr><td align="center">$!dbTag.name</td><td align="center">$!dbTag.count</td><td align="center">$!dbTag.getAvg()</td></tr>
+				#foreach($leaf in $leafList)
+                    <tr><td align="center">$!leaf.name</td><td align="center">$!leaf.count</td><td align="center">$!leaf.getAvg()</td></tr>
+				#end
+				</table>
+				#end
+				
+			</td>
+			#set ($search = $tmp.getTypeUnit(1))
+			<td>
+				#set ($leafList = $search.getLeafList())
+				#if ($leafList)
+				<table class="new-spec" cellpadding="0" cellspacing="1" border="1" width="98%">
+				<tr><td align="center">$!search.name</td><td align="center">$!search.count</td><td align="center">$!search.getAvg()</td></tr>
+				#foreach($leaf in $leafList)
+                    <tr><td align="center">$!leaf.name</td><td align="center">$!leaf.count</td><td align="center">$!leaf.getAvg()</td></tr>
+				#end
+				</table>
+				#end
+				
+			</td>
+			#set ($catchTag = $tmp.getTypeUnit(2))
+			<td>
+				#set ($leafList = $catchTag.getLeafList())
+				#if ($leafList)
+				<table class="new-spec" cellpadding="0" cellspacing="1" border="1" width="98%">
+				<tr><td align="center">$!catchTag.name</td><td align="center">$!catchTag.count</td><td align="center">$!catchTag.getAvg()</td></tr>
+				#foreach($leaf in $leafList)
+                    <tr><td align="center">$!leaf.name</td><td align="center">$!leaf.count</td><td align="center">$!leaf.getAvg()</td></tr>
+				#end
+				</table>
+				#end
+				
+			</td>
+		</tr>
+		#end
+	#end
+</table>

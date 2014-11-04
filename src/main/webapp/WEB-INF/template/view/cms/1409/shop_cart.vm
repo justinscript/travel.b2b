@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/layer/layer.min.js"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+<script src="/static/js/city.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<div id="wrapper">
+    <div class="c">
+      <div class="left">
+        <dl>
+          <dd class="hover"><a href="#"><i class="ico2 i5"></i>积分商城</a></dd>
+          <dt style="display:block;">
+			#foreach($!gClass in $!gClassList)
+				<a href="/shop.htm">$!gClass.gcName</a>
+            #end
+          </dt>
+        </dl>
+      </div>
+      <div class="right">
+        <div class="tit"><h2>收货人信息</h2></div>
+        <style type="text/css">
+
+        </style>
+        <div class="shop_view">
+          <div class="cart_info">
+          <input type="hidden" value="$!gift.gRedemption" id="shopjf">
+            <div class="tab">
+             <form action="/addGiftOrder.htm" id="shopcartform">
+              <table>
+                <tr><th>礼品名称：</th>
+                <td><a href="#" target="_blank">$!gift.gTitle</a><input type="hidden" value="$!gift.gId" name="gId"></td></tr>
+                <tr><th>兑换数量：</th>
+                <td><span><input class="numinput" size="4" type="text" id="shopcartnum" value="1" name="goCount" datatype="n" nullmsg="数量不能为空"  errormsg="兑换数量必须为数字" /></span></td></tr>
+                <tr><th>兑换积分：</th>
+                <td><b id="jfcount">$!gift.gRedemption</b><input type="hidden" value="$!gift.gRedemption" name="goIntegralCount" id="goIntegralCount"></td></tr>
+                <tr><th>收货人姓名：</th>
+                <td><span><input type="text" value="" name="goName" datatype="chinese"
+nullmsg="收货人姓名不能为空" errormsg="姓名必须为中文" class="z-input"  /></span><label class="Validform_checktip">*</label></td></tr>
+                <tr><th>省/市/区：</th><td><span>
+          <select name="goProvince" id="Province" class="select" datatype="*" errormsg="所在省份不能为空" nullmsg="所在省份不能为空">
+          </select>
+          <select name="goCity" id="City" datatype="*" class="select" errormsg="所在地级市不能为空" nullmsg="所在地级市不能为空">
+          </select>
+          <select name="goCounty" id="County" datatype="*" class="select" errormsg="所在地级省不能为空" nullmsg="所在地级省不能为空">
+          </select>
+          </span><label class="Validform_checktip">*</label></td></tr>
+                <tr><th>收货地址：</th><td><span><input type="text" value="" name="goAddress" datatype="*" nullmsg="收货地址不能为空" errormsg="" class="z-input" size="80"  /></span><label class="Validform_checktip">*</label></td></tr>
+                <tr><th>手机号码：</th><td><span><input type="text" value="" name="goMobile" datatype="m" nullmsg="手机号码不为空" errormsg="手机号码格式不对" class="z-input"  /></span><label class="Validform_checktip">*</label></td></tr>
+                <tr><th>固定电话：</th><td><span><input type="text" value="" name="goTel" datatype="t" ignore="ignore" errormsg="电话号码格式错误,例：021-552933344" class="z-input"  /></span><label class="Validform_checktip"></label></td></tr>
+                <tr><th>电子邮箱：</th><td><span><input type="text" value="" name="goEmail" datatype="e" ignore="ignore" errormsg="邮箱格式不对" class="z-input"  /></span><label class="Validform_checktip"></label></td></tr>
+                <tr><th>备注：</th><td><textarea class="z-input" style="width:500px;height:100px;"></textarea></td></tr>
+                <tr><th></th><td><input type="submit" value="提交订单" class="z-submit"></td></tr>
+              </table>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+#parse("/widget/common/index1409_footer.vm")
+<script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+<link href="/static/js/Validform/css/style.css" rel="stylesheet" />
+<script type="text/javascript">
+  $(function(){
+      $("#shopcartnum").focusout(function(){
+          $("#jfcount").html($("#shopjf").val()*$(this).val())
+		  $("#goIntegralCount").val($("#shopjf").val()*$(this).val())
+      })
+      GetP('Province', 'City', 'County', ["", "", ""]);
+	  $("#shopcartform").Validform({
+	  ajaxPost:true,
+	  postonce: false,
+	  tiptype:2,
+	  showAllError:false,
+	  callback:function(data)
+	  {
+	    if(data.code==0)
+	    {
+	      setTimeout(function () {
+	        $.Hidemsg();
+	        location.reload();
+	      }, 1000);
+	    }
+	  }
+	});
+  })
+</script>
+</body>
+</html>

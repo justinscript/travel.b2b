@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelFinanceMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelFinanceDO" id="baseResult">
+		<id column="F_ID" property="fId" jdbcType="INTEGER" />
+		<result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+		<result column="OR_ID" property="orId" jdbcType="INTEGER" />
+		<result column="F_TYPE" property="fType" jdbcType="INTEGER" />
+		<result column="F_SERIALNUMBER" property="fSerialNumber" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_C_ID" property="accountCid" jdbcType="INTEGER" />
+		<result column="TOUR_C_ID" property="tourCid" jdbcType="INTEGER" />
+		<result column="F_RECEIVABLE" property="fReceivable" jdbcType="FLOAT" />
+		<result column="F_RECEIPT" property="fReceipt" jdbcType="FLOAT" />
+		<result column="APP_ID" property="appId" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelFinanceViewDO" id="viewResult">
+		<id 	column="F_ID" 			property="fId" 			jdbcType="INTEGER" />
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP" />
+		<result column="OR_ID" 			property="orId" 		jdbcType="INTEGER" />
+		<result column="F_TYPE" 		property="fType" 		jdbcType="INTEGER" />
+		<result column="F_SERIALNUMBER" property="fSerialNumber" jdbcType="VARCHAR" />
+		<result column="ACCOUNT_C_ID" 	property="accountCid" 	jdbcType="INTEGER" />
+		<result column="TOUR_C_ID" 		property="tourCid" 		jdbcType="INTEGER" />
+		<result column="F_RECEIVABLE" 	property="fReceivable" 	jdbcType="FLOAT" />
+		<result column="F_RECEIPT" 		property="fReceipt" 	jdbcType="FLOAT" />
+		<result column="APP_ID" 		property="appId" 		jdbcType="INTEGER" />
+		<result column="L_TITLE" 		property="lTitle" 		jdbcType="INTEGER" />
+		<result column="OR_GOGROUPTIME" property="goGroupTime" 	jdbcType="INTEGER" />
+		<result column="Z_ID" 			property="zId" 			jdbcType="INTEGER" />
+		<result column="TOURNAME" 		property="tourName" 	jdbcType="INTEGER" />
+		<result column="ACCOUNTNAME" 	property="accountName" 	jdbcType="INTEGER" />
+		<result column="L_ID" 			property="lId" 			jdbcType="INTEGER" />
+		<result column="OR_NAME" 		property="orName" 		jdbcType="VARCHAR" />
+		<result column="C_CUSTOMNAME" 	property="cCustomName" 	jdbcType="VARCHAR" />
+		<result column="L_GROUPNUMBER" 	property="lGroupNumber" jdbcType="VARCHAR" />
+		<result column="ORCREATETIME" 	property="orCreateTime" jdbcType="TIMESTAMP" />
+		<result column="OR_ORDERID" 	property="orderNumber" jdbcType="VARCHAR" />
+		<result column="ORDERPEOPLECOUNT" 	property="orderPeopleCount" jdbcType="VARCHAR" />
+		<result column="M_ID" 			property="mId" jdbcType="INTEGER" />
+	</resultMap>
+
+	<!-- 字段集 -->
+	<sql id="column">
+		F_ID,GMT_CREATE,GMT_MODIFIED,OR_ID,F_TYPE,F_SERIALNUMBER,ACCOUNT_C_ID,TOUR_C_ID,F_RECEIVABLE,F_RECEIPT,APP_ID
+	</sql>
+	
+	<!-- 字段集 -->
+	<sql id="columnjoinorder">
+		<include refid="column"/>,L_TITLE,OR_GOGROUPTIME,Z_ID,TOURNAME,ACCOUNTNAME,L_ID,OR_NAME,C_CUSTOMNAME,L_GROUPNUMBER,ORCREATETIME,OR_ORDERID,ORDERPEOPLECOUNT
+	</sql>
+
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY F_ID DESC
+	</sql>
+
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="fId != null">
+				F_ID=#{fId}
+			</if>
+			<if test="orId != null">
+				AND OR_ID=#{orId}
+			</if>
+			<if test="fType != null">
+				AND F_TYPE=#{fType}
+			</if>
+			<if test="fSerialNumber != null">
+				AND F_SERIALNUMBER=#{fSerialNumber}
+			</if>
+			<if test="accountCid != null">
+				AND ACCOUNT_C_ID=#{accountCid}
+			</if>
+			<if test="tourCid != null">
+				AND TOUR_C_ID=#{tourCid}
+			</if>
+			<if test="fReceivable != null">
+				AND F_RECEIVABLE=#{fReceivable}
+			</if>
+			<if test="fReceipt != null">
+				AND F_RECEIPT=#{fReceipt}
+			</if>
+			<if test="appId != null">
+				AND APP_ID=#{appId}
+			</if>
+			<if test="zId != null">
+				AND Z_ID=#{zId}
+			</if>
+			<if test="goGroupTime != null and  goGroupEndTime == null">
+				<![CDATA[AND OR_GOGROUPTIME=TO_DATE(#{goGroupTime},'YYYY-MM-DD')]]>
+			</if>
+			<if test="goGroupEndTime != null and goGroupTime != null">
+			    <![CDATA[AND OR_GOGROUPTIME BETWEEN TO_DATE(#{goGroupTime},'YYYY-MM-DD') AND TO_DATE(#{goGroupEndTime},'YYYY-MM-DD')]]>
+			</if>
+			<if test="lTitle != null">
+				AND L_TITLE like '%'||#{lTitle}||'%'
+			</if>
+			<if test="tourName != null">
+				AND TOURNAME like '%'||#{tourName}||'%'
+			</if>
+			<if test="accountName != null">
+				AND ACCOUNTNAME like '%'||#{accountName}||'%'
+			</if>
+			<if test="mId != null">
+			    AND M_ID=#{mId}
+			</if>
+			<if test="orderTime != null and  orderEndTime == null">
+				<![CDATA[AND ORCREATETIME=TO_DATE(#{orderTime},'YYYY-MM-DD')]]>
+			</if>
+			<if test="orderTime != null and orderEndTime != null">
+			    <![CDATA[AND ORCREATETIME BETWEEN TO_DATE(#{orderTime},'YYYY-MM-DD') AND TO_DATE(#{orderEndTime},'YYYY-MM-DD')]]>
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="orId != null">
+				OR_ID=#{orId},
+			</if>
+			<if test="fType != null">
+				F_TYPE=#{fType},
+			</if>
+			<if test="fSerialNumber != null">
+				F_SERIALNUMBER=#{fSerialNumber},
+			</if>
+			<if test="accountCid != null">
+				ACCOUNT_C_ID=#{accountCid},
+			</if>
+			<if test="tourCid != null">
+				TOUR_C_ID=#{tourCid},
+			</if>
+			<if test="fReceivable != null">
+				F_RECEIVABLE=#{fReceivable},
+			</if>
+			<if test="fReceipt != null">
+				F_RECEIPT=#{fReceipt},
+			</if>
+			<if test="appId != null">
+				APP_ID=#{appId}
+			</if>
+		</trim>
+	</sql>
+
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select
+		<include refid="column" />
+		from TRAVEL_FINANCE
+	</select>
+
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="viewResult" parameterType="com.zb.app.biz.query.TravelFinanceQuery">
+		select
+		<include refid="columnjoinorder" />
+		from FINANCEVIEW
+		<include refid="query_where_clause" />
+		<include refid="orderby_clause" />
+	</select>
+
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="viewResult" parameterType="com.zb.app.biz.query.TravelFinanceQuery">
+		<include refid="PAGINATION.paginationStart" />
+		select
+		<include refid="columnjoinorder" />
+		FROM FINANCEVIEW
+		<include refid="query_where_clause" />
+		<include refid="orderby_clause" />
+		<include refid="PAGINATION.paginationEnd" />
+	</select>
+
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select
+		<include refid="column" />
+		from TRAVEL_FINANCE where F_ID=#{fId}
+	</select>
+
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelFinanceDO">
+		<selectKey resultType="java.lang.Long" keyProperty="fId" order="BEFORE">
+			SELECT TRAVEL_FINANCE_SEQ.NEXTVAL AS fId FROM DUAL
+		</selectKey>
+		insert into TRAVEL_FINANCE(
+		<include refid="column" />
+		)
+		VALUES
+		(#{fId},SYSTIMESTAMP,SYSTIMESTAMP,#{orId,jdbcType=INTEGER},#{fType,jdbcType=INTEGER},
+		#{fSerialNumber,jdbcType=VARCHAR},#{accountCid,jdbcType=INTEGER},#{tourCid,jdbcType=INTEGER},#{fReceivable,jdbcType=FLOAT},
+		#{fReceipt,jdbcType=FLOAT},#{appId,jdbcType=INTEGER})
+	</insert>
+
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelFinanceDO">
+		update TRAVEL_FINANCE
+		<include refid="update_set_clause" />
+		where F_ID=#{fId}
+	</update>
+
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_FINANCE where F_ID=#{fId}
+	</delete>
+
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelFinanceQuery">
+		select count(1) from FINANCEVIEW
+		<include refid="query_where_clause" />
+	</select>
+</mapper>

@@ -1,0 +1,148 @@
+<script type="text/javascript">
+$(function(){
+	mRoleShow();
+})
+</script>
+#if($!type=="update")
+<form id="NewUserForm" method="post" action="/account/updateUser.htm">
+    <input type="hidden" name="mId" value="$!member.mId" />
+#else
+<form id="NewUserForm" method="post" action="/account/addUser.htm">
+#end
+    <input type="hidden" name="act" value="newuser" />
+    <input type="hidden" name="C_Id" value="" />
+    <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+        <tr>
+            <th width="90">
+                用户名：
+            </th>
+            <td>
+                <span><input type="text" value="$!member.mUserName" name="mUserName" id="M_UserName" datatype="username" nullmsg="用户名不能为空" /></span>
+                <div class="Validform_checktip"></div>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                密码：
+            </th>
+            <td>
+                    <span><input type="password" value="$!member.mPassword" name="mPassword"  datatype="*" nullmsg="密码不能为空" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                真实姓名：
+            </th>
+            <td>
+                    <span>
+                    <input type="text" value="$!member.mName" name="mName"  datatype="chinese" datatype="chinese" nullmsg="真实姓名不能为空" errormsg="请输入中文"  /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                姓别：
+            </th>
+            <td>
+            	#if($!member.mSex!=0)
+                	<label class="rad"><input type="radio" name="mSex" value="0" />男&nbsp;&nbsp;</label>
+                	<label class="rad"><input type="radio" checked name="mSex" value="1" />女</label>
+                #else
+                	<label class="rad"><input type="radio" checked name="mSex" value="0" />男&nbsp;&nbsp;</label>
+                	<label class="rad"><input type="radio" name="mSex" value="1" />女</label>
+                #end
+            </td>
+        </tr>
+        <tr>
+            <th>
+                手机号码：
+            </th>
+            <td>
+                <span><input type="text"  name="mMobile" value="$!member.mMobile" nullmsg="手机号码不能为空" datatype="m" errormsg="手机号码不正确" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                电话号码：
+            </th>
+            <td>
+                <span><input type="text"  name="mTel" value="$!member.mTel" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                电子邮件：
+            </th>
+            <td>
+                <span><input type="text"  name="mEmail" value="$!member.mEmail" datatype="e" ignore="ignore" errormsg="邮箱格式不正确" nullmsg="请填空您的邮箱！" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                QQ号码：
+            </th>
+            <td>
+                <span><input   ignore="ignore" nullmsg="请填写您的QQ号码" datatype="n" errormsg="QQ号码格式错误" type="text" name="mQQ" value="$!member.mQQ" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                管理类型：
+            </th>
+            <td>
+            	#if($!member.mType!=1)
+                	<label class="rad"><input type="radio" name="mType"  value="0" checked/>超级管理员</label>
+                	<label class="rad"><input type="radio" name="mType" value="1" />普通管理员</label>
+                #else
+                	<label class="rad"><input type="radio" name="mType"  value="0"  />超级管理员</label>
+                	<label class="rad"><input type="radio" name="mType" value="1" checked/>普通管理员</label>
+                #end
+            </td>
+        </tr>
+		<tr id="quanxian"#if($!member.mType!=1) class="hide"#end>
+        <th class="valigntop">用户权限 ：</th>
+        <td><input type="hidden" name="mRole" id="mRole" value="$!member.mRole"/>
+        	<div class="quanxian">
+				#set($allRight=$!{enumViewTools.getAccountRightMenu()})
+				#foreach($rightMenu in $allRight)
+        		<dl>
+        			<dd>$!{rightMenu.getName()}</dd>
+        			<dt>
+						#foreach($right in $rightMenu.getRights())
+                        <label><input type="checkbox" name="mRolecheckbox" class="mRole" value="$!{right.getIndex()}"/>$!{right.getName()}</label>
+						#end
+                    </dt>
+        		</dl>
+                #end             
+        	</div>
+        </td>
+        </tr>				
+        <tr>
+            <th>
+                状态：
+            </th>
+            <td>
+            	#if($!member.mState!=1)
+                	<label class="rad"><input type="radio" checked name="mState" id="M_State1"  value="0" />正常</label>
+                	<label class="rad"><input type="radio" name="mState" id="M_State2" value="1" />停止</label>
+                #else
+                	<label class="rad"><input type="radio" name="mState" id="M_State1"  value="0" />正常</label>
+                	<label class="rad"><input type="radio" checked name="mState" id="M_State2" value="1" />停止</label>
+                #end
+            </td>
+        </tr>
+        <tr><td></td>
+            <td>
+                <button class="btn btn-primary" type="submit" onclick="OrgFormL(this)">提交</button>
+            </td>
+        </tr>
+    </table>
+    <div class="clear">
+    </div>
+</form>

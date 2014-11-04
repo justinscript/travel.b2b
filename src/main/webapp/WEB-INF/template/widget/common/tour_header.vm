@@ -1,0 +1,29 @@
+<div id="Header">
+    <div id="Menu">
+    <ul id="TopNav">
+        <li class="fr msg">
+            <i class="icon iMsg"></i>消息<span>[0]</span><i class="icon iArrow"></i>
+            <div>
+             
+                #*<ul>
+                    <li class="tit"><b>积分兑换</b> 有<b>1</b>个新消息</li>
+                    <li><a href="#">&bull; 签收成功，记得分享拆包的喜悦</a></li>
+                </ul>*#
+            </div>
+        </li>
+        <li class="fr">
+            <b>欢迎您，$!{webUser.getCompanyName()}【$!{webUser.getNick()}】</b> | <a href="/loginOut.htm">[退出]</a>
+        </li>
+    </ul>
+		<a href="/" class="icon logo">左边网</a>
+        <div class="Menu_list">
+        <a href="/tour/line/longLine.htm"><i class="icon i1"></i>国内长线</a>
+        <a href="/tour/line/shortLine.htm"><i class="icon i2"></i>周边短线</a>
+        <a href="/tour/line/internationalLine.htm"><i class="icon i3"></i>国际线路</a>
+        <a href="#"><i class="icon i4"></i>景点门票</a>
+        <a href="#"><i class="icon i5"></i>散客机票</a>
+        <a href="/shop.htm" target="_blank"><i class="icon i6"></i>积分兑换</a>
+        </div>
+        <span class="icon iTel">400-0378-7777</span>
+    </div>
+</div>

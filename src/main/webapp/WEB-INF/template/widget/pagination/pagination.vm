@@ -1,0 +1,78 @@
+<div class="pagination pagination-normal">
+<div class="pagination-wrapper">
+		<span class="info">共$!{pagination.query.getAllRecordNum()}条/$!{pagination.query.getAllPageNum()}页</span>
+		#if($pagination.query.nowPageIndex == 0)
+			<span class="start">首页</span>
+		#else
+			<a href="javascript:void(0)" class="start" onclick="paginationSearch(0);" >首页</a>
+		#end
+		
+		#if($pagination.query.nowPageIndex == 0)
+			<span class="prev">上一页</span>
+		#else
+			<a href="javascript:void(0)" class="prev" onclick="paginationSearch($!{pagination.query.nowPageIndex} - 1);" >上一页</a>
+		#end
+		
+		#foreach($index in $!{pagination.query.skipPageIndex})
+          #set($count = $index + 1)
+          #if($index == $!{pagination.query.nowPageIndex})
+            <span class="page">$count</span>
+          #else
+            <a href="javascript:void(0)" class="page" onclick="paginationSearch($index);">$count</a>
+          #end
+        #end
+		
+		#if($!{pagination.query.nowPageIndex} + 1 < $!{pagination.query.allPageNum})
+          <a href="javascript:void(0)" class="next" onclick="paginationSearch($!{pagination.query.nowPageIndex} + 1);">下一页</a>
+        #else
+          <span class="next">下一页</span>
+		#end
+		
+        #if($!{pagination.query.nowPageIndex} !=  $!{pagination.query.allPageNum} - 1)
+          <a href="javascript:void(0)" class="end" onclick="paginationSearch($!{pagination.query.allPageNum} - 1);">末页</a>
+        #else
+          <span class="end">末页</span>
+		#end
+		
+		<span class="skip-to">到第<input id="gotoPageIndex" type="text">页<button type="button" onclick="gotoPageIndex()">确定</button></span>
+		<span class="data-limit">
+			每页
+			<select onchange="pageSizeChanged(this)">
+				<option value="10" #if($!{pagination.query.pageSize} == 10) selected="selected" #end>10条</option>
+				<option value="30" #if($!{pagination.query.pageSize} == 30) selected="selected" #end>30条</option>
+				<option value="50" #if($!{pagination.query.pageSize} == 50) selected="selected" #end>50条</option>
+				<option value="100" #if($!{pagination.query.pageSize} == 100) selected="selected" #end>100条</option>
+			</select>
+		</span>
+	</div>
+</div>
+#*
+#if($noScript!="false")
+<script type="text/javascript">
+function paginationSearch(nextPage){
+ 	var f = document.$!{formName};
+	document.getElementById("nextPage").value = nextPage;
+	f.submit(); 
+}
+function pageSizeChanged(sel){
+	document.getElementById("pageSize").value = sel.value;
+}
+function gotoPageIndex(){
+	var f = document.$!{formName};
+	var num = document.getElementById("gotoPageIndex").value;
+	var p = /^\d+$/;
+	if (!p.test(num)){
+	    alert("输入的页码必须是数字");
+		return false;
+	}
+	if (num - 1 < 0 ){
+		alert("输入的页码必须大于1");
+		return false;
+	}
+	num = num - 1;
+	document.getElementById("nextPage").value = num;
+	f.submit(); 
+}
+</script>
+#end
+*#

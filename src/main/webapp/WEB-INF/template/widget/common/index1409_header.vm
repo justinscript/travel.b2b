@@ -1,0 +1,162 @@
+<link rel="stylesheet" type="text/css" href="/static/js/autocomplete/jquery.autocomplete.css" />
+<link rel="stylesheet" type="text/css" href="/static/js/autocomplete/thickbox.css" />
+<script type="text/javascript" src="/static/js/autocomplete/jquery.bgiframe.min.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/jquery.ajaxQueue.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/thickbox-compressed.js"></script>
+<script type="text/javascript" src="/static/js/autocomplete/jquery.autocomplete.pack.js"></script>
+<div class="head">
+   <div class="top">
+    <div class="c">
+       <div class="u_info">
+       <span>你好！欢迎登录左边网</span>
+       <span class="login">
+		#if($!{webUser.hasLogin()})
+		<a href="$!{webUser.current().getType().getIndexUrl()}">欢迎您，$!{webUser.getCompanyName()}【$!{webUser.getNick()}】</a>
+		<a href="/loginOut.htm">退出</a>
+		#else
+		<a href="/userlogin.htm">请登录</a>
+		<a href="/register.htm">免费注册</a></span>
+		#end
+       </div>
+       <div class="t_link">
+           <a href="#"><i class="ico home"></i>设为首页</a>
+           <a href="#"><i class="ico sc"></i>加入收藏</a>
+           <a href="/help/6.htm"><i class="ico help"></i>帮助中心</a>
+           <span class="tel"><i></i>400 0378 777</span>
+       </div>
+    </div>
+   </div>
+   #set($siteCacheMap=$!{siteCache.getOnlyChufaMap()})
+   <div class="top2 c">
+       <a href="/" class="logo"></a>
+       <div class="city">
+   			#if(!$!{webUser.getChugangId()} || $!{webUser.getChugangId()}=="" || $!{webUser.getChugangId()} == "0")
+				<strong>上海出发</strong>
+			#else
+				#if(!$!{siteCacheMap.get($webUser.getChugangId())} || !$!{siteCacheMap.get($webUser.getChugangId()).cName} || $!{siteCacheMap.get($webUser.getChugangId()).cName}=="")
+					<strong>上海出发</strong>
+				#else
+					<strong>$!{siteCacheMap.get($webUser.getChugangId()).cName}出发</strong>
+				#end
+			#end
+           <span class="more_tip" data-tip_id="city_tip">更改城市<i class="ico down"></i></span>
+           <div id="city_tip" style="display:none;">
+            <b>选择您的出发城市</b>
+            <div class="city_tag_top">
+              <a href="#" target="_self">热门</a>
+            </div>
+            <div class="city_tag_con" uri="#">
+              <div class="txt hot" style="display: block;">
+				#foreach($!siteKey in ${siteCacheMap.keySet()})
+					#if($!{webUser.getChugangId()} && $!{webUser.getChugangId()} !="" && $!{webUser.getChugangId()} != "0")  ##&& $!siteKey != $!{webUser.getChugangId()}
+					<a href="javascript:void(0)" onclick="SetCG('$!siteKey')" target="_self">$!{siteCacheMap.get($siteKey).cName}</a>
+					#end
+				#end
+              </div>
+              <div class="txt" style="display: none;">
+                <ul>
+                </ul>
+              </div>
+            </div>
+        </div>
+       </div>
+       <div class="t_search">
+       <div id="search_select" class="search_select">
+       <span class="tit"><b>线路</b> <i class="ico"></i></span>
+       <ul id="curtlist" style=""><li data="1">线路</li><li data="2">景点</li><li data="3">旅行社</li><li data="4">综合</li><li data="5">门票</li></ul></div>
+       <form action="/search/productSearch.htm" method=""><input type="hidden" name="tn" id="tn" value="line"><input type="text" class="text" value="$!{keyword}" id="keyword" name="keyword"  tip="请输入目的地"><button type="submit" name="">搜&nbsp;索</button></div></form>
+   </div>
+   <div class="clear"></div>
+   <div class="menu">
+    <div class="c">
+        <div class="side_menu">
+        全部旅游产品分类
+        <div class="side_box">
+            <ul>
+              <li>
+              <i class="i1"></i>
+              <div class="tit"><a href="#">周边短线</a></div>
+              <div class="li">
+				  #foreach($short in $!{indexHeaderTools.getTag().get(1)})
+					<a href="/search/productSearch.htm?lArrivalCity=$!short.lcName">$!short.lcName</a>
+				  #end
+              </div>
+              <span class="line"></span>
+              </li>
+              <li>
+              <i class="i2"></i>
+              <div class="tit"><a href="#">国内长线</a></div>
+              <div class="li">
+                  #foreach($long in $!{indexHeaderTools.getTag().get(2)})
+					<a href="/search/productSearch.htm?lArrivalCity=$!long.lcName">$!long.lcName</a>
+				  #end
+              </div>
+              <span class="line"></span>
+              </li>
+              <li>
+              <i class="i3"></i>
+              <div class="tit"><a href="#">国际线路</a></div>
+              <div class="li">
+                  #foreach($international in $!{indexHeaderTools.getTag().get(3)})
+					<a href="/search/productSearch.htm?lArrivalCity=$!international.lcName">$!international.lcName</a>
+				  #end
+              </div>
+              <span class="line"></span>
+              </li>
+              <li>
+              <i class="i4"></i>
+              <div class="tit"><a href="#">积分商城</a></div>
+              <div class="li">
+				  #foreach($gift in $!{indexHeaderTools.getGiftList()})
+					<a href="/shop_view.htm?id=$!gift.gId">$!gift.gTitle</a>
+				  #end
+              </div>
+              <span class="line"></span>
+              </li>                                                 
+            </ul>
+        </div>
+        <div class="side_con">
+            <div class="con_box">
+            </div>
+        </div>
+        </div>
+        <div class="nav">
+            <a href="/index.htm">首页</a>
+            <a href="/line/showline.htm">旅游线路</a>
+            <a href="/company.htm">商家大全</a>
+            <a href="/shop.htm">积分商城</a>
+            <a href="/about/1.htm">关于左边</a>
+        </div>
+    </div>
+   </div>
+</div>
+<script type="text/javascript">
+$(function(){
+$("#keyword").autocomplete("/search/autoComplete.htm",{
+    		dataType:'json',
+   			parse:function(da) {
+        	var parsed = []; 
+			data=da.data;
+        	for (var i = 0; i < data.length; i++) {  
+            	parsed[parsed.length] = {  
+            	data: data[i],  
+            	value: data[i],  
+            	result: data[i]
+            	};  
+        	}  
+        	return parsed;  
+    	},  
+    	formatItem: function(item) {
+    		return "<div>"+item+"</div>";  
+     	},  
+    	formatMatch: function(item) {  
+        	return item;  
+    	},  
+    	formatResult: function(item) {  
+    		return item;  
+    	}  
+		}).result(function(event, item, formatted) {            
+    		$("#keyword").val(item);
+		});
+})
+</script>

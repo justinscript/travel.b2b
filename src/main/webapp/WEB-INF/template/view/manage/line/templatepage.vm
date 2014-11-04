@@ -1,0 +1,26 @@
+<table class="tbl" cellpadding="0" cellspacing="0">
+    <tr>
+        <th width="50"><input type="checkbox"></th>
+        <th width="120">出发/抵达</th>
+        <th>线路名称</th>
+        <th width="80">天数</th>
+        <th width="60">操作</th>
+    </tr>
+    #foreach($!temp in $!template)
+    <tr>
+        <td><input type="checkbox" value="1" name="$!temp.lId"></td>
+        <td>$!temp.lCity/$!temp.lArrivalCity</td>
+        <td>
+            <a href="#">$!temp.lTile</a><br />
+            <label>标准：</label>$!temp.lTypeString
+        </td>
+        <td>$!temp.lDay天</td>
+        <td>
+     <div class="w120" style="line-height: 26px;">
+           <a href="javascript:Page_Add($!temp.lId,'/zbmanlogin/line/templateupdate.htm','修改线路模板')" class="btn btn-primary btn-mini"><i class="icon-eye-open icon-white"></i> 修改</a>
+        </div>                    
+        </td>
+    </tr>
+    #end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

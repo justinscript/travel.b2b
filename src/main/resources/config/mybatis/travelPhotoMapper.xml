@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelPhotoMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelPhotoDO" id="baseResult">
+		<id 	property="pId" 			column="P_ID" 			jdbcType="INTEGER"/>
+		<result property="gmtCreate" 	column="GMT_CREATE" 	jdbcType="TIMESTAMP"/>
+		<result property="gmtModified" 	column="GMT_MODIFIED" 	jdbcType="TIMESTAMP"/>
+		<result property="cId" 			column="C_ID" 			jdbcType="INTEGER"/>
+		<result property="pType" 		column="P_TYPE" 		jdbcType="INTEGER"/>
+		<result property="pTitle" 		column="P_TITLE" 		jdbcType="VARCHAR"/>
+		<result property="pPath" 		column="P_PATH" 		jdbcType="VARCHAR"/>
+		<result property="pRemark" 		column="P_REMARK" 		jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		P_ID,GMT_CREATE,GMT_MODIFIED,C_ID,P_TYPE,P_TITLE,P_PATH,P_REMARK
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY P_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+				<if test="pId != null">
+					P_ID=#{pId}
+				</if>
+				<if test="cId != null">
+					AND C_ID=#{cId}
+				</if>
+				<if test="pType != null">
+					AND P_TYPE=#{pType}
+				</if>
+				<if test="pTitle != null">
+					AND P_TITLE=#{pTitle}
+				</if>
+				<if test="pPath != null">
+					AND P_PATH=#{pPath}
+				</if>
+				<if test="pRemark != null">
+					AND P_REMARK=#{pRemark}
+				</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+				<if test="pId != null">
+					P_ID=#{pId},
+				</if>
+				<if test="cId != null">
+					C_ID=#{cId},
+				</if>
+				<if test="pType != null">
+					P_TYPE=#{pType},
+				</if>
+				<if test="pTitle != null">
+					P_TITLE=#{pTitle},
+				</if>
+				<if test="pPath != null">
+					P_PATH=#{pPath},
+				</if>
+				<if test="pRemark != null">
+					P_REMARK=#{pRemark},
+				</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_PHOTO
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelPhotoQuery">
+		select <include refid="column"/>
+		from TRAVEL_PHOTO
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelPhotoQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_PHOTO
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_PHOTO where P_ID=#{pId} 
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelPhotoDO">
+		<selectKey resultType="java.lang.Long" keyProperty="pId" order="BEFORE">
+			SELECT TRAVEL_PHOTO_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_PHOTO(<include refid="column"/>) values (#{pId},SYSTIMESTAMP,SYSTIMESTAMP,#{cId,jdbcType=INTEGER},#{pType,jdbcType=INTEGER},#{pTitle,jdbcType=VARCHAR},#{pPath,jdbcType=VARCHAR},#{pRemark,jdbcType=VARCHAR})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelPhotoDO">
+		update TRAVEL_PHOTO
+		<include refid="update_set_clause"/>
+		 where P_ID=#{pId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_PHOTO where P_ID=#{pId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelPhotoQuery">
+		select count(1) from TRAVEL_PHOTO <include refid="query_where_clause"/>
+	</select>
+</mapper>

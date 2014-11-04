@@ -1,0 +1,284 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelCompanyMapper" >
+	<!-- 返回集 -->
+  <resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelCompanyDO" >
+    <id column="c_Id" property="cId" jdbcType="INTEGER" />
+    <result column="gmt_Create" property="gmtCreate" jdbcType="TIMESTAMP" />
+    <result column="gmt_Modified" property="gmtModified" jdbcType="TIMESTAMP" />
+    <result column="c_Type" property="cType" jdbcType="INTEGER" />
+    <result column="c_Name" property="cName" jdbcType="VARCHAR" />
+    <result column="c_Province" property="cProvince" jdbcType="VARCHAR" />
+    <result column="c_City" property="cCity" jdbcType="VARCHAR" />
+    <result column="c_County" property="cCounty" jdbcType="VARCHAR" />
+    <result column="c_Customname" property="cCustomname" jdbcType="VARCHAR" />
+    <result column="c_Logo" property="cLogo" jdbcType="VARCHAR" />
+    <result column="c_QQ" property="cQQ" jdbcType="VARCHAR" />
+    <result column="c_Email" property="cEmail" jdbcType="VARCHAR" />
+    <result column="c_Tel" property="cTel" jdbcType="VARCHAR" />
+    <result column="c_Fax" property="cFax" jdbcType="VARCHAR" />
+    <result column="c_Mobile" property="cMobile" jdbcType="VARCHAR" />
+    <result column="c_Address" property="cAddress" jdbcType="VARCHAR" />
+    <result column="c_Aboutus" property="cAboutus" jdbcType="VARCHAR" />
+    <result column="c_Contact" property="cContact" jdbcType="VARCHAR" />
+    <result column="c_DefaultCity" property="cDefaultCity" jdbcType="VARCHAR" />
+    <result column="c_CityTop" property="cCityTop" jdbcType="VARCHAR" />
+    <result column="c_CityList" property="cCityList" jdbcType="VARCHAR" />
+    <result column="c_Bank" property="cBank" jdbcType="VARCHAR" />
+    <result column="c_Corporation" property="cCorporation" jdbcType="VARCHAR" />
+    <result column="c_LoginTime" property="cLoginTime" jdbcType="TIMESTAMP" />
+    <result column="c_State" property="cState" jdbcType="INTEGER" />
+    <result column="c_Recommend" property="cRecommend" jdbcType="VARCHAR" />
+    <result column="c_spell" property="cSpell" jdbcType="VARCHAR" />
+  </resultMap>
+  <!-- 字段集 -->
+  <sql id="columns" >
+    c_id, 
+    gmt_create,
+    gmt_modified,
+    c_type,
+    c_name, 
+    c_province, 
+    c_city, 
+    c_county, 
+    c_customname, 
+    c_logo, 
+    c_qq, 
+    c_email, 
+    c_tel, 
+    c_fax, 
+    c_mobile, 
+    c_address, 
+    c_aboutus, 
+    c_contact, 
+    c_defaultcity, 
+    c_citytop, 
+    c_citylist, 
+    c_bank, 
+    c_corporation, 
+    c_logintime, 
+    c_state,
+    c_recommend,
+    c_Spell
+  </sql>
+  <!-- 排序 -->
+  <sql id="orderby_clause">
+		order by GMT_MODIFIED desc
+	</sql>
+	<!-- 条件SQL -->
+  <sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="cId != null">  
+	            c_ID = #{cId, jdbcType=INTEGER}
+	        </if>
+	        <if test="cIds !=null ">
+				and c_ID in
+				<foreach collection="cIds" index="index" item="item" open="(" separator="," close=")"> 
+		            #{item} 
+		        </foreach> 
+			</if>
+	        <if test="cType != null">  
+	            and c_type = #{cType, jdbcType=INTEGER}
+	        </if>
+	        <if test="cName != null and cName != '' ">
+	            and c_Name = #{cName, jdbcType=VARCHAR}
+	        </if>
+     	    <if test="cNameLike != null and cNameLike != '' ">
+	            and c_Name like '%'||#{cNameLike, jdbcType=VARCHAR}||'%'
+	        </if>
+	        <if test="cRecommend != null and cRecommend != '' ">
+	            and c_Recommend = #{cRecommend, jdbcType=VARCHAR}
+	        </if>
+	        <if test="cProvince != null and cProvince != '' ">
+	            and c_Province = #{cProvince, jdbcType=VARCHAR}
+	        </if>
+	        <if test="cCity != null and cCity != '' ">
+	            and c_City = #{cCity, jdbcType=VARCHAR}
+	        </if>
+	        <if test="cCounty != null and cCounty != '' ">
+	            and c_County = #{cCounty, jdbcType=VARCHAR}
+	        </if>
+	        <if test="cState != null">  
+	            and c_State = #{cState, jdbcType=INTEGER}
+	        </if>
+	        <if test="cSpell != null">  
+	            and c_Spell = #{cSpell, jdbcType=VARCHAR}
+	        </if>
+	    </trim> 
+  	</sql>
+  	<!-- 更新赋值SQL -->
+  	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+			<if test="cType !=null">  
+				,c_Type = #{cType, jdbcType=INTEGER}
+			</if>
+			<if test="cName !=null">  
+				,c_Name = #{cName, jdbcType=VARCHAR}
+			</if>
+			<if test="cProvince !=null">  
+				,c_Province = #{cProvince, jdbcType=VARCHAR}
+			</if>
+			<if test="cCity !=null">  
+				,c_City = #{cCity, jdbcType=VARCHAR}
+			</if>
+			<if test="cCounty !=null">  
+				,c_County = #{cCounty, jdbcType=VARCHAR}
+			</if>
+			<if test="cCustomname !=null">  
+				,c_Customname = #{cCustomname, jdbcType=VARCHAR}
+			</if>
+			<if test="cLogo !=null">  
+				,c_Logo = #{cLogo, jdbcType=VARCHAR}
+			</if>
+			<if test="cQQ !=null">  
+				,c_QQ = #{cQQ, jdbcType=VARCHAR}
+			</if>
+			<if test="cEmail !=null">  
+				,c_Email = #{cEmail, jdbcType=VARCHAR}
+			</if>
+			<if test="cTel !=null">  
+				,c_Tel = #{cTel, jdbcType=VARCHAR}
+			</if>
+			<if test="cFax !=null">  
+				,c_Fax = #{cFax, jdbcType=VARCHAR}
+			</if>
+			<if test="cMobile !=null">  
+				,c_Mobile = #{cMobile, jdbcType=VARCHAR}
+			</if>
+			<if test="cAddress !=null">  
+				,c_Address = #{cAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="cAboutus !=null">  
+				,c_Aboutus = #{cAboutus, jdbcType=VARCHAR}
+			</if>
+			<if test="cContact !=null">  
+				,c_Contact = #{cContact, jdbcType=VARCHAR}
+			</if>
+			<if test="cDefaultCity !=null">  
+				,c_DefaultCity = #{cDefaultCity, jdbcType=VARCHAR}
+			</if>
+			<if test="cCityTop !=null">  
+				,c_CityTop = #{cCityTop, jdbcType=VARCHAR}
+			</if>
+			<if test="cCityList !=null">  
+				,c_CityList = #{cCityList, jdbcType=VARCHAR}
+			</if>
+			<if test="cBank !=null">  
+				,c_Bank = #{cBank, jdbcType=VARCHAR}
+			</if>
+			<if test="cCorporation !=null">  
+				,c_Corporation = #{cCorporation, jdbcType=VARCHAR}
+			</if>
+			<if test="cRecommend !=null">  
+				,c_Recommend = #{cRecommend, jdbcType=VARCHAR}
+			</if>
+			<if test="cLoginTime !=null">  
+				,c_LoginTime = #{cLoginTime, jdbcType=TIMESTAMP}
+			</if>
+			<if test="cState !=null">  
+				,c_State = #{cState, jdbcType=INTEGER}
+			</if>
+			<if test="cSpell != null">  
+	            ,c_Spell = #{cSpell, jdbcType=VARCHAR}
+	        </if>
+		</trim>
+	</sql>
+   <select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select <include refid="columns" /> from Travel_Company where c_id = #{cId, jdbcType = INTEGER}
+  </select>
+  
+  <!-- 根据姓名查找 -->
+  <select id="getByName" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery" >
+    select <include refid="columns" /> from Travel_Company <include refid="query_where_clause" />
+  </select>
+  <!-- 查询所有 -->
+   <select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+  	select  <include refid="columns" /> 
+  	from Travel_Company 
+  	ORDER BY c_id DESC
+  </select>
+  <!-- 分页查询 -->
+  <select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+ 	<include refid="PAGINATION.paginationStart" />
+	SELECT 
+	<include refid="columns"/>
+	FROM TRAVEL_COMPANY
+	<if test="cId != null">
+  		and c_id = #{cId,jdbcType=INTEGER}
+  	</if>
+	ORDER BY c_id DESC
+	<include refid="PAGINATION.paginationEnd" />
+  </select>
+  
+  <select id="showCompanyPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="columns" /> from Travel_Company
+		<include refid="query_where_clause" />
+		order by GMT_MODIFIED desc
+		<include refid="PAGINATION.paginationEnd" />
+  </select>
+  	<!-- 总条数 -->
+  <select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+		select count(1)
+		from travel_Company
+		<include refid="query_where_clause" />
+  </select>
+	
+  <select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+		select <include refid="columns" /> from Travel_Company
+		<include refid="query_where_clause" />
+		order by GMT_MODIFIED desc
+  </select>
+	<!-- 添加 -->
+   <insert id="insert" parameterType="com.zb.app.biz.domain.TravelCompanyDO" useGeneratedKeys="true">
+   	<selectKey resultType="java.lang.Long" keyProperty="cId" order="BEFORE">
+      SELECT Travel_Company_SEQ.NEXTVAL AS cId FROM DUAL
+   	</selectKey>
+   	 insert into TRAVEL_COMPANY (
+   	 	<include refid="columns"/>
+   	 	)
+   	 values (
+   	 	#{cId},
+   	 	SYSTIMESTAMP,
+   	 	SYSTIMESTAMP,
+   	 	#{cType, jdbcType=INTEGER},
+   	 	#{cName, jdbcType=VARCHAR},
+   	 	#{cProvince, jdbcType=VARCHAR},
+   	 	#{cCity, jdbcType=VARCHAR},
+   	 	#{cCounty, jdbcType=VARCHAR},
+   	 	#{cCustomname, jdbcType=VARCHAR},
+   	 	#{cLogo, jdbcType=VARCHAR},
+   	 	#{cQQ, jdbcType=VARCHAR},
+   	 	#{cEmail, jdbcType=VARCHAR},
+   	 	#{cTel, jdbcType=VARCHAR},
+   	 	#{cFax, jdbcType=VARCHAR},
+   	 	#{cMobile, jdbcType=VARCHAR},
+   	 	#{cAddress, jdbcType=VARCHAR},
+   	 	#{cAboutus, jdbcType=VARCHAR},
+   	 	#{cContact, jdbcType=VARCHAR},
+   	 	#{cDefaultCity, jdbcType=VARCHAR},
+   	 	#{cCityTop, jdbcType=VARCHAR},
+   	 	#{cCityList, jdbcType=VARCHAR},
+   	 	#{cBank, jdbcType=VARCHAR},
+   	 	#{cCorporation, jdbcType=VARCHAR},
+   	 	#{cLoginTime, jdbcType=TIMESTAMP},
+   	 	#{cState, jdbcType=INTEGER},
+   	 	#{cRecommend, jdbcType=VARCHAR},
+   	 	#{cSpell, jdbcType=VARCHAR}
+   	 )
+   </insert>
+  <!-- 删除 -->
+  <update id="deleteById" parameterType="java.lang.Integer">
+  		update travel_company set gmt_Modified = SYSTIMESTAMP, c_state = 2 where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <!-- 修改 -->
+   <update id="updateById" parameterType="com.zb.app.biz.domain.TravelCompanyDO">
+    update TRAVEL_COMPANY <include refid="update_set_clause"/>
+    where c_id = #{cId,jdbcType=INTEGER}
+  </update>
+  <select id="countByAccount" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+		SELECT COUNT(1)
+		from Travel_Company
+		<include refid="query_where_clause" />
+	</select>
+</mapper>

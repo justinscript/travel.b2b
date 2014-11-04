@@ -1,0 +1,44 @@
+    <script type="text/javascript">
+        $(function () {
+        	$("#sortadd").Validform({
+        		ajaxPost:true,
+        		postonce: false,
+        		tiptype:2,
+        		showAllError:false,
+        		callback:function(data)
+        		{
+        			if(data.code==0)
+        			{
+        				setTimeout(function () {
+							layer.closeAll();
+        					$.Hidemsg();
+        				}, 1000);
+        			}
+        		}
+        	})
+        });
+    </script>
+#if($!type=="update")	
+<form method="post" action="/zbmanlogin/editgiftclass.htm" id="sortadd" >
+<input type="hidden" value="$!sort.gcId" name="gcId"/>
+#else
+	<form method="post" action="/zbmanlogin/addGiftClass.htm" id="sortadd" >
+	#end
+<div style="margin:20px;">
+	<table width="100%" class="tab2">
+		<tr><th>类别名称：</th><td>
+				<span><input type="text" value="$!sort.gcName" name="gcName" datatype="*" nullmsg="类别名称不能为空"/></span>
+		</td></tr>
+		<tr><th>排序：</th><td>
+				<span><input type="text" value="0" name="" datatype="n" nullmsg="排序不能为空" errormsg="排序必须为数字"/></span>
+		</td></tr>
+		<tr>
+        <td>
+        </td>
+        <td>
+			<input type="submit" value="提交" class="btn btn-primary" />
+        </td>
+    </tr>
+	</table>
+</div>
+</form>

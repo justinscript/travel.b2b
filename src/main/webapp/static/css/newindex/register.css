@@ -1,0 +1,87 @@
+@charset "utf-8";
+body{line-height:160%;font-size:12px;color:#555;text-align:center;background-color:#F9F9F9}
+body,input,select,button{font-family:verdana,sans-serif}
+h1,h2,h3,h4,h5,h6,select,input,textarea,button{font-size:100%}
+body,h1,h2,h3,h4,h5,h6,ul,ol,li,form,p,dl,dt,dd,table,th,td,img,blockquote{margin:0;padding:0;border:0}
+hr{margin:0;padding:0}
+input,button,textarea,img{line-height:normal}
+abbr,acronym,address,cite,q,em,code,var,dfn,ins{font-style:normal;text-decoration:none;border:0}
+q:before,q:after{content:""}
+ul,ol{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+.ipt-c,.ipt-r{width:16px;heivght:16px;padding:0;margin:0 3px 0 0;overflow:hidden}
+.page,.header,.content,.footer{margin:auto}
+iframe{display:inherit}
+a{color:#039;text-decoration:none}
+a:hover{text-decoration:underline}
+.clear{font-size:0;line-height:0;height:1px;clear:both;overflow:hidden;visibility:hidden}
+.txt-err,.txt-impt{color:#C00}
+.txt-tips{color:#999}
+.txt-succ{color:#3D882D}
+.txt-14{font-size:14px}
+.regForm-item-ct .pswState span{-webkit-transition-property:all;-webkit-transition-duration:0.2s;-moz-transition-property:all;-moz-transition-duration:0.2s;-o-transition-property:all;-o-transition-duration:0.2s}
+select{padding:3px;font-size:14px;font-weight:bold;color:#555}
+.header .bg,.regTabs ul,.regForm-item-ct .owned .arr,.btnReg,.mainBody-side .norCont .intro,.g-msgbox .Aclose,.ico{background-image:url(/static/img/register/glb.png);background-repeat:no-repeat}
+.content-tit,.btn,.btn-main,.btnSml{background-image:url(/static/img/register/bgx.png);background-repeat:repeat-x}
+.ico,.btn,.btnReg,.btnRegDisable,.btn-disable,.btn-main,.btnSml{display:inline-block;+display:inline;+zoom:1;vertical-align:middle;line-height:0;font-size:0;overflow:hidden}
+.ipt{padding:4px 5px;border:#ABABAB 1px solid;box-shadow:2px 2px 3px #EDEDED inset;font-size:14px;font-weight:bold}
+.ipt-err{border-color:#C66161;background-color:#FBE2E2;color:#C00;box-shadow:2px 2px 3px #EDEDED inset}
+
+.btn{height:28px;padding:0 20px;font-size:14px;background-position:0 -72px;border:#BBB 1px solid;text-decoration:none;line-height:28px;color:#555;border-radius:3px;outline:none}
+.btn:hover{text-decoration:none;background-position:0 -108px}
+.btn:active{text-decoration:none;background-position:0 -144px}
+.btn-disable,.btn-disable:hover,.btn-disable:active{height:28px;padding:0 20px;font-size:14px;background-color:#F5F5F5;border:#BBB 1px solid;text-decoration:none;line-height:28px;color:#555;border-radius:3px;outline:none;cursor:default;color:#999}
+.btn-main{height:28px;padding:0 20px;font-size:14px;background-position:0 -288px;border:#459830 1px solid;text-decoration:none;line-height:28px;color:#FFF;font-weight:bold;border-radius:3px;outline:none}
+.btn-main:hover{text-decoration:none;background-position:0 -324px}
+.btn-main:active{text-decoration:none;background-position:0 -360px}
+
+.btnReg{width:119px;height:37px;font-size:14px;background-position:0 -360px;text-decoration:none;line-height:37px;color:#FFF;outline:none;text-align:center;font-weight:bold;border:0px; cursor:pointer;}
+.btnReg:hover{text-decoration:none;background-position:-144px -360px}
+.btnReg:active{text-decoration:none;background-position:-288px -360px}
+.btnRegDisable,.btnRegDisable:hover,.btnRegDisable:active{width:119px;height:35px;font-size:14px;background-color:#F0F0F0;border:#D8D8D8 1px solid;text-decoration:none;line-height:35px;color:#999;outline:none;text-align:center;font-weight:bold;cursor:default;border-radius:3px}
+
+.header{width:960px;height:81px;margin:0 auto;text-align:left;position:relative}
+.header .bg{width:644px;height:62px;background-position:0 0;position:absolute;left:0;top:10px}
+.header .bg a{display:block;width:128px;height:27px;white-space:nowrap;text-indent:3000px;overflow:hidden;float:left}
+.header .links{width:200px;position:absolute;right:0;top:34px;text-align:right;color:#999}
+.header .links a{margin:0 5px}
+.content{width:960px;margin:0 auto;text-align:left}
+.content-tit{height:36px;background-position:0 0;background-color:#6495C6;border:#5B88B8 1px solid;border-radius:3px 3px 0 0}
+.content-tit h1{font-size:14px;line-height:36px;font-weight:normal;color:#FFF;text-indent:20px}
+.content .mainBody-wp{border:#E0E0E0 1px solid;border-top-width:0;}
+.content .mainBody{padding:50px 0 36px 20px;zoom:1}
+
+
+
+.regTabs{height:58px;}
+.regTabs ul{width:261px;height:35px;margin:0 auto;}
+.regTabs li{width:130px;height:35px;float:left}
+.regTabs a{display:block;width:130px;height:35px;line-height:35px;text-align:center;color:#555;font-size:14px}
+.regTabs .tabs1-on{background-position:0 -72px}
+.regTabs .tabs2-on{background-position:0 -144px}
+.regTabs .tabs2-on .a2,.regTabs .tabs2-on .a2:hover,.regTabs .tabs1-on .a1,.regTabs .tabs1-on .a1:hover{font-weight:bold;color:#FFF;cursor:default;text-decoration:none}
+.regForm{}
+.regForm-item{position:relative}
+.regForm-item dt{border-bottom:#CCC 1px solid;font-size:16px;font-weight:bold;line-height:30px;height:30px;margin-bottom:15px;}
+.regForm-item th{height:40px;line-height:40px;font-size:14px;width:100px;text-align:right;font-weight:normal;}
+.regForm-item-focus .tips .txt-tips{color:#333}
+
+.regForm-item-tit{position:absolute;width:75px;position:absolute;left:0;top:13px;text-align:right;font-size:14px}
+.regForm-item-ct{padding:8px 0 8px 100px;zoom:1;position:relative}
+.regForm-item-ct .ipt{width:200px}
+.regForm-item-ct .switchvCode{position:absolute;left:320px;top:45px}
+.regForm-item-ct .tips{line-height:16px;padding:6px 0 4px}
+.regForm-item-ct .btns{padding-top:5px}
+.regForm-item-ct .norWidthIpt{width:322px}
+.regForm-item-ct .vCodeWidthIpt{width:222px}
+.regForm-item-ct .vCode{border:#E7E7E7 1px solid}
+.regForm-item-ct .vCode .ipt{}
+.regForm-item-ct .mob-supt{position:relative}
+.regForm-item-ct .mob-supt .ipt{padding-left:25px;width:215px}
+.regForm-item-ct .mob-supt .ico-mob{position:absolute;left:10px;top:8px}
+
+
+
+.footer{text-align:center;clear:both;height:40px;line-height:40px;color:#999}
+.footer a{color:#999}
+

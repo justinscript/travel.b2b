@@ -1,0 +1,25 @@
+<table class="tbl table-striped table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <th width="80">操作员</th>
+        <th width="120">操作类型</th>
+        <th>操作内容</th>
+		<th width="120">操作时间</th>		
+    </tr>
+	#foreach($log in $logList)
+        <tr>
+			<td>$log.mName</td>
+			<td>没有</td>
+            <td>
+				#if($log.lTitle)
+					<a href="http://121.40.160.6/line/${log.olTablePb}.htm" target="_blank"> $!{log.lTitle} </a><br/>
+				#else
+					<a href="http://121.40.160.6/line/${log.olTablePk}.htm" target="_blank"> $!{log.orOrderid} </a><br/>
+				#end
+			<span class="red">修改前：</span>$log.olChangeBefore<br/>
+			<span class="red">修改后：</span>$log.olChangeLater
+			</td>
+            <td>${dateViewTools.formatFullDate($log.gmtCreate)}</td>
+        </tr>
+	#end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

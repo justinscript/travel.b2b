@@ -1,0 +1,91 @@
+<table width="100%" cellpadding="5" cellspacing="0" class="tab2 table-striped">
+    <tr>
+        <th width="100">
+            礼品名称：
+        </th>
+        <td>
+            $!fullDO.gTitle
+        </td>
+    </tr>
+    <tr>
+        <th>
+            数量：
+        </th>
+        <td>
+            $!fullDO.goCount
+        </td>
+    </tr>
+    <tr>
+        <th>
+            扣除积分：
+        </th>
+        <td>
+            $!fullDO.goIntegralCount
+        </td>
+    </tr>
+    <tr>
+        <th>
+            公司名称：
+        </th>
+        <td>
+            $!fullDO.cName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            兑换账户：
+        </th>
+        <td>
+            $!fullDO.mName ( $!fullDO.mUserName )
+        </td>
+    </tr>
+    <tr>
+        <th>
+            真实姓名：
+        </th>
+        <td>
+            $!fullDO.mName
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系电话：
+        </th>
+        <td>
+            $!fullDO.goTel
+        </td>
+    </tr>
+    <tr>
+        <th>
+            手机号码：
+        </th>
+        <td>
+            $!fullDO.goMobile
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系地址：
+        </th>
+        <td>
+            $!fullDO.goProvince $!fullDO.goCity $!fullDO.goCounty $!fullDO.goAddress
+        </td>
+    </tr>
+    <tr>
+        <th>
+            状态：
+        </th>
+        <td style="color: Red; font-weight; 700; font-size: 16px;">
+            #if($!fullDO.goState == 0)
+            	<input class="btn" type="button" value="确认订单" gid="1" />
+            #elseif($!fullDO.goState == 1)
+            	<input class="btn btn-primary" type="button" value="已发货" gid="1" />
+            #elseif($!fullDO.goState == 2)
+            	<input class="btn btn-info" type="button" value="已收货" gid="1" />
+            #else
+            	<input class="btn btn-success" type="button" value="订单完成" gid="1" />
+            #end
+        </td>
+    </tr>
+    <tr><th>手机充值</th><td><iframe name="alimamaifrm" frameborder="0" marginheight="0" marginwidth="0" border="0" scrolling="no" width="210" height="200" src="http://www.taobao.com/go/app/tbk_app/chongzhi_210_200.php?pid=mm_16955960_3457204_13088213&page=chongzhi_210_200.php&size_w=210&size_h=200&stru_phone=1&stru_game=0&stru_travel=0&size_cat=std" ></iframe></td></tr>
+</table>

@@ -1,0 +1,71 @@
+<ul id="LeftNav">
+            <li>
+                <a href="#">公司管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/m/manage.htm">总管理</a>
+                    <a href="/zbmanlogin/m/account.htm">批发商</a>
+                    <a href="/zbmanlogin/m/tour.htm">组团社</a>
+                    <!--<a href="/zbmanlogin/m/person.htm">直客会员</a>-->
+                    <a href="/zbmanlogin/black.htm">黑名单反馈</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">线路管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/line/shortLine.htm">周边短线</a>
+                    <a href="/zbmanlogin/line/longLine.htm">国内长线</a>
+                    <a href="/zbmanlogin/line/internationalLine.htm">国际线路</a>
+					<a href="/zbmanlogin/line/template.htm">线路模板</a>
+                </div>
+            </li>
+            <li><a href="#">订单管理<i class="icon iArrow"></i></a>
+                <div>
+					#if(${webUser.hasPermission(1)})
+                    <a href="/zbmanlogin/order.htm">散客订单</a>
+					#end
+                    <a href="/zbmanlogin/ordercount.htm">订单统计</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">新闻管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/info/news.htm">旅游资讯</a>
+                    <a href="/zbmanlogin/info/notice.htm">最新公告</a>
+                    <a href="/zbmanlogin/info/userinfo.htm">用户资讯</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">礼品管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/gift.htm">礼品列表</a>
+                    <a href="/zbmanlogin/gift_cart.htm">订单管理</a>
+                    <a href="/zbmanlogin/gift_sort.htm">礼品类别</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">系统管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/site/index.htm">站点管理</a>
+					<a href="/zbmanlogin/site/tag.htm">站点标签</a>
+                    <a href="/zbmanlogin/page.htm">网站栏目</a>
+                    <a href="/zbmanlogin/link.htm">广告管理</a>
+                    <a href="/zbmanlogin/photo.htm">照片墙管理</a>
+                    <a href="#">接口管理</a>
+                </div>
+            </li>
+            <li>
+                <a href="#">积分管理<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/integral.htm">积分记录</a>
+                    <a href="/zbmanlogin/integral/add.htm">积分充值</a>
+                </div>
+            </li>			
+            <li>
+                <a href="#">统计分析<i class="icon iArrow"></i></a>
+                <div>
+                    <a href="/zbmanlogin/count/recruiting.htm">批发商收客</a>
+                    <a href="/zbmanlogin/count/login.htm">登录统计</a>
+                    <a href="/zbmanlogin/count/reg.htm">注册统计</a>
+                </div>
+            </li>
+        </ul>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+    <script src="/static/js/jq-zuobian-init.js"></script>
+    <script src="/static/js/layer/layer.min.js"></script>
+    <script src="/static/js/common.js"></script>
+    <script type="text/javascript">
+		$(function(){
+		$("#FilterList").filterSearch();
+					 $.Menu("公司管理","黑名单反馈");
+				   })
+	</script>
+</head>
+<body>
+    #parse("/widget/common/manage_header.vm")
+    <div id="Bodyer">
+        #parse("/widget/common/manage_nav.vm")
+        <div class="M_title">
+                    <div class="tit">黑名单</div>
+                	<div class="Page_option">
+                    	<ul>
+                        	<li class="current"><a href="#tabl1" rel="">信息列表</a></li>
+                        </ul>
+                    </div>
+        </div>
+        <div id="Main">
+            <div id="tab1">
+             <div id="FilterList" url="/zbmanlogin/blacklists.htm">
+					<ul>
+                        <li class="title-tab">
+                            <span class="tit" name="lState" hide="false">状  态：</span>
+                            <a href="#" rel="0" class="hover">未审核</a>
+                            <a href="#" rel="1">已审核</a>
+                        </li>
+                        <div id="FilterSearch" class="hide"><span class="tit">已选条件：</span></div>
+                    </ul>
+				</div>
+                <div class="tableContent"></div>
+            </div>
+            <div id="tab2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

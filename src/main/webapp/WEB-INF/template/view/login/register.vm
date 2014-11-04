@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<link href="/static/css/1409/login.css" rel="stylesheet" />
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+<script src="/static/js/city.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetP('Province', 'City', 'County', ["", "", ""]);
+        })
+    </script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<div id="register">
+  <div class="c" id="registerinfo">
+    <div class="tits">
+      <span>
+      <a href="javascript:void(0)" class="on" onclick="CompanyType(this);" data-id="1"><i class="ico2 i1"></i>组团社(门市)</a>
+      <p class="ico2 i3" style="display:block"></p>
+      </span>
+      <span>
+      <a href="javascript:void(0)" onclick="CompanyType(this);" data-id="2"><i class="ico2 i2"></i>批发商(地接)</a>
+      <p class="ico2 i3"></p>
+      </span>
+    </div>
+    <div class="content">
+      <div class="left">
+      <form action="/doRegister.htm" id="registerform">
+        <input type="hidden" name="token" value="${token}" />
+        <input type="hidden" value="userreg" name="act" />
+        <input type="hidden" value="1" name="cType" id="t" />     
+
+        <dl><dd>
+        <div class="tit"><h3>公司信息</h3><span>您当前选择的是<b id="typename">组团社</b></span></div>
+        <div class="form">
+          <dl><dt>公司名称:</dt><dd><span>
+<input type="text" value="" name="cName" id="C_Name" ajaxurl="nameVerify.htm?type=1"  datatype="*" nullmsg="公司名称不能为空" errormsg="公司名称格式不对" class="reginput" size="50" /></span>
+<label class="Validform_checktip">请填写您的公司全称</label></dd></dl>
+          <dl><dt>公司法人:</dt><dd><span><input type="text" name="cCorporation" datatype="chinese" nullmsg="公司法人不能为空"
+errormsg="公司法人必须为中文字符"class="reginput"/></span><label class="Validform_checktip">请填写公司法人</label></dd></dl>
+          <dl><dt>所在省份:</dt><dd><span>
+          <select name="cProvince" id="Province" datatype="*" errormsg="所在省份不能为空" nullmsg="所在省份不能为空">
+          </select>
+          <select name="cCity" id="City" datatype="*" errormsg="所在地级市不能为空" nullmsg="所在地级市不能为空">
+          </select>
+          <select name="cCounty" id="County" datatype="*" errormsg="所在地级省不能为空" nullmsg="所在地级省不能为空">
+          </select>
+          </span><label class="Validform_checktip">*</label></dd></dl>  
+          <dl><dt>详细地址:</dt><dd><span><input type="text" name="cAddress" style="width: 400px"
+datatype="*" nullmsg="公司地址不为空" class="reginput"/></span><label class="Validform_checktip"></label></dd></dl>
+          <dl><dt>公司电话:</dt><dd><span><input type="text" name="cTel" datatype="*" nullmsg="公司电话不能为空" errormsg="公司电话格式错误,例：0512-55884466" class="reginput"/></span><label class="Validform_checktip">*必填</label></dd></dl>
+          <dl><dt>公司传真:</dt><dd><span><input type="text" name="cFax" datatype="*"  ignore="ignore" nullmsg="公司传真不能为空" errormsg="公司传真格式错误,例：0512-55884466" class="reginput"/></span><label class="Validform_checktip"></label></dd></dl>  
+          <dl><dt>推荐公司:</dt><dd><span><input type="text" name="cRecommend"  class="reginput"/></span><div class=""></div></dd></dl>
+        </div>
+      <div class="tit"><h3>个人信息</h3></div>
+        <div class="form">
+<dl>
+<dt>用户名：</dt>
+<dd><span><input type="text" value="" id="M_UserName" name="mUserName" datatype="username"
+nullmsg="用户名不能为空" errormsg="用户名至少4个字符,最多18个字符！" class="reginput" ajaxurl="userNameVerify.htm?type=1" /></span><label class="Validform_checktip">
+*用户名至少4-20个字母或数字！</label></dd>
+</dl>
+<dl>
+<dt>真实姓名：</dt>
+<dd><span><input type="text" value="" name="mName" datatype="chinese" nullmsg="真实姓名不能为空" errormsg="姓名必须为中文"
+class="reginput" /></span> <label class="Validform_checktip">*必须为中文</label></dd>
+</dl>
+<dl>
+<dt>手机号码：</dt>
+<dd><span><input type="text" value="" name="mMobile" id="M_Mobile" datatype="m" nullmsg="手机号码不能为空"
+errormsg="手机号码格式错误,例：15966888866" class="reginput" /></span><label class="Validform_checktip">
+*手机号码不能为空</label></dd>
+</dl>
+<dl>
+<dt>电话号码：</dt>
+<dd><span><input type="text" value="" name="mTel" datatype="*" ignore="ignore" errormsg="电话号码格式错误,例：021-552933344"
+class="reginput" /></span><label class="Validform_checktip"></label></dd>
+</dl>
+<dl>
+<dt>电子邮箱：</dt>
+<dd><span><input type="text" value="" name="mEmail" datatype="e" ignore="ignore" errormsg="邮箱格式错误"
+class="reginput" /></span><label class="Validform_checktip"></label></dd>
+</dl>
+<dl>
+<dt>登录密码：</dt>
+<dd><span><input type="password" value="" name="mPassword" datatype="*6-16" nullmsg="密码不能为空"
+errormsg="密码范围在6~16位之间！" class="reginput" /></span><label class="Validform_checktip"></label></dd>
+</dl>
+<dl>
+<dt>确认密码：</dt>
+<dd><span><input type="password" value="" name="mAffirmPassword" recheck="mPassword" datatype="*"
+nullmsg="请再输入一次密码" errormsg="两次密码不一致" class="reginput" /></span><label class="Validform_checktip"></label></dd>
+</dl>
+<!--<dl><dt>验证码:</dt><dd><span><input type="text" value="" name="" class="reginput"/></span><div class=""></div></dd></dl>-->
+          <dl><dd><input type="submit" value="立即注册" class="regsubmit"/></dd></dl>
+        </div>  
+        </dd></dl>
+      </form>      
+      </div>
+      <div class="right">
+        <div class="login"><a href="#">已有账号，请点击这里登录</a></div>
+        <div class="box">
+          <dl>
+            <dd><i class="ico2 i1"></i>会员注册须知</dd>
+            <dt>
+            <p>目前左边只受理旅行社单会员注册</p>
+<p>注册会员需要提供营业执照复印件、法人身份证复印件、经营许可证复印件</p>
+<p>申请成功后左边网工作人员进行核验身份后正式开通</p>
+            </dt>
+          </dl>
+          <dl>
+            <dd><i  class="ico2 i2"></i>左边网为会员提供那些服务？</dd>
+            <dt>
+            <p>浏览本网站信息</p>
+<p>自主发布地接交易信息</p>
+<p>网上在线采购和销售服务</p>
+            </dt>
+          </dl>
+          <dl>
+            <dd><i  class="ico2 i3"></i>客服服务</dd>
+            <dt>
+            <p>
+            <span><i class="ico2 i4"></i>400 0378 777</span>
+             <span><i class="ico2 i5"></i>QQ客服</span>
+            </p>
+            </dt>
+          </dl>                    
+        </div>
+      </div>
+    </div>
+  </div>
+    <div class="c success" id="registersuccess">
+      <div class="info">
+      <dl>
+      <dt><i class="ico2"></i>会员申请成功！</dt>
+      <!--<dd>公司名：<span id="usercompany"></span> 用户名：<span id="username"></span></dd>-->
+      <dd>请耐心等待工作人员审核，审核期间请保持手机畅通，处理时间为1-2个工作日，如有疑问请拨打：<b>400 0378 777</b></dd>
+      </div>
+  </div>
+</div>  
+#parse("/widget/common/index1409_footer.vm")
+<script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+<script src="/static/js/1409/f.js" type="text/javascript"></script>
+<link href="/static/js/Validform/css/style.css" rel="stylesheet" />
+</body>
+</html>

@@ -1,0 +1,17 @@
+<body>  
+<h2>文件上传实例</h2>  
+  
+<h4>文件上传实例</h2>  
+<form name="file-form" action="doUpload.htm" method="post" enctype="multipart/form-data">  
+    选择文件:<input type="file" name="file">  
+    <input type="submit" value="提交">   
+</form>  
+
+<h4>文件上传实例2</h2> 
+<form name="files-form" action="doUploads.htm" method="post" enctype="multipart/form-data">  
+    选择文件:<input type="file" name="files">  
+    <input type="submit" value="提交">   
+</form>  
+  
+  
+</body> 

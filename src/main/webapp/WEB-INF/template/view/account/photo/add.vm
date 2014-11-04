@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+	<link href="/static/css/common.css" rel="stylesheet" />  
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/swfupload.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/handlers.js"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+    <script src="/static/js/common.js" type="text/javascript"></script>		
+    <script type="text/javascript">
+		var swfu;
+        $(function(){
+            swfu = new SWFUpload({
+                upload_url: "/ajaxUpload.htm",
+                file_post_name: "files", 
+                post_params: {"accept" : "file"},
+                use_query_string:false,
+                // File Upload Settings
+                file_size_limit : "10 MB",  // 文件大小控制
+                file_types : "*.jpg;*.gif,*.png",
+                file_types_description : "All Files",
+                file_upload_limit : "0",
+                file_queue_error_handler : fileQueueError,
+                file_dialog_complete_handler : fileDialogComplete,//选择好文件后提交
+                file_queued_handler : uploadComplete,//选择好文件后
+                upload_progress_handler : uploadProgress,//等待上传
+                upload_error_handler : uploadError,
+                upload_success_handler : uploadSuccess,
+                upload_complete_handler : uploadComplete,
+                button_image_url: "/static/js/swfupload/button.png",
+                button_placeholder_id : "spanButtonPlaceholder",
+                button_width: 140,
+                button_height: 35,
+                button_text_top_padding: 0,
+                button_text_left_padding: 18,
+                button_window_mode: SWFUpload.WINDOW_MODE.TRANSPARENT,
+                button_cursor: SWFUpload.CURSOR.HAND,
+                // Flash Settings
+                flash_url : "/static/js/swfupload/flash/swfupload.swf",
+                custom_settings : {
+                    upload_target : "divFileProgressContainer",
+                },
+                // Debug Settings
+                debug: false  //是否显示调试窗口
+            });
+        }
+		);
+        function startUploadFile(){
+            swfu.startUpload();
+        }
+
+		var index = parent.layer.getFrameIndex(window.name);
+		$(function(){
+			$("#PicForm").Validform({
+        		tiptype:1,
+        		ajaxPost:true,
+        		postonce:true,
+        		callback:function(data)
+        		{
+        			if(data.code==0)
+        			{
+        				setTimeout(function () {
+        				$.Hidemsg();
+						parent.location.reload();
+        				}, 1000);
+        			}
+        		}
+        	})
+		})
+    </script>
+ 
+</head>
+<body>
+
+<div style="padding:10px;">
+<form id="PicForm" method="post" action="/account/addPhoto.htm">
+<input type="hidden" name="act" value="SaveTraffic" />
+<table width="100%" cellpadding="0" cellspacing="0" class="tab2" >
+<tr><th width="100">类型：</th><td>
+    <Select name="pType" >
+        <option value="1">景点</option>
+        <option value="2">酒店</option>
+        <option value="3">餐饮</option>
+    </Select>
+</td></tr>
+<tr><th>
+图片：
+</th>
+<td>
+<div style="position:relative">
+<span id="spanButtonPlaceholder"></span>              
+<div id="divFileProgressContainer" style="position:absolute;left:150px;top:0"></div>
+</div>
+<div id="J_imageView" class="photo-list"></div>
+</td>
+</tr>
+<tr><th></th><td><button class="btn btn-primary" type="submit" onclick="OrgFormL(this)">提交</button></td></tr>
+</table>
+</form>
+</div>
+</body>
+</html>

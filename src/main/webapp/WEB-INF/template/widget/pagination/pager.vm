@@ -1,0 +1,51 @@
+<style>
+.pager .active {
+    background-color: #f60;
+    border-color: #f60;
+    color: #fff;
+}
+</style>
+#if($!{pagination.getAllPageNum()} && $!{pagination.getAllPageNum()} >= 1)
+	## <span><strong>$!{pagination.getAllPageNum()}</strong> 页</span>
+	<div class="pager">
+		<ul class="clearfix">
+			#set($page = ${pagination.firstPage})
+			#if(!$page.current)
+				<li class="first opt"><a href="$page.url" p="$page.page">首页</a></li>
+			#else
+				<li class="first opt"><a href="javascript:void(0);" class="disabled"  p="$page.page">首页</a></li>
+			#end
+			
+			#set($page = ${pagination.prevPage})
+			#if(!$page.current)
+				<li class="prev opt"><a href="$page.url"  p="$page.page">上一页</a></li>
+			#else
+				<li class="prev opt"><a href="javascript:void(0);" class="disabled"  p="$page.page">上一页</a></li>
+			#end
+			
+			#set($subCount = $pagination.pages.size())
+			#foreach($indexPage in $!{pagination.pages})
+				#if($indexPage.current)
+					<li class=" #if($velocityCount == $subCount) end #end"><a class="active" style="background-color: #f60;" href="javascript:void(0);"  p="$indexPage.page">$indexPage.page</a></li>
+				#else
+					<li #if($velocityCount == $subCount) class="end" #end><a href="$indexPage.url"  p="$indexPage.page">$indexPage.page</a></li>
+				#end
+			#end
+			
+			#set($page = ${pagination.nextPage})
+			#if(!$page.current)
+				<li class="next opt" ><a style="float: none;" href="$page.url" p="$page.page">下一页</a></li>
+				
+			#else
+				<li class="next opt" ><a style="float: none;" href="javascript:void(0);" class="disabled"  p="$page.page">下一页</a></li>
+			#end
+			
+			#set($page = ${pagination.lastPage})
+			#if(!$page.current)
+				<li id="id_lastBtn" class="last opt"><a href="$page.url" p="$page.page">末页</a></li>
+			#else
+				<li class="last opt"><a href="javascript:void(0);" class="disabled" p="$page.page">末页</a></li>
+			#end
+		</ul>
+	</div>
+#end

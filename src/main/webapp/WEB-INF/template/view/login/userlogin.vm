@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<link href="/static/css/1409/login.css" rel="stylesheet" />
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<script>
+	$(function(){
+		#if($!type == '2')
+			$("#ulogintype").children().eq(0).removeClass("hover");
+			$("#ulogintype").children().eq(1).addClass("hover");
+		#end
+	});
+</script>
+<body>
+<div class="user_header">
+  <div class="logo"><a href="/"></a><span>会员登录</span></div>
+  <div class="h-menu"><a href="#">返回首页</a><a href="#">帮助中心</a><a href="#">联系我们</a></div>
+</div>
+<div class="logins">
+<div class="banner"></div>
+<div class="box">
+<form action="/doLogin.htm" id="loginform">	
+	<input type="hidden" value="$!type" name="utype" id="utype"/>
+    <div class="box2">
+      <div class="tit" id="ulogintype"><a href="#" class="hover" data-id="1">组团社登录</a><a href="#" data-id="2">地接社登录</a></div>
+      <div class="list">
+        <dl><dd>用户名：</dd><dt><span><input type="text" value="" name="account" class="input" datatype="*" nullmsg="用户名不能为空"/></span></dt></dl>
+        <dl><dd>密码：</dd><dt><span><input type="password" value="" name="password" class="input" datatype="*" nullmsg="密码不能为空"/></span></dt></dl>
+        <!--<dl><dd>验证码：</dd><dt><input type="text" value="" name="" class="input w100"/></dt></dl>-->
+        <dl class="li"><dt><input type="submit" value="登录" class="submit" /></dt></dl>
+		<dl></dl>
+        <dl class="li t20"><dt style="margin-left:80px;"><input type="checkbox" id="remobe"/><label for="remobe">保存登录信息</label><a href="#">找回密码</a> | <a href="/register.htm">免费注册</a></dt></dl>
+      </div>
+    </div>
+</form>	
+  </div>
+</div>
+<div class="footer">
+  <div class="copyright">Copyright © 2013 版权所有 左边网. All Rights Reserved.浙ICP备11057101号</div>
+</div>
+<script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+<script src="/static/js/1409/f.js" type="text/javascript"></script>
+<link href="/static/js/Validform/css/style.css" rel="stylesheet" />
+</body>
+</html>

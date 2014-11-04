@@ -1,0 +1,35 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/layer/layer.min.js"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<div id="wrapper">
+    <div class="c">
+      #parse("/widget/common/index1409_top.vm")
+      <div class="right">
+        <div class="tit"><h2>左边公告</h2></div>
+        <div class="detail">
+                <div class="d-tit">休闲度假文化游是景区旅游新亮点</div>
+                <div class="d-content">    随着市场经济的发展，以及国家法律法规的出台，旅游景区的经营与管理日渐规范，创新型经营管理模式成为旅游景区最为关切的问题。从景区经营的角度，主要涉及景区的形象设计、产品创新与市场营销；从景区管理的角度，主要包括景区基础管理制度和具体管理模式和方法等。<br/>
+    近日，中国旅游研究院在京发布《中国旅游景区发展报告（2014）》，对最近一年来的景区发展环境、景区消费需求与服务质量、景区投资、景区经营景气水平、景区业政策法规动态以及景区发展趋势等进行了调查研究。<br/>
+    报告还对2013年景区经营绩效进行系统评价，通过景区企业对行业发展、企业自身经营状况以及具体经营指标的判断分析景区行业的发展绩效。景区业政策法规方面，《国民旅游休闲纲要（2013-2020年）》、《中华人民共和国旅游法》的颁布和实施。<br/>
+    2013年中国旅游研究院通过现场问卷发放、网络评论和投诉等三个渠道收集了三万余例调查样本数据，对目前我国景区消费主体的市场需求、消费偏好以及服务质量评价进行调查分析。国内游客和入境游客对景区服务质量评价的满意度指数分别为7.40和7.42，略低于2013年游客总体满意度指数7.49。景区游客的主体分布在距景区300公里以内的范围内，比例达到55%。选择游览观光作为主要旅游目的的游客数量占总游客数量的51%。<br/>
+　　报告对2013年景区投资进行了分析，认为休闲度假、文化旅游是景区旅游投资的新亮点。2013年，各地旅游景区大项目投资也明显增加，投资100亿元以上的项目达127个。社会资本加速进入旅游业，成为旅游投资的最大主体。其中，民间资本成为景区投资的主力，约占57%；休闲度假类景区成为旅游投资的重点，约占61%；东部地区成为景区投资的热点，约占65%。报告发现，传统景区如黄山、西湖、长城、故宫、兵马俑等持续吸引广大游客的同时，以华侨城、海昌、长隆等为代表的主题公园越来越受到游客特别是年轻人的欢迎，以乌镇、古北水镇、宽窄巷子等文化休闲度假景区越来越成为资本追逐的对象，而迪斯尼、环球影城等项目也是受到市场强烈关注。<br/>
+　　当前，我国旅游业正在从大众化发展的初级阶段向中高级阶段的演化进程中。为适应国民大众旅游需求的新变化，“推动观光、休闲和度假旅游协调发展”成为大众旅游和国民休闲时代的新战略。这要求景区业着眼于更多的老百姓参与进来，同时着力构建更加多元、更多层次的景区发展体系。</div>
+        </div>
+      </div>
+    </div>
+</div>
+#parse("/widget/common/index1409_footer.vm")
+</body>
+</html>

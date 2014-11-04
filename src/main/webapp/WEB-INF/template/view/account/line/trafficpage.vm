@@ -1,0 +1,30 @@
+<table class="tbl table-striped table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <th width="80">往/返</th>
+        <th>标题</th>
+        <th width="120">类型</th>
+        <th width="150">操作</th>
+    </tr>
+    #foreach($!tic in $traffic)
+        <tr>
+            #if($!tic.tCat==0)
+                <td>出发</td>
+                #else
+                    <td>返回</td>
+            #end
+            <td>$!tic.tTraffic</td>
+            <td>$!tic.tTypeString</td>
+            <td>
+                <div class="w120" style="line-height: 26px;">
+                    <a href="javascript:void(0)" onclick="ajaxTemple(this,$!tic.tId)" url="trafficupdate.htm" title="修改交通模板" rel="800,300" class="btn btn-primary btn-mini">
+                        <i class="icon-edit icon-white"></i>
+                        修改</a>
+                        <a href="javascript:void(0)" title="模板删除" onClick="DelList('/account/deletetraffic.htm',$!tic.tId,this,3);return false"  class="btn btn-mini">
+                            <i class="icon-remove"></i>
+                            删除</a>
+                </div>
+            </td>
+        </tr>
+    #end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

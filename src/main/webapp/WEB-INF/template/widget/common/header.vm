@@ -1,0 +1,4 @@
+<div id="header">
+    <div id="header-left">左边网后台管理系统</div>
+    <div id="header-right">欢迎您，$!{webUser.getCompanyName()}【$!{webUser.getNick()}】<a href="/loginOut.htm">退出</a></div>
+</div>

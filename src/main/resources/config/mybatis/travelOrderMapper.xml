@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelOrderMapper">
+
+	<resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelOrderDO">
+		<!-- 自动编号 -->
+		<id column="OR_ID" property="orId" jdbcType="INTEGER" />
+		<!-- 创建时间 -->
+		<result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<!-- 修改时间 -->
+		<result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+		<!-- 线路id -->
+		<result column="L_ID" property="lId" jdbcType="INTEGER" />
+		<!-- 组团社用户id -->
+		<result column="CUSTOM_ID" property="customId" jdbcType="INTEGER" />
+		<!-- 组团社公司id -->
+		<result column="CUSTOMCOMPANY_ID" property="customCompanyId" jdbcType="INTEGER" />
+		<!-- 地接社公司id -->
+		<result column="C_ID" property="cId" jdbcType="INTEGER" />
+		<!-- 预留人 -->
+		<result column="M_ID" property="mId" jdbcType="INTEGER" />
+		<!-- 订单号 -->
+		<result column="OR_ORDERID" property="orOrderId" jdbcType="VARCHAR" />
+		<!-- 预定人姓名 -->
+		<result column="OR_NAME" property="orName" jdbcType="VARCHAR" />
+		<!-- 预定人手机 -->
+		<result column="OR_MOBILE" property="orMobile" jdbcType="VARCHAR" />
+		<!-- 预定人电话 -->
+		<result column="OR_TEL" property="orTel" jdbcType="VARCHAR" />
+		<!-- 预定人传真 -->
+		<result column="OR_FAX" property="orFax" jdbcType="VARCHAR" />
+		<!-- 成人数 -->
+		<result column="OR_ADULTCOUNT" property="orAdultCount" jdbcType="INTEGER" />
+		<!-- 儿童数 -->
+		<result column="OR_CHILDCOUNT" property="orChildCount" jdbcType="INTEGER" />
+		<!-- 婴儿数 -->
+		<result column="OR_BABYCOUNT" property="orBabyCount" jdbcType="INTEGER" />
+		<!-- 订单总金额 -->
+		<result column="OR_PIRCECOUNT" property="orPirceCount" jdbcType="FLOAT" />
+		<!-- 优惠价 -->
+		<result column="OR_YOUHUIPRICE" property="orYouHuiPrice" jdbcType="FLOAT" />
+		<!-- 单房差总价 -->
+		<result column="OR_DANGFANGPRICE" property="orDangFangPrice" jdbcType="FLOAT" />
+		<!-- 预定备注 -->
+		<result column="OR_MODE" property="orMode" jdbcType="NCLOB" />
+		<!-- 出团日期 -->
+		<result column="OR_GOGROUPTIME" property="orGoGroupTime" jdbcType="DATE" />
+		<!-- 取消原因 -->
+		<result column="OR_CLEARMODE" property="orClearMode" jdbcType="NCLOB" />
+		<!-- 内部备注 -->
+		<result column="OR_NMODE" property="orNMode" jdbcType="NCLOB" />
+		<!-- 接送id -->
+		<result column="OR_JS" property="orJs" jdbcType="INTEGER" />
+		<!-- 最初价格接送 -->
+		<result column="OR_JSPRICE" property="orJsPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_POSTSITE" property="orPostSite" jdbcType="VARCHAR" />
+		<!-- 初始成人门市价 -->
+		<result column="OR_FIRSTCRPRICE" property="orFirstCrPrice" jdbcType="FLOAT" />
+		<!-- 初始成人结算价 -->
+		<result column="OR_FIRSTJCRPRICE" property="orFirstJcrPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTXHPRICE" property="orFirstXhPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTJXHPRICE" property="orFirstJxhPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTYPRICE" property="orFirstyPrice" jdbcType="FLOAT" />
+		<!-- 婴儿结算价 -->
+		<result column="OR_FIRSTJYPRICE" property="orFirstJyPrice" jdbcType="FLOAT" />
+		<!-- 初始单房差 -->
+		<result column="OR_FIRSTFANGPRICE" property="orFirstFangPrice" jdbcType="FLOAT" />
+		<!--成人积分 -->
+		<result column="OR_ADULTINTEGRAL" property="orAdultIntegral" jdbcType="INTEGER" />
+		<!-- 儿童积分-->
+		<result column="OR_CHILDRENINTEGRAL" property="orChildrenIntegral" jdbcType="INTEGER" />
+		<!--状态 -->
+		<result column="OR_STATE" property="orState" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap id="ShowOrderResultMap" type="com.zb.app.biz.domain.TravelOrderFullDO">
+		<!-- 自动编号 -->
+		<id column="OR_ID" property="orId" jdbcType="INTEGER" />
+		<!-- 创建时间 -->
+		<result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<!-- 修改时间 -->
+		<result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+		<!-- 线路id -->
+		<result column="L_ID" property="lId" jdbcType="INTEGER" />
+		<!-- 组团社用户id -->
+		<result column="CUSTOM_ID" property="customId" jdbcType="INTEGER" />
+		<!-- 组团社公司id -->
+		<result column="CUSTOMCOMPANY_ID" property="customCompanyId" jdbcType="INTEGER" />
+		<!-- 地接社公司id -->
+		<result column="C_ID" property="cId" jdbcType="INTEGER" />
+		<!-- 预留人 -->
+		<result column="M_ID" property="mId" jdbcType="INTEGER" />
+		<!-- 订单号 -->
+		<result column="OR_ORDERID" property="orOrderId" jdbcType="VARCHAR" />
+		<!-- 预定人姓名 -->
+		<result column="OR_NAME" property="orName" jdbcType="VARCHAR" />
+		<!-- 预定人手机 -->
+		<result column="OR_MOBILE" property="orMobile" jdbcType="VARCHAR" />
+		<!-- 预定人电话 -->
+		<result column="OR_TEL" property="orTel" jdbcType="VARCHAR" />
+		<!-- 预定人传真 -->
+		<result column="OR_FAX" property="orFax" jdbcType="VARCHAR" />
+		<!-- 成人数 -->
+		<result column="OR_ADULTCOUNT" property="orAdultCount" jdbcType="INTEGER" />
+		<!-- 儿童数 -->
+		<result column="OR_CHILDCOUNT" property="orChildCount" jdbcType="INTEGER" />
+		<!-- 婴儿数 -->
+		<result column="OR_BABYCOUNT" property="orBabyCount" jdbcType="INTEGER" />
+		<!-- 订单总金额 -->
+		<result column="OR_PIRCECOUNT" property="orPirceCount" jdbcType="FLOAT" />
+		<!-- 优惠价 -->
+		<result column="OR_YOUHUIPRICE" property="orYouHuiPrice" jdbcType="FLOAT" />
+		<!-- 单房差总价 -->
+		<result column="OR_DANGFANGPRICE" property="orDangFangPrice" jdbcType="FLOAT" />
+		<!-- 预定备注 -->
+		<result column="OR_MODE" property="orMode" jdbcType="NCLOB" />
+		<!-- 出团日期 -->
+		<result column="OR_GOGROUPTIME" property="orGoGroupTime" jdbcType="DATE" />
+		<!-- 取消原因 -->
+		<result column="OR_CLEARMODE" property="orClearMode" jdbcType="NCLOB" />
+		<!-- 内部备注 -->
+		<result column="OR_NMODE" property="orNMode" jdbcType="NCLOB" />
+		<!-- 接送id -->
+		<result column="OR_JS" property="orJs" jdbcType="INTEGER" />
+		<!-- 最初价格接送 -->
+		<result column="OR_JSPRICE" property="orJsPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_POSTSITE" property="orPostSite" jdbcType="VARCHAR" />
+		<!-- 初始成人门市价 -->
+		<result column="OR_FIRSTCRPRICE" property="orFirstCrPrice" jdbcType="FLOAT" />
+		<!-- 初始成人结算价 -->
+		<result column="OR_FIRSTJCRPRICE" property="orFirstJcrPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTXHPRICE" property="orFirstXhPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTJXHPRICE" property="orFirstJxhPrice" jdbcType="FLOAT" />
+		<!-- -->
+		<result column="OR_FIRSTYPRICE" property="orFirstyPrice" jdbcType="FLOAT" />
+		<!-- 婴儿结算价 -->
+		<result column="OR_FIRSTJYPRICE" property="orFirstJyPrice" jdbcType="FLOAT" />
+		<!-- 初始单房差 -->
+		<result column="OR_FIRSTFANGPRICE" property="orFirstFangPrice" jdbcType="FLOAT" />
+		<!--成人积分 -->
+		<result column="OR_ADULTINTEGRAL" property="orAdultIntegral" jdbcType="INTEGER" />
+		<!-- 儿童积分-->
+		<result column="OR_CHILDRENINTEGRAL" property="orChildrenIntegral" jdbcType="INTEGER" />
+		<!--状态 -->
+		<result column="OR_STATE" property="orState" jdbcType="INTEGER" />
+		<!--状态 -->
+		<result column="L_TITLE" property="lTile" jdbcType="VARCHAR" />
+		<result column="L_VIEWS" property="lViews" jdbcType="INTEGER" />
+		<result column="m_name" property="mName" jdbcType="VARCHAR" />
+		<result column="m_tel" property="mTel" jdbcType="VARCHAR" />
+		<result column="acc_name" property="accName" jdbcType="VARCHAR" />
+		<result column="c_name" property="cName" jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelOrderContactDO" id="orderContactMap">
+		<result column="CUSTOMCOMPANY_ID" 	property="cId" 					jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelOrderCountDO" id="orderCountResultMap">
+		<result column="OR_STATE" 			property="orState" 				jdbcType="INTEGER" />
+		<result column="OR_ADULTCOUNT"  	property="orAdultCount" 		jdbcType="INTEGER" />
+		<result column="OR_CHILDCOUNT" 		property="orChildCount" 		jdbcType="INTEGER" />
+		<result column="OR_BABYCOUNT" 		property="orBabyCount" 			jdbcType="INTEGER" />
+		<result column="ALL_COUNT" 			property="allCount" 			jdbcType="INTEGER" />
+		<result column="OR_PIRCECOUNT" 		property="orPirceCount" 		jdbcType="FLOAT" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelOrderCountByStateDO" id="orderCountByStateResultMap">
+		<result column="OR_STATE" 			property="orState" 				jdbcType="INTEGER" />
+		<result column="or_StateCount"  	property="orStateCount" 		jdbcType="INTEGER" />
+	</resultMap>
+	<sql id="column">
+		OR_ID,
+		GMT_CREATE,
+		GMT_MODIFIED,
+		L_ID,
+		CUSTOM_ID,
+		CUSTOMCOMPANY_ID,
+		C_ID,
+		M_ID,
+		OR_ORDERID,
+		OR_NAME,
+		OR_MOBILE,
+		OR_TEL,
+		OR_FAX,
+		OR_ADULTCOUNT,
+		OR_CHILDCOUNT,
+		OR_BABYCOUNT,
+		OR_PIRCECOUNT,
+		OR_YOUHUIPRICE,
+		OR_DANGFANGPRICE,
+		OR_MODE,
+		OR_GOGROUPTIME,
+		OR_CLEARMODE,
+		OR_NMODE,
+		OR_JS,
+		OR_JSPRICE,
+		OR_POSTSITE,
+		OR_FIRSTCRPRICE,
+		OR_FIRSTJCRPRICE,
+		OR_FIRSTXHPRICE,
+		OR_FIRSTJXHPRICE,
+		OR_FIRSTYPRICE,
+		OR_FIRSTJYPRICE,
+		OR_FIRSTFANGPRICE,
+		OR_ADULTINTEGRAL,
+		OR_CHILDRENINTEGRAL,
+		OR_STATE
+	</sql>
+
+	<sql id="columnt">
+		OR_ID,GMT_CREATE,GMT_MODIFIED
+	</sql>
+	
+	<sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="orId != null">  
+	            1=1 and OR_ID = #{orId, jdbcType=INTEGER}
+	        </if>
+	        <if test="cId != null">  
+	            and c_ID = #{cId, jdbcType=INTEGER}
+	        </if>
+	        <if test="mId != null">  
+	            and m_ID = #{mId, jdbcType=INTEGER}
+	        </if>
+	        <if test="lId != null">  
+	            and a.l_ID = #{lId, jdbcType=INTEGER}
+	        </if>
+	        <if test="orState != null">  
+	            and OR_STATE = #{orState, jdbcType=INTEGER}
+	        </if>
+	        <if test="orName != null and orName != '' ">
+	            and or_name = #{orName, jdbcType=VARCHAR}
+	        </if>
+	        <if test="gmtCreate != null">
+	            and gmt_Create = #{gmtCreate, jdbcType=TIMESTAMP}
+	        </if>
+	        <if test="orGoGroupTime != null">
+	            and to_char(or_GoGroupTime + 10, 'yyyy-MM-dd') = to_char(sysdate, 'yyyy-MM-dd')
+	        </if>
+	    </trim> 
+  	</sql>
+  	
+  	<sql id="lb_query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="orId != null">  
+	            1=1 and OR_ID = #{orId, jdbcType=INTEGER}
+	        </if>
+	        <if test="orOrderId != null">  
+	            and a.or_OrderId = #{orOrderId, jdbcType=VARCHAR}
+	        </if>
+	        <if test="cId != null">  
+	            and a.c_ID = #{cId, jdbcType=INTEGER}
+	        </if>
+	        <if test="customCompanyId != null">  
+	            and a.customCompany_Id = #{customCompanyId, jdbcType=INTEGER}
+	        </if>
+	        <if test="mId != null">  
+	            and m_ID = #{mId, jdbcType=INTEGER}
+	        </if>
+	        <if test="lId != null">  
+	            and a.l_ID = #{lId, jdbcType=INTEGER}
+	        </if>
+	        <if test="zId != null">  
+	            and b.z_ID = #{zId, jdbcType=INTEGER}
+	        </if>
+	        <if test="lTile != null">  
+	            and b.l_Title like '%'||#{lTile, jdbcType=VARCHAR}||'%'
+	        </if>
+	        <if test="orState != null">  
+	            and OR_STATE = #{orState, jdbcType=INTEGER}
+	        </if>
+	        <if test="orName != null and orName != '' ">
+	            and or_name = #{orName, jdbcType=VARCHAR}
+	        </if>
+	        <if test="gmtCreate != null">
+	            and to_char(a.gmt_create,'yyyy-MM-dd') = #{gmtCreate, jdbcType=VARCHAR}
+	        </if>
+	        <if test="startDate != null and endDate != null">
+	            and l_gogrouptime between to_date(#{startDate, jdbcType=VARCHAR},'yyyy-MM-dd') and to_date(#{endDate, jdbcType=VARCHAR},'yyyy-MM-dd')
+	        </if>
+	    </trim> 
+  	</sql>
+  	
+  	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="lId != null">
+				L_ID=#{lId},
+			</if>
+			<if test="customId != null">
+				CUSTOM_ID=#{customId},
+			</if>
+			<if test="customCompanyId != null">
+				customCompany_Id=#{customCompanyId},
+			</if>
+			<if test="cId != null">
+				C_ID=#{cId},
+			</if>
+			<if test="mId != null">
+				M_ID=#{mId},
+			</if>
+			<if test="orOrderId != null">
+				OR_ORDERID=#{orOrderId},
+			</if>
+			<if test="orName != null">
+				OR_NAME=#{orName},
+			</if>
+			<if test="orMobile != null">
+				OR_MOBILE=#{orMobile},
+			</if>
+			<if test="orTel != null">
+				OR_TEL=#{orTel},
+			</if>
+			<if test="orFax != null">
+				OR_FAX=#{orFax},
+			</if>
+			<if test="orAdultCount != null and orAdultCount != 0">
+				OR_ADULTCOUNT=#{orAdultCount},
+			</if>
+			<if test="orChildCount != null and orChildCount != 0">
+				OR_CHILDCOUNT=#{orChildCount},
+			</if>
+			<if test="orBabyCount != null and orBabyCount != 0">
+				OR_BABYCOUNT=#{orBabyCount},
+			</if>
+			<if test="orPirceCount != null and orPirceCount != 0.0">
+				OR_PIRCECOUNT=#{orPirceCount},
+			</if>
+			<if test="orYouHuiPrice != null">
+				OR_YOUHUIPRICE=#{orYouHuiPrice},
+			</if>
+			<if test="orDangFangPrice != null">
+				OR_DANGFANGPRICE=#{orDangFangPrice},
+			</if>
+			<if test="orMode != null">
+				OR_MODE=#{orMode},
+			</if>
+			<if test="orGoGroupTime != null">
+				OR_GOGROUPTIME=#{orGoGroupTime},
+			</if>
+			<if test="orClearMode != null">
+				OR_CLEARMODE=#{orClearMode},
+			</if>
+			<if test="orNMode != null">
+				OR_NMODE=#{orNMode},
+			</if>
+			<if test="orJs != null">
+				OR_JS=#{orJs},
+			</if>
+			<if test="orJsPrice != null">
+				OR_JSPRICE=#{orJsPrice},
+			</if>
+			<if test="orPostSite != null">
+				OR_POSTSITE=#{orPostSite},
+			</if>
+			<if test="orFirstCrPrice != null">
+				OR_FIRSTCRPRICE=#{orFirstCrPrice},
+			</if>
+			<if test="orFirstJcrPrice != null">
+				OR_FIRSTJCRPRICE=#{orFirstJcrPrice},
+			</if>
+			<if test="orFirstXhPrice != null">
+				OR_FIRSTXHPRICE=#{orFirstXhPrice},
+			</if>
+			<if test="orFirstJxhPrice != null">
+				OR_FIRSTJXHPRICE=#{orFirstJxhPrice},
+			</if>
+			<if test="orFirstyPrice != null">
+				OR_FIRSTYPRICE=#{orFirstyPrice},
+			</if>
+			<if test="orFirstJyPrice != null">
+				OR_FIRSTJYPRICE=#{orFirstJyPrice},
+			</if>
+			<if test="orFirstFangPrice != null">
+				OR_FIRSTFANGPRICE=#{orFirstFangPrice},
+			</if>
+			<if test="orState != null">
+				OR_STATE=#{orState},
+			</if>
+		</trim>
+	</sql>
+	
+  	<sql id="orderby_clause">
+		order by GMT_MODIFIED desc
+	</sql>
+	
+	<select id="getTourCompany" resultMap="orderContactMap" parameterType="com.zb.app.biz.query.TravelOrderQuery" >
+    	SELECT CUSTOMCOMPANY_ID
+    	FROM TRAVEL_ORDER 
+    	<include refid="query_where_clause" />
+    	GROUP BY CUSTOMCOMPANY_ID
+    </select>
+	
+	<select id="countOrder" resultMap="orderCountResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select tor.OR_STATE as OR_STATE,sum(tor.OR_ADULTCOUNT) as OR_ADULTCOUNT,sum(tor.OR_CHILDCOUNT) as OR_CHILDCOUNT,sum(tor.OR_BABYCOUNT) as OR_BABYCOUNT,
+		sum(tor.OR_ADULTCOUNT+tor.OR_CHILDCOUNT+tor.OR_BABYCOUNT) as ALL_COUNT,sum(tor.OR_PIRCECOUNT) as OR_PIRCECOUNT
+		from TRAVEL_ORDER tor
+		<if test="cId != null">
+	    	where tor.C_ID=#{cId}
+	    </if>
+	    <if test="customCompanyId != null">
+	    	where tor.customCompany_Id=#{customCompanyId}
+	    </if>
+		group by OR_STATE
+		order by OR_STATE
+	</select>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="BaseResultMap">
+		select
+		<include refid="column" />
+		from TRAVEL_ORDER
+	</select>
+	<select id="countByOrState" resultMap="orderCountByStateResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select or_state as OR_STATE,count(1) as OR_STATECOUNT from travel_order 
+		<include refid="query_where_clause"/>
+ 		group by or_state
+	</select>
+	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+   		select  <include refid="column" /> 
+   		from TRAVEL_ORDER 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+	
+	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="column"/>
+		from TRAVEL_ORDER
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select count(1)
+		from travel_order a left join travel_line b on a.l_id = b.l_id left join travel_member c on a.custom_id = c.m_id left join travel_company d on a.c_id = d.c_id left join travel_company e on a.customcompany_id = e.c_id
+		<include refid="lb_query_where_clause" />
+	</select>
+	
+	<select id="companyOrderQuery" resultMap="ShowOrderResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select a.*,d.c_name 
+		from travel_order a 
+		join travel_company d on a.c_id = d.c_id
+		where 1=1
+		<if test="orId != null">  
+            and a.OR_ID = #{orId, jdbcType=INTEGER}
+        </if>
+        <if test="mId != null">  
+            and a.m_ID = #{mId, jdbcType=INTEGER}
+        </if>
+        <if test="cId != null">  
+            and a.c_id = #{cId, jdbcType=INTEGER}
+        </if>
+        <if test="orState != null">  
+            and a.OR_STATE = #{orState, jdbcType=INTEGER}
+        </if>
+        <if test="orName != null and orName != '' ">
+            and a.or_name = #{orName, jdbcType=VARCHAR}
+        </if>
+		order by a.GMT_MODIFIED desc
+  	</select>
+	
+	<select id="showOrderQuery" resultMap="ShowOrderResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select a.*,b.l_Title,c.m_name,c.m_tel,d.c_name 
+		from travel_order a 
+		left join travel_line b on a.l_id = b.l_id 
+		left join travel_member c on a.custom_id = c.m_id 
+		left join travel_company d on a.c_id = d.c_id
+		<include refid="lb_query_where_clause"/>
+		order by a.GMT_MODIFIED desc
+  	</select>
+  	
+  	<select id="showOrderPagination" resultMap="ShowOrderResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select a.*,b.l_Title,b.l_Views,c.m_name,c.m_tel,d.c_name as acc_name,e.c_name from travel_order a left join travel_line b on a.l_id = b.l_id left join travel_member c on a.custom_id = c.m_id left join travel_company d on a.c_id = d.c_id left join travel_company e on a.customcompany_id = e.c_id
+		<include refid="lb_query_where_clause"/>
+		order by a.GMT_MODIFIED desc
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="find" resultMap="ShowOrderResultMap" parameterType="com.zb.app.biz.query.TravelOrderQuery">
+		select a.*,b.l_Title,b.l_Views,c.m_name,c.m_tel,d.c_name as acc_name,e.c_name from travel_order a left join travel_line b on a.l_id = b.l_id left join travel_member c on a.custom_id = c.m_id left join travel_company d on a.c_id = d.c_id left join travel_company e on a.customcompany_id = e.c_id
+		<include refid="lb_query_where_clause" />
+	</select>
+  	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="column" />
+		from TRAVEL_ORDER where OR_ID=#{orId}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelOrderDO">
+		<selectKey resultType="java.lang.Long" keyProperty="orId" order="BEFORE">
+			SELECT TRAVEL_ORDER_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into	TRAVEL_ORDER(<include refid="column" />) values (
+			#{orId},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#{lId,jdbcType=INTEGER},
+			#{customId,jdbcType=INTEGER},
+			#{customCompanyId,jdbcType=INTEGER},
+			#{cId,jdbcType=INTEGER},
+			#{mId,jdbcType=INTEGER},
+			#{orOrderId,jdbcType=VARCHAR},
+			#{orName,jdbcType=VARCHAR},
+			#{orMobile,jdbcType=VARCHAR},
+			#{orTel,jdbcType=VARCHAR},
+			#{orFax,jdbcType=VARCHAR},
+			#{orAdultCount,jdbcType=INTEGER},
+			#{orChildCount,jdbcType=INTEGER},
+			#{orBabyCount,jdbcType=INTEGER},
+			#{orPirceCount,jdbcType=FLOAT},
+			#{orYouHuiPrice,jdbcType=FLOAT},
+			#{orDangFangPrice,jdbcType=FLOAT},
+			#{orMode,jdbcType=CLOB},
+			#{orGoGroupTime,jdbcType=DATE},
+			#{orClearMode,jdbcType=CLOB},
+			#{orNMode,jdbcType=CLOB},
+			#{orJs,jdbcType=INTEGER},
+			#{orJsPrice,jdbcType=FLOAT},
+			#{orPostSite,jdbcType=VARCHAR},
+			#{orFirstCrPrice,jdbcType=FLOAT},
+			#{orFirstJcrPrice,jdbcType=FLOAT},
+			#{orFirstXhPrice,jdbcType=FLOAT},
+			#{orFirstJxhPrice,jdbcType=FLOAT},
+			#{orFirstyPrice,jdbcType=FLOAT},
+			#{orFirstJyPrice,jdbcType=FLOAT},
+			#{orFirstFangPrice,jdbcType=FLOAT},
+			#{orAdultIntegral,jdbcType = INTEGER},
+			#{orChildrenIntegral,jdbcType = INTEGER},
+			#{orState,jdbcType=INTEGER})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelOrderDO">
+		update TRAVEL_ORDER 
+		<include refid="update_set_clause"/>
+		where OR_ID = #{orId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_ORDER where OR_ID=#{orId}
+	</delete>
+	
+	<update id="cancelOrder" parameterType="com.zb.app.biz.domain.TravelOrderDO">
+		update TRAVEL_ORDER set GMT_MODIFIED = SYSTIMESTAMP,or_State = 2, or_ClearMode = #{orClearMode} where OR_ID=#{orId}
+	</update>
+</mapper>

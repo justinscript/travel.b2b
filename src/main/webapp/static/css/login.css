@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+
+    body
+    {
+        margin: 0;
+        padding: 0;
+        background: url(/static/img/i_bg.jpg);
+    }
+    .input
+    {
+        height: 24px;
+        line-height: 24px;
+        padding: 2px;
+    }
+	.l_bg{background: url(/static/img/l_topbg.jpg) center no-repeat #0183CD; height: 279px;}
+	.l_main{height: 200px; margin: 20px 0 10px 0;}
+	.l_logins{margin: 0 auto; width: 1000px; text-align: center;}
+	.submit{background: url(/static/img/submit.png) no-repeat;width: 95px; height: 34px; border: 0;}
+	.l_line{margin: 0 auto; width: 1000px; text-align: center; padding-top: 20px;background:url(/static/img/i_line_bj.png) no-repeat;}
+	.l_copyright{font-family: Arial; font-weight: bold; font-size: 12px; text-align: center;color: #BBBBBB;}

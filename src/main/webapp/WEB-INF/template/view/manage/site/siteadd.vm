@@ -1,0 +1,58 @@
+<script type="text/javascript">
+	$(function(){
+			       GetP('province', 'city', 'C',['浙江', '杭州','']);
+	
+	$("#SiteForm").Validform({
+		tiptype:1,
+		ajaxPost:true,
+		postonce:true,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+				$.Hidemsg();
+				layer.closeAll();
+				location.reload();
+				}, 1000);
+			}
+		}
+	});
+			   })
+	</script>
+<div style="margin:20px;width:760px;">
+	<form id="SiteForm" method="post" action="/zbmanlogin/site/savesite.htm">
+		<table class="tab2_1" width="100%" cellpadding="0" cellspacing="0" >
+		        <tr>
+		        	<td width="100">站点名称：</td>
+		        	<td>
+		        		<span><input type="text" name="sName" datatype="*" value="$!{site.sName}" datatype="*" ></span>
+		        		<div class="validform_checktip"></div>
+		        	</td>
+		        </tr>
+		        <tr>
+		            <td>所在地区：</td>
+		            <td>
+		            	<span>	
+		            		<select class="w80" id="province" name="sProvince" datatype="*" value="$!{site.sName}"></select> 
+		                  	<select class="w80" id="city" name="sCity" value="$!{site.sName}"></select>
+		                </span>
+		                <div class="validform_checktip"></div>
+		                <div class="hide"><select id="C"></select></div>
+		            </td>
+		        </tr>
+		        <tr>
+		        	<td>排序：</td>
+		        	<td>
+		        		<input type="text" class="w40" name="sSort"  value="#if(!$!{site.sSort}) 0 #else $!{site.sSort} #end">
+		        	</td>
+		        </tr>
+		        <tr>
+		        	<td colspan="2" align="center">
+		        		<input type="hidden" name="sId" value="$!{site.sId}" />
+		            	<input type="submit" value="保存" class="btn btn-primary"/>
+		        	</td>
+		        </tr>
+		</table>
+	</form>
+</div>

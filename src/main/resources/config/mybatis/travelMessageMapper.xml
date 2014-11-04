@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelMessageMapper" >
+  	<resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelMessageDO" >
+  		<id 		column="ME_ID" 			property="meId" 			jdbcType="DECIMAL" />
+    	<result 	column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP" />
+    	<result 	column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP" />
+    	
+    	<result 	column="FROM_C_ID" 		property="fromCid" 			jdbcType="DECIMAL" />
+    	<result 	column="FROM_M_ID" 		property="fromMid" 			jdbcType="DECIMAL" />
+    	<result 	column="FROM_C_TYPE" 	property="fromType" 		jdbcType="INTEGER" />
+    	<result 	column="TO_C_ID" 		property="toCid" 			jdbcType="DECIMAL" />
+    	<result 	column="TO_M_ID" 		property="toMid" 			jdbcType="DECIMAL" />
+    	<result 	column="TO_C_TYPE" 		property="toType" 			jdbcType="INTEGER" />
+    	
+    	<result 	column="TITLE" 			property="title" 			jdbcType="VARCHAR" />
+    	<result 	column="CONTENT" 		property="content" 			jdbcType="VARCHAR" />
+    	<result 	column="MESSAGE_STATE" 	property="messageState" 	jdbcType="INTEGER" />
+    	<result 	column="MESSAGE_TYPE" 	property="messageType" 		jdbcType="INTEGER" />
+  	</resultMap>
+  	
+  	<sql id="table_columns_without_id">
+  		GMT_CREATE,GMT_MODIFIED,FROM_C_ID,FROM_M_ID,FROM_C_TYPE,TO_C_ID,TO_M_ID,TO_C_TYPE,TITLE,CONTENT,MESSAGE_STATE,MESSAGE_TYPE
+   	</sql>
+  
+  	<sql id="columns" >
+  		ME_ID,<include refid="table_columns_without_id"/>
+  	</sql>
+  	
+  	<sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="message.meId !=null ">  
+	            ME_ID = #{message.meId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="message.fromCid !=null ">  
+	            and FROM_C_ID = #{message.fromCid, jdbcType=INTEGER}
+	        </if>  
+	        <if test="message.fromMid !=null ">  
+	            and FROM_M_ID = #{message.fromMid, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.fromType !=null ">  
+	            and FROM_C_TYPE = #{message.fromType, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.toCid !=null ">  
+	            and TO_C_ID = #{message.toCid, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.toMid !=null ">  
+	            and TO_M_ID = #{message.toMid, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.toType !=null ">  
+	            and TO_C_TYPE = #{message.toType, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.title != null and message.title != '' ">  
+	            and TITLE = #{message.title, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="message.content != null and message.content != '' ">  
+	            and CONTENT = #{message.content, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="message.messageState !=null ">  
+	            and MESSAGE_STATE = #{message.messageState, jdbcType=INTEGER}
+	        </if>
+	        <if test="message.messageType !=null ">  
+	            and MESSAGE_TYPE = #{message.messageType, jdbcType=INTEGER}
+	        </if>
+	        <if test="startGmtCreate != null and startGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE >= to_date(#{startGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtCreate != null and endGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE <= to_date(#{endGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]> 
+	        </if>
+	        <if test="startGmtModified != null and startGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{startGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtModified != null and endGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{endGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	    </trim> 
+  	</sql>
+  		
+  	<sql id="update_where_clause">
+		<trim prefix="where" prefixOverrides="and|or"> 
+	        <if test="meId !=null ">  
+	            ME_ID = #{meId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="fromCid !=null ">  
+	            and FROM_C_ID = #{fromCid, jdbcType=INTEGER}
+	        </if>  
+	        <if test="fromMid !=null ">  
+	            and FROM_M_ID = #{fromMid, jdbcType=INTEGER}
+	        </if>
+	        <if test="fromType !=null ">  
+	            and FROM_C_TYPE = #{fromType, jdbcType=INTEGER}
+	        </if>
+	        <if test="toCid !=null ">  
+	            and TO_C_ID = #{toCid, jdbcType=INTEGER}
+	        </if>
+	        <if test="toMid !=null ">  
+	            and TO_M_ID = #{toMid, jdbcType=INTEGER}
+	        </if>
+	        <if test="toType !=null ">  
+	            and TO_C_TYPE = #{toType, jdbcType=INTEGER}
+	        </if>
+	        <if test="title != null and title != '' ">  
+	            and TITLE = #{title, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="content != null and content != '' ">  
+	            and CONTENT = #{content, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="messageState !=null ">  
+	            and MESSAGE_STATE = #{messageState, jdbcType=INTEGER}
+	        </if>
+	        <if test="messageType !=null ">  
+	            and MESSAGE_TYPE = #{messageType, jdbcType=INTEGER}
+	        </if>  
+	    </trim>
+   	</sql>
+  		
+  	<sql id="update_set_clause">
+  		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">  
+	        <if test="fromCid !=null ">  
+	            FROM_C_ID = #{fromCid, jdbcType=INTEGER},
+	        </if>  
+	        <if test="fromMid !=null ">  
+	            FROM_M_ID = #{fromMid, jdbcType=INTEGER},
+	        </if>
+	        <if test="fromType !=null ">  
+	            FROM_C_TYPE = #{fromType, jdbcType=INTEGER},
+	        </if>
+	        <if test="toCid !=null ">  
+	            TO_C_ID = #{toCid, jdbcType=INTEGER},
+	        </if>
+	        <if test="toMid !=null ">  
+	            TO_M_ID = #{toMid, jdbcType=INTEGER},
+	        </if>
+	        <if test="toType !=null ">  
+	            TO_C_TYPE = #{toType, jdbcType=INTEGER},
+	        </if>
+	        <if test="title != null and title != '' ">  
+	            TITLE = #{title, jdbcType=VARCHAR},
+	        </if>  
+	        <if test="content != null and content != '' ">  
+	            CONTENT = #{content, jdbcType=VARCHAR}, 
+	        </if>  
+	        <if test="messageState !=null ">  
+	            MESSAGE_STATE = #{messageState, jdbcType=INTEGER},
+	        </if>
+	        <if test="messageType !=null ">  
+	            MESSAGE_TYPE = #{messageType, jdbcType=INTEGER},
+	        </if> 
+   		</trim>
+  	</sql>
+  		
+  	<sql id="orderby_clause">
+        order by GMT_MODIFIED asc
+    </sql>
+  
+   	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+   		<if test="limitSize != null" >
+   			<include refid="PAGINATION.paginationStart" />
+   		</if>
+   		select  <include refid="columns" /> 
+   		from TRAVEL_MESSAGE 
+   		<include refid="orderby_clause"/>
+	  	<if test="limitSize != null" >
+	        <include refid="PAGINATION.paginationEnd" />
+	    </if>
+  	</select>
+  	
+  	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMessageQuery">
+   		select  <include refid="columns" /> 
+   		from TRAVEL_MESSAGE 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+  
+  	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMessageQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="columns"/>
+		from TRAVEL_MESSAGE 
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelMessageQuery" >
+  		select <include refid="columns"/>
+        from TRAVEL_MESSAGE
+        <include refid="query_where_clause"/>
+        <include refid="orderby_clause"/>
+  	</select>
+  
+   	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelMessageDO" useGeneratedKeys="true">
+   		<selectKey resultType="java.lang.Long" keyProperty="meId" order="BEFORE" >
+	      select TRAVEL_MESSAGE_SEQ.NEXTVAL as meId from DUAL
+	   	</selectKey>
+	   	insert into TRAVEL_MESSAGE (<include refid="columns"/>)
+	   	values (#{meId},SYSTIMESTAMP,SYSTIMESTAMP, 
+	   		#{fromCid,jdbcType=INTEGER},
+	   		#{fromMid,jdbcType=INTEGER},
+	   		#{fromType,jdbcType=INTEGER},
+	   		#{toCid,jdbcType=INTEGER},
+	   		#{toMid,jdbcType=INTEGER},
+	   		#{toType,jdbcType=INTEGER},
+	   		#{title,jdbcType=VARCHAR},
+	   		#{content,jdbcType=VARCHAR},
+	   		1,
+	   		#{messageType,jdbcType=INTEGER}
+	   	)
+   	</insert>
+   	
+   	<update id="update" parameterType="com.zb.app.biz.domain.TravelMessageDO">
+   		update TRAVEL_MESSAGE 
+       	<include refid="update_set_clause"/>
+       	<include refid="update_where_clause"/>
+  	</update>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelMessageQuery">
+  		select count(1)
+        from TRAVEL_MESSAGE  
+       	<include refid="query_where_clause"/>
+   	</select>
+   	
+  	<delete id="deleteById" parameterType="java.lang.Integer">
+  		delete from TRAVEL_MESSAGE where ME_ID = #{id,jdbcType=INTEGER}
+  	</delete>
+  	
+  	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  		select <include refid="columns" /> 
+  		from TRAVEL_MESSAGE 
+  		where ME_ID = #{id,jdbcType=INTEGER}
+  	</select>
+  
+   	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelMessageDO">
+   		update TRAVEL_MESSAGE 
+   		<include refid="update_set_clause"/>
+	    where ME_ID = #{meId,jdbcType=INTEGER}
+  	</update>
+  	
+</mapper>

@@ -1,0 +1,25 @@
+#message
+{
+	position: absolute;
+	z-index: 9999999;
+	width: 372px;
+	height: 63px;
+	text-align: center;
+	background-image: url('../Images/message_bg.png');
+	background-repeat: no-repeat;
+	color: #FFFFFF;
+	font-family:"ÑÅºÚ","ËÎÌå";
+	font-size: 20px;
+	line-height: 63px;
+}
+
+#message2
+{
+	position: absolute;
+	z-index: 9999999;
+	width: 495px;
+	height: 286px;
+	text-align: center;
+	background-image: url('/img/enter.png');
+	background-repeat: no-repeat;
+}

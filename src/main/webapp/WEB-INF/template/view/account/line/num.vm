@@ -1,0 +1,27 @@
+<div id="targetBox" class="target_box">
+      <div class="target_list">
+		#if($!act=="day")
+          <div class=a1>
+          #foreach($i in [1..30])
+          <a href='javascript:void(0)'>$i</a>
+          #end
+          </div>
+		#end
+		#if($!act=="hour")
+          <div class=a1>
+          #foreach($i in [1..24])
+          <a href='javascript:void(0)'>$i</a>
+          #end
+          </div>			
+		#end
+		
+		#if($!act=="minute")
+          <div class=a1>
+          #foreach($i in [1..60])
+          <a href='javascript:void(0)'>$i</a>
+          #end
+          </div>
+		#end
+		
+      </div>
+</div>

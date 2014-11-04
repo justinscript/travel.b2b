@@ -1,0 +1,681 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelLineMapper">
+
+	<!-- 	TravelLineDO( extends TravelThinDO) -->
+	<resultMap type="com.zb.app.biz.domain.TravelLineDO" id="BaseResultMap">
+		<id 	column="L_ID" 				property="lId" 					jdbcType="DECIMAL" />
+		<result column="GMT_CREATE" 		property="gmtCreate" 			jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" 		property="gmtModified" 			jdbcType="TIMESTAMP" />
+		<result column="Z_ID" 				property="zId" 					jdbcType="DECIMAL" />
+		<result column="M_ID" 				property="mId" 					jdbcType="DECIMAL" />
+		<result column="C_ID" 				property="cId" 					jdbcType="DECIMAL" />
+		<result column="L_TITLE" 			property="lTile" 				jdbcType="VARCHAR" />
+		<result column="L_TYPE" 			property="lType" 				jdbcType="INTEGER" />
+		<result column="L_GROUPNUMBER" 		property="lGroupNumber" 		jdbcType="VARCHAR" />
+		<result column="L_GOGROUPTIME" 		property="lGoGroupTime" 		jdbcType="TIMESTAMP" />
+		<result column="L_ENDTIME" 			property="lEndTime" 			jdbcType="TIMESTAMP" />
+		<result column="L_PROVINCE" 		property="lProvince" 			jdbcType="VARCHAR" />
+		<result column="L_CITY" 			property="lCity" 				jdbcType="VARCHAR" />
+		<result column="L_AREA" 			property="lArea" 				jdbcType="VARCHAR" />
+		<result column="L_ISJS" 			property="lIsJs" 				jdbcType="INTEGER" />
+		<result column="L_JSRUD" 			property="lJsRud" 				jdbcType="VARCHAR" />
+		<result column="L_ARRIVALPROVINCE" 	property="lArrivalProvince" 	jdbcType="VARCHAR" />
+		<result column="L_ARRIVALCITY" 		property="lArrivalCity" 		jdbcType="VARCHAR" />
+		<result column="L_ARRIVALAREA" 		property="lArrivalArea" 		jdbcType="VARCHAR" />
+		<result column="L_RENCOUNT" 		property="lRenCount" 			jdbcType="DECIMAL" />
+		<result column="L_CRCOUNT" 			property="lCrCount" 			jdbcType="DECIMAL" />
+		<result column="L_XHCOUNT" 			property="lXhCount" 			jdbcType="DECIMAL" />
+		<result column="L_YCOUNT" 			property="lYCount" 				jdbcType="DECIMAL" />
+		<result column="L_CRPRICE" 			property="lCrPrice" 			jdbcType="FLOAT" />
+		<result column="L_JCRPRICE" 		property="lJCrPrice" 			jdbcType="FLOAT" />
+		<result column="L_XHPRICE" 			property="lXhPrice" 			jdbcType="FLOAT" />
+		<result column="L_JXHPRICE" 		property="lJXhPrice" 			jdbcType="FLOAT" />
+		<result column="L_YPRICE" 			property="lYPrice" 				jdbcType="FLOAT" />
+		<result column="L_JYPRICE" 			property="lJYPrice" 			jdbcType="FLOAT" />
+		<result column="L_FANGPRICE" 		property="lFangPrice" 			jdbcType="FLOAT" />
+		<result column="L_ADULTINTEGRAL" 	property="lAdultIntegral" 		jdbcType="INTEGER" />
+		<result column="L_CHILDRENINTEGRAL" property="lChildrenIntegral" 	jdbcType="INTEGER" />
+		<result column="L_DAY" 				property="lDay" 				jdbcType="DECIMAL" />
+		<result column="L_TRAFFICTYPE" 		property="lTrafficyType" 		jdbcType="DECIMAL" />
+		<result column="L_GOTRAFFIC" 		property="lGoTraffic" 			jdbcType="VARCHAR" />
+		<result column="L_TRAFFICBACKTYPE" 	property="lTrafficBackType" 	jdbcType="DECIMAL" />
+		<result column="L_BACKTRAFFICE" 	property="lBackTraffice" 		jdbcType="VARCHAR" />
+		<result column="L_JHD" 				property="lJhd" 				jdbcType="VARCHAR" />
+		<result column="L_JHDTIME" 			property="lJhdTime" 			jdbcType="VARCHAR" />
+		<result column="L_ICO" 				property="lIco" 				jdbcType="VARCHAR" />
+		<result column="L_DIPEI" 			property="lDipei" 				jdbcType="VARCHAR" />
+		<result column="L_GROUPTEL" 		property="lGroupTel" 			jdbcType="VARCHAR" />
+		<result column="L_MODE" 			property="lMode" 				jdbcType="VARCHAR" />
+		<result column="L_NMODE" 			property="lNMode" 				jdbcType="VARCHAR" />
+		<result column="L_YESITEM" 			property="lYesItem" 			jdbcType="VARCHAR" />
+		<result column="L_NOITEM" 			property="lNoItem" 				jdbcType="VARCHAR" />
+		<result column="L_CHILDREN" 		property="lChildren" 			jdbcType="VARCHAR" />
+		<result column="L_SHOP" 			property="lShop" 				jdbcType="VARCHAR" />
+		<result column="L_EXPENSEITEM" 		property="lExpenseItem" 		jdbcType="VARCHAR" />
+		<result column="L_PRESEITEM" 		property="lPreseItem" 			jdbcType="VARCHAR" />
+		<result column="L_ATTENTION" 		property="lAttention" 			jdbcType="VARCHAR" />
+		<result column="L_OTHER" 			property="lOther" 				jdbcType="VARCHAR" />
+		<result column="L_REMINDER" 		property="lReminder" 			jdbcType="VARCHAR" />
+		<result column="L_TEMPLATESATE" 	property="lTemplateState" 		jdbcType="DECIMAL" />
+		<result column="L_EDITUSERID" 		property="lEditUserId" 			jdbcType="DECIMAL" />
+		<result column="L_STATE" 			property="lState" 				jdbcType="DECIMAL" />
+		<result column="L_DELSTATE" 		property="lDelState" 			jdbcType="DECIMAL" />
+		<result column="L_DISPLAY" 			property="lDisplay" 			jdbcType="DECIMAL" />
+		<result column="L_PRODUCT" 			property="lProduct" 			jdbcType="VARCHAR" />
+		<result column="L_ISINTEGRAL" 		property="lIsIntegral" 			jdbcType="INTEGER" />
+		<result column="L_ISVOUCHERS" 		property="lIsVouchers" 			jdbcType="INTEGER" />
+		<result column="L_TOURCONTENT" 		property="lTourContent" 		jdbcType="VARCHAR" />
+		<result column="L_PHOTOCOVER" 		property="lPhotoCover" 			jdbcType="VARCHAR" />
+		<result column="L_VIEWS" 			property="lViews" 				jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 	TravleLineThinDO -->	
+	<resultMap type="com.zb.app.biz.domain.TravelLineThinDO" id="ThinResult">
+		<id 	column="L_ID" 				property="lId" 					jdbcType="DECIMAL" />
+		<result column="GMT_CREATE" 		property="gmtCreate" 			jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" 		property="gmtModified" 			jdbcType="TIMESTAMP" />
+		<result column="Z_ID" 				property="zId"					jdbcType="DECIMAL" />
+		<result column="M_ID" 				property="mId" 					jdbcType="DECIMAL" />
+		<result column="C_ID" 				property="cId" 					jdbcType="DECIMAL" />
+		<result column="L_TITLE" 			property="lTile" 				jdbcType="VARCHAR" />
+		<result column="L_TYPE" 			property="lType" 				jdbcType="INTEGER" />
+		<result column="L_GROUPNUMBER" 		property="lGroupNumber" 		jdbcType="VARCHAR" />
+		<result column="L_GOGROUPTIME" 		property="lGoGroupTime" 		jdbcType="TIMESTAMP" />
+		<result column="L_ENDTIME" 			property="lEndTime" 			jdbcType="TIMESTAMP" />
+		<result column="L_PROVINCE" 		property="lProvince" 			jdbcType="VARCHAR" />
+		<result column="L_CITY" 			property="lCity" 				jdbcType="VARCHAR" />
+		<result column="L_AREA"				property="lArea" 				jdbcType="VARCHAR" />
+		<result column="L_ISJS" 			property="lIsJs" 				jdbcType="INTEGER" />
+		<result column="L_JSRUD" 			property="lJsRud" 				jdbcType="VARCHAR" />
+		<result column="L_ARRIVALPROVINCE" 	property="lArrivalProvince" 	jdbcType="VARCHAR" />
+		<result column="L_ARRIVALCITY" 		property="lArrivalCity" 		jdbcType="VARCHAR" />
+		<result column="L_ARRIVALAREA" 		property="lArrivalArea" 		jdbcType="VARCHAR" />
+		<result column="L_RENCOUNT" 		property="lRenCount" 			jdbcType="DECIMAL" />
+		<result column="L_CRCOUNT" 			property="lCrCount" 			jdbcType="DECIMAL" />
+		<result column="L_XHCOUNT" 			property="lXhCount" 			jdbcType="DECIMAL" />
+		<result column="L_YCOUNT" 			property="lYCount" 				jdbcType="DECIMAL" />
+		<result column="L_CRPRICE" 			property="lCrPrice" 			jdbcType="FLOAT" />
+		<result column="L_JCRPRICE" 		property="lJCrPrice" 			jdbcType="FLOAT" />
+		<result column="L_XHPRICE" 			property="lXhPrice" 			jdbcType="FLOAT" />
+		<result column="L_JXHPRICE" 		property="lJXhPrice" 			jdbcType="FLOAT" />
+		<result column="L_YPRICE" 			property="lYPrice" 				jdbcType="FLOAT" />
+		<result column="L_JYPRICE" 			property="lJYPrice" 			jdbcType="FLOAT" />
+		<result column="L_FANGPRICE" 		property="lFangPrice" 			jdbcType="FLOAT" />
+		<result column="L_ADULTINTEGRAL" 	property="lAdultIntegral" 		jdbcType="INTEGER" />
+		<result column="L_CHILDRENINTEGRAL" property="lChildrenIntegral" 	jdbcType="INTEGER" />
+		<result column="L_DAY" 				property="lDay" 				jdbcType="DECIMAL" />
+		<result column="L_TRAFFICTYPE" 		property="lTrafficyType" 		jdbcType="DECIMAL" />
+		<result column="L_GOTRAFFIC" 		property="lGoTraffic" 			jdbcType="VARCHAR" />
+		<result column="L_TRAFFICBACKTYPE" 	property="lTrafficBackType" 	jdbcType="DECIMAL" />
+		<result column="L_BACKTRAFFICE" 	property="lBackTraffice" 		jdbcType="VARCHAR" />
+		<result column="L_TEMPLATESATE" 	property="lTemplateState" 		jdbcType="DECIMAL" />
+		<result column="L_EDITUSERID" 		property="lEditUserId" 			jdbcType="DECIMAL" />
+		<result column="L_STATE" 			property="lState" 				jdbcType="DECIMAL" />
+		<result column="L_DELSTATE" 		property="lDelState" 			jdbcType="DECIMAL" />
+		<result column="L_DISPLAY" 			property="lDisplay" 			jdbcType="DECIMAL" />
+		<result column="L_PRODUCT" 			property="lProduct" 			jdbcType="VARCHAR" />
+		<result column="L_ISINTEGRAL" 		property="lIsIntegral" 			jdbcType="INTEGER" />
+		<result column="L_ISVOUCHERS" 		property="lIsVouchers" 			jdbcType="INTEGER" />
+		<result column="L_PHOTOCOVER" 		property="lPhotoCover" 			jdbcType="VARCHAR" />
+		<result column="L_VIEWS" 			property="lViews" 				jdbcType="INTEGER" />
+	</resultMap>
+
+	<!-- 	用于索引查询对象 -->
+	<resultMap type="com.zb.app.external.lucene.search.pojo.ProductSearchField" id="SearchResult">
+		<id column="L_ID" 						property="lId" 					jdbcType="DECIMAL" />
+		<result column="L_GROUPNUMBER" 			property="lGroupNumber" 		jdbcType="VARCHAR" />
+		<result column="L_TITLE" 				property="lTile" 				jdbcType="VARCHAR" />
+		<result column="L_GOGROUPTIME"			property="lGoGroupTime" 		jdbcType="TIMESTAMP" />
+		<result column="L_ARRIVALCITY" 			property="lArrivalCity" 		jdbcType="VARCHAR" />
+		<result column="L_PHOTOCOVER" 			property="lPhotoCover" 			jdbcType="VARCHAR" />
+		<result column="L_MODE" 				property="lMode" 				jdbcType="VARCHAR" />
+		<result column="L_YESITEM" 				property="lYesItem" 			jdbcType="VARCHAR" />
+		<result column="L_NOITEM" 				property="lNoItem" 				jdbcType="VARCHAR" />
+		<result column="L_CHILDREN" 			property="lChildren" 			jdbcType="VARCHAR" />
+		<result column="L_SHOP" 				property="lShop" 				jdbcType="VARCHAR" />
+		<result column="L_EXPENSEITEM" 			property="lExpenseItem" 		jdbcType="VARCHAR" />
+		<result column="L_PRESEITEM" 			property="lPreseItem" 			jdbcType="VARCHAR" />
+		<result column="R_CONTENT" 				property="rContent" 			jdbcType="VARCHAR" />
+		<result column="R_CAR" 					property="rCar" 				jdbcType="VARCHAR" />
+		<result column="L_TYPE" 				property="lType" 				jdbcType="INTEGER" />
+		<result column="L_DAY" 					property="lDay" 				jdbcType="INTEGER" />
+		<result column="Z_ID" 					property="zId" 					jdbcType="INTEGER" />
+		<result column="L_JCRPRICE" 			property="lJCrPrice" 			jdbcType="FLOAT" />
+	</resultMap>
+	
+	<!-- 	所有列（TravelLineDo+TravelLineThinDO） -->
+	<sql id="columns">
+		L_ID,GMT_CREATE,GMT_MODIFIED,Z_ID,M_ID,C_ID,L_TITLE,L_TYPE,L_GROUPNUMBER,L_GOGROUPTIME,L_ENDTIME,L_PROVINCE,L_CITY,L_AREA,L_ISJS,L_JSRUD,
+		L_ARRIVALPROVINCE,L_ARRIVALCITY,L_ARRIVALAREA,L_RENCOUNT,L_CRCOUNT,L_XHCOUNT,L_YCOUNT,L_CRPRICE,L_JCRPRICE,L_XHPRICE,L_JXHPRICE,L_YPRICE,L_JYPRICE,
+		L_ADULTINTEGRAL,L_CHILDRENINTEGRAL,L_FANGPRICE,L_DAY,L_TRAFFICTYPE,L_GOTRAFFIC,L_TRAFFICBACKTYPE,L_BACKTRAFFICE,L_JHD,L_JHDTIME,L_ICO,L_DIPEI,L_GROUPTEL,
+		L_MODE,L_NMODE,L_YESITEM,L_NOITEM,L_CHILDREN,L_SHOP,L_EXPENSEITEM,L_PRESEITEM,L_ATTENTION,L_OTHER,L_REMINDER,L_TEMPLATESATE,L_EDITUSERID,L_STATE,L_DELSTATE,
+		L_DISPLAY,L_Product,L_ISINTEGRAL,L_ISVOUCHERS,L_TOURCONTENT,L_PHOTOCOVER,L_VIEWS
+	</sql>
+	
+	<!-- 索引列 -->
+	<sql id="searchcolumns">
+		L_ID,L_GROUPNUMBER,L_TITLE,L_GOGROUPTIME,L_ARRIVALCITY,L_PHOTOCOVER,L_MODE,L_YESITEM,L_NOITEM,L_CHILDREN,L_SHOP,L_EXPENSEITEM,L_PRESEITEM,L_TYPE,L_DAY,Z_ID,L_JCRPRICE
+	</sql>
+	<!-- 	父类列(TravelLineThinDo) -->
+	<sql id="thincolumns">
+		L_ID,GMT_CREATE,GMT_MODIFIED,Z_ID,M_ID,C_ID,L_TITLE,L_TYPE,L_GROUPNUMBER,L_GOGROUPTIME,L_ENDTIME,L_PROVINCE,L_CITY,L_AREA,L_ISJS,
+		L_JSRUD,L_ARRIVALPROVINCE,L_ARRIVALCITY,L_ARRIVALAREA,L_RENCOUNT,L_CRCOUNT,L_XHCOUNT,L_YCOUNT,L_CRPRICE,L_JCRPRICE,L_XHPRICE,L_JXHPRICE,
+		L_YPRICE,L_JYPRICE,L_FANGPRICE,L_ADULTINTEGRAL,L_CHILDRENINTEGRAL,L_DAY,L_TRAFFICTYPE,
+		L_GOTRAFFIC,L_TRAFFICBACKTYPE,L_BACKTRAFFICE,L_TEMPLATESATE,L_EDITUSERID,L_STATE,L_DELSTATE,L_DISPLAY,L_PRODUCT,L_ISINTEGRAL,L_ISVOUCHERS,L_PHOTOCOVER,L_VIEWS
+	</sql>
+
+	<!-- 	用于单个产品显示（单个产品包含多条数据） -->
+	<sql id="groupcolumns">
+		L_ID,L_GROUPNUMBER,L_CRPRICE,L_JCRPRICE,L_XHPRICE,L_JXHPRICE,L_YPRICE,L_JYPRICE,L_FANGPRICE,L_GOGROUPTIME,L_ADULTINTEGRAL,L_CHILDRENINTEGRAL,L_RENCOUNT,L_CRCOUNT,L_XHCOUNT,L_ISINTEGRAL,L_ISVOUCHERS,L_ENDTIME,L_CITY,L_ARRIVALCITY
+	</sql>
+
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gmtCreate != null">
+				and GMT_CREATE between TRUNC(SYSDATE-1) and  TRUNC(SYSDATE)
+			</if>
+			<if test="lId !=null ">
+				and L_ID = #{lId, jdbcType=INTEGER}
+			</if>
+			<if test="cId != null">
+				and C_ID=#{cId}
+			</if>
+			<if test="zIds !=null ">
+				and Z_ID in
+				<foreach collection="zIds" index="index" item="item" open="(" separator="," close=")">
+					#{item}
+				</foreach>
+			</if>
+			<if test="mId !=null ">
+				and M_ID = #{mId, jdbcType=INTEGER}
+			</if>
+			<if test="lTile !=null and lTile != '' ">
+				and L_TITLE like '%'||#{lTile, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="lGoGroupTime != null and lGoGroupEndTime != null">
+				and L_GOGROUPTIME between #{lGoGroupTime} and #{lGoGroupEndTime}
+			</if>
+			<if test="lGoGroupTime != null and lGoGroupEndTime == null">
+				and L_GOGROUPTIME = #{lGoGroupTime}
+			</if>
+			<if test="lGoGroupTime == null and lGoGroupEndTime != null">
+				and L_GOGROUPTIME &lt; #{lGoGroupEndTime}
+			</if>
+			<if test="lType !=null">
+				and L_TYPE = #{lType, jdbcType=INTEGER}
+			</if>
+			<if test="lProvince !=null and lProvince != '' ">
+				and L_PROVINCE = #{lProvince, jdbcType=VARCHAR}
+			</if>
+			<if test="lCity !=null and lCity != '' ">
+				and L_CITY = #{lCity, jdbcType=VARCHAR}
+			</if>
+			<if test="lArea !=null and lArea != '' ">
+				and L_AREA = #{lArea, jdbcType=VARCHAR}
+			</if>
+			<if test="lArrivalCity !=null and lArrivalCity != '' ">
+				and L_ARRIVALCITY = #{lArrivalCity, jdbcType=VARCHAR}
+			</if>
+			<if test="lEditUserId !=null ">
+				and L_EDITUSERID = #{lEditUserId, jdbcType=INTEGER}
+			</if>
+			<if test="lState ==0 ">
+				and L_STATE = #{lState, jdbcType=INTEGER} and (L_RENCOUNT-L_CRCOUNT-L_XHCOUNT)>0 and  <![CDATA[ L_GOGROUPTIME >= TO_DATE(TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD'),'YYYY-MM-DD') ]]>
+			</if>
+			<if test="lState ==1 ">
+				and L_STATE = #{lState, jdbcType=INTEGER}
+			</if>
+			<if test="lState ==2 ">
+				and L_STATE = #{lState, jdbcType=INTEGER} OR (L_RENCOUNT-L_CRCOUNT-L_XHCOUNT)=0 and <![CDATA[ L_GOGROUPTIME >= TO_DATE(TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD'),'YYYY-MM-DD') ]]>
+			</if>
+			<if test="lState ==3 ">
+				and <![CDATA[ L_GOGROUPTIME < TO_DATE(TO_CHAR(SYSTIMESTAMP,'YYYY-MM-DD'),'YYYY-MM-DD') ]]>
+			</if>
+			<if test="lDelState !=null ">
+				and L_DELSTATE = #{lDelState, jdbcType=INTEGER}
+			</if>
+			<if test="lDisplay !=null ">
+				and L_DISPLAY = #{lDisplay, jdbcType=INTEGER}
+			</if>
+			<if test="lTrafficyType !=null ">
+				and L_TRAFFICTYPE = #{lTrafficyType, jdbcType=INTEGER}
+			</if>
+			<if test="lTrafficBackType !=null ">
+				and L_TRAFFICBACKTYPE = #{lTrafficBackType,jdbcType=INTEGER}
+			</if>
+			<if test="lTemplateState != null">
+				and L_TEMPLATESATE = #{lTemplateState}
+			</if>
+			<if test="lDay !=null ">
+				and L_DAY = #{lDay, jdbcType=INTEGER}
+			</if>
+			<if test="lIsJs !=null ">
+				and L_ISJS = #{lIsJs, jdbcType=INTEGER}
+			</if>
+			<if test="lProduct !=null ">
+				and L_PRODUCT = #{lProduct, jdbcType=VARCHAR}
+			</if>
+			<if test="lIsIntegral != null">
+				and L_ISINTEGRAL = #{lIsIntegral,jdbcType=INTEGER}
+			</if>
+			<if test="lIsVouchers != null">
+				and L_ISVOUCHERS = #{lIsVouchers,jdbcType=INTEGER}
+			</if>
+			<if test="lGroupNumber != null">
+				and L_GROUPNUMBER=#{lGroupNumber}
+			</if>
+		</trim>
+	</sql>
+
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="zId !=null ">
+				Z_ID = #{zId, jdbcType=INTEGER},
+			</if>
+			<if test="mId !=null ">
+				M_ID = #{mId, jdbcType=INTEGER},
+			</if>
+			<if test="cId !=null ">
+				C_ID = #{cId, jdbcType=INTEGER},
+			</if>
+			<if test="lTile !=null and lTile != '' ">
+				L_TITLE = #{lTile, jdbcType=VARCHAR},
+			</if>
+			<if test="lType !=null">
+				L_TYPE = #{lType, jdbcType=INTEGER},
+			</if>
+			<if test="lGroupNumber !=null and lGroupNumber != '' ">
+				L_GROUPNUMBER = #{lGroupNumber, jdbcType=VARCHAR},
+			</if>
+			<if test="lGoGroupTime !=null ">
+				L_GOGROUPTIME = #{lGoGroupTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="lEndTime !=null ">
+				L_ENDTIME = #{lEndTime, jdbcType=TIMESTAMP},
+			</if>
+			<if test="lProvince !=null and lProvince != '' ">
+				L_PROVINCE = #{lProvince, jdbcType=VARCHAR},
+			</if>
+			<if test="lCity !=null and lCity != '' ">
+				L_CITY = #{lCity, jdbcType=VARCHAR},
+			</if>
+			<if test="lArea !=null and lArea != '' ">
+				L_AREA = #{lArea, jdbcType=VARCHAR},
+			</if>
+			<if test="lIsJs !=null ">
+				L_ISJS = #{lIsJs, jdbcType=INTEGER},
+			</if>
+			<if test="lJsRud !=null and lJsRud != '' ">
+				L_JSRUD = #{lJsRud, jdbcType=VARCHAR},
+			</if>
+			<if test="lArrivalProvince !=null and lArrivalProvince != '' ">
+				L_ARRIVALPROVINCE = #{lArrivalProvince,
+				jdbcType=VARCHAR},
+			</if>
+			<if test="lArrivalCity !=null and lArrivalCity != '' ">
+				L_ARRIVALCITY = #{lArrivalCity, jdbcType=VARCHAR},
+			</if>
+			<if test="lArrivalArea !=null and lArrivalArea != '' ">
+				L_ARRIVALAREA = #{lArrivalArea, jdbcType=VARCHAR},
+			</if>
+			<if test="lRenCount !=null ">
+				L_RENCOUNT = #{lRenCount, jdbcType=INTEGER},
+			</if>
+			<if test="lCrCount !=null ">
+				L_CRCOUNT = #{lCrCount, jdbcType=INTEGER},
+			</if>
+			<if test="lXhCount !=null ">
+				L_XHCOUNT = #{lXhCount, jdbcType=INTEGER},
+			</if>
+			<if test="lYCount !=null ">
+				L_YCOUNT = #{lYCount, jdbcType=INTEGER},
+			</if>
+			<if test="lCrPrice !=null ">
+				L_CRPRICE = #{lCrPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lJCrPrice !=null ">
+				L_JCRPRICE = #{lJCrPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lArrivalCity !=null ">
+				L_XHPRICE = #{lXhPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lJXhPrice !=null ">
+				L_JXHPRICE = #{lJXhPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lYPrice !=null ">
+				L_YPRICE = #{lYPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lJYPrice !=null ">
+				L_JYPRICE = #{lJYPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lAdultIntegral != null">
+				L_ADULTINTEGRAL = #{lAdultIntegral, jdbcType=INTEGER},
+			</if>
+			<if test="lChildrenIntegral != null">
+				L_CHILDRENINTEGRAL = #{lChildrenIntegral,jdbcType=INTEGER},
+			</if>
+			<if test="lFangPrice !=null ">
+				L_FANGPRICE = #{lFangPrice, jdbcType=FLOAT},
+			</if>
+			<if test="lDay !=null ">
+				L_DAY = #{lDay, jdbcType=INTEGER},
+			</if>
+			<if test="lTrafficyType !=null ">
+				L_TRAFFICTYPE = #{lTrafficyType, jdbcType=INTEGER},
+			</if>
+			<if test="lGoTraffic !=null and lGoTraffic != '' ">
+				L_GOTRAFFIC = #{lGoTraffic, jdbcType=INTEGER},
+			</if>
+			<if test="lTrafficBackType !=null ">
+				L_TRAFFICBACKTYPE = #{lTrafficBackType,
+				jdbcType=INTEGER},
+			</if>
+			<if test="lBackTraffice !=null and lBackTraffice != '' ">
+				L_BACKTRAFFICE = #{lBackTraffice, jdbcType=VARCHAR},
+			</if>
+			<if test="lJhd !=null and lJhd != '' ">
+				L_JHD = #{lJhd, jdbcType=VARCHAR},
+			</if>
+			<if test="lJhdTime !=null and lJhdTime != '' ">
+				L_JHDTIME = #{lJhdTime, jdbcType=VARCHAR},
+			</if>
+			<if test="lIco !=null and lIco != '' ">
+				L_ICO = #{lIco, jdbcType=VARCHAR},
+			</if>
+			<if test="lDipei !=null and lDipei != '' ">
+				L_DIPEI = #{lDipei, jdbcType=VARCHAR},
+			</if>
+			<if test="lGroupTel !=null and lGroupTel != '' ">
+				L_GROUPTEL = #{lGroupTel, jdbcType=VARCHAR},
+			</if>
+			<if test="lMode !=null and lMode != '' ">
+				L_MODE = #{lMode, jdbcType=VARCHAR},
+			</if>
+			<if test="lNMode !=null and lNMode != '' ">
+				L_NMODE = #{lNMode, jdbcType=VARCHAR},
+			</if>
+			<if test="lYesItem !=null and lYesItem != '' ">
+				L_YESITEM = #{lYesItem, jdbcType=VARCHAR},
+			</if>
+			<if test="lNoItem !=null and lNoItem != '' ">
+				L_NOITEM = #{lNoItem, jdbcType=VARCHAR},
+			</if>
+			<if test="lChildren !=null and lChildren != '' ">
+				L_CHILDREN = #{lChildren, jdbcType=VARCHAR},
+			</if>
+			<if test="lShop !=null and lShop != '' ">
+				L_SHOP = #{lShop, jdbcType=VARCHAR},
+			</if>
+			<if test="lExpenseItem !=null and lExpenseItem != '' ">
+				L_EXPENSEITEM = #{lExpenseItem, jdbcType=VARCHAR},
+			</if>
+			<if test="lPreseItem !=null and lPreseItem != '' ">
+				L_PRESEITEM = #{lPreseItem, jdbcType=VARCHAR},
+			</if>
+			<if test="lAttention !=null and lAttention != '' ">
+				L_ATTENTION = #{lAttention, jdbcType=VARCHAR},
+			</if>
+			<if test="lOther !=null and lOther != '' ">
+				L_OTHER = #{lOther, jdbcType=VARCHAR},
+			</if>
+			<if test="lReminder !=null and lReminder != '' ">
+				L_REMINDER = #{lReminder, jdbcType=VARCHAR},
+			</if>
+			<if test="lTemplateState !=null ">
+				L_TEMPLATESATE = #{lTemplateState, jdbcType=INTEGER},
+			</if>
+			<if test="lEditUserId !=null ">
+				L_EDITUSERID = #{lEditUserId, jdbcType=INTEGER},
+			</if>
+			<if test="lState !=null ">
+				L_STATE = #{lState, jdbcType=INTEGER},
+			</if>
+			<if test="lDelState !=null ">
+				L_DELSTATE = #{lDelState, jdbcType=INTEGER},
+			</if>
+			<if test="lDisplay !=null ">
+				L_DISPLAY = #{lDisplay, jdbcType=INTEGER},
+			</if>
+			<if test="lProduct !=null ">
+				L_PRODUCT = #{lProduct, jdbcType=VARCHAR},
+			</if>
+			<if test="lIsIntegral != null">
+				L_ISINTEGRAL = #{lIsIntegral,jdbcType=INTEGER},
+			</if>
+			<if test="lIsVouchers != null">
+				L_ISVOUCHERS = #{lIsVouchers,jdbcType=INTEGER},
+			</if>
+			<if test="lTourContent != null">
+				L_TOURCONTENT = #{lTourContent,jdbcType=INTEGER},
+			</if>
+			<if test="lPhotoCover != null">
+				L_PHOTOCOVER = #{lPhotoCover,jdbcType=VARCHAR}
+			</if>
+			<if test="lViews != null">
+				L_VIEWS=#{lViews}
+			</if>
+		</trim>
+	</sql>
+	
+	<sql id="groupby_clause">
+		<if test="groupType == null">
+			GROUP BY L_PRODUCT
+		</if>
+		<if test="groupType == 1">
+			GROUP BY L_CITY
+		</if>
+	</sql>
+	
+	<sql id="column_clause">
+		<!-- 分组后统计个数 -->
+		<if test="columnType == null">
+			COUNT(COUNT(1))
+		</if>
+		<!-- 分组后统计统计浏览量 -->
+		<if test="columnType == 1">
+			SUM(L_VIEWS)
+		</if>
+	</sql>
+	
+	<sql id="orderby_clause">
+		order by L_ID DESC
+	</sql>
+
+	<sql id="orderby_date">
+		order by L_GOGROUPTIME ASC
+	</sql>
+
+	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+		<if test="limitSize != null">
+			<include refid="PAGINATION.paginationStart" />
+		</if>
+		select
+		<include refid="groupcolumns" />
+		from TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="orderby_clause" />
+		<if test="limitSize != null">
+			<include refid="PAGINATION.paginationEnd" />
+		</if>
+	</select>
+
+	<select id="listQuery" resultMap="ThinResult" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		select
+		<include refid="groupcolumns" />
+		from TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="orderby_date" />
+	</select>
+
+	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		<include refid="PAGINATION.paginationStart" />
+		select
+		<include refid="columns" />
+		from TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="orderby_date" />
+		<include refid="PAGINATION.paginationEnd" />
+	</select>
+
+	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		select
+		<include refid="columns" />
+		from TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="orderby_clause" />
+	</select>
+
+	<select id="listGroup" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		<include refid="PAGINATION.paginationStart" />
+		SELECT *        
+   		FROM (
+   		SELECT ROW_NUMBER() OVER(PARTITION BY L_PRODUCT ORDER BY L_JCRPRICE ASC,L_GOGROUPTIME ASC) RN,        
+		<include refid="columns" />   
+        FROM TRAVEL_LINE
+		<include refid="query_where_clause" />
+        ) WHERE RN = 1
+		<include refid="PAGINATION.paginationEnd" />
+	</select>
+
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelLineDO" useGeneratedKeys="true">
+		<selectKey resultType="java.lang.Long" keyProperty="lId" order="BEFORE">
+			select TRAVEL_LINE_SEQ.NEXTVAL as lId from DUAL
+		</selectKey>
+		insert into TRAVEL_LINE (
+		<include refid="columns" />
+		)
+		values (#{lId},SYSTIMESTAMP,SYSTIMESTAMP,
+		#{zId,jdbcType=INTEGER},
+		#{mId,jdbcType=INTEGER},
+		#{cId,jdbcType=INTEGER},
+		#{lTile,jdbcType=VARCHAR},
+		#{lType,jdbcType=INTEGER},
+		#{lGroupNumber,jdbcType=VARCHAR},
+		#{lGoGroupTime,jdbcType=TIMESTAMP},
+		#{lEndTime,jdbcType=TIMESTAMP},
+		#{lProvince,jdbcType=VARCHAR},
+		#{lCity,jdbcType=VARCHAR},
+		#{lArea,jdbcType=VARCHAR},
+		#{lIsJs,jdbcType=INTEGER},
+		#{lJsRud,jdbcType=VARCHAR},
+		#{lArrivalProvince,jdbcType=VARCHAR},
+		#{lArrivalCity,jdbcType=VARCHAR},
+		#{lArrivalArea,jdbcType=VARCHAR},
+		#{lRenCount,jdbcType=INTEGER},
+		0,
+		0,
+		0,
+		#{lCrPrice,jdbcType=FLOAT},
+		#{lJCrPrice,jdbcType=FLOAT},
+		#{lXhPrice,jdbcType=FLOAT},
+		#{lJXhPrice,jdbcType=FLOAT},
+		#{lYPrice,jdbcType=FLOAT},
+		#{lJYPrice,jdbcType=FLOAT},
+		#{lAdultIntegral,jdbcType=FLOAT},
+		#{lChildrenIntegral,jdbcType=FLOAT},
+		#{lFangPrice,jdbcType=FLOAT},
+		#{lDay,jdbcType=INTEGER},
+		#{lTrafficyType,jdbcType=INTEGER},
+		#{lGoTraffic,jdbcType=VARCHAR},
+		#{lTrafficBackType,jdbcType=INTEGER},
+		#{lBackTraffice,jdbcType=VARCHAR},
+		#{lJhd,jdbcType=VARCHAR},
+		#{lJhdTime,jdbcType=VARCHAR},
+		#{lIco,jdbcType=VARCHAR},
+		#{lDipei,jdbcType=VARCHAR},
+		#{lGroupTel,jdbcType=VARCHAR},
+		#{lMode,jdbcType=VARCHAR},
+		#{lNMode,jdbcType=VARCHAR},
+		#{lYesItem,jdbcType=VARCHAR},
+		#{lNoItem,jdbcType=VARCHAR},
+		#{lChildren,jdbcType=VARCHAR},
+		#{lShop,jdbcType=VARCHAR},
+		#{lExpenseItem,jdbcType=VARCHAR},
+		#{lPreseItem,jdbcType=VARCHAR},
+		#{lAttention,jdbcType=VARCHAR},
+		#{lOther,jdbcType=VARCHAR},
+		#{lReminder,jdbcType=VARCHAR},
+		#{lTemplateState,jdbcType=INTEGER},
+		#{lEditUserId,jdbcType=INTEGER},
+		0,
+		0,
+		0,
+		#{lProduct,jdbcType=VARCHAR},
+		#{lIsIntegral,jdbcType=INTEGER},
+		#{lIsVouchers,jdbcType=INTEGER},
+		#{lTourContent,jdbcType=VARCHAR},
+		#{lPhotoCover,jdbcType=VARCHAR},
+		0
+		)
+	</insert>
+
+	<update id="update" parameterType="com.zb.app.biz.domain.TravelLineDO">
+		update TRAVEL_LINE
+		<include refid="update_set_clause" />
+		where L_ID = #{lId,jdbcType=INTEGER}
+	</update>
+
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		select count(1)
+		from TRAVEL_LINE
+		<include refid="query_where_clause" />
+	</select>
+	<!-- 统计方法 -->
+	<select id="countByGroup" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		SELECT <include refid="column_clause"/>
+		FROM TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="groupby_clause" />
+	</select>
+
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete from TRAVEL_LINE
+		where L_ID = #{id,jdbcType=INTEGER}
+	</delete>
+
+	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer">
+		select
+		<include refid="columns" />
+		from TRAVEL_LINE
+		where L_ID = #{id,jdbcType=INTEGER}
+	</select>
+
+	<update id="updateByLines" parameterType="java.util.Map">
+		UPDATE TRAVEL_LINE
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="trdo.lState !=null ">
+				L_STATE = #{trdo.lState, jdbcType=INTEGER},
+			</if>
+		</trim>
+		WHERE L_ID IN
+		<foreach collection="lIds" index="index" item="item" open="(" separator="," close=")">
+			#{item}
+		</foreach>
+	</update>
+
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelLineDO">
+		update TRAVEL_LINE
+		<include refid="update_set_clause" />
+		where L_ID = #{lId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 	查询所有线路数据，bulid进索引 -->
+	<select id="listProductSearch" resultMap="SearchResult" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		<include refid="PAGINATION.paginationStart" />
+		SELECT *        
+   		FROM (
+   		SELECT ROW_NUMBER() OVER(PARTITION BY L_PRODUCT ORDER BY L_JCRPRICE ASC,L_GOGROUPTIME ASC) RN,        
+		<include refid="searchcolumns"/>
+        FROM TRAVEL_LINE
+		<include refid="query_where_clause" />
+        ) WHERE RN = 1
+		<include refid="PAGINATION.paginationEnd" />
+	</select>
+	
+	<select id="countProductSearch" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelLineQuery">
+		SELECT COUNT(COUNT(1)) FROM TRAVEL_LINE
+		<include refid="query_where_clause" />
+		<include refid="groupby_clause" />
+	</select>
+</mapper>

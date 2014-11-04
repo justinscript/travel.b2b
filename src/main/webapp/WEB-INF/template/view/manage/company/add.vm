@@ -1,0 +1,320 @@
+<script type="text/javascript">
+
+
+
+$(function(){
+    GetP('province', 'city', 'county', ["$!company.cProvince", "$!company.cCity", "$!company.cCounty"]);
+	var editor = KindEditor.create('.kindcontent', {allowFileManager : true,afterBlur: function(){this.sync();}});
+	$("#companyForm").Validform({
+		ajaxPost:true,
+		postonce: false,
+		tiptype:2,
+		showAllError:false,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+					$.Hidemsg();
+					location.reload();
+				}, 1000);
+			}
+		}
+	})
+	#if($!type==1  || $!company.cType==1 )
+	DefProvince('','');//默认站点
+	
+     //获取已存站点
+       var UserSiteCity="";
+    	var UserSite=$("#PListId").html();
+		SiteShow(UserSite);
+		if(UserSite!=""){
+    		UserSite=eval("(" + UserSite + ")")
+			 $.each(UserSite, function (i, item) {
+                $.each(item.City, function (j, dr) {
+    				$(".Selecthtml").append('<a rel="' + dr.CName + '">' + dr.CName + ' <i class=" icon-remove icon-white"></i></a>')
+    				UserSiteCity=UserSiteCity+","+dr.CName;
+                })
+         })
+		}
+	#end
+
+    //站点选择
+ 	$(".Selectbox .SelectSub").click(function(event){
+       event.stopPropagation();
+        $(".Select_list").show();
+   })
+
+    $(".Select_list").on("click","a",function () {
+        if ($(this).attr("class") == "cur") {
+            $(this).removeClass("cur");
+            $(".Selecthtml").find('a[rel=' + $(this).attr("title") + ']').remove();
+			SelectSite()
+        } else {
+            $(this).addClass("cur");
+            $(".Selecthtml").append('<a rel="' + $(this).attr("title") + '">' + $(this).attr("title") + ' <i class=" icon-remove icon-white"></i></a>')
+			SelectSite()
+        }
+    })
+    $(".Selecthtml").on("click","a",function(){
+        $(this).remove();
+        $(".Select_list").find('a[title='+$(this).attr("rel")+']').removeClass("cur");
+       	SelectSite()
+    })
+
+    $(document).bind("click",function(e){
+        var target  = $(e.target);
+        if(target.closest(".Select_list").length == 0){
+            $(".Select_list").hide();
+        }
+    })
+})
+
+
+</script>
+#if($!cType=="update")
+	<form method="post" id="companyForm" action="/zbmanlogin/company/updateCompany.htm">
+    	<input type="hidden" name="cId" value="$!company.cId" />
+#else
+	<form method="post" id="companyForm" action="/zbmanlogin/company/addCompany.htm">
+	<input type="hidden" name="cType" value="$!type">
+#end
+    <div class="title_form">公司信息</div>
+    <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+		#if($!type==1 ||  $!company.cType==1  )
+        <tr>
+            <th width="100">默认站点：</th>
+            <td>
+                <span><select name="cCityTop" id="DefProvince" class="w100" onchange="DefSelect(this)" nullmsge="站点不能为空" datatype="*">
+                    <option value="">请选择</option>
+                </select>
+				<select name="cCityTop" id="DefCity" class="w100" nullmsge="出发地不能为空" datatype="*">
+                    <option value="">请选择</option>
+                </select>
+				</span>
+            </td>
+        </tr>
+        <tr>
+            <th>所有站点：</th>
+            <td>
+				  <div class="Selectbox">
+						<div class="hide" id="PListId">$!company.cCityList</div>
+                        <input type="hidden" name="cCityList" value="" id="SelectValue" size="200"/>
+                        <a class="btn SelectSub" href="javascript:void(0)">请选择 <i class="caret"></i></a>
+                        <div class="Select_list" rel="0" >
+                        </div>
+                        <div class="Selecthtml">
+                        </div>
+                    </div>
+            </td>
+        </tr>
+		#end
+		<!--组团社才有的结束-->
+        <tr>
+            <th width="100">公司名称：</th>
+            <td><span><input type="text" datatype="chinese" value="$!company.cName" name="cName" nullmsge="公司名称不能为空" errormsg="公司名称必须为中文"/></span>
+            <div class="Validform_checktip">公司名称不能为空</div>
+            </td>
+        </tr>
+        <tr>
+            <th>所在地址：</th>
+            <td> <select name="cProvince" id="province" class="w80"></select>
+                <select name="cCity" id="city"  class="w80"></select>
+                <select id="county" name="cCounty"  class="w100"></select>
+                <input value="$!company.cAddress" name="cAddress" type="text" />
+            </td>
+        </tr>
+        <tr>
+            <th>公司法人：</th>
+            <td>
+				<span><input name="cCorporation" value="$!company.cCorporation" type="text" datatype="chinese" /></span>
+				<div class="Validform_checktip">公司法人不能为空</div>
+			</td>
+        </tr>
+        <tr>
+            <th>联系人：</th>
+            <td>
+				<span><input type="text" name="cCustomname" value="$!company.cCustomname" datatype="chinese"/></span>
+				<div class="Validform_checktip">联系人不能为空</div>
+			</td>
+        </tr>
+        <tr>
+            <th>联系人手机：</th>
+            <td>
+				<span><input type="text" ignore="ignore" name="cMobile" value="$!company.cMobile" datatype="m" /></span>
+				<div class="Validform_checktip">联系人手机不能为空</div>
+			</td>
+        </tr>
+        <tr>
+            <th>公司电话：</th>
+            <td>
+				<span><input type="text" ignore="ignore" name="cTel" value="$!company.cTel" datatype="t" /></span>
+				<div class="Validform_checktip">公司电话格式为：021-88886666</div>
+			</td>
+        </tr>
+        <tr>
+            <th>公司传真：</th>
+            <td>
+				<span><input type="text" ignore="ignore" name="cFax" value="$!company.cFax" datatype="t"/></span>
+				<div class="Validform_checktip">公司传真格式为：021-88886666</div>
+			</td>
+        </tr>
+        <tr>
+            <th>电子邮箱：</th>
+            <td>
+				<span><input type="text" name="cEmail" value="$!company.cEmail" datatype="e" ignore="ignore" /></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>QQ号码：</th>
+            <td>
+				<span><input type="text" name="cQQ" value="$!company.cQQ" datatype="n" ignore="ignore" /></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>银行账号：</th>
+            <td><textarea name="cBank"  style="height: 150px;width:98%;">$!company.cBank</textarea></td>
+        </tr>
+        <tr>
+            <th>公司介绍：</th>
+            <td><textarea class="kindcontent"  name="cAboutus" style="width: 99%;height:200px;">$!company.cAboutus</textarea></td>
+        </tr>
+        <tr>
+            <th>联系方式：</th>
+            <td><textarea class="kindcontent"  name="cContact" style="width: 99%;height:200px;">$!company.cContact</textarea></td>
+        </tr>
+        <tr>
+            <th>状态：</th>
+            <td>
+            #if($!company.cState==2)
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios1" value="1"> 正常</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="2" checked>停止</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="0" >未审核</label>
+            #elseif($!company.cState==0)
+            	<label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios1" value="1"> 正常</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="2">停止</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="0" checked>未审核</label>
+           	#else
+           		<label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios1" value="1" checked> 正常</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="2">停止</label>
+                <label class="rad">
+                    <input type="radio" name="cState" id="optionsRadios2" value="0">未审核</label>
+            #end
+            </td>
+        </tr>
+        <tr>
+            <th>推荐公司：</th>
+            <td><input type="text" value="$!company.cRecommend" name="cRecommend"/></td>
+        </tr>		
+    </table>
+    #if($!cType=="update")
+    	
+    #else
+    <div class="title_form">初始用户</div>
+    <table width="100%" cellspacing="0" cellpadding="0" class="tab2">
+        <tr>
+            <th width="100">
+                用户名：
+            </th>
+            <td>
+                <span><input type="text" name="mUserName" value="" datatype="*" nullmsg="用户名不能为空" ajaxurl="/userNameVerify.htm?type=$!cType/></span>
+				<div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                密码：
+            </th>
+            <td>
+				<span><input type="text" name="mPassword" value="" datatype="*" nullmsg="密码不能为空" /></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>
+                真实姓名：
+            </th>
+            <td>
+				<span><input type="text" name="mName" value="" datatype="chinese" nullmsg="真实姓名不能为空" errormsg="真实姓名必须为中文" /></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>
+                性别：
+            </th>
+            <td><label class="rad">
+                    <input type="radio" name="mSex" id="optionsRadios1" value="0" checked="checked">
+                    男
+                </label>
+                <label class="rad">
+                    <input type="radio" name="mSex" id="optionsRadios2" value="1" >
+                    女
+                </label></td>
+        </tr>
+        <tr>
+            <th>
+                手机号码：
+            </th>
+            <td>
+				<span><input type="text" name="mMobile" value="" datatype="m" nullmsg="手机号码不能为空" errormsg="手机号码格式不正确 " /></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>
+                电话号码：
+            </th>
+            <td>
+				<span><input type="text" name="mTel" value="" datatype="t" ignore="ignore" errormsg="电话号码不正确，例：021-88886666"/></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>
+                电子邮件：
+            </th>
+            <td>
+				<span><input type="text" name="mEmail" value="" datatype="e" ignore="ignore" errormsg="电子邮件格式不正确"/></span>
+				<div class="Validform_checktip"></div>
+			</td>
+        </tr>
+        <tr>
+            <th>
+                权限：
+            </th>
+            <td><input type="text" name="mRole" value="" /> </td>
+        </tr>
+        <tr>
+            <th>
+                状态：
+            </th>
+            <td>
+     <label class="rad">
+                    <input type="radio" name="mState" id="optionsRadios1" value="0" checked>
+                    正常
+                </label>
+                <label class="rad">
+                    <input type="radio" name="mState" id="optionsRadios2" value="1" >
+                    停止
+                </label>
+</td>
+        </tr>
+    
+        
+    </table>
+	#end
+	<table width="100%" cellspacing="0" cellpadding="0" class="tab2">
+	<tr><th width="100"></th><td><button class="btn btn-primary" type="submit">提交</button></td></tr>
+	</table>
+</form>

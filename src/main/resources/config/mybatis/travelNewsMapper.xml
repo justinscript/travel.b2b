@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelNewsMapper">
+
+	<resultMap type="com.zb.app.biz.domain.TravelNewsDO" id="BaseResultMap">
+		<id column="n_ID" property="nId" jdbcType="INTEGER" />
+		<result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+		<result column="C_ID" property="cId" jdbcType="INTEGER" />
+		<result column="Z_ID" property="zId" jdbcType="INTEGER" />
+		<result column="n_Type" property="nType" jdbcType="INTEGER" />
+		<result column="n_Title" property="nTitle" jdbcType="VARCHAR" />
+		<result column="n_Pic" property="nPic" jdbcType="VARCHAR" />
+		<result column="n_Content" property="nContent" jdbcType="VARCHAR" />
+		<result column="n_State" property="nState" jdbcType="INTEGER" />
+		<result column="n_HotCount" property="nHotCount" jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="column">
+		n_id, gmt_create, gmt_modified, c_id, z_id, n_type, n_title, n_pic, n_content, n_state, n_hotcount
+	</sql>
+	
+	<sql id="query_where_clause">
+  		<trim prefix=" where " prefixOverrides="and|or"> 
+  			<if test="cId !=null ">  
+	            and C_ID = #{cId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="zId !=null ">  
+	            and Z_ID = #{zId, jdbcType=INTEGER}
+	        </if>  
+	        <if test="nType != null ">  
+	            and n_Type = #{nType, jdbcType=INTEGER}  
+	        </if>  
+	        <if test="nTitle != null and nTitle != '' ">  
+	            and n_Title = #{nTitle, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="nState != null ">  
+	            and n_State = #{nState, jdbcType=INTEGER}  
+	        </if>
+	    </trim> 
+  	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="BaseResultMap">
+		select
+		<include refid="column" />
+		from Travel_News
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="column" />
+		from Travel_News where n_ID=#{nId}
+	</select>
+	
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelNewsQuery">
+		select count(1)
+		from TRAVEL_NEWS
+		<include refid="query_where_clause"/>
+	</select>
+  	
+  	<select id="showNewsPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelNewsQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="column" />
+		from TRAVEL_NEWS
+		<include refid="query_where_clause"/>
+		order by GMT_MODIFIED desc
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelNewsDO">
+		<selectKey resultType="java.lang.Long" keyProperty="nId" order="BEFORE">
+			SELECT TRAVEL_NEWS_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_NEWS(<include refid="column" />) 
+		values (
+			#{nId},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#{cId,jdbcType=INTEGER},
+			#{zId,jdbcType=INTEGER},
+			#{nType,jdbcType=INTEGER},
+			#{nTitle,jdbcType=VARCHAR},
+			#{nPic,jdbcType=VARCHAR},
+			#{nContent,jdbcType=VARCHAR},
+			#{nState,jdbcType=VARCHAR},
+			#{nHotCount,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelNewsDO">
+		update TRAVEL_NEWS set GMT_MODIFIED = SYSTIMESTAMP
+		<trim suffixOverrides=",">
+			<if test="gmtCreate != null">
+				,GMT_CREATE=#{gmtCreate},
+			</if>
+			<if test="gmtModified != null">
+				,GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="nTitle != null">
+				,n_Title=#{nTitle}
+			</if>
+			<if test="nContent != null">
+				,n_Content=#{nContent}
+			</if>
+			<if test="nState != null">
+				,n_State=#{nState}
+			</if>
+			<if test="zId != null">
+				,z_Id=#{zId}
+			</if>
+		</trim>
+		where n_ID = #{nId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		update TRAVEL_NEWS
+		set GMT_MODIFIED = SYSTIMESTAMP, n_state = 1
+		where n_ID = #{nId}
+	</delete>
+	
+</mapper>

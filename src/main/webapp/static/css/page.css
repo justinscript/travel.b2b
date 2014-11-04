@@ -1,0 +1,77 @@
+body,td
+{
+    font-size:12px;
+    font-family:  verdana, arial, helvetica, sans-serif;
+    padding:0px;
+}
+ul,li{list-style:none;padding:0;margin:0;}
+
+td{color:#666;}
+.alertTable th{text-align:left;border:0px; background:#f1f1f1;color:#666;font-size:14px;padding:5px;line-height:26px;height:26px;border-bottom:1px solid #ccc}
+.alertTable td{text-align:left;border:1px solid #ccc;border-left:0px;border-top:0px;line-height:24px;height:24px;padding:5px;}
+div.pager
+{
+    padding: 3px;
+    font-size: 0.85em;
+    font-size:12px;
+    font-family: '微软雅黑','宋体';
+    margin:20px auto;
+    text-align: center;
+   
+
+}
+div.pager ul{float:right;margin:0 auto;}
+div.pager li{float:left;}
+div.pager a
+{
+    border: #ccdbe4 1px solid;
+    padding:2px 8px 2px  8px;
+    background-position: 50% bottom;
+    margin-right: 3px;
+    text-decoration: none;
+    color:#000;
+}
+div.pager a:hover
+{
+    border: #2b55af 1px solid;
+    background-image: none;
+    color: #fff;
+    background-color: #000;
+}
+div.pager a:active
+{
+    border: #2b55af 1px solid;
+    background-image: none;
+    color: #fff;
+    background-color: #3666d4;
+}
+div.pager .current
+{
+    padding:2px 6px 2px 6px;
+    color: #000;
+    font-weight: bold;
+    margin-right: 3px;
+
+}
+div.pager span.disabled
+{
+    display: none;
+}
+div.pager a.next
+{
+    border: #ccdbe4 2px solid;
+    margin: 0px 0px 0px 10px;
+}
+div.pager a.next:hover
+{
+    border: #2b55af 2px solid;
+}
+div.pager a.prev
+{
+    border: #ccdbe4 2px solid;
+    margin: 0px 10px 0px 0px;
+}
+div.pager a.prev:hover
+{
+    border: #2b55af 2px solid;
+}

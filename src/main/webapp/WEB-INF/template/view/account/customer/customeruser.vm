@@ -1,0 +1,29 @@
+<link href="/static/css/page.css" rel="stylesheet" />
+<table cellpadding="3" cellspacing="0" border="0" width="100%" class="alertTable">
+    <tbody>
+		
+		<tr>
+            <th valign="middle">用户名</th>
+            <th width="100" valign="middle">真实姓名</th>
+            <th width="100">手机号码</th>
+            <th width="150">传真号码</th>
+            <th width="100">QQ号码</th>
+            <th width="150">电子邮箱</th>					
+        </tr>
+		#foreach($!member in $memberList)
+        <tr>
+            <td style="border-left: 1px solid #ccc">$!{member.mUserName}</td>
+            <td>$!{member.mName}</td>
+            <td align="center">$!{member.mMobile}</td>
+			<td align="center">$!{member.mFax}</td>
+			<td align="center">$!{member.mQQ}</td>
+			<td align="center">$!{member.mEmail}</td>
+        </tr>
+		#end
+		
+    </tbody>
+</table>
+
+<div>
+    
+</div>

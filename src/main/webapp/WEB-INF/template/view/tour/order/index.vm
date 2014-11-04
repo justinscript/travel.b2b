@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+    <script src="/static/js/jq-zuobian-init.js"></script>
+    <script src="/static/js/layer/layer.min.js"></script>
+    <script type="text/javascript" src="/static/js/powerfloat/js/jquery-powerFloat.js"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+    <script src="/static/js/common.js"></script>
+    <script src="/static/js/laydate/laydate.js"></script>
+    <script type="text/javascript">
+        $(function(){
+           $.Menu("订单管理","散客订单");
+           laydate(start);
+           laydate(end);  
+		   $("#FilterList").filterSearch();
+        })
+        //取消订单
+	function ClearOrder1(obj,id) {
+	var loadi = layer.load('加载中…');
+	$.ajax({
+		type: "get",
+		url: "/tour/clearorder.htm?id="+id,
+		cache: false,
+		success: function (html) {
+			$.layer({
+				type : 1,
+				title :"取消订单",
+				offset:['100px' , ''],
+				border : [10, 0.3, '#000'],
+				area : ['500px','300px'],
+				page : {html :html}
+			});
+		},
+		complete: function () {
+			layer.close(loadi);
+		},
+		error: function (err) {  }
+	})
+}
+    </script>
+</head>
+<body>
+    #parse("/widget/common/tour_header.vm")
+    <div id="Bodyer">
+        #parse("/widget/common/tour_nav.vm")
+        <div class="M_title">
+            <div class="tit">订单管理</div>
+        	<div class="Page_option">
+            </div>
+            </div>
+        <div id="Main">
+        <div id="tab1" >
+                        <ul id="FilterList" url="/tour/orderlist.htm">
+                             <li>
+                                <span class="tit" name="zType">类型：</span>
+                                <a href="#" rel="1">国内长线</a>
+                                <a href="#" rel="2">周边短线</a>
+                                <a href="#" rel="3">国际线路</a>
+                            </li>
+                            <li>
+                                <span class="tit" name="orState">状态：</span>
+                                <a href="#" rel="0">未确认</a>
+                                <a href="#" rel="1">已确认</a>
+                                <a href="#" rel="3">无名单</a>
+                                <a href="#" rel="2">取消</a>
+                            </li>
+							<li id="FilterSearch"><span class="tit">已选条件：</span></li>
+                        </ul>
+
+                      <div class="search-list">
+                        <table>
+                            <tr>
+                            <th>线路名称：</th>
+                            <td><input name="lTile" type="text" value="" class="txt" /></td>
+                            <th>团期：</th>
+                            <td><input type="text" value="" name="startDate" class="w80" id="startDate"/> - <input type="text" value="" name="endDate" class="w80" id="endDate"/></td>
+                            <th>游客：</th>
+                            <td><input type="text" name="" value="" class="w80"/></td>
+                            <td> <button class="btn" type="smbmit"><i class="icon-search"></i> 查询</button>
+                            <a class="btn btn-warning" type="button" href="/tour/printOrderExcel.htm"><i class="icon-download-alt icon-white"></i> 导出当前数据</a></td>
+                            </tr>
+                        </table>
+                       </div>
+					   
+						<div class="tableContent"></div>
+                        </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,22 @@
+<center><h1 style="color:red">用户操作日志</h1></center>
+
+<table>
+	<tr>
+		<td>操作时间</td>
+		<td>表名</td>
+		<td>主键</td>
+		<td>修改前</td>
+		<td>修改后</td>
+		<td>操作人</td>
+	</tr>
+	#foreach($log in $logList)
+	<tr>
+		<td>${dateViewTools.formatFullDate($log.gmtCreate)}</td>
+		<td>$!log.olTable</td>
+		<td>$!log.olTablePk</td>
+		<td>$!log.olChangeBefore</td>
+		<td>$!log.olChangeLater</td>
+		<td>$!log.mId</td>
+	</tr>
+	#end
+</table>

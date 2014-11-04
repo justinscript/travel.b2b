@@ -1,0 +1,33 @@
+<table class="table table-bordered table-striped" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>线路/公司</th>
+        <th width="130">成人</th>
+        <th width=130"">儿童</th>
+        <th width="130">婴儿</th>
+        <th width="130">总人数</th>
+        <th>总金额</th>
+    </tr>
+	#foreach($item in $!list)
+    <tr>
+        <td>
+            <a href="/line/$!{item.lId}.htm" target="_blank" class="blue">$!{item.lTile}</a>
+            <br/>$!{item.cName}</td>
+            <td>$!{item.orAdultCount}</td>
+            <td>$!{item.orChildCount}</td>
+            <td>$!{item.orBabyCount}</td>
+			#set($allCount=$!{item.orAdultCount}+$!{item.orChildCount}+$!{item.orBabyCount})
+            <td>$allCount</td>
+            <td class="red">￥$!format.formatFloat($!{item.orPirceCount})</td>
+    </tr>
+	#end
+	
+	<tr class="warning" style="font-weight: bold;">
+        <td>总数：</td>
+        <td>$!{orderCount.orAdultCount}</td>
+        <td>$!{orderCount.orChildCount}</td>
+        <td>$!{orderCount.orBabyCount}</td>
+        <td>$!{orderCount.allCount}</td>
+        <td class="red">￥$!format.formatFloat($!{orderCount.orPirceCount})</td>
+    </tr>
+	
+</table>

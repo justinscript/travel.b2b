@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>系统错误</title>
+	<link rel="stylesheet" href="/static/css/common.css">
+	<link rel="stylesheet" href="/static/css/preciseGoodInfo.css">
+	<script src="/static/js/jquery-1.8.3.min.js"></script>
+	<script src="/static/js/common.js"></script>
+</head>
+<body>
+    #parse("widget/common/header.vm")
+	
+    <div id="content">
+		exception:$!exception
+		<hr>
+		url:$!url
+		<hr>
+		msg:$!exception
+		<hr>
+		stackTrace:$!exception
+    </div>
+    
+	#parse("widget/common/footer.vm")
+</body>
+</html>

@@ -1,0 +1,33 @@
+
+<div class="title-tabl">
+	<ul class="tab fl" >
+        		<li class="cur"><a title="">用户列表</a></li>
+        </ul>
+        <ul class="fr"><button type="button" class="btn btn-primary btn-sm" onclick="GetTemple(this)" url="/zbmanlogin/company/useradd.htm?cId=$!cId" title="添加用户"  >添加用户</button></ul>
+        </div>
+<table class="tbl table-striped table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>真实姓名</th>
+        <th width="120">用户名</th>
+        <th width="150">类型</th>
+        <th width="150">部门</th>
+        <th width="150">手机</th>
+        <th width="150">最后登录时间</th>
+        <th width="150">操作</th>
+    </tr>
+    #foreach( $!member in $!memberList ) 
+    <tr>
+        <td>$!member.mName</td>
+        <td>$!member.mUserName</td>
+        <td>#if($!member.mType==0)
+            	超级管理员
+            #elseif($!member.mType==1)
+            	普通管理员
+            #end</td>
+        <td>暂无</td>
+        <td>$!member.mMobile</td>
+        <td>${dateViewTools.formatDate($!member.gmtCreate)}</td>
+        <td><a href="javascript:void(0)" onclick="GetTemple(this)" url="/zbmanlogin/company/ljUpdateUser.htm?id=$!member.mId" title="修改用户"  class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i> 修改</a></td>
+    </tr>
+    #end
+</table>

@@ -1,0 +1,1176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<?mso-application progid="Word.Document"?>
+<w:wordDocument xmlns:w="http://schemas.microsoft.com/office/word/2003/wordml" xmlns:v="urn:schemas-microsoft-com:vml" xmlns:w10="urn:schemas-microsoft-com:office:word" xmlns:sl="http://schemas.microsoft.com/schemaLibrary/2003/core" xmlns:aml="http://schemas.microsoft.com/aml/2001/core" xmlns:wx="http://schemas.microsoft.com/office/word/2003/auxHint" xmlns:o="urn:schemas-microsoft-com:office:office" xmlns:dt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882" xmlns:wsp="http://schemas.microsoft.com/office/word/2003/wordml/sp2" w:macrosPresent="no" w:embeddedObjPresent="no" w:ocxPresent="no" xml:space="preserve">
+    <w:ignoreElements w:val="http://schemas.microsoft.com/office/word/2003/wordml/sp2"/>
+    <o:DocumentProperties>
+        <o:Title>财务催款单</o:Title>
+        <o:Author>Hero</o:Author>
+        <o:LastAuthor>deeplm</o:LastAuthor>
+        <o:Revision>2</o:Revision>
+        <o:TotalTime>1</o:TotalTime>
+        <o:Created>2014-08-29T02:53:00Z</o:Created>
+        <o:LastSaved>2014-08-29T02:53:00Z</o:LastSaved>
+        <o:Pages>1</o:Pages>
+        <o:Words>73</o:Words>
+        <o:Characters>420</o:Characters>
+        <o:Lines>3</o:Lines>
+        <o:Paragraphs>1</o:Paragraphs>
+        <o:CharactersWithSpaces>492</o:CharactersWithSpaces>
+        <o:Version>11.0000</o:Version>
+    </o:DocumentProperties>
+    <w:fonts>
+        <w:defaultFonts w:ascii="Times New Roman" w:fareast="宋体" w:h-ansi="Times New Roman" w:cs="Times New Roman"/>
+        <w:font w:name="宋体">
+            <w:altName w:val="SimSun"/>
+            <w:panose-1 w:val="02010600030101010101"/>
+            <w:charset w:val="86"/>
+            <w:family w:val="Auto"/>
+            <w:pitch w:val="variable"/>
+            <w:sig w:usb-0="00000003" w:usb-1="288F0000" w:usb-2="00000016" w:usb-3="00000000" w:csb-0="00040001" w:csb-1="00000000"/>
+        </w:font>
+        <w:font w:name="@宋体">
+            <w:panose-1 w:val="02010600030101010101"/>
+            <w:charset w:val="86"/>
+            <w:family w:val="Auto"/>
+            <w:pitch w:val="variable"/>
+            <w:sig w:usb-0="00000003" w:usb-1="288F0000" w:usb-2="00000016" w:usb-3="00000000" w:csb-0="00040001" w:csb-1="00000000"/>
+        </w:font>
+    </w:fonts>
+    <w:styles>
+        <w:versionOfBuiltInStylenames w:val="4"/>
+        <w:latentStyles w:defLockedState="off" w:latentStyleCount="156"/>
+        <w:style w:type="paragraph" w:default="on" w:styleId="a">
+            <w:name w:val="Normal"/>
+            <wx:uiName wx:val="正文"/>
+            <w:pPr>
+                <w:widowControl w:val="off"/>
+                <w:jc w:val="both"/>
+            </w:pPr>
+            <w:rPr>
+                <wx:font wx:val="Times New Roman"/>
+                <w:kern w:val="2"/>
+                <w:sz w:val="21"/>
+                <w:sz-cs w:val="24"/>
+                <w:lang w:val="EN-US" w:fareast="ZH-CN" w:bidi="AR-SA"/>
+            </w:rPr>
+        </w:style>
+        <w:style w:type="character" w:default="on" w:styleId="a0">
+            <w:name w:val="Default Paragraph Font"/>
+            <wx:uiName wx:val="默认段落字体"/>
+            <w:semiHidden/>
+        </w:style>
+        <w:style w:type="table" w:default="on" w:styleId="a1">
+            <w:name w:val="Normal Table"/>
+            <wx:uiName wx:val="普通表格"/>
+            <w:semiHidden/>
+            <w:rPr>
+                <wx:font wx:val="Times New Roman"/>
+            </w:rPr>
+            <w:tblPr>
+                <w:tblInd w:w="0" w:type="dxa"/>
+                <w:tblCellMar>
+                    <w:top w:w="0" w:type="dxa"/>
+                    <w:left w:w="108" w:type="dxa"/>
+                    <w:bottom w:w="0" w:type="dxa"/>
+                    <w:right w:w="108" w:type="dxa"/>
+                </w:tblCellMar>
+            </w:tblPr>
+        </w:style>
+        <w:style w:type="list" w:default="on" w:styleId="a2">
+            <w:name w:val="No List"/>
+            <wx:uiName wx:val="无列表"/>
+            <w:semiHidden/>
+        </w:style>
+        <w:style w:type="table" w:styleId="a3">
+            <w:name w:val="Table Grid"/>
+            <wx:uiName wx:val="网格型"/>
+            <w:basedOn w:val="a1"/>
+            <w:rsid w:val="004A12E3"/>
+            <w:pPr>
+                <w:widowControl w:val="off"/>
+                <w:jc w:val="both"/>
+            </w:pPr>
+            <w:rPr>
+                <wx:font wx:val="Times New Roman"/>
+            </w:rPr>
+            <w:tblPr>
+                <w:tblInd w:w="0" w:type="dxa"/>
+                <w:tblBorders>
+                    <w:top w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                    <w:left w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                    <w:bottom w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                    <w:right w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                    <w:insideH w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                    <w:insideV w:val="single" w:sz="4" wx:bdrwidth="10" w:space="0" w:color="auto"/>
+                </w:tblBorders>
+                <w:tblCellMar>
+                    <w:top w:w="0" w:type="dxa"/>
+                    <w:left w:w="108" w:type="dxa"/>
+                    <w:bottom w:w="0" w:type="dxa"/>
+                    <w:right w:w="108" w:type="dxa"/>
+                </w:tblCellMar>
+            </w:tblPr>
+        </w:style>
+    </w:styles>
+    <w:docPr>
+        <w:view w:val="print"/>
+        <w:zoom w:percent="120"/>
+        <w:bordersDontSurroundHeader/>
+        <w:bordersDontSurroundFooter/>
+        <w:proofState w:spelling="clean" w:grammar="clean"/>
+        <w:attachedTemplate w:val=""/>
+        <w:defaultTabStop w:val="420"/>
+        <w:drawingGridVerticalSpacing w:val="156"/>
+        <w:displayHorizontalDrawingGridEvery w:val="0"/>
+        <w:displayVerticalDrawingGridEvery w:val="2"/>
+        <w:punctuationKerning/>
+        <w:characterSpacingControl w:val="CompressPunctuation"/>
+        <w:optimizeForBrowser/>
+        <w:validateAgainstSchema/>
+        <w:saveInvalidXML w:val="off"/>
+        <w:ignoreMixedContent w:val="off"/>
+        <w:alwaysShowPlaceholderText w:val="off"/>
+        <w:compat>
+            <w:spaceForUL/>
+            <w:balanceSingleByteDoubleByteWidth/>
+            <w:doNotLeaveBackslashAlone/>
+            <w:ulTrailSpace/>
+            <w:doNotExpandShiftReturn/>
+            <w:adjustLineHeightInTable/>
+            <w:breakWrappedTables/>
+            <w:snapToGridInCell/>
+            <w:wrapTextWithPunct/>
+            <w:useAsianBreakRules/>
+            <w:dontGrowAutofit/>
+            <w:useFELayout/>
+        </w:compat>
+        <wsp:rsids>
+            <wsp:rsidRoot wsp:val="004A12E3"/>
+            <wsp:rsid wsp:val="0027261D"/>
+            <wsp:rsid wsp:val="002C0806"/>
+            <wsp:rsid wsp:val="00384B7A"/>
+            <wsp:rsid wsp:val="00461053"/>
+            <wsp:rsid wsp:val="004A12E3"/>
+            <wsp:rsid wsp:val="0053721A"/>
+            <wsp:rsid wsp:val="006516E6"/>
+            <wsp:rsid wsp:val="006D5C8A"/>
+            <wsp:rsid wsp:val="00773A7E"/>
+            <wsp:rsid wsp:val="00937785"/>
+            <wsp:rsid wsp:val="009C0A81"/>
+            <wsp:rsid wsp:val="00AA3AD7"/>
+            <wsp:rsid wsp:val="00D5230B"/>
+        </wsp:rsids>
+    </w:docPr>
+    <w:body>
+        <wx:sect>
+            <w:p wsp:rsidR="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="36"/>
+                        <w:sz-cs w:val="36"/>
+                    </w:rPr>
+                </w:pPr>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:b/>
+                        <w:sz w:val="36"/>
+                        <w:sz-cs w:val="36"/>
+                    </w:rPr>
+                    <w:t>财务催款单</w:t>
+                </w:r>
+            </w:p>
+            <w:tbl>
+                <w:tblPr>
+                    <w:tblStyle w:val="a3"/>
+                    <w:tblW w:w="0" w:type="auto"/>
+                    <w:tblLook w:val="01E0"/>
+                </w:tblPr>
+                <w:tblGrid>
+                    <w:gridCol w:w="1368"/>
+                    <w:gridCol w:w="3240"/>
+                    <w:gridCol w:w="1260"/>
+                    <w:gridCol w:w="2721"/>
+                </w:tblGrid>
+                <w:tr wsp:rsidR="004A12E3" wsp:rsidTr="0027261D">
+                    <w:trPr>
+                        <w:trHeight w:val="296"/>
+                    </w:trPr>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1368" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>To:</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3240" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!tourMessage[0]</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>From：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="2654" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!{webUser.getCompanyName()}</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+                <w:tr wsp:rsidR="004A12E3" wsp:rsidTr="004A12E3">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1368" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>收件人：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3240" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!tourMessage[1]</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>发件人：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="2654" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00937785" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!loginmember.mUserName</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+                <w:tr wsp:rsidR="004A12E3" wsp:rsidTr="004A12E3">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1368" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>电话：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3240" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!tourMessage[2]</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>电话：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="2654" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00937785" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!loginmember.mTel</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+                <w:tr wsp:rsidR="004A12E3" wsp:rsidTr="004A12E3">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1368" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>传真：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3240" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!tourMessage[3]</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>传真：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="2654" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="004A12E3" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00937785" wsp:rsidP="004A12E3">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!loginmember.mFax</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+            </w:tbl>
+            <w:p wsp:rsidR="004A12E3" wsp:rsidRDefault="004A12E3" wsp:rsidP="006516E6">
+                <w:pPr>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006516E6" wsp:rsidP="006516E6">
+                <w:pPr>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="0053721A">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>致：</w:t>
+                </w:r>
+                <w:r wsp:rsidR="00461053">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>$!{tourMessage[0]}   $!{tourMessage[1]}</w:t>
+                </w:r>
+            </w:p>
+            <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="006516E6" wsp:rsidP="006516E6">
+                <w:pPr>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="0053721A">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:tab wx:wTab="420" wx:tlc="none" wx:cTlc="8"/>
+                </w:r>
+                <w:r wsp:rsidR="009C0A81">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>$!tourMessage[4]</w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="0053721A">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>至</w:t>
+                </w:r>
+                <w:r wsp:rsidR="009C0A81">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>$!tourMessage[5]</w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="0053721A">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>贵社尚欠我社团款元，明细如下</w:t>
+                </w:r>
+            </w:p>
+            <w:tbl>
+                <w:tblPr>
+                    <w:tblStyle w:val="a3"/>
+                    <w:tblW w:w="0" w:type="auto"/>
+                    <w:tblLook w:val="01E0"/>
+                </w:tblPr>
+                <w:tblGrid>
+                    <w:gridCol w:w="1566"/>
+                    <w:gridCol w:w="3008"/>
+                    <w:gridCol w:w="1611"/>
+                    <w:gridCol w:w="1176"/>
+                    <w:gridCol w:w="1896"/>
+                    <w:gridCol w:w="1431"/>
+                </w:tblGrid>
+                <w:tr wsp:rsidR="00773A7E" wsp:rsidTr="00AA3AD7">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1420" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>订单号</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3008" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>线路名称</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>出团日期</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1080" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>预订人</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="900" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>人数</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="854" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="00AA3AD7" wsp:rsidP="00AA3AD7">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>金额</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+				#set($receivableCount=0)
+				#set($receivedCount=0)
+				#set($oweCount=0)
+				#foreach($!fin in $financelist)
+                <w:tr wsp:rsidR="00773A7E" wsp:rsidTr="00AA3AD7">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1420" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!fin.orderNumber</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="3008" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!fin.lTitle</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1260" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!{dateViewTools.format($!fin.goGroupTime,'yyyy-MM-dd')}</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1080" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!fin.orName</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="900" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!fin.orderPeopleCount</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="854" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="006516E6" wsp:rsidRPr="0053721A" wsp:rsidRDefault="00773A7E" wsp:rsidP="00773A7E">
+                            <w:pPr>
+                                <w:jc w:val="center"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+								#set($owe=$!fin.fReceivable - $!fin.fReceipt)
+                                <w:t>$owe</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+				#set($receivableCount=$receivableCount + $!fin.fReceivable)
+				#set($receivedCount=$receivedCount + $!fin.fReceipt)
+				#set($oweCount=$oweCount + $owe)
+				#end
+            </w:tbl>
+            <w:p wsp:rsidR="006516E6" wsp:rsidRDefault="006516E6" wsp:rsidP="006516E6">
+                <w:pPr>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+            </w:p>
+            <w:p wsp:rsidR="0053721A" wsp:rsidRDefault="0053721A" wsp:rsidP="0053721A">
+                <w:pPr>
+                    <w:jc w:val="center"/>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>总应收款：</w:t>
+                </w:r>
+                <w:r wsp:rsidRPr="0027261D">
+                    <w:rPr>
+						<w:color w:val="FF0000"/>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="20"/>
+                        <w:sz-cs w:val="20"/>
+                    </w:rPr>
+                    <w:t>$receivableCount</w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t></w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>总已收款：</w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+						<w:color w:val="FF0000"/>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="20"/>
+                        <w:sz-cs w:val="20"/>
+                    </w:rPr>
+                    <w:t>$receivedCount</w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:b/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>总未收款：</w:t>
+                </w:r>
+                <w:r>
+                    <w:rPr>
+						<w:color w:val="FF0000"/>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:b/>
+                        <w:sz w:val="20"/>
+                        <w:sz-cs w:val="20"/>
+                    </w:rPr>
+                    <w:t>$oweCount</w:t>
+                </w:r>
+            </w:p>
+            <w:tbl>
+                <w:tblPr>
+                    <w:tblStyle w:val="a3"/>
+                    <w:tblW w:w="0" w:type="auto"/>
+                    <w:tblLook w:val="01E0"/>
+                </w:tblPr>
+                <w:tblGrid>
+                    <w:gridCol w:w="1368"/>
+                    <w:gridCol w:w="7154"/>
+                </w:tblGrid>
+                <w:tr wsp:rsidR="0053721A" wsp:rsidTr="0053721A">
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="1368" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="0053721A" wsp:rsidRDefault="0053721A" wsp:rsidP="0053721A">
+                            <w:pPr>
+                                <w:jc w:val="right"/>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <wx:font wx:val="宋体"/>
+                                    <w:b/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>公司账号：</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                    <w:tc>
+                        <w:tcPr>
+                            <w:tcW w:w="7154" w:type="dxa"/>
+                        </w:tcPr>
+                        <w:p wsp:rsidR="0053721A" wsp:rsidRPr="006D5C8A" wsp:rsidRDefault="006D5C8A" wsp:rsidP="0053721A">
+                            <w:pPr>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                            </w:pPr>
+                            <w:r>
+                                <w:rPr>
+                                    <w:rFonts w:hint="fareast"/>
+                                    <w:sz w:val="18"/>
+                                    <w:sz-cs w:val="18"/>
+                                </w:rPr>
+                                <w:t>$!tourMessage[6]</w:t>
+                            </w:r>
+                        </w:p>
+                    </w:tc>
+                </w:tr>
+            </w:tbl>
+            <w:p wsp:rsidR="0053721A" wsp:rsidRPr="0053721A" wsp:rsidRDefault="0053721A" wsp:rsidP="0053721A">
+                <w:pPr>
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                </w:pPr>
+                <w:r wsp:rsidRPr="0053721A">
+                    <w:rPr>
+                        <w:rFonts w:hint="fareast"/>
+                        <wx:font wx:val="宋体"/>
+                        <w:sz w:val="18"/>
+                        <w:sz-cs w:val="18"/>
+                    </w:rPr>
+                    <w:t>请核对。如核对无误，请将上列款项汇入以下账号。如有疑问，请致电43434</w:t>
+                </w:r>
+            </w:p>
+            <w:sectPr wsp:rsidR="0053721A" wsp:rsidRPr="0053721A">
+                <w:pgSz w:w="11906" w:h="16838"/>
+                <w:pgMar w:top="1440" w:right="1800" w:bottom="1440" w:left="1800" w:header="851" w:footer="992" w:gutter="0"/>
+                <w:cols w:space="425"/>
+                <w:docGrid w:type="lines" w:line-pitch="312"/>
+            </w:sectPr>
+        </wx:sect>
+    </w:body>
+</w:wordDocument>

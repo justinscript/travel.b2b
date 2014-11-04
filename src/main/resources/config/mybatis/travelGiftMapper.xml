@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelGiftMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelGiftDO" id="baseResult">
+		<id 	column="G_ID" 			property="gId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP"/>
+		<result column="G_TITLE" 		property="gTitle" 		jdbcType="VARCHAR"/>
+		<result column="GC_ID" 			property="gcId" 		jdbcType="INTEGER"/>
+		<result column="G_REDEMPTION" 	property="gRedemption" 	jdbcType="INTEGER"/>
+		<result column="G_PRICE" 		property="gPrice" 		jdbcType="FLOAT"/>
+		<result column="G_CONTENT" 		property="gContent" 	jdbcType="VARCHAR"/>
+		<result column="G_PIC" 			property="gPic" 		jdbcType="VARCHAR"/>
+		<result column="G_STATE" 		property="gState" 		jdbcType="INTEGER"/>	
+		<result column="G_gcName" 		property="gcName" 	jdbcType="VARCHAR"/>	
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		G_ID,GMT_CREATE,GMT_MODIFIED,G_TITLE,GC_ID,G_REDEMPTION,G_PRICE,G_CONTENT,G_PIC,G_STATE
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY G_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gId != null">
+				AND G_ID=#{gId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="gTitle !=  null">
+				AND G_TITLE=#{gTitle}
+			</if>
+			<if test="gcId !=  null">
+				AND a.GC_ID=#{gcId}
+			</if>
+			<if test="gRedemption !=  null">
+				AND G_REDEMPTION=#{gRedemption}
+			</if>
+			<if test="gPrice !=  null">
+				AND G_PRICE=#{gPrice}
+			</if>
+			<if test="gContent !=  null">
+				AND G_CONTENT=#{gContent}
+			</if>
+			<if test="gPic !=  null">
+				AND G_PIC=#{gPic}
+			</if>
+			<if test="gState !=  null">
+				AND G_STATE=#{gState}
+				<if test="gState !=  null">
+					AND G_STATE=#{gState}
+				</if>
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="gTitle !=  null">
+				G_TITLE=#{gTitle},
+			</if>
+			<if test="gcId !=  null">
+				GC_ID=#{gcId},
+			</if>
+			<if test="gRedemption !=  null">
+				G_REDEMPTION=#{gRedemption},
+			</if>
+			<if test="gPrice !=  null">
+				G_PRICE=#{gPrice},
+			</if>
+			<if test="gContent !=  null">
+				G_CONTENT=#{gContent},
+			</if>
+			<if test="gPic !=  null">
+				G_PIC=#{gPic},
+			</if>
+			<if test="gState !=  null">
+				G_STATE=#{gState}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_GIFT
+	</select>
+	
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelGiftQuery">
+		select <include refid="column"/>
+		from TRAVEL_GIFT
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelGiftQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select a.*,b.gc_name as g_gcName from travel_gift a left join travel_giftclass b on a.gc_id = b.gc_id
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select a.*,b.gc_name as g_gcName from travel_gift a left join travel_giftclass b on a.gc_id = b.gc_id WHERE a.G_ID=#{gId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelGiftDO">
+		<selectKey resultType="java.lang.Long" keyProperty="gId" order="BEFORE">
+			SELECT TRAVEL_GIFT_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_GIFT(<include refid="column"/>) values (
+				#{gId},SYSTIMESTAMP,SYSTIMESTAMP,#{gTitle,jdbcType=VARCHAR},
+				#{gcId,jdbcType=INTEGER},#{gRedemption,jdbcType=INTEGER},
+				#{gPrice,jdbcType=FLOAT},#{gContent,jdbcType=VARCHAR},
+				#{gPic,jdbcType=VARCHAR},#{gState,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelGiftDO">
+		update TRAVEL_GIFT <include refid="update_set_clause"/> where G_ID=#{gId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_GIFT where G_ID=#{gId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelGiftQuery">
+		select count(1) from travel_gift a left join travel_giftclass b on a.gc_id = b.gc_id <include refid="query_where_clause"/>
+	</select>
+</mapper>

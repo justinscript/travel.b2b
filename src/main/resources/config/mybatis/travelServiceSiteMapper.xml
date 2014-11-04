@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelServiceSiteMapper">
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelServiceSiteDO" id="baseResult">
+		<id 		column="SZ_ID" 			property="szId" 			jdbcType="INTEGER" />
+		<result 	column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP" />
+		<result 	column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP" />
+		<result 	column="S_ID" 			property="sId" 				jdbcType="INTEGER"/>
+		<result 	column="Z_ID" 			property="zId" 				jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+			SZ_ID,GMT_CREATE,GMT_MODIFIED,S_ID,Z_ID
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY SZ_ID DESC
+	</sql>
+	
+	<!-- 条件查询 -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="szId != null">
+				and sz_Id=#{szId}
+			</if>
+			<if test="sId != null">
+				and S_ID=#{sId}
+			</if>
+			<if test="zId != null">
+				and z_Id=#{zId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+			<if test="szId != null">
+				sz_Id=#{szId}
+			</if>
+			<if test="gmtCreate != null">
+				,gmt_Create=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				,gmt_Modified=#{gmtModified}
+			</if>
+			<if test="sId != null">
+				,S_ID=#{sId}
+			</if>
+			<if test="zId != null">
+				,z_Id=#{zId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from Travel_ServiceSite
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelServiceSiteQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from Travel_ServiceSite
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from Travel_ServiceSite WHERE Sz_ID=#{szId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 根据客服编号查询 -->
+	<select id="getBySId" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from Travel_ServiceSite WHERE s_ID=#{sId,jdbcType=INTEGER}
+	</select>
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelServiceSiteDO">
+		<selectKey resultType="java.lang.Long" keyProperty="szId" order="BEFORE">
+			SELECT Travel_ServiceSite_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into Travel_ServiceSite (<include refid="column"/>) values (
+			#{szId},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#{sId,jdbcType=INTEGER},
+			#{zId,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelServiceSiteDO">
+		update Travel_ServiceSite
+		<include refid="update_set_clause"/>
+		where sz_ID=#{sId}
+	</update>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelServiceSiteQuery">
+		select count(1) from Travel_ServiceSite <include refid="query_where_clause"/>
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete Travel_ServiceSite WHERE s_ID = #{sId,jdbcType=INTEGER}
+	</delete>
+</mapper>

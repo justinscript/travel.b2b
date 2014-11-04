@@ -1,0 +1,6 @@
+cId=$!{company.cId}
+name=$!{company.name}
+cLogo=$!{company.cLogo}
+cAddress=$!company.cAddress
+cCorporation=$!company.cCorporation
+cCustomname=$!company.cCustomname

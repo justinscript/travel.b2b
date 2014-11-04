@@ -1,0 +1,19 @@
+<div id="Header">
+    <div id="Menu">
+        <ul id="TopNav">
+            <li class="fr">
+                <b>欢迎您，$!{webUser.getCompanyName()}【$!{webUser.getNick()}】</b> | <a href="/zbmanlogin/loginOut.htm">[退出]</a>
+            </li>
+        </ul>		
+        <a href="/" class="icon logo">左边网</a>
+        <div class="Menu_list">
+        <a href="/zbmanlogin/m/manage.htm"><i class="icon i11"></i>公司管理</a>
+        <a href="/zbmanlogin/line/shortLine.htm"><i class="icon i7"></i>线路管理</a>
+        <a href="/zbmanlogin/order.htm"><i class="icon i8"></i>订单管理</a>
+        <a href="/zbmanlogin/info/news.htm"><i class="icon i12"></i>新闻管理</a>
+        <a href="#"><i class="icon i13"></i>统计分析</a>
+        <a href="/zbmanlogin/site/index.htm"><i class="icon i14"></i>系统管理</a>
+        </div>
+        <span class="icon iTel">400-0378-7777</span>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+ <table class="table table-bordered table-hover table-striped" cellpadding="0" cellspacing="0">
+<tr>
+<th>礼品标题</th>
+<th width="50">数量</th>
+<th width="60">积分</th>
+<th width="80">真实姓名</th>
+<th width="300">联系方式</th>
+<th width="80">状态</th>
+<th width="80">操作</th>
+</tr>
+#foreach($!gOrder in $giftOrderList)
+<tr>
+<td>
+<a href="#">$!gOrder.gTitle</a>
+</td>
+<td>$!gOrder.goCount</td>
+<td class="red">$!gOrder.goIntegralCount</td>
+<td>$!gOrder.mName</td>
+<td>公司名称： $!gOrder.cName<br/>
+兑换账户： $!gOrder.mName ( $!gOrder.mUserName )<br/>
+联系电话： $!gOrder.goMobile <br/>
+手机号码： $!gOrder.goTel
+</td>
+<td class="blue">
+#if($!gOrder.goState == 0)
+	确认订单
+#elseif($!gOrder.goState == 1)
+	已发货
+#elseif($!gOrder.goState == 2)
+	已收货
+#else
+	订单完成
+#end
+</td>
+<td>
+<div class="w60" style="line-height: 26px;">
+<a href="javascript:Page_Add( $!gOrder.goId,'/zbmanlogin/cart_view.htm','订单详细')" class="btn btn-primary btn-mini" target="_blank"><i class="icon-eye-open icon-white"></i> 查看</a>
+</div>
+</td>
+</tr>
+
+#end
+
+</table>
+
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

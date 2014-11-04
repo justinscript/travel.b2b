@@ -1,0 +1,96 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>法意瑞11日迪斯尼乐游亲子之旅 线上预定，送500积分/人 - 旅游资讯 - 左边旅游同业平台</title>
+       <link href="/static/css/newindex/main.css" rel="stylesheet" />
+    <link href="/static/css/newindex/style.css" rel="stylesheet" />
+    <link href="/static/css/newindex/zuobian.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+	<script src="/static/js/layer/layer.min.js"></script>	
+    <script src="/static/js/jquery.cookie.js" language="javascript" type="text/javascript" ></script>
+    <script src="/static/js/home.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(function () {
+            GetMenu("旅游资讯");
+        })
+    </script>
+</head>
+<body>
+  #parse("widget/common/index_top.vm")
+   
+    <div class="main">
+        <div class="mb">
+            <div style="width: 310px; float: left;">
+                 <div class="box01">
+        <div class="tit"><span>新闻资讯</span></div>
+        <div class="navlist">
+			<ul>
+             <li><a href="/News/index_2.shtml" >
+                            站点告示</a></li>
+                        <li><a href="/new/index_1.htm" class="on" >
+                            旅游资讯</a></li>
+            </ul>
+        </div>
+    </div>
+                
+<div class="box01">
+                    <div class="tit">
+                        <span>常用工具</span></div>
+                       <div id="ToolList">
+                <a href="http://jipiao.kuxun.cn/shike.html" target="_blank">
+                    <img src="/static/img/newindex/tool-1.jpg" alt="" /><br />
+                    航空查询 </a><a href="http://www.hao123.com/tianqi" target="_blank">
+                        <img src="/static/img/newindex/tool-2.jpg" alt="" /><br />
+                        天气预报 </a><a href="http://www.trip8080.com/" target="_blank">
+                            <img src="/static/img/newindex/tool-3.jpg" alt="" /><br />
+                            客运查询 </a><a href="http://map.baidu.com/" target="_blank">
+                                <img src="/static/img/newindex/tool-4.jpg" alt="" /><br />
+                                地图导航 </a><a href="http://lvyou.hao123.com/" target="_blank">
+                                    <img src="/static/img/newindex/tool-5.jpg" alt="" /><br />
+                                    旅游常识 </a><a href="http://lvyou.hao123.com/huoche" target="_blank">
+                                        <img src="/static/img/newindex/tool-6.jpg" alt="" /><br />
+                                        火车时刻表 </a><a href="http://lvyou.hao123.com/" target="_blank">
+                                            <img src="/static/img/newindex/tool-7.jpg" alt="" /><br />
+                                            旅游攻略 </a><a href="http://d.lotour.com/" target="_blank">
+                                                <img src="/static/img/newindex/tool-8.jpg" alt="" /><br />
+                                                景点指南 </a>
+            </div>
+                </div>
+            </div>
+            <div class="line" style="float: right; width: 850px;">
+                <div class="about">
+                    <div class="tit">
+                        <h3>
+                           系统告示</h3>
+                        <span class="fr">当前位置: <a href="/">首页</a> > 新闻资讯</span></div>
+
+                        <div class="acontent">
+                        <div class="m_contxt detail">
+                                <div class="News_Title">
+                                    <h1>
+                                        $!news.nTitle</h1>
+                                    <span>发布时间：${dateViewTools.formatFullDate($!news.gmtCreate)}</span></div>
+                                <p>
+	<img src="$!news.nPic" alt="" />
+</p>
+<p>
+	<br />
+</p>
+<p style="text-align:justify;" class="MsoNormal">
+	$!news.nContent
+</p>
+<p>
+	<br />
+</p>
+                            </div>
+                        </div>
+                   
+                </div>
+            </div>
+        </div>
+  #parse("widget/common/index_footer.vm")      
+  </body>
+</html>

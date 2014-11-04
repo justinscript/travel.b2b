@@ -1,0 +1,186 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+    <title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+    <link href="/static/css/newindex/main.css" rel="stylesheet" />
+    <link href="/static/css/newindex/index.css" rel="stylesheet" />
+    <link href="/static/css/newindex/style.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+	<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+    <script src="/static/js/layer/layer.min.js"></script>	
+    <script src="/static/js/jquery.cookie.js" language="javascript" type="text/javascript" ></script>
+    <script src="/static/js/home.js" type="text/javascript"></script>
+        <script type="text/javascript">
+        $(function () {
+            GetMenu("首 页");
+        })
+    </script>
+</head>
+<body>
+   #parse("widget/common/index_top.vm")
+    <!--幻灯片-->
+    <div class="banner">
+        <div class="mb2">
+            <div id="LoginWrap" class="wrap">
+                <form class="userloginform" method="post">
+                <input type="hidden" value="0" name="log" id="log" />
+                <input type="hidden" value="login" name="act" />
+				#if($!hasLogin)
+				<!--登录后-->
+				<ul class="userinfo">
+					<li class="pho"><img src="/static/img/newindex/usr.jpg" alt=""></li>
+                    <li class="info"><b>$!{webUser.getNick()}</b>您好！<br>$!{webUser.getCompanyName()}<br>上次登录：$!{webUser.getLastLogin()}</li>
+                    <li id="user_info">个人积分：<b>$!iBalance</b>分<br>预留订单：<b>$!reserveOrderCount</b> 条 | 被修改订单：<b>$!modifyOrderCount</b> 条 </li>
+                    <li class="btns"><a href="/tour/line/longLine.htm" class="enter">进入系统</a><a href="/loginOut.htm" class="user_out esc">退出</a></li>
+                </ul>
+				#else
+				<!--登录前 -->
+				<ul class="login">
+                    <li>
+                        <h2>登录左边</h2>
+                    </li>
+                    <li class="user"><span>账户名</span>
+                        <input type="text" value="" name="account" id="account" datatype="*" nullmsg="用户名不能为空">
+                    </li>
+                    <li class="pwd"><span>密码</span>
+                        <input type="password" value="" name="password" id="password" datatype="*" nullmsg="密码不能为空">
+                    </li>
+                    <li>
+                        <label class="fl"><input name="remember" type="checkbox" value="1" id="remember">记住密码</label>
+                        <span class="fr"><a href="#">忘记登录密码？</a></span> 
+					</li>
+                    <li><input type="submit" value="登 录" class="btn" /></li>
+                    <li><a href="/register.htm" class="reg">免费注册</a></li>
+                </ul>
+				#end
+                </form>
+            </div>
+        </div>
+        <div id="IndexMaxShow">
+            <div style="display:none">
+                <a href="http://theme2014.zuobian.com/" target="_blank">
+                	<img src="http://www.zuobian.com/upload/link/20140703/20140703011716.jpg" alt="【法意瑞11日迪斯尼乐游亲子之旅】线上预定，送500积分/人" />
+                </a>
+            </div>
+            <div style="display:none">
+                <a href="/detail/81.htm" target="_blank">
+					<img src="http://www.zuobian.com/upload/link/20140523/20140523033715.jpg" alt="【法意瑞11日迪斯尼乐游亲子之旅】线上预定，送500积分/人" />
+				</a>
+            </div>
+            
+            <div style="display:none">
+                <a href="/about/2.htm" target="_blank">
+					<img src="http://www.zuobian.com/upload/link/20140516/20140516094325.jpg" alt="新旅程，从左边开始" />
+				</a>
+            </div>
+        </div>
+    </div>
+    <!--主体内容-->
+    <ul id="Main" class="wrap">
+        <li id="LeftSide" class="fl">
+			
+			#set($chugangCacheMap=$!{siteCache.getOnlyChugangMap($!{webUser.getSiteId()})})
+            <!--出港地-->
+            <h2 class="tit">出港地</h2>
+            <ul id="AddressList">
+				#foreach($!chugangKey in ${chugangCacheMap.keySet()})
+					<li #if($!{webUser.getChugangId()} && $!{webUser.getChugangId()}!="" && $!{webUser.getChugangId()} != "0" && $!chugangKey == $!{webUser.getChugangId()}) class="sel" #end><a href="javascript:void(0)" onclick="SetCG('$!chugangKey')">$!{chugangCacheMap.get($chugangKey).cName}</a></li>
+				#end
+            </ul>
+            <div id="ConWrap">
+                <ul id="SideNav">
+                    <li><a href="javascript:void(0)" class="sel">国内长线</a></li>
+                    <li><a href="javascript:void(0)">周边短线</a></li>
+                    <li><a href="javascript:void(0)">国际线路</a></li>
+                </ul>
+                <div id="ConList">
+					#set($columnMap=$!{chugang.getColumnMap()})
+                    <div style="display: block;">
+						#set($longLineList=$!{columnMap.get(1)})
+						#foreach($!column in $longLineList) 
+                        <a href="/company/column/$!{column.zId}.htm"><img src="$!{column.zPic}" alt="" />$!{column.zName}</a>
+						#end
+                    </div>
+                    <div>
+						#set($shortLineList=$!{columnMap.get(0)})
+						#foreach($!column in $shortLineList) 
+                        <a href="/company/column/$!{column.zId}.htm"><img src="$!{column.zPic}" alt="" />$!{column.zName}</a>
+						#end
+                    </div>
+                    <div>
+						#set($internationalLineList=$!{columnMap.get(2)})
+						#foreach($!column in $internationalLineList) 
+                        <a href="/company/column/$!{column.zId}.htm"><img src="$!{column.zPic}" alt="" />$!{column.zName}</a>
+						#end
+                    </div>
+                </div>
+            </div>
+			
+			
+            <!--推荐商家-->
+            <h2 class="tit">推荐商家</h2>
+            <ul id="RecmdList">
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140110/20140110094853.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140527/20140527095617.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523045939.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523045739.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523045037.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523044932.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523044853.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523044616.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523044533.jpg" alt="" width="160" /></a>
+				</li>
+                <li>
+					<a href="/company_view.htm"><img src="http://www.zuobian.com/upload/link/20140523/20140523044441.jpg" alt="" width="160" /></a>
+				</li>
+            </ul>
+        </li>
+        <li id="RightSide" class="fr">
+            <h2 class="tit">左边快报<a href="/news.htm">更多</a></h2>
+            <div id="ZBPress">
+                <ul>
+                	#foreach($news in $!newsList)
+						<li><a href="/news_view.htm?id=$!{news.nId}">$!news.nTitle</a></li>
+					#end
+                </ul>
+            </div>
+            <div id="AdList">
+                <a href="/detail/44.htm" target="_blank"><img src="http://www.zuobian.com/upload/link/20140304/20140304094305.jpg" alt="" /></a>
+                <a href="/register.htm" target="_blank"><img src="http://www.zuobian.com/upload/link/20140703/20140703012647.jpg" alt="" /></a>
+            </div>
+            <h2 class="tit">常用工具</h2>
+            <div id="ToolList">
+            	<a href="http://jipiao.kuxun.cn/shike.html" target="_blank"><img src="/static/img/newindex/tool-1.jpg" alt="" /><br />航空查询</a>
+				<a href="http://www.hao123.com/tianqi" target="_blank"><img src="/static/img/newindex/tool-2.jpg" alt="" /><br />天气预报</a>
+				<a href="http://www.trip8080.com/" target="_blank"><img src="/static/img/newindex/tool-3.jpg" alt="" /><br />客运查询</a>
+				<a href="http://map.baidu.com/" target="_blank"><img src="/static/img/newindex/tool-4.jpg" alt="" /><br />地图导航</a>
+				<a href="http://lvyou.hao123.com/" target="_blank"><img src="/static/img/newindex/tool-5.jpg" alt="" /><br />旅游常识</a>
+				<a href="http://lvyou.hao123.com/huoche" target="_blank"><img src="/static/img/newindex/tool-6.jpg" alt="" /><br />火车时刻表</a>
+				<a href="http://lvyou.hao123.com/" target="_blank"><img src="/static/img/newindex/tool-7.jpg" alt="" /><br />旅游攻略</a>
+				<a href="http://d.lotour.com/" target="_blank"><img src="/static/img/newindex/tool-8.jpg" alt="" /><br />景点指南 </a>
+            </div>
+        </li>
+    </ul>
+ #parse("widget/common/index_footer.vm")
+</body>
+</html>

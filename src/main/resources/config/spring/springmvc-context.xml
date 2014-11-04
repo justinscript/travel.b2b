@@ -1,0 +1,220 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://www.springframework.org/schema/beans" 
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p" 
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xmlns:jdbc="http://www.springframework.org/schema/jdbc" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc" 
+	xmlns:dwr="http://www.directwebremoting.org/schema/spring-dwr"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans  
+            http://www.springframework.org/schema/beans/spring-beans-4.0.xsd 
+            http://www.springframework.org/schema/aop 
+			http://www.springframework.org/schema/aop/spring-aop-4.0.xsd 
+			http://www.springframework.org/schema/util 
+			http://www.springframework.org/schema/util/spring-util-2.5.xsd 
+            http://www.springframework.org/schema/context  
+            http://www.springframework.org/schema/context/spring-context-4.0.xsd  
+            http://www.springframework.org/schema/tx  
+            http://www.springframework.org/schema/tx/spring-tx-4.0.xsd  
+            http://www.springframework.org/schema/jdbc  
+            http://www.springframework.org/schema/jdbc/spring-jdbc-4.0.xsd 
+            http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
+		
+	<context:component-scan base-package="com.zb.app.web.controller" >
+		<context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+	</context:component-scan>
+	
+	<bean id="zuobianWebUserBuilderValve" 			class="com.zb.app.web.webuser.ZuobianWebUserBuilderValve">
+		<property name="checkUrl" 			value="true" />
+		<property name="noPermissionUrl" 	value="/nopermission.htm" />
+		<property name="loginUrl" 			value="/account/login.htm" />
+		<property name="noCheckUrlLikeList">
+		    <list>
+	    		<value>/push/*.htm</value>
+	    		<value>/push/opt/*.htm</value>
+	    		<value>/line/*.htm</value>
+	    		<value>/printdoc/*.htm</value>
+	    		<value>/help/*.htm</value>
+	    		<value>/about/*.htm</value>
+	    		<value>/detail/*.htm</value>
+	    		<value>/company_*/*.htm</value>
+	    		<value>/company/column/*.htm</value>
+	    		<value>/companyDetail/*.htm</value>
+	    		<value>/search/*.htm</value>
+		    </list>
+		</property>
+		<property name="noCheckUrlList">
+		   <list>
+		   		<value>/index2.htm</value>
+		   	    <value>/register2.htm</value>
+		   	    <value>/about2.htm</value>
+		   	    <value>/line2.htm</value>
+		   	    <value>/userlogin.htm</value>
+		   	    <value>/news2.htm</value>
+		   
+		   		<value>/index.htm</value>
+		   		<value>/tour/index.htm</value>
+		   		<value>/doLogin.htm</value>
+		   		<value>/loginOut.htm</value>
+		   		<value>/account/login.htm</value>
+	    		<value>/account/doLogin.htm</value>
+	    		<value>/account/loginOut.htm</value>
+	    		<value>/zbmanlogin/login.htm</value>
+	    		<value>/zbmanlogin/doLogin.htm</value>
+	    		<value>/zbmanlogin/loginOut.htm</value>
+	    		<value>/nopermission.htm</value>
+		   		<value>/register.htm</value>
+		   		<value>/doRegister.htm</value>
+		   		<value>/userNameVerify.htm</value>
+		   		<value>/nameVerify.htm</value>
+		   		<value>/nopermissionAjax.htm</value>
+		   		
+		   		<value>/ajaxUpload.htm</value>
+		   		
+		   		<value>/shop.htm</value>
+		   		<value>/shop_view.htm</value>
+		   		<value>/shop_cart.htm</value>
+		   		<value>/addGiftOrder.htm</value>
+		   		
+		   		<value>/modifySite.htm</value>
+		   		<value>/modifyChugang.htm</value>
+		   		<value>/allSite.htm</value>
+		   		<value>/fullSite.htm</value>
+		   		<value>/currentSite.htm</value>
+		   		<value>/line.htm</value>
+	    		<value>/404.htm</value>
+	    		<value>/home.htm</value>
+	    		<value>/comset/show.htm</value>
+	    		<value>/about.htm</value>
+	    		<value>/company.htm</value>
+	    		<value>/news.htm</value>
+	    		<value>/company_view.htm</value>
+	    		<value>/news_view.htm</value>
+		   		<value>/test.htm</value>
+		   		<value>/msg.htm</value>
+		   </list>
+		</property>
+	</bean>
+	<bean id="cookieSaveValue"              			class="com.zb.app.common.pipeline.value.CookieSaveValue"/>
+	
+	<bean id="preHandlePipelineHandlers" 		class="com.zb.app.common.pipeline.PipelineValvesMapper">
+        <constructor-arg value="zuobianWebUserBuilderValve" type="java.lang.String" />
+        <constructor-arg ref="zuobianWebUserBuilderValve"/>
+	</bean>
+	<bean id="afterCompletionPipelineHandlers" 	class="com.zb.app.common.pipeline.PipelineValvesMapper">
+		<constructor-arg value="cookieSaveValue" type="java.lang.String" />
+        <constructor-arg ref="cookieSaveValue"/>
+	</bean>
+	
+	<util:list id="preHandlePipelineValves" list-class="java.util.ArrayList">
+       <ref bean="preHandlePipelineHandlers"/>
+   	</util:list>
+   	<util:list id="afterCompletionPipelineValves" list-class="java.util.ArrayList">
+       <ref bean="afterCompletionPipelineHandlers"/>
+   	</util:list> 
+   	
+   	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" >
+   		<mvc:argument-resolvers>  
+           <bean class="com.zb.app.common.component.FormModelMethodArgumentResolver"/>  
+        </mvc:argument-resolvers>
+   	</mvc:annotation-driven>
+   	
+	<mvc:annotation-driven content-negotiation-manager="contentNegotiationManager" />  
+		<mvc:interceptors>
+		    <bean class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor" />
+		    <mvc:interceptor>
+		        <mvc:mapping path="/**"/>
+		        <bean class="com.zb.app.common.interceptor.PipelineHandlerInterceptor" init-method="init"/>
+		    </mvc:interceptor>
+		    <mvc:interceptor>
+		        <mvc:mapping path="/**"/>
+		        <bean class="com.zb.app.common.interceptor.AuthorityAnnotationInterceptor"/>
+		    </mvc:interceptor>
+			<mvc:interceptor>
+		        <mvc:mapping path="/**"/>
+		        <bean class="com.zb.app.common.interceptor.TokenAnnotationInterceptor"/>
+		    </mvc:interceptor>
+		    <mvc:interceptor>
+		        <mvc:mapping path="/**"/>
+		        <bean class="com.zb.app.common.interceptor.ExportFileAnnotationInterceptor"/>
+		    </mvc:interceptor>
+		</mvc:interceptors>
+		<bean id="contentNegotiationManager" class="org.springframework.web.accept.ContentNegotiationManagerFactoryBean">   
+		    <property name="favorPathExtension" value="false" />  
+		    <property name="favorParameter" value="false" />   
+		    <property name="ignoreAcceptHeader" value="false" />   
+		    <property name="mediaTypes" >   
+		        <value>  
+		            atom=application/atom+xml  
+		            html=text/html  
+		            json=application/json  
+		            *=*/*  
+		        </value>   
+		    </property>  
+		    <property name="defaultContentType" value="text/html"/>
+		</bean>
+	 <mvc:annotation-driven/>
+	 
+	 <bean name="velocityConfig"		class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+		<property name="resourceLoaderPath" value="/WEB-INF/template/"/> 
+		<property name="velocityProperties">
+			<props>
+				<prop key="input.encoding">UTF-8</prop>
+				<prop key="output.encoding">UTF-8</prop>
+				<prop key="resource.loader">file</prop>
+				<prop key="directive.set.null.allowed">true</prop>
+				<prop key="directive.if.tostring.nullcheck">false</prop>
+				<prop key="file.resource.loader.cache">false</prop>
+				
+				<prop key="directive.set.null.allowed">true</prop>
+				<prop key="directive.if.tostring.nullcheck">false</prop>
+				<prop key="velocimacro.library">common/securitymacro.vm</prop>
+				<prop key="resource.manager.class">com.zb.app.common.core.VelocityResourceManagerImpl</prop>
+				
+				<prop key="runtime.log.logsystem.class">org.apache.velocity.runtime.log.AvalonLogChute,org.apache.velocity.runtime.log.Log4JLogChute,org.apache.velocity.runtime.log.CommonsLogLogChute,org.apache.velocity.runtime.log.ServletLogChute,org.apache.velocity.runtime.log.JdkLogChute</prop>  
+                <prop key="runtime.log">velocity.log</prop>
+                <prop key="runtime.log.error.stacktrace">true</prop>  
+                <prop key="runtime.log.warn.stacktrace">true</prop>  
+                <prop key="runtime.log.info.stacktrace">false</prop>  
+                <prop key="runtime.log.invalid.reference">true</prop>
+			</props>
+		</property>
+	</bean>
+	
+	<bean id="viewResolver" 		class="com.zb.app.common.velocity.CustomVelocityLayoutViewResolver">
+		<property name="contentType" 			value="text/html;charset=UTF-8" />
+	    <property name="cache" 					value="false" /> <!-- 开发 不设置缓存 -->
+		<property name="suffix" 				value=".vm" />
+		<property name="screenContentKey" 		value="body" />
+	</bean>
+	
+	<bean id="dateViewTools" 	    			class="com.zb.app.common.util.DateViewTools"/>
+	<bean id="webUser" 	    					class="com.zb.app.web.tools.WebUserTools"/>
+	<bean id="systemInfo" 						class="com.zb.app.web.tools.SystemInfos"/>
+	<bean id="currencyFormattor" 				class="com.zb.app.common.util.CurrencyFormatter"/>
+	<bean id="siteCache" 						class="com.zb.app.web.tools.SiteCacheTools"/>
+	<bean id="format"							class="com.zb.app.common.util.StringFormatter"/>
+	<bean id="enumViewTools"					class="com.zb.app.web.tools.EnumViewTools"/>
+	<bean id="articleCacheTools"				class="com.zb.app.web.tools.ArticleCacheTools"/>
+	<bean id="indexHeaderTools"					class="com.zb.app.web.tools.IndexHeaderTools"/>
+	
+	<bean class="com.zb.app.common.velocity.ViewToolsFactory">
+		<property name="viewTools">
+			<map>
+				<entry key="dateViewTools"  		value-ref="dateViewTools" />
+				<entry key="webUser"  				value-ref="webUser" />
+				<entry key="currencyFormattor"  	value-ref="currencyFormattor" />
+				<entry key="systemInfo"  			value-ref="systemInfo" />
+				<entry key="siteCache"  			value-ref="siteCache" />
+				<entry key="format"  				value-ref="format" />
+				<entry key="enumViewTools"  		value-ref="enumViewTools" />
+				<entry key="articleCacheTools"  	value-ref="articleCacheTools" />
+				<entry key="indexHeaderTools"  		value-ref="indexHeaderTools" />
+			</map>
+		</property>
+	</bean>
+</beans>

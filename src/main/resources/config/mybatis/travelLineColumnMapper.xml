@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelLineColumnMapper">
+	
+	<!-- 结果集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelLineColumnDO"	id="baseResult">
+		<id 	column="LC_ID" 			property="lcId" 		jdbcType="INTEGER" />	<!-- 自动编号 -->
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />	<!-- 创建时间 -->
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP" />	<!-- 修改时间 -->
+		<result column="Z_ID" 			property="zId" 			jdbcType="INTEGER" />	<!-- 专线ID -->
+		<result column="C_ID" 			property="cId" 			jdbcType="INTEGER" />	<!-- 公司ID -->
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		 LC_ID,GMT_CREATE,GMT_MODIFIED,Z_ID,C_ID
+	</sql>
+	
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelLineColumnQuery">
+   		select  <include refid="column" /> 
+   		from TRAVEL_LINECOLUMN where 1=1
+   		<if test="zId != null">
+	  		and Z_ID = #{zId,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="cId != null">
+	  		and C_ID = #{cId,jdbcType=INTEGER}
+	  	</if>
+	  	ORDER BY GMT_CREATE DESC
+  </select>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_LINECOLUMN
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Long" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_LINECOLUMN where LC_ID=#{lcId,jdbcType=INTEGER}
+	</select>
+	
+	<select id="getByCid" parameterType="java.lang.Long" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_LINECOLUMN where C_ID=#{cId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelLineColumnDO">
+		<selectKey resultType="java.lang.Long" keyProperty="lcId" order="BEFORE">
+			SELECT TRAVEL_LINECOLUMN_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_LINECOLUMN(<include refid="column"/>) values (#{lcId},SYSTIMESTAMP,SYSTIMESTAMP,#{zId,jdbcType=INTEGER},#{cId,jdbcType=INTEGER})
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelLineColumnDO">
+		update TRAVEL_LINECOLUMN set GMT_MODIFIED=SYSTIMESTAMP,
+		<trim suffixOverrides=",">
+			<if test="zId != null">
+				Z_ID = #{zId},
+			</if>
+			<if test="cId != null">
+				C_ID = #{cId}
+			</if>
+		</trim>
+		where LC_ID=#{lcId,jdbcType=INTEGER}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_LINECOLUMN where LC_ID=#{lcId,jdbcType=INTEGER}
+	</delete>
+</mapper>

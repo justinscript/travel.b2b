@@ -1,0 +1,193 @@
+﻿@charset "utf-8";
+#Main{margin:20px auto;overflow:hidden;_zoom:1;}
+
+/*Login*/
+
+.banner{position:relative;z-index:1;}
+.mb2{margin:0 auto;width:1180px;position:relative;z-index:99999;}
+
+#LoginWrap{height:400px;position:absolute;top:0px;right:0;margin-bottom:-400px;z-index:99999;width:330px;}
+
+#LoginWrap .login,
+#LoginWrap .userinfo{
+    position:absolute;right:0;top:0;padding:35px;color:#ccc;
+    width:240px;height:330px;background:url(/static/img/newindex/login-bg.png);
+}
+#LoginWrap .login li{height:40px;margin:10px 0 0;}
+
+#LoginWrap .login li.user span,
+#LoginWrap .login li.pwd span{
+    float:left;display:block;width:40px;height:0;padding:40px 0 0;overflow:hidden;
+    background:url(/static/img/newindex/icons.png) no-repeat -40px 0;
+}
+#LoginWrap .login li.pwd span{
+    background-position:-80px 0;
+}
+
+#LoginWrap .login li.user input,
+#LoginWrap .login li.pwd input{
+    width:180px;height:40px;float:left;line-height:40px\9;font-size:14px;
+    border:0;padding:0 10px;margin:0;outline:none;color:#666;
+}
+
+#LoginWrap .btn{
+    width:100%;height:40px;border:none;margin:0;padding:0;cursor:pointer;
+    background:#f70;color:#fff;font-size:14px;
+}
+#LoginWrap .btn:hover {background:#f80;}
+
+#LoginWrap a{
+    color:#eee;
+}
+#LoginWrap a:hover{
+    text-decoration:underline;
+}
+#LoginWrap a.reg{
+    color:#f70;
+}
+
+/*user info*/
+#LoginWrap .userinfo{
+    padding:155px 35px 0;height:245px;line-height:22px;
+}
+#LoginWrap .userinfo b{
+    color:#f70;font-weight:normal;
+}
+#LoginWrap .userinfo .pho{
+    position:absolute;left:0;top:0;width:310px;height:155px;
+}
+#LoginWrap .userinfo .info{
+    margin:20px 0;
+}
+#LoginWrap .userinfo .info b{
+    font-size:18px;margin-right:8px;
+}
+#LoginWrap .userinfo .btns{
+    overflow:auto;margin-top:20px;
+}
+#LoginWrap .userinfo .btns a:hover{text-decoration:none;background:#ccc;}
+#LoginWrap .userinfo a.enter,
+#LoginWrap .userinfo a.esc{
+    float:left;display:block;width:50%;height:40px;line-height:40px;
+    text-align:center;background:#ddd;color:#222;font-size:14px;
+}
+#LoginWrap .userinfo a.enter{
+    background:#f70;color:#fff;
+}
+#LoginWrap .userinfo a.enter:hover {
+    background:#f60;
+}
+
+
+/*LeftSide*/
+#LeftSide{width:850px;}
+
+/**/
+#AddressList{
+    position:relative;height:32px;
+}
+#AddressList li{
+    float:left;display:block;height:32px;line-height:32px;padding:0 10px;
+}
+#AddressList li.sel{
+    color:#f60;border:3px solid #fff;border-top-color:#f60;margin-top:-3px;
+}
+#AddressList li.sel a{color:#f60;font-weight:bold;}
+
+#AddressList li.more .icon-arrow3{
+    float:right;margin:14px 0 0 5px;}
+#AddressList li.more:hover{
+    background:#eee;
+}
+#AddressList li.more:hover .icon-arrow3{
+    background-position:-20px -10px;}
+
+#AddressList li.more .sub{
+    left:0;top:32px;
+}
+
+/**/
+#ConWrap{
+    overflow:auto;margin:10px 0 20px;
+}
+#SideNav{
+    float:left;width:40px;background:#f5f5f5;text-align:center;
+    padding:1px 0;
+}
+#SideNav li a{
+    display:block;font-size:14px;
+    width:15px;height:92px;padding:11px 12px 11px;
+    border-left:2px solid transparent;
+}
+#SideNav li a:hover{
+    background:#eee;
+}
+#SideNav li a.sel{
+    background:#fff;border-color:#f60;color:#f60;
+}
+
+#ConList{
+    float:right;width:808px;overflow:hidden;height:344px; 
+}
+#ConList{
+    float:right;width:808px;min-height:344px;overflow:hidden;
+    background:url(/static/img/newindex/address-bg.jpg) no-repeat right bottom;
+}
+#ConList div{display:none; }
+#ConList a{
+    float:left;width:113px;height:78px;margin:0 1px 10px;background:#f7f7f7;
+    text-align:center;line-height:24px;
+}
+#ConList a:hover{
+    background:#f70;color:#fff;
+}
+#ConList a img{width:100%;height:51px;display:block;}
+
+/**/
+#RecmdList{
+    overflow:auto;padding:5px 0;
+}
+#RecmdList li{
+    float:left;display:block;width:166px;height:75px;
+    margin:5px 1px;background:#eee;
+    border:1px #eee solid
+}
+#RecmdList img
+{
+    width:166px;
+   height:75px
+}
+/*RightSide*/
+#RightSide{width:310px;}
+
+/**/
+#ZBPress{
+    overflow:auto;
+    border:1px solid #eee;border-top:none;
+    line-height:22px;
+}
+#ZBPress ul{
+    float:left;
+    padding:0 10px;margin:10px 0;border-left:1px dotted #eee;
+}
+#ZBPress ul.fir{border:none;}
+#ZBPress a:hover{
+    text-decoration:underline;
+}
+
+/**/
+#AdList {
+    margin-bottom:15px;
+}
+#AdList a{
+    display:block;margin-top:10px;
+}
+#AdList a img{display:block;}
+
+
+
+
+
+
+
+

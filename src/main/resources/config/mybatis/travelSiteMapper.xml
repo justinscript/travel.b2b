@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelSiteMapper">
+
+	<resultMap type="com.zb.app.biz.domain.TravelSiteDO" id="baseResult">
+		<id 	column="S_ID" 			property="sId" 				jdbcType="INTEGER" />	<!-- 自动编号 -->
+		<result column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP" />	<!-- 创建时间 -->
+		<result column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP" />	<!-- 修改时间 -->
+		<result column="S_NAME" 		property="sName" 			jdbcType="VARCHAR" />	<!-- 站点名称 -->
+		<result column="S_PROVINCE" 	property="sProvince" 		jdbcType="VARCHAR" />	<!-- 站点所属省 -->
+		<result column="S_CITY" 		property="sCity" 			jdbcType="VARCHAR" />	<!-- 站点所属市 -->
+		<result column="S_TOID" 		property="sToid" 			jdbcType="INTEGER" />	<!-- 站点上级Id -->
+		<result column="S_SORT" 		property="sSort" 			jdbcType="INTEGER" />	<!-- 排序 -->
+		<result column="S_STATE" 		property="sState" 			jdbcType="INTEGER" />	<!-- 状态 -->
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.CompanyColumnDO" id="companyColumnResult">
+		<result	column="C_ID" 			property="cId" 				jdbcType="INTEGER" />
+		<result column="Z_ID" 			property="zId" 				jdbcType="INTEGER" />	
+		<result column="C_TYPE" 		property="cType" 			jdbcType="INTEGER" />	
+		<result column="C_NAME" 		property="cName" 			jdbcType="VARCHAR" />
+		<result column="C_LOGO" 		property="cLogo" 			jdbcType="VARCHAR" />
+		<result column="C_ABOUTUS" 		property="cAboutus" 		jdbcType="VARCHAR" />
+    	<result column="C_CONTACT" 		property="cContact" 		jdbcType="VARCHAR" />
+    	<result column="C_BANK" 		property="cBank" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelSiteCoreDO" id="siteCoreResult">
+		<!-- 站点信息 -->
+		<result	column="S_ID" 			property="sId" 				jdbcType="INTEGER" />	
+		<result column="S_NAME" 		property="sName" 			jdbcType="VARCHAR" />	
+		<result column="S_PROVINCE" 	property="sProvince" 		jdbcType="VARCHAR" />	
+		<result column="S_CITY" 		property="sCity" 			jdbcType="VARCHAR" />	
+		<result column="S_SORT" 		property="sSort" 			jdbcType="INTEGER" />
+		<!-- 出港点信息 -->
+		<result	column="C_ID" 			property="cId" 				jdbcType="INTEGER" />	
+		<result column="C_NAME" 		property="cName" 			jdbcType="VARCHAR" />	
+		<result column="C_SORT" 		property="cSort" 			jdbcType="INTEGER" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelSiteFullDO" id="siteFullResult">
+		<!-- 站点信息 -->
+		<result	column="S_ID" 			property="sId" 				jdbcType="INTEGER" />	
+		<result column="S_NAME" 		property="sName" 			jdbcType="VARCHAR" />	
+		<result column="S_PROVINCE" 	property="sProvince" 		jdbcType="VARCHAR" />	
+		<result column="S_CITY" 		property="sCity" 			jdbcType="VARCHAR" />	
+		<result column="S_SORT" 		property="sSort" 			jdbcType="INTEGER" />
+		<!-- 出港点信息 -->
+		<result	column="C_ID" 			property="cId" 				jdbcType="INTEGER" />	
+		<result column="C_NAME" 		property="cName" 			jdbcType="VARCHAR" />	
+		<result column="C_SORT" 		property="cSort" 			jdbcType="INTEGER" />
+		<!-- 专线信息 -->
+		<result column="Z_ID" 			property="zId" 				jdbcType="INTEGER" />
+	    <result column="Z_NAME" 		property="zName" 			jdbcType="VARCHAR" />
+	    <result column="Z_CAT" 			property="zCat" 			jdbcType="INTEGER" />
+	    <result column="Z_DESC" 		property="zDesc" 			jdbcType="INTEGER" />
+	    <result column="Z_HOT" 			property="zHot" 			jdbcType="INTEGER" />
+	    <result column="Z_PIC" 			property="zPic" 			jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<sql id="column">
+		S_ID,GMT_CREATE,GMT_MODIFIED,S_NAME,S_PROVINCE,S_CITY,S_TOID,S_SORT,S_STATE 		
+	</sql>
+	
+	<select id="getSiteCore4All" resultMap="siteCoreResult">
+		select ts.S_ID,ts.S_NAME,ts.S_PROVINCE,ts.S_CITY,ts.S_SORT,tcf.S_ID as C_ID,tcf.S_NAME as C_NAME,tcf.S_SORT as C_SORT
+		from TRAVEL_SITE ts 
+		left join TRAVEL_SITE tcf on(tcf.S_TOID = ts.S_ID and tcf.S_STATE = 0)
+		where ts.S_TOID = 0 and ts.S_STATE = 0
+		order by ts.S_PROVINCE,ts.S_CITY DESC
+	</select>
+	
+	<select id="getSiteFullCore4All" resultMap="siteFullResult">
+		select ts.S_ID,ts.S_NAME,ts.S_PROVINCE,ts.S_CITY,ts.S_SORT,
+		tcf.S_ID as C_ID,tcf.S_NAME as C_NAME,tcf.S_SORT as C_SORT,
+		tc.Z_ID,tc.Z_NAME,tc.Z_CAT,tc.Z_DESC,tc.Z_HOT,tc.Z_PIC
+		from  TRAVEL_SITE ts 
+		left  join TRAVEL_SITE tcf on(tcf.S_TOID = ts.S_ID and tcf.S_STATE = 0)
+		left  join Travel_Column tc on(tc.S_ID = ts.S_ID and tc.S_TOID = tcf.S_ID and tc.z_State = 0)
+		where ts.S_TOID = 0 and ts.S_STATE = 0
+		order by ts.S_PROVINCE,ts.S_CITY,tc.Z_DESC DESC
+	</select>
+	
+	<select id="getSiteFullBycId" parameterType="java.lang.Integer" resultMap="siteFullResult">
+		select ts.S_ID,ts.S_NAME,ts.S_PROVINCE,ts.S_CITY,ts.S_SORT,tcf.S_ID as C_ID,
+		tcf.S_NAME as C_NAME,tcf.S_SORT as C_SORT,tc.Z_ID,tc.Z_NAME,tc.Z_CAT,tc.Z_DESC,tc.Z_HOT,tc.Z_PIC
+		from TRAVEL_LINECOLUMN tlc
+		inner join Travel_Column tc on(tlc.Z_ID = tc.Z_ID and tc.z_State = 0)
+		inner join TRAVEL_SITE tcf on(tc.s_ToId = tcf.S_ID and tcf.S_STATE = 0)
+		inner join TRAVEL_SITE ts on(tcf.S_TOID = ts.S_ID and ts.S_STATE = 0)
+		where tlc.C_ID=#{cId,jdbcType=INTEGER}
+		order by ts.S_PROVINCE,ts.S_CITY,tc.Z_DESC DESC
+	</select>
+	
+	<select id="getCompanyByzId" parameterType="java.lang.Integer" resultMap="companyColumnResult">
+		select tc.C_ID, tlc.Z_ID, tc.C_TYPE, tc.C_NAME, tc.C_LOGO, tc.C_ABOUTUS, tc.C_CONTACT, tc.C_BANK
+		from TRAVEL_LINECOLUMN tlc
+		left join TRAVEL_COMPANY tc on(tc.C_ID = tlc.C_ID and tc.C_STATE = 1)
+		where tlc.Z_ID=#{zId,jdbcType=INTEGER}
+		order by tc.C_ID DESC
+	</select>
+	
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_SITE order by S_SORT DESC
+	</select>
+	
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelSiteQuery">
+   		select  <include refid="column" /> 
+   		from TRAVEL_SITE where 1=1
+   		<if test="sState != null">
+	  		and S_STATE = #{sState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToid != null">
+	  		and S_TOID = #{sToid,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sName != null and sName != '' ">
+	  		and S_NAME = #{sName,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sProvince != null and sProvince != '' ">
+	  		and S_PROVINCE = #{sProvince,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sCity != null and sCity != '' ">
+	  		and S_CITY = #{sCity,jdbcType=VARCHAR}
+	  	</if>
+   		order by S_SORT DESC
+  	</select>
+  	
+  	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelSiteQuery">
+	 	<include refid="PAGINATION.paginationStart" />
+		SELECT 
+		<include refid="column"/>
+		FROM TRAVEL_SITE where 1=1
+		<if test="sState != null">
+	  		and S_STATE = #{sState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToid != null">
+	  		and S_TOID = #{sToid,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sName != null and sName != '' ">
+	  		and S_NAME = #{sName,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sProvince != null and sProvince != '' ">
+	  		and S_PROVINCE = #{sProvince,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sCity != null and sCity != '' ">
+	  		and S_CITY = #{sCity,jdbcType=VARCHAR}
+	  	</if>
+		ORDER BY S_SORT DESC
+		<include refid="PAGINATION.paginationEnd" />
+   </select>
+   
+   <select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelSiteQuery">
+  		select count(1)
+        from TRAVEL_SITE  where 1=1
+		<if test="sState != null">
+	  		and S_STATE = #{sState,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sToid != null">
+	  		and S_TOID = #{sToid,jdbcType=INTEGER}
+	  	</if>
+	  	<if test="sName != null and sName != '' ">
+	  		and S_NAME = #{sName,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sProvince != null and sProvince != '' ">
+	  		and S_PROVINCE = #{sProvince,jdbcType=VARCHAR}
+	  	</if>
+	  	<if test="sCity != null and sCity != '' ">
+	  		and S_CITY = #{sCity,jdbcType=VARCHAR}
+	  	</if>
+   	</select>
+  	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_SITE where S_ID=#{sId,jdbcType=INTEGER}
+	</select>
+	
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelSiteDO">
+		<selectKey resultType="java.lang.Long" keyProperty="sId" order="BEFORE">
+			SELECT TRAVEL_SITE_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_SITE(<include refid="column"/>) 
+		values (#{sId},SYSTIMESTAMP,SYSTIMESTAMP,
+				#{sName,jdbcType=VARCHAR},
+				#{sProvince,jdbcType=VARCHAR},
+				#{sCity,jdbcType=VARCHAR},
+				#{sToid,jdbcType=INTEGER},
+				#{sSort,jdbcType=INTEGER},
+				#{sState,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelSiteDO">
+		update TRAVEL_SITE set GMT_MODIFIED=SYSTIMESTAMP,
+		<trim suffixOverrides=",">
+			<if test="sName	!=	null">
+				S_NAME=#{sName},
+			</if>
+			<if test="sProvince	!=	null">
+				S_PROVINCE=#{sProvince},
+			</if>
+			<if test="sCity	!=	null">
+				S_CITY=#{sCity},
+			</if>
+			<if test="sToid	!=	null">
+				S_TOID=#{sToid},
+			</if>
+			<if test="sState!=	null">
+				S_STATE=#{sState},
+			</if>
+			<if test="sSort!=	null">
+				S_SORT=#{sSort}
+			</if>
+		</trim>
+		where S_ID=#{sId,jdbcType=INTEGER}
+	</update>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_SITE WHERE S_ID=#{sId,jdbcType=INTEGER}
+	</delete>
+</mapper>

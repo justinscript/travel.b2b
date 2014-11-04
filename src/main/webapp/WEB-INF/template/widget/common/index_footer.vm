@@ -1,0 +1,23 @@
+<!--通屏横幅-->
+<div style="background:#67c3ec;text-align:center;height:100px;">
+<a href="/help/5.htm"><img src="/static/img/test/20140415090628.jpg" alt=""  /></a>
+</div>
+<!--底部-->
+<ul id="Footer">
+    <li>
+        <img src="/static/img/test/footer-01.jpg" alt="" />
+    </li>
+    <li class="link">
+        <a href="/about/3.htm">关于我们</a>
+        |
+        <a href="/help/7.htm">登录注册</a>
+        |
+        <a href="/help/11.htm">常见问题</a>
+        |
+        <a href="/about/6.htm">服务热线</a>
+    </li>
+    <li>
+        Copyright © 2013 版权所有 左边网. All Rights Reserved.<br />
+        浙ICP备11057101号
+    </li>
+</ul>

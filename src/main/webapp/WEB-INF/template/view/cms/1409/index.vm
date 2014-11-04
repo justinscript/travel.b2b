@@ -1,0 +1,215 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/layer/layer.min.js"></script>	
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<input type="hidden" id="index" value="0"/>
+<div class="banner c">
+    <div class="slide_box">
+        <div class="slide_list" id="banner">
+			#foreach($ad in $!adList)
+            <div>
+    			<a href="$!{ad.link}"><img width="160" height="80" src="$!{ad.pic}"/></a>
+    		</div>
+			#end
+        </div>
+        <div class="slide_li">
+            <a href="#"><img src="/static/img/1409/show02.jpg"/></a>
+			<a href="#"><img src="/static/img/1409/show02.jpg"/></a>
+			<a href="#"><img src="/static/img/1409/show02.jpg"/></a>
+        </div>
+    </div>
+    <div class="b_right">
+        <div class="u_reg">
+            <a href="/userlogin.htm?type=tour" class="tour">组团社入驻</a>
+            <a href="/userlogin.htm?type=account" class="account">批发商入驻</a>
+        </div>
+        <div class="w_info">
+            <dl>
+                <dd>中国最大的旅游B2B平台</dd>
+                <dt>
+                <span class="linenum"><strong>${linecount}</strong> 条线路</span>
+                <span class="addline">昨日：<b>${todaycount}</b>条</span>
+                </dt>
+            </dl>
+            <dl class="other">
+                <dt>
+                <span>可选择出发的城市<br/><b>${CityCount}</b>个</span>
+                <span>为您服务的批发商<br/><b>${accountCount}</b>个</span>
+                </dt>
+            </dl>
+        </div>
+        <div class="z_info">
+            <div class="tit"><span>左边公告</span><a href="/news.htm">更多</a></div>
+            <div class="list">
+                <ul>
+					#foreach($news in $!newsList)
+						<li><a href="/news_view.htm?id=$!{news.nId}">$!news.nTitle</a></li>
+					#end
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="clear"></div>
+<div class="i_column c">
+    <div class="colist">
+        <div class="tit" id="icolumn">
+            <a href="#" class="hover"><i class="i2"></i>国内长线</a><a href="#"><i class="i1"></i>周边短线</a><a href="#"><i class="i3"></i>国际线路</a>
+        </div>
+        <div class="list">
+            <ul id="icolumnli">
+				#set($columnMap=$!{chugang.getColumnMap()})
+                <li style="display:block">
+  					#set($shortLineList=$!{columnMap.get(1)})
+					#foreach($!column in $shortLineList) 
+                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+					#end
+                </li>
+				<li>
+					#set($longLineList=$!{columnMap.get(0)})
+					#foreach($!column in $longLineList)
+					<a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+					#end
+				</li>				
+                <li>
+                    #set($internationalLineList=$!{columnMap.get(2)})
+    				#foreach($!column in $internationalLineList) 
+                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+    				#end
+                </li>                
+            </ul>
+        </div>
+    </div>
+    <div class="rbox">
+        <div class="tit"><span>商家推荐</span><a href="company.htm">更多...</a></div>
+        <ul>
+			#foreach($companyDO in $!companyDOs)
+				<li>
+					<a href="/company_view/$!{companyDO.cId}.htm">$!companyDO.cName</a>
+					<p>$!companyDO.cAboutus</p>
+				</li>
+			#end        
+        </ul>
+    </div>
+</div>
+<!--线路展示-->
+<div class="i_line c">
+    <div class="tit">
+      <span class="fl" id="ilinetit"><a href="" class="first hover">国内长线</a><a href="">周边线路</a><a href="">国际线路</a></span>
+      <span class="fr"><a href="#">更多...</a></span>
+    </div>
+    <div class="list" id="ilineli">
+		<div class="list-li" style="display:block;">
+              <div class="pic">
+				#foreach($linevo in $lineMap.get(1))
+				#if($!{velocityCount} < 5)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p> $linevo.lTile</p>
+                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
+                  </dt>
+                </dl>
+				#end
+				#end
+              </div>
+              <div class="li">
+				#foreach($linevo in $lineMap.get(1))
+				#if($!{velocityCount} > 4)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dt><a href="${url}">$linevo.lTile></a></dt>
+                  <dd class="desc">$!{linevo.lMode}</dd>
+                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                </dl>
+				#end
+				#end
+              </div>
+		</div>
+		<div class="list-li" style="display:none;">
+              <div class="pic">
+				#foreach($linevo in $lineMap.get(0))
+				#if($!{velocityCount} < 5)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p>$linevo.lTile</p>
+                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
+                  </dt>
+                </dl>
+				#end
+				#end
+              </div>
+              <div class="li">
+				#foreach($linevo in $lineMap.get(0))
+				#if($!{velocityCount} > 4)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dt><a href="${url}">$linevo.lTile></a></dt>
+                  <dd class="desc">$!{linevo.lMode}</dd>
+                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                </dl>
+				#end
+				#end
+              </div>
+		</div>
+		<div class="list-li" style="display:none;">
+              <div class="pic">
+				#foreach($linevo in $lineMap.get(2))
+				#if($!{velocityCount} < 5)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                  <dt>
+                  <p>$linevo.lTile</p>
+                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
+                  </dt>
+                </dl>
+				#end
+				#end
+              </div>
+              <div class="li">
+				#foreach($linevo in $lineMap.get(2))
+				#if($!{velocityCount} > 4)
+				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                <dl>
+                  <dt><a href="${url}">$linevo.lTile></a></dt>
+                  <dd class="desc">$!{linevo.lMode}</dd>
+                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                </dl>
+				#end
+				#end
+              </div>
+		</div>
+    </div>
+</div>
+#parse("/widget/common/index1409_footer.vm")
+<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+<script type="text/javascript">
+  $(function(){
+        $("#banner").kinMaxShow({
+        height:315,
+        button:{
+            switchEvent:'mouseover',
+            showIndex:false,
+            normal:{width:'25px',height:'10px',lineHeight:'18px',right:'16px',bottom:'16px',fontSize:'12px',opacity:0.8,background:"#666666",border:"1px solid #999999",color:"#CCCCCC",marginRight:'6px'},
+            focus:{background:"#ff8800",border:"1px solid #ff8800",color:"#000000"}
+            }     
+    });
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,23 @@
+<table class="table table-bordered table-hover table-striped" cellpadding="0" cellspacing="0">
+                <tr>
+                    <th>用户名</th>
+                    <th width="80">QQ</th>
+                    <th width="80">添加时间</th>
+                    <th width="80">操作</th>
+                </tr>
+				#foreach($!service in $list) 
+                <tr>
+                    <td>$!{service.sName}</td>
+                    <td>$!{service.sQQ}</td>
+                    <td>${dateViewTools.formatDate($service.gmtCreate)}</td>
+                    <td>
+                    <div class="w120" style="line-height: 26px;">
+                    <a href="javascript:void(0)" onclick="Page_Add($!{service.sId},'qqedit.htm','修改客服')" class="btn btn-primary btn-mini" ><i class="icon-edit icon-white"></i> 修改</a>
+                    <a href="javascript:void(0)" title="删除" onClick="DelList('delqq.htm',$!{service.sId},this,3);return false"  class="btn btn-mini"><i class="icon-remove"></i> 删除</a>
+                    </div>
+                    </td>
+                </tr>
+                #end
+            </table>
+
+            $widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

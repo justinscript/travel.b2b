@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelOperationLogMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelOperationLogDO" id="baseResult">
+		<id 	column="OL_ID" 				property="olId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 		property="gmtCreate" 		jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 		property="gmtModified" 		jdbcType="TIMESTAMP"/>
+		<result column="OL_TABLE" 			property="olTable" 			jdbcType="VARCHAR"/>
+		<result column="OL_TABLEPK" 		property="olTablePk" 		jdbcType="INTEGER"/>
+		<result column="OL_TABLEPB" 		property="olTablePb" 		jdbcType="VARCHAR"/>
+		<result column="OL_CHANGEBEFORE" 	property="olChangeBefore" 	jdbcType="VARCHAR"/>
+		<result column="OL_CHANGELATER" 	property="olChangeLater" 	jdbcType="VARCHAR"/>
+		<result column="M_ID" 				property="mId" 				jdbcType="INTEGER"/>
+		<result column="C_ID" 				property="cId" 				jdbcType="INTEGER"/>
+		<result column="OL_CORRMODULE" 		property="olCorrModule" 	jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelOperationLogFullDO" id="fullBaseResult">
+		<id 	column="OL_ID" 				property="olId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 		property="gmtCreate" 		jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 		property="gmtModified" 		jdbcType="TIMESTAMP"/>
+		<result column="OL_TABLE" 			property="olTable" 			jdbcType="VARCHAR"/>
+		<result column="OL_TABLEPK" 		property="olTablePk" 		jdbcType="INTEGER"/>
+		<result column="OL_TABLEPB" 		property="olTablePb" 		jdbcType="VARCHAR"/>
+		<result column="OL_CHANGEBEFORE" 	property="olChangeBefore" 	jdbcType="VARCHAR"/>
+		<result column="OL_CHANGELATER" 	property="olChangeLater" 	jdbcType="VARCHAR"/>
+		<result column="M_ID" 				property="mId" 				jdbcType="INTEGER"/>
+		<result column="C_ID" 				property="cId" 				jdbcType="INTEGER"/>
+		<result column="OL_CORRMODULE" 		property="olCorrModule" 	jdbcType="VARCHAR"/>
+		<result column="M_NAME" 			property="mName" 			jdbcType="VARCHAR"/>
+		<result column="L_TITLE" 			property="lTitle" 			jdbcType="VARCHAR"/>
+		<result column="or_orderid" 		property="orOrderid" 		jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 字段集 -->
+	<sql id="column">
+		ol_id, gmt_create, gmt_modified, ol_table, ol_tablepk, ol_tablepb, ol_changebefore, ol_changelater, m_id, c_id, ol_corrmodule
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY OL_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="olId != null">
+				AND ol_Id=#{olId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="olTable != null">
+				AND ol_Table=#{olTable}
+			</if>
+			<if test="olTablePk != null">
+				AND ol_TablePk=#{olTablePk}
+			</if>
+			<if test="olTablePb != null">
+				AND ol_TablePb=#{olTablePb}
+			</if>
+			<if test="olChangeBefore != null">
+				AND ol_ChangeBefore=#{olChangeBefore}
+			</if>
+			<if test="olChangeLater != null">
+				AND ol_ChangeLater=#{olChangeLater}
+			</if>
+			<if test="mId != null">
+				AND m_Id=#{mId}
+			</if>
+			<if test="cId != null">
+				AND c_Id=#{cId}
+			</if>
+			<if test="olCorrModule != null">
+				AND ol_CorrModule=#{olCorrModule}
+			</if>
+		</trim>
+	</sql>
+	<!-- 条件SQL -->
+	<sql id="full_query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="olId != null">
+				AND ol_Id=#{olId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="olTable != null">
+				AND ol_Table=#{olTable}
+			</if>
+			<if test="olTablePk != null">
+				AND ol_TablePk=#{olTablePk}
+			</if>
+			<if test="olTablePb != null">
+				AND ol_TablePb=#{olTablePb}
+			</if>
+			<if test="olChangeBefore != null">
+				AND ol_ChangeBefore=#{olChangeBefore}
+			</if>
+			<if test="olChangeLater != null">
+				AND ol_ChangeLater=#{olChangeLater}
+			</if>
+			<if test="mId != null">
+				AND m_Id=#{mId}
+			</if>
+			<if test="cId != null">
+				AND a.c_Id=#{cId}
+			</if>
+			<if test="olCorrModule != null">
+				AND ol_CorrModule=#{olCorrModule}
+			</if>
+		</trim>
+	</sql>
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="gmtCreate != null">
+				gmt_Create=#{gmtCreate},
+			</if>
+			<if test="olTablePk != null">
+				ol_TablePk=#{olTablePk}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from Travel_OperationLog
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelOperationLogQuery">
+		select <include refid="column"/>
+		from Travel_OperationLog
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="fullBaseResult" parameterType="com.zb.app.biz.query.TravelOperationLogQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select a.*,b.m_name as m_name,c.or_orderid as or_orderid,d.l_title as l_title  from Travel_OperationLog a 
+		left join travel_member b on a.m_id = b.m_id
+		left join travel_order c on a.ol_tablepk = c.or_id
+		left join travel_line d on a.ol_tablepk = d.l_id
+		<include refid="full_query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from Travel_OperationLog WHERE ol_ID=#{olId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelOperationLogDO">
+		<selectKey resultType="java.lang.Long" keyProperty="olId" order="BEFORE">
+			SELECT Travel_OperationLog_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into Travel_OperationLog(<include refid="column"/>) values (
+			#{olId},SYSTIMESTAMP,SYSTIMESTAMP,
+			#{olTable,jdbcType=VARCHAR},
+			#{olTablePk,jdbcType=INTEGER},
+			#{olTablePb,jdbcType=VARCHAR},
+			#{olChangeBefore,jdbcType=VARCHAR},
+			#{olChangeLater,jdbcType=VARCHAR},
+			#{mId,jdbcType=INTEGER},
+			#{cId,jdbcType=INTEGER},
+			#{olCorrModule,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelOperationLogDO">
+		update Travel_OperationLog <include refid="update_set_clause"/> where ol_ID=#{olId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete Travel_OperationLog where ol_ID=#{olId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelOperationLogQuery">
+		select count(1) from Travel_OperationLog <include refid="query_where_clause"/>
+	</select>
+</mapper>

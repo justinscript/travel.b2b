@@ -1,0 +1,61 @@
+<div class="zx_list">
+  #foreach($!line in $list)
+  <div class="item">
+    <div class="info">
+      #set($url='/line/' + $!{line.lGroupNumber} + '.htm')
+      <div class="tit">
+        <span class="icon">
+          $!line.lTypeString
+        </span>
+        <a href="$url">
+          $!line.lTile
+        </a>
+      </div>
+      <dl>
+        <dd>
+          <label>
+            出发抵达：
+            <span>
+              $!line.lCity - $!line.lArrivalCity
+            </span>
+          </label>
+          <label>
+            剩余人数：
+            <span>
+              $!line.lSurplusCount/$!line.lRenCount
+            </span>
+          </label>
+          <label>
+            出行天数：
+            <span>
+              $!line.lDay天
+            </span>
+          </label>
+        </dd>
+        <dd>
+          #if($!line.lIsIntegral==1)
+          <span class="red" style="border:red 1px solid;">
+            &nbsp;积分：$!line.lAdultIntegral/成人|$!line.lChildrenIntegral/儿童&nbsp;
+          </span>
+          #end
+        </dd>
+      </dl>
+    </div>
+    <div class="price">
+      成人价：
+      <label>
+        ¥$!line.lJCrPrice
+      </label>
+      <br/>
+      儿童价：
+      <label>
+        ¥$!line.lJXhPrice
+      </label>
+      <br/>
+    </div>
+  </div>
+  #end
+</div>
+<div class="yahoo2">
+  $widget.setTemplate("pagination/pager").addParam('pagination',$pagination)
+</div>

@@ -1,0 +1,68 @@
+<link rel="stylesheet" href="/static/css/photo.css"/>
+<link rel="stylesheet" href="/static/css/page.css"/>
+<script type="text/javascript">
+        $(function(){
+		var ajaxId=$("#ajaxId").val();
+		$("#FilterList2").filterSearch({
+			callblack:function(){
+					 LinePhotoShow();
+                    $("#ListResource dd").hover(function(){
+                        $(this).addClass("mover");
+                        $(this).find("div").css("display","block");
+                    },function(){
+                        $(this).removeClass("mover");
+                        if($(this).attr("class")==""){$(this).find("div").css("display","none")};
+                    })
+        
+                    $("#ListResource div").click(function(){
+                        var linephoto=$("#RoteList table").eq(ajaxId).find(".linephoto");
+                        var linephotoshow=$("#RoteList .xc-photo-list").eq(ajaxId);
+                        var linephttoimg=$(this).parent().find("img").attr("src");
+                        var linephotovalue=linephoto.val();
+                        var img=$(this).parent().find("img").attr("src");
+                            if($(this).attr("rel")=="1"){
+                                linephoto.val(linephotovalue.replace(img+',',""));//移除input数据
+                                linephotoshow.find("img[src='"+linephttoimg+"']").parent().remove()
+                                $(this).attr("rel","0")
+                                $(this).parent().removeClass("click");
+                            }else
+                            {
+                                linephoto.val(linephttoimg+","+linephotovalue);//添加input数据
+                                linephotoshow.append("<li><img src='"+linephttoimg+"' width=50 height=50 /></li>")
+                                $(this).attr("rel","1")
+                                $(this).parent().addClass("click");
+                            }
+                    })
+		}	   
+		});
+          
+		//判断是否已选
+            function LinePhotoShow()
+            {
+                var linephoto=$("#RoteList table").eq(ajaxId).find(".linephoto").val();
+                var a_img=linephoto.substring(0,linephoto.length-1);
+                var strs=new Array();
+                strs=a_img.split(",");
+                $.each(strs, function (index, img) {
+                    $("#ListResource img[src='"+img+"']").parent().parent().addClass("click");
+                    $("#ListResource img[src='"+img+"']").parent().parent().find("div").attr("rel","1")
+                });
+            }
+        })
+    </script>
+</head>
+<body>
+<div style="padding:0 10px;">
+<div id="FilterList2" class="FilterList" url="/account/photodiv.htm">
+	<ul>
+        <li class="title-tab fl">
+			<span class="tit" name="pType" hide="false">类型：</span>
+    		<a href="#" rel="1">景点</a>
+    		<a href="#" rel="2">酒店</a>
+    		<a href="#" rel="3">餐饮</a>
+		</li>
+	<div id="FilterSearch" class="hide"><span class="tit">已选条件：</span></div>
+	</ul>
+</div>
+<div class="tableContent"></div>
+</div>

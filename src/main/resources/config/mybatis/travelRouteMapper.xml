@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelRouteMapper" >
+  	<resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelRouteDO" >
+  		<id 		column="R_ID" 			property="rId" 			jdbcType="INTEGER" />
+    	<result 	column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />
+    	<result 	column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP" />
+    	<result 	column="L_ID" 			property="lId" 			jdbcType="INTEGER" />
+    	<result 	column="R_CONTENT" 		property="rContent" 	jdbcType="VARCHAR" />
+    	<result 	column="R_ZHU" 			property="rZhu" 		jdbcType="VARCHAR" />
+    	<result 	column="R_CAN" 			property="rCan" 		jdbcType="VARCHAR" />
+    	<result 	column="R_PICPATH" 		property="rPicpath" 	jdbcType="VARCHAR" />
+    	<result 	column="R_CAR" 			property="rCar" 		jdbcType="VARCHAR" />
+    	<result 	column="R_RESOURCE" 	property="rResource" 	jdbcType="VARCHAR" />
+  	</resultMap>
+  	
+  	<sql id="table_columns_without_id">
+  		GMT_CREATE,GMT_MODIFIED,L_ID,R_CONTENT,R_ZHU,R_CAN,R_PICPATH,R_CAR,R_RESOURCE
+   	</sql>
+  
+  	<sql id="columns" >
+  		R_ID,<include refid="table_columns_without_id"/>
+  	</sql>
+  	
+  	<sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="rId !=null ">  
+	            R_ID = #{rId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="lId !=null ">  
+	            and L_ID = #{lId, jdbcType=INTEGER}
+	        </if>  
+	        <if test="rContent != null and rContent != '' ">  
+	            and R_CONTENT = #{rContent, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="rZhu != null and rZhu != '' ">  
+	            and R_ZHU = #{rZhu, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="rCan != null and rCan != '' ">  
+	            and R_CAN = #{rCan, jdbcType=VARCHAR}  
+	        </if> 
+	        <if test="rPicpath != null and rPicpath != '' ">  
+	            and R_PICPATH = #{rPicpath, jdbcType=VARCHAR}  
+	        </if> 
+	        <if test="rCar != null and rCar != '' ">  
+	            and R_CAR = #{rCar, jdbcType=VARCHAR}  
+	        </if>
+	        <if test="rResource != null and rResource != '' ">  
+	            and R_RESOURCE = #{rResource, jdbcType=VARCHAR}  
+	        </if>
+	    </trim> 
+  	</sql>
+  		
+  	<sql id="update_where_clause">
+		<trim prefix="where" prefixOverrides="and|or"> 
+ 			<if test="rId !=null ">  
+	            R_ID = #{rId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="lId !=null ">  
+	            and L_ID = #{lId, jdbcType=INTEGER}
+	        </if>  
+	    </trim>
+   	</sql>
+  		
+  	<sql id="update_set_clause">
+  		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">  
+	        <if test="lId != null ">  
+	            L_ID = #{lId, jdbcType=INTEGER},  
+	        </if>  
+	        <if test="rContent != null and rContent != ''  ">  
+	            R_CONTENT = #{rContent, jdbcType=VARCHAR},  
+	        </if>  
+	        <if test="rZhu != null and rZhu != '' ">  
+	            R_ZHU = #{rZhu, jdbcType=VARCHAR},  
+	        </if>  
+	        <if test="rCan != null and rCan != '' ">  
+	            R_CAN = #{rCan, jdbcType=VARCHAR},  
+	        </if>  
+	        <if test="rPicpath != null and rPicpath != '' ">  
+	            R_PICPATH = #{rPicpath, jdbcType=VARCHAR},  
+	        </if>  
+	        <if test="rCar != null and rCar != '' ">  
+	            R_CAR = #{rCar, jdbcType=VARCHAR}, 
+	        </if> 
+	        <if test="rResource != null and rResource != '' ">  
+	            R_RESOURCE = #{rResource, jdbcType=VARCHAR} 
+	        </if> 
+   		</trim>
+  	</sql>
+  		
+  	<sql id="orderby_clause">
+        order by R_ID asc
+    </sql>
+  
+   	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+   		<if test="limitSize != null" >
+   			<include refid="PAGINATION.paginationStart" />
+   		</if>
+   		select  <include refid="columns" /> 
+   		from TRAVEL_ROUTE 
+   		<include refid="orderby_clause"/>
+	  	<if test="limitSize != null" >
+	        <include refid="PAGINATION.paginationEnd" />
+	    </if>
+  	</select>
+  	
+  	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelRouteQuery">
+   		select  <include refid="columns" /> 
+   		from TRAVEL_ROUTE 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+  
+  	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelRouteQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="columns"/>
+		from TRAVEL_ROUTE 
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelRouteQuery" >
+  		select <include refid="columns"/>
+        from TRAVEL_ROUTE
+        <include refid="query_where_clause"/>
+        <include refid="orderby_clause"/>
+  	</select>
+  
+   	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelRouteDO" useGeneratedKeys="true">
+   		<selectKey resultType="java.lang.Long" keyProperty="rId" order="BEFORE" >
+	      select TRAVEL_ROUTE_SEQ.NEXTVAL as rId from DUAL
+	   	</selectKey>
+	   	insert into TRAVEL_ROUTE (<include refid="columns"/>)
+	   	values (#{rId},SYSTIMESTAMP,SYSTIMESTAMP, 
+	   		#{lId,jdbcType=INTEGER},
+	   		#{rContent,jdbcType=VARCHAR},
+	   		#{rZhu,jdbcType=VARCHAR},
+	   		#{rCan,jdbcType=VARCHAR},
+	   		#{rPicpath,jdbcType=VARCHAR},
+	   		#{rCar,jdbcType=VARCHAR},
+	   		#{rResource,jdbcType=VARCHAR}
+	   	)
+   	</insert>
+   	
+   	<update id="update" parameterType="com.zb.app.biz.domain.TravelRouteDO">
+   		update TRAVEL_ROUTE 
+       	<include refid="update_set_clause"/>
+       	<include refid="update_where_clause"/>
+  	</update>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelRouteQuery">
+  		select count(1)
+        from TRAVEL_ROUTE  
+       	<include refid="query_where_clause"/>
+   	</select>
+   	
+  	<delete id="deleteById" parameterType="java.lang.Integer">
+  		delete from TRAVEL_ROUTE where R_ID = #{id,jdbcType=INTEGER}
+  	</delete>
+  	
+  	<delete id="deleteByLineId" parameterType="java.lang.Integer">
+  		delete from TRAVEL_ROUTE where L_ID = #{id,jdbcType=INTEGER}
+  	</delete>
+  	
+  	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  		select <include refid="columns" /> 
+  		from TRAVEL_ROUTE 
+  		where R_ID = #{id,jdbcType=INTEGER}
+  	</select>
+  
+   	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelRouteDO">
+   		update TRAVEL_ROUTE 
+   		<include refid="update_set_clause"/>
+	    where R_ID = #{rId,jdbcType=INTEGER}
+  	</update>
+  	
+</mapper>

@@ -1,0 +1,27 @@
+<table class="tbl" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>财务单号/出团日期/线路名称</th>
+        <th width="200">供应商信息</th>
+        <th width="60">订单金额</th>
+        <th width="60">已付款</th>
+        <th width="60">应付款</th>
+        <th width="160">操作时间</th>
+    </tr>
+#foreach($!fin in $!finance)
+    <tr>
+        <td>
+        <a href="/order/orderdetails.htm?id=$!fin.orId" target="_blank" class="a1">$!fin.fSerialNumber</a><br/>
+        ${dateViewTools.formatDate($!fin.goGroupTime)}<br/>
+        <a href="/line/$!{fin.lGroupNumber}.htm" target="_blank">$!fin.lTitle</a>
+        </td>
+        <td>$!fin.accountName</td>
+        <td class="red">￥${format.formatFloat($!fin.fReceivable)}</td>
+        <td class="red">￥${format.formatFloat($!fin.fReceipt)}</td>
+        <td class="red">￥${format.formatFloat($!fin.fReceivable)}</td>
+        <td>
+           ${dateViewTools.format($!fin.gmtModified,"yyyy-MM-dd HH:mm")}
+        </td>
+	</tr>
+#end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

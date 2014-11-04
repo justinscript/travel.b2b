@@ -1,0 +1,29 @@
+<script type="text/javascript">
+    $(function(){
+        $("#ClearOrderForm").Validform({
+            ajaxPost:true,
+            tiptype:2,
+            callback:function(data){
+                if(data.code==0){
+                    setTimeout(function(){
+                        layer.closeAll();
+						location.reload();
+                        $.Hidemsg();
+                    },1000);
+                }
+            }
+        });
+    })
+</script>
+<div style="padding:10px;">
+<form action="/tour/cancelOrder.htm" method="post" id="ClearOrderForm">
+    <table width="100%" cellspacing="0" cellpadding="0" class="tab2">
+    		<input type="hidden" name="orId" value="$!order.orId" />
+            <tr><td>
+            <span><textarea name="orClearMode" style="width:400px;height:150px;" datatype="*" nullmsg="请填写订单取消原因">$!order.orClearMode</textarea></span>
+            <span class="Validform_checktip">请填写订单取消原因！</span>
+            </td></tr>
+            <tr><td><input class="btn btn-primary" type="submit" value="保存"></td></tr>
+    </table>
+</form>
+</div>

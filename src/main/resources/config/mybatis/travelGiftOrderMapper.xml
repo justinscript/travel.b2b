@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelGiftOrderMapper">
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelGiftOrderDO" id="BaseResultMap">
+		<!-- 自动编号 -->
+		<id column="go_Id" 					property="goId" 			jdbcType="INTEGER" />
+		<!-- 创建时间 -->
+		<result column="GMT_CREATE"			property="gmtCreate" 		jdbcType="TIMESTAMP" />
+		<!-- 修改时间 -->
+		<result column="GMT_MODIFIED" 		property="gmtModified" 		jdbcType="TIMESTAMP" />
+		<result column="c_Id" 				property="cId" 				jdbcType="INTEGER" />
+		<result column="m_Id" 				property="mId" 				jdbcType="INTEGER" />
+		<result column="g_Id" 				property="gId" 				jdbcType="INTEGER" />
+		<result column="go_Name" 			property="goName" 			jdbcType="VARCHAR" />
+		<result column="go_Province" 		property="goProvince" 		jdbcType="VARCHAR" />
+		<result column="go_City" 			property="goCity" 			jdbcType="VARCHAR" />
+		<result column="go_County" 			property="goCounty" 		jdbcType="VARCHAR" />
+		<result column="go_Address" 		property="goAddress" 		jdbcType="VARCHAR" />
+		<result column="go_Mobile" 			property="goMobile" 		jdbcType="VARCHAR" />
+		<result column="go_Tel" 			property="goTel" 			jdbcType="VARCHAR" />
+		<result column="go_Email" 			property="goEmail" 			jdbcType="VARCHAR" />
+		<result column="go_State" 			property="goState" 			jdbcType="INTEGER" />
+		<result column="go_Count" 			property="goCount" 			jdbcType="INTEGER" />
+		<result column="go_IntegralCount" 	property="goIntegralCount"  jdbcType="INTEGER" />
+	</resultMap>
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelGiftOrderFullDO" id="FullBaseResultMap">
+		<!-- 自动编号 -->
+		<id column="go_Id" property="goId" jdbcType="INTEGER" />
+		<!-- 创建时间 -->
+		<result column="GMT_CREATE" property="gmtCreate" jdbcType="TIMESTAMP" />
+		<!-- 修改时间 -->
+		<result column="GMT_MODIFIED" property="gmtModified" jdbcType="TIMESTAMP" />
+		<result column="c_Id" property="cId" jdbcType="INTEGER" />
+		<result column="m_Id" property="mId" jdbcType="INTEGER" />
+		<result column="g_Id" property="gId" jdbcType="INTEGER" />
+		<result column="go_Name" property="goName" jdbcType="VARCHAR" />
+		<result column="go_Province" property="goProvince" jdbcType="VARCHAR" />
+		<result column="go_City" property="goCity" jdbcType="VARCHAR" />
+		<result column="go_County" property="goCounty" jdbcType="VARCHAR" />
+		<result column="go_Address" property="goAddress" jdbcType="VARCHAR" />
+		<result column="go_Mobile" property="goMobile" jdbcType="VARCHAR" />
+		<result column="go_Tel" property="goTel" jdbcType="VARCHAR" />
+		<result column="go_Email" property="goEmail" jdbcType="VARCHAR" />
+		<result column="go_State" property="goState" jdbcType="INTEGER" />
+		<result column="go_Count" property="goCount" jdbcType="INTEGER" />
+		<result column="go_IntegralCount" property="goIntegralCount" jdbcType="INTEGER" />
+		<result column="g_title" property="gTitle" jdbcType="VARCHAR" />
+		<result column="m_name" property="mName" jdbcType="VARCHAR" />
+		<result column="m_username" property="mUserName" jdbcType="VARCHAR" />
+		<result column="c_name" property="cName" jdbcType="VARCHAR" />
+	</resultMap>
+	<!-- 字段集 -->
+	<sql id="column">
+		go_id, gmt_create, gmt_modified, c_id, m_id, g_id, go_name, go_province, go_city, go_county, go_address, go_mobile, go_tel, go_email, go_state, go_integralcount, go_count
+	</sql>
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY GO_ID DESC
+	</sql>
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="goId != null">
+				AND go_Id=#{goId, jdbcType=INTEGER}
+			</if>
+			<if test="cId != null">
+				AND a.c_Id=#{cId, jdbcType=INTEGER}
+			</if>
+			<if test="mId != null">
+				AND m_Id=#{mId, jdbcType=INTEGER}
+			</if>
+			<if test="gId != null">
+				AND g_Id=#{gId, jdbcType=INTEGER}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate, jdbcType=TIMESTAMP}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified, jdbcType=TIMESTAMP}
+			</if>
+			<if test="goName !=  null">
+				AND go_Name=#{goName, jdbcType=VARCHAR}
+			</if>
+			<if test="goProvince !=  null">
+				AND go_Province=#{goProvince, jdbcType=VARCHAR}
+			</if>
+			<if test="goCity !=  null">
+				AND go_City=#{goCity, jdbcType=VARCHAR}
+			</if>
+			<if test="goCounty !=  null">
+				AND go_County=#{goCounty, jdbcType=VARCHAR}
+			</if>
+			<if test="goAddress !=  null">
+				AND go_Address=#{goAddress, jdbcType=VARCHAR}
+			</if>
+			<if test="goMobile !=  null">
+				AND go_Mobile=#{goMobile, jdbcType=VARCHAR}
+			</if>
+			<if test="goTel !=  null">
+				AND go_Tel=#{goTel, jdbcType=VARCHAR}
+			</if>
+			<if test="goEmail !=  null">
+				AND go_Email=#{goEmail, jdbcType=VARCHAR}
+			</if>
+			<if test="goState !=  null">
+				AND go_State=#{goState, jdbcType=INTEGER}
+			</if>
+			<if test="goCount !=  null">
+				AND go_Count=#{goCount, jdbcType=INTEGER}
+			</if>
+			<if test="goIntegralCount !=  null">
+				AND go_IntegralCount=#{goIntegralCount, jdbcType=INTEGER}
+			</if>
+		</trim>
+	</sql>
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+			<if test="gmtCreate != null">
+				GMT_CREATE=#{gmtCreate, jdbcType=TIMESTAMP},
+			</if>
+			<if test="cId != null">
+				c_Id=#{cId, jdbcType=INTEGER},
+			</if>
+			<if test="mId != null">
+				m_Id=#{mId, jdbcType=INTEGER},
+			</if>
+			<if test="gId != null">
+				g_Id=#{gId, jdbcType=INTEGER},
+			</if>
+			<if test="gmtModified != null">
+				GMT_MODIFIED=#{gmtModified, jdbcType=TIMESTAMP},
+			</if>
+			<if test="goName !=  null">
+				go_Name=#{goName, jdbcType=VARCHAR},
+			</if>
+			<if test="goProvince !=  null">
+				go_Province=#{goProvince, jdbcType=VARCHAR},
+			</if>
+			<if test="goCity !=  null">
+				go_City=#{goCity, jdbcType=VARCHAR},
+			</if>
+			<if test="goCounty !=  null">
+				go_County=#{goCounty, jdbcType=VARCHAR},
+			</if>
+			<if test="goAddress !=  null">
+				go_Address=#{goAddress, jdbcType=VARCHAR},
+			</if>
+			<if test="goMobile !=  null">
+				go_Mobile=#{goMobile, jdbcType=VARCHAR},
+			</if>
+			<if test="goTel !=  null">
+				go_Tel=#{goTel, jdbcType=VARCHAR},
+			</if>
+			<if test="goEmail !=  null">
+				go_Email=#{goEmail, jdbcType=VARCHAR},
+			</if>
+			<if test="goState !=  null">
+				go_State=#{goState, jdbcType=INTEGER},
+			</if>
+			<if test="goCount !=  null">
+				go_Count=#{goCount, jdbcType=INTEGER},
+			</if>
+			<if test="goIntegralCount !=  null">
+				go_IntegralCount=#{goIntegralCount, jdbcType=INTEGER},
+			</if>
+		</trim>
+	</sql>
+	<!-- 查询所有 -->
+	<select id="list" resultMap="BaseResultMap">
+		select <include refid="column"/> from TRAVEL_GiftOrder
+	</select>
+	
+	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelGiftOrderQuery">
+		select <include refid="column"/>
+		from TRAVEL_GiftOrder
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelGiftOrderQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_GiftOrder
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	<!-- 连表分页查询 -->
+	<select id="fullListPagination" resultMap="FullBaseResultMap" parameterType="com.zb.app.biz.query.TravelGiftOrderQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select a.*, b.g_title as g_title, c.m_name as m_name, c.m_username as m_username, d.c_name as c_name 
+		from travel_giftorder a 
+		left join travel_gift b on a.g_id = b.g_id 
+		left join travel_member c on a.m_id = c.m_id 
+		left join travel_company d on a.c_id = d.c_id
+		<include refid="query_where_clause"/>
+		ORDER BY a.GO_ID DESC
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="column" />
+		from TRAVEL_GiftOrder where GO_ID=#{goId}
+	</select>
+	<!-- 连表根据编号查询 -->
+	<select id="fullGetById" parameterType="java.lang.Integer"
+		resultMap="FullBaseResultMap">
+		select a.*, b.g_title as g_title, c.m_name as m_name, c.m_username as m_username, d.c_name as c_name 
+		from travel_giftorder a 
+		left join travel_gift b on a.g_id = b.g_id 
+		left join travel_member c on a.m_id = c.m_id 
+		left join travel_company d on a.c_id = d.c_id
+		where GO_ID=#{goId}
+	</select>
+	<!-- 添加 -->
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelGiftOrderDO">
+		<selectKey resultType="java.lang.Long" keyProperty="goId" order="BEFORE">
+			SELECT TRAVEL_GiftOrder_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_GiftOrder(<include refid="column" />) 
+		values (
+			#{goId},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#{cId,jdbcType=INTEGER},
+			#{mId,jdbcType=INTEGER},
+			#{gId,jdbcType=INTEGER},
+			#{goName,jdbcType=VARCHAR},
+			#{goProvince,jdbcType=VARCHAR},
+			#{goCity,jdbcType=VARCHAR},
+			#{goCounty,jdbcType=VARCHAR},
+			#{goAddress,jdbcType=VARCHAR},
+			#{goMobile,jdbcType=VARCHAR},
+			#{goTel,jdbcType=VARCHAR},
+			#{goEmail,jdbcType=VARCHAR},
+			#{goState,jdbcType=INTEGER},
+			#{goIntegralCount,jdbcType=FLOAT},
+			#{goCount,jdbcType=INTEGER}
+		)
+	</insert>
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelGiftOrderDO">
+		 update TRAVEL_GiftOrder <include refid="update_set_clause"/> where GO_ID = #{goId}
+	</update>
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete
+		TRAVEL_GiftOrder
+		where GO_ID = #{goId}
+	</delete>
+	<!-- 连表总条数 -->
+	<select id="fullCount" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelGiftOrderQuery">
+		select count(1) from travel_giftorder a 
+		left join travel_gift b on a.g_id = b.g_id 
+		left join travel_member c on a.m_id = c.m_id 
+		left join travel_company d on a.c_id = d.c_id
+		<include refid="query_where_clause"/>
+	</select>
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelGiftOrderQuery">
+		select count(1) from travel_giftorder
+		<include refid="query_where_clause"/>
+	</select>
+</mapper>

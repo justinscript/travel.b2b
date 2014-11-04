@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>	
+    <script src="/static/js/common.js"></script>
+</head>
+<body style="background:#fff">
+<div>
+	<form id="tagForm" method="post" action="/zbmanlogin/site/savetag.htm">
+		<table class="tab2_1" width="99%" cellpadding="0" cellspacing="0" >
+		        <tr>
+		            <td>所在地区：</td>
+		            <td>
+		            	<span><select name="province" id="DefProvince" class="w100" onchange="DefSelect(this,1)"  datatype="*" nullmsg="站点不能为空">
+                    <option value="">请选择</option>
+                </select>
+				<select id="DefCity" class="w100" nullmsg="出发地不能为空" datatype="*" onchange="SelectDefCity(this)">
+                    <option value="">请选择</option>
+                </select>
+				<input type="hidden" value="" name="city" id="cityname"/>
+				</span>
+		                <div class="validform_checktip"></div>
+		               </div>
+		            </td>
+		        </tr>
+		        <tr>
+		        	<td width="100">专线分类：</td>
+		        	<td>
+		        		<span>
+							<select name="lineType" class="w100">
+								<option value="0" >周边短线</option>
+								<option value="1" >国内长线</option>
+								<option value="2" >国际线路</option>
+							</select>
+						</span>
+		        		<div class="validform_checktip"></div>
+		        	</td>
+		        </tr>
+				<tr>
+					<td>类型</td>
+					<td>
+		        		<span>
+							<select name="lcType" class="w100">
+								<option value="0" >New</option>
+								<option value="1" >热销</option>
+								<option value="2" >推荐</option>
+								<option value="3" >特价</option>
+								<option value="4" >豪华</option>
+								<option value="5" >纯玩</option>
+							</select>
+						</span>
+		        		<div class="validform_checktip"></div>
+		        	</td>
+				</tr>
+		        <tr>
+		        	<td width="100">名称：</td>
+		        	<td>
+		        		<span><input type="text" name="lcName" datatype="*" nullmsg="名称不能为空" value="$!categoryDO.lcName"></span>
+		        		<div class="validform_checktip"></div>
+		        	</td>
+		        </tr>				
+		        <tr>
+		        	<td>排序：</td>
+		        	<td>
+		        		<span><input type="text" class="w40" name="lcSort" datatype="n" value="0"></span>
+							<div class="validform_checktip"></div>
+		        	</td>
+		        </tr>
+		        <tr>
+		        	<td colspan="2" align="center">
+		        		<input type="hidden" name="sId" id="sId"  value="" />
+						<input type="hidden" name="lcId" value="$!categoryDO.lcId" />
+						<input type="submit" value="保存" class="btn btn-primary"/>
+		        	</td>
+		        </tr>
+		</table>
+	</form>
+</div>
+<script type="text/javascript">
+$(function(){
+	DefProvince('$!categoryDO.province','$!categoryDO.city',1);//默认站点
+	$("#tagForm").Validform({
+		ajaxPost:true,
+		postonce: false,
+		tiptype:2,
+		showAllError:false,
+		callback:function(data)
+		{
+			if(data.code==0)
+			{
+				setTimeout(function () {
+					$.Hidemsg();
+					parent.closelayer();
+					location.reload();
+				}, 1000);
+			}
+		}
+	});	
+})
+function SelectDefCity(obj)
+{
+	var cityname=$(obj).find('option:selected').text();
+	$("#cityname").val(cityname);
+	$("#sId").val($(obj).val());
+}
+</script>
+</body>
+</html>

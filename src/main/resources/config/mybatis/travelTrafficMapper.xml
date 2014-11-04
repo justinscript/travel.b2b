@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelTrafficMapper">
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelTrafficDO" id="baseResult">
+		<id 	column="T_ID" 			property="tId" 			jdbcType="INTEGER"/>
+		<result column="T_TYPE" 		property="tType" 		jdbcType="INTEGER"/>
+		<result column="T_CAT" 			property="tCat" 		jdbcType="INTEGER"/>
+		<result column="T_TRAFFIC" 		property="tTraffic" 	jdbcType="VARCHAR"/>
+		<result column="C_ID" 			property="cId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />
+    	<result column="GMT_MODIFIED"	property="gmtModified" 	jdbcType="TIMESTAMP" />
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+			T_ID,T_TYPE,T_CAT,T_TRAFFIC,C_ID,GMT_CREATE,GMT_MODIFIED
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY T_ID DESC
+	</sql>
+	
+	<!-- 条件查询 -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="tType != null">
+				T_TYPE=#{tType}
+			</if>
+			<if test="tCat != null">
+				and T_CAT=#{tCat}
+			</if>
+			<if test="tTraffic != null">
+				and T_TRAFFIC like '%'||#{tTraffic, jdbcType=VARCHAR}||'%'
+			</if>
+			<if test="cId != null">
+				and C_ID=#{cId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_TRAFFIC
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelTrafficQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_TRAFFIC
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_TRAFFIC WHERE T_ID=#{tId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelTrafficDO">
+		<selectKey resultType="java.lang.Long" keyProperty="tId" order="BEFORE">
+			SELECT TRAVEL_TRAFFIC_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_TRAFFIC (<include refid="column"/>) values (#{tId},#{tType,jdbcType=INTEGER},#{tCat,jdbcType=INTEGER},#{tTraffic,jdbcType=VARCHAR},
+		#{cId,jdbcType=INTEGER},SYSTIMESTAMP,SYSTIMESTAMP)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelTrafficDO">
+		update TRAVEL_TRAFFIC SET GMT_MODIFIED=SYSTIMESTAMP,
+		<trim suffixOverrides=",">
+			<if test="tType != null">
+				T_TYPE = #{tType},
+			</if>
+			<if test="tCat != null">
+				T_CAT = #{tCat},
+			</if>
+			<if test="tTraffic != null">
+				T_TRAFFIC = #{tTraffic}
+			</if>
+		</trim>
+		where T_ID=#{tId}
+	</update>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelTrafficQuery">
+		select count(1) from TRAVEL_TRAFFIC <include refid="query_where_clause"/>
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_TRAFFIC WHERE T_ID = #{tId,jdbcType=INTEGER}
+	</delete>
+</mapper>

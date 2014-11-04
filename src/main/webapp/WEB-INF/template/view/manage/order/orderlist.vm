@@ -1,0 +1,67 @@
+<table class="tbl table-striped " cellpadding="0" cellspacing="0">
+<tr>
+<th width="80" align="center">状态</th>
+<th>线路信息</th>
+<th width="170">批发商</th>
+<th width="150">预订旅行社</th>
+<th width="90">结算价</th>
+<th width="70">订单总额</th>
+<th width="90">人数</th>
+<th width="90">操作时间</th>
+<th width="80"><div style="padding-left:20px;">操作</div></th>
+</tr>
+#foreach( $!order in $orderList )
+<tr>
+<td> #if($!order.orState==0)
+<font color="red">未确认</font><br/>
+#elseif($!order.orState==1)
+	<font color="#f4a460">名单不全</font><br/>
+#elseif($!order.orState==2)
+	<font color="blue">已取消</font><br/>
+#elseif($!order.orState==3)
+	<font color="green">已确认</font></td>
+#end
+</td>
+<td class="h1">
+$!order.orOrderId<br/>
+$!order.orGoGroupTimeString<br/>
+<a href="/line/$!{order.lId}.htm">$!order.lTile</a>
+</td>
+<td>
+<div class="ellipsis">$!order.accName</div>
+</td>
+<td>
+ <div class="ellipsis" style="width:120px;line-height:24px;" title="">
+$!order.mName&nbsp;
+#if($!order.mId)
+	<font color="red">预留</font>
+#else
+#end
+<br>$!order.orName&nbsp;&nbsp;
+<font color="red">$!order.mTel</font><br>$!order.cName<span style="display:none"><b>组团社：</b>$!order.cName<br><b>预订人：</b>$!order.orName<br><b>电话：</b><font color="red">$!order.orTel</font><br><b>手机：$!order.orMobile</b><br><b>传真：</b>$!order.orFax</span></div>
+</td>                                
+<td>成：$!format.formatFloat($!order.orFirstJcrPrice)<br/>儿：$!format.formatFloat($!order.orFirstJxhPrice)</td>
+<td>
+￥#set ($ddje = $!order.orFirstJcrPrice * $!order.orAdultCount + $!order.orFirstJxhPrice * $!order.orChildCount + $!order.orFirstyPrice * $!order.orBabyCount)
+$!format.formatFloat($!ddje)
+</td>
+<td>
+   $!order.orAdultCount大$!order.orChildCount小$!order.orBabyCount婴
+</td>
+<td>$!order.gmtModifiedString</td>
+<td>
+<div class="markSelectBox">
+<a href="javascript:void(0)">操作<span class="jan" style="display: inline-block;"></span></a>
+<div class="shadow" style="display:block;">
+#if(${webUser.hasPermission(1)})
+<a href="/order/orderdetails.htm?id=$!order.orId" target="_blank" title="订单查看">查看详细</a>
+#end
+<a href="/printdoc/$!{order.lId}.htm" title="导出行程" target="_blank">导出行程</a>
+<a href="/order/print/guest.htm?id=$!{order.lId}" title="导出游客" target="_blank">导出游客</a>
+</div>
+</div>
+</td>
+</tr>
+#end                                                                             
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

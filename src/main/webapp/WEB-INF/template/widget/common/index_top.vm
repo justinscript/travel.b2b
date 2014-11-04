@@ -1,0 +1,38 @@
+<input type="hidden" name="S" id="S" value="黑龙江" />
+<!--顶部导航-->
+#set($siteCacheMap=$!{siteCache.getOnlySiteMap()})
+<div id="TopNav">
+    <ul class="wrap">
+        <li class="fl address hasSubNav">
+			#if(!$!{webUser.getSiteId()} || $!{webUser.getSiteId()}=="" || $!{webUser.getSiteId()} == "0")
+				<i class="icon-address fl"></i><b>黑龙江</b><a href="#">[更换]</a>
+			#else
+				<i class="icon-address fl"></i><b>$!{siteCacheMap.get($webUser.getSiteId()).sName}</b><a href="#">[更换]</a>
+			#end
+            <div class="sub" id="zd">
+				#foreach($!siteKey in ${siteCacheMap.keySet()})
+					#if($!{webUser.getSiteId()} && $!{webUser.getSiteId()} !="" && $!{webUser.getSiteId()} != "0" && $!siteKey != $!{webUser.getSiteId()}) 
+					<a href="javascript:void(0)" onclick="SetCity('$!siteKey')">$!{siteCacheMap.get($siteKey).sName}</a>
+					#end
+				#end
+			</div>
+        </li>
+        <li class="fr">
+            <a href="/account/login.htm">商家入驻</a>
+            | <a href="javascript:void(0);" onclick="AddFavorite('左边网',location.href)">收藏本站</a>
+            | <a href="/help/7.htm">帮助中心</a>
+        </li>
+    </ul>
+</div>
+<!--导航栏-->
+<ul id="MainNav" class="wrap">
+    <li class="fl">
+        <a href="/" class="logo">左边网zuobian.com客服热线4000378777您身边的旅游电商服务专家</a>
+    </li>
+    <li class="fr">
+        <a href="/index.htm">首 页</a>
+        <a href="/shop.htm">积分商城</a>
+        <a href="/company.htm">商家大全</a>
+        <a href="/about/3.htm">关于我们</a>
+    </li>
+</ul>

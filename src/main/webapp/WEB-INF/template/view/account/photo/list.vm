@@ -1,0 +1,28 @@
+#if($type=="div")
+<div class="J_imageView2" style=" padding: 10px;" id="ListResource">
+    #foreach($!photo in $list)
+    <dl>
+    <dd>
+        <a href="javascript:void(0)" ><img src="$!photo.pPath"></a>
+        <div rel="0"></div>
+    </dd>
+    <dt>$!photo.pTitle</dt>
+    </dl>
+    #end
+</div>
+#else
+	<div class="photo-list" id="photo-list" >
+        #foreach($!photo in $list)
+            <dl>
+                <dd>
+                    <a href="" ><img layer-img="$!photo.pPath" src="$!photo.pPath"></a>
+                    <div>
+					<a href="javascript:void(0)" onclick="DelList('/account/photodel.htm',$!photo.pId,this,3);return false">删除</a>
+					</div>
+                </dd>
+                <dt>$!photo.pTitle</dt>
+            </dl>
+		#end
+</div>
+#end
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

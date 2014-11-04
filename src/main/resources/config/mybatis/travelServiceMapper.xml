@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelServiceMapper">
+
+	<resultMap type="com.zb.app.biz.domain.TravelServiceDO" id="BaseResultMap">
+		<id 		column="S_ID" 			property="sId" 				jdbcType="INTEGER" />
+		<result 	column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP" />
+		<result 	column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP" />
+		
+		<result 	column="C_ID" 			property="cId" 				jdbcType="INTEGER" />
+		<result 	column="S_NAME" 		property="sName" 			jdbcType="VARCHAR" />
+		<result 	column="S_QQ" 			property="sQQ" 				jdbcType="VARCHAR" />
+		<result 	column="S_SORT" 		property="sSort" 			jdbcType="INTEGER" />
+	</resultMap>
+	
+	<sql id="column">
+		S_ID, GMT_CREATE, GMT_MODIFIED, C_ID, S_NAME, S_QQ, S_SORT
+	</sql>
+	
+  	<sql id="orderby_clause">
+        order by S_SORT asc
+    </sql>
+	
+	<sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="service.sId !=null ">  
+	            S_ID = #{service.sId, jdbcType=INTEGER}
+	        </if> 
+       		<if test="service.cId !=null ">  
+	            and C_ID = #{service.cId, jdbcType=INTEGER}
+	        </if>
+	        <if test="service.sName != null and service.sName != '' ">  
+	            and S_NAME = #{service.sName, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="service.sQQ != null and service.sQQ != '' ">  
+	            and S_QQ = #{service.sQQ, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="service.sSort !=null ">  
+	            and S_SORT = #{service.sSort, jdbcType=INTEGER}
+	        </if>
+	        <if test="startGmtCreate != null and startGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE >= to_date(#{startGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtCreate != null and endGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE <= to_date(#{endGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]> 
+	        </if>
+	        <if test="startGmtModified != null and startGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{startGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtModified != null and endGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{endGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	    </trim> 
+  	</sql>
+	
+	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+   		<if test="limitSize != null" >
+   			<include refid="PAGINATION.paginationStart" />
+   		</if>
+   		select  <include refid="column" /> 
+   		from TRAVEL_SERVICE 
+   		<include refid="orderby_clause"/>
+	  	<if test="limitSize != null" >
+	        <include refid="PAGINATION.paginationEnd" />
+	    </if>
+  	</select>
+  	
+  	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelServiceQuery">
+   		select  <include refid="column" /> 
+   		from TRAVEL_SERVICE 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+  
+  	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelServiceQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="column"/>
+		from TRAVEL_SERVICE 
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelServiceQuery">
+  		select count(1)
+        from TRAVEL_SERVICE  
+       	<include refid="query_where_clause"/>
+   	</select>
+  	
+  	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelServiceQuery" >
+  		select <include refid="column"/>
+        from TRAVEL_SERVICE
+        <include refid="query_where_clause"/>
+        <include refid="orderby_clause"/>
+  	</select>
+	
+	<select id="getById" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select <include refid="column" />
+		from TRAVEL_SERVICE where S_ID=#{sId}
+	</select>
+	
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelServiceDO">
+		<selectKey resultType="java.lang.Long" keyProperty="sId" order="BEFORE">
+			SELECT TRAVEL_SERVICE_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_SERVICE(<include refid="column" />) 
+		values (#{sId},SYSTIMESTAMP,SYSTIMESTAMP,
+			#{cId,jdbcType=INTEGER},
+			#{sName,jdbcType=VARCHAR},
+			#{sQQ,jdbcType=VARCHAR},
+			#{sSort,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelServiceDO">
+		update TRAVEL_SERVICE set GMT_MODIFIED = SYSTIMESTAMP,
+		<trim suffixOverrides=",">
+			<if test="cId !=null ">  
+	            C_ID = #{cId, jdbcType=INTEGER},
+	        </if> 
+	        <if test="sName != null and sName != '' ">  
+	            S_NAME = #{sName, jdbcType=VARCHAR},
+	        </if>  
+	        <if test="sQQ != null and sQQ != '' ">  
+	            S_QQ = #{sQQ, jdbcType=VARCHAR}, 
+	        </if>  
+	        <if test="sSort !=null ">  
+	            S_SORT = #{sSort, jdbcType=INTEGER},
+	        </if>
+		</trim>
+		where S_ID = #{sId}
+	</update>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_SERVICE
+		where S_ID = #{sId}
+	</delete>
+	
+</mapper>

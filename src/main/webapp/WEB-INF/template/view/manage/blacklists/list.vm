@@ -1,0 +1,20 @@
+<table class="table  table-striped table-hover" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>公司名称</th>
+        <th width="80">评论次数</th>
+        <th width="170">操作</th>
+    </tr>
+	#foreach( $!black in $blackList )
+    <tr>
+        <td>$!black.cName</td>
+        <td>
+        	$!black.blackCount
+        </td>
+        <td>
+		  <button onclick="Page_Add($!black.beCId,'/zbmanlogin/blacklistsview.htm','查看详细')" class="btn btn-small" ><i class="icon-eye-open"></i> 查看</button>
+		  <button onclick="addBlack($!black.beCId)" class="btn btn-small btn-inverse" ><i class="icon-plus icon-white"></i> 加入黑名单</button>
+        </td>
+    </tr>
+	#end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

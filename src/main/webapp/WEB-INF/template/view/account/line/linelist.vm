@@ -1,0 +1,120 @@
+<script type="text/javascript">
+    $(function(){
+    tooltip();
+    })
+</script>
+<table class="tbl" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>
+            <input type="checkbox" class="checkall"></th>
+            <th>出团日期</th>
+            <th>出发/抵达</th>
+            <th>线路名称</th>
+            <th>天数</th>
+            <th>结算价</th>
+            <th>交通</th>
+            <th>剩 / 总</th>
+            <th>状态</th>
+            <th>
+                <div style="padding-left:20px;">操作</div>
+            </th>
+</tr>
+<tr class="hide">
+    <th width="40"></th>
+    <th width="100"></th>
+    <th width="100"></th>
+    <th></th>
+    <th width="50"></th>
+    <th width="100"></th>
+    <th width="150"></th>
+    <th width="80"></th>
+    <th width="60"></th>
+    <th width="60"></th>
+</tr>
+#foreach( $!line in $list ) 
+    <tr>
+        <td>
+            #if($!line.lSurplusCount == 0 || $!line.lStateString == "过期")
+                <input type="checkbox" disabled="disabled">
+                    #elseif($!line.lStateString != "过期")
+                        <input type="checkbox" value="$!line.lId" name="Lid" class="check">
+            #end
+</td>
+<td>$!line.lGoGroupTimeString</td>
+<td>$!line.lCity/$!line.lArrivalCity</td>
+<td>
+    #set($url='/line/' + $!{line.lGroupNumber} + '.htm')
+    <a href="$url" target="_blank">$!line.lTile</a>
+    <br/>
+    <label>标准：</label>
+    $!line.lTypeString
+    #if($!line.lIsIntegral == 1)
+        <label class="split">|</label>
+        <label>积分：</label>
+        $!line.lAdultIntegral/成人|$!line.lChildrenIntegral/儿童
+    #end
+</td>
+<td>$!line.lDay天</td>
+<td>
+    <label>成：</label>￥$!{format.formatFloat($!line.lJCrPrice)}<br />
+    <label>儿：</label>
+    ￥$!{format.formatFloat($!line.lJXhPrice)}</td>
+    <td>
+        <div class="ellipsis" style="width:100px;line-height:24px;" title="">
+            <label>往($!line.lTrafficyTypeString)：</label>
+            $!line.lGoTraffic<br>
+                <label>返($!line.lTrafficBackTypeString)：</label>
+                $!line.lBackTraffice
+</div>
+</td>
+<td>
+    <b>$!line.lSurplusCount</b>
+    / $!line.lRenCount
+</td>
+<td>
+    #if($!line.lStateString=="预定")
+        <a href="$url" title="预定">$!line.lStateString</a>
+        #else
+            <font color="red">$!line.lStateString</font>
+    #end
+</td>
+<td>
+    <div class="markSelectBox">
+        <a href="javascript:void(0)">操作<span class="jan" style="display: inline-block;"></span>
+        </a>
+        <div class="shadow" style="display:block;">
+            #if(${webUser.hasPermission(1)})
+                <a href="/account/lineOrder.htm?id=$!{line.lId}" title="订单查看">订单查看</a>
+            #end
+            #if(${webUser.hasPermission(12)})
+                <a href="linegetvalue.htm?lId=$!{line.lId}" title="线路修改" target="_blank">线路修改</a>
+            #end
+            #if(${webUser.hasPermission(14)})
+                <a href="linecopyvalue.htm?lId=$!{line.lId}" title="线路另存" target="_blank">线路另存</a>
+            #end
+            <a href="/printdoc/$!{line.lId}.htm" title="导出行程" target="_blank">导出行程</a>
+            <a href="/order/print/guest.htm?id=$!{line.lId}" title="游客名单" target="_blank">游客名单</a>
+            #if(${webUser.hasPermission(13)})
+                <a href="javascript:void(0)" onClick="DelList('/account/deleteline.htm',$!{line.lId},this,4);return false">删除线路</a>
+            #end
+        </div>
+    </div>
+</td>
+</tr>
+#end
+<div class="tit_ed">
+    <div class="hide">
+        <dl>
+            <dd>
+                <input type="checkbox" class="checkall"></dd>
+                <dt>
+                    <span class="checknum">您当前选择了0条数据 </span>
+                    <button class="btn btn-inverse" value="0" type="button">预定</button>
+                    <button class="btn btn-inverse" value="1" type="button">停止</button>
+                    <button class="btn btn-inverse" value="2" type="button">客满</button>
+                </dt>
+</dl>
+    </div>
+    </div>
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

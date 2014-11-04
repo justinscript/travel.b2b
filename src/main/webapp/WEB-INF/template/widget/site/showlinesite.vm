@@ -1,0 +1,24 @@
+#set($columnMap=$!{siteCache.getChugangByChugangId($!{webUser.getChugangId()}).getColumnMap()})
+<ul id="icolumnli">
+                <li>
+					<h1>国内长线</h1>
+					#set($longLineList=$!{columnMap.get(0)})
+					#foreach($!column in $longLineList)
+					<a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+					#end
+				</li>
+                <li>
+					<h1>周边短线</h1>
+  					#set($shortLineList=$!{columnMap.get(1)})
+					#foreach($!column in $shortLineList) 
+                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+					#end
+                </li>
+                <li>
+					<h1>国际线路</h1>
+                    #set($internationalLineList=$!{columnMap.get(2)})
+    				#foreach($!column in $internationalLineList) 
+                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+    				#end
+                </li>                
+</ul>

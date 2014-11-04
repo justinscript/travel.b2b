@@ -1,0 +1,463 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link href="/static/css/print.css" rel="stylesheet" media="all"/>
+<style type="text/css" media="print">
+    #printBtn
+    {
+        display: none;
+    }
+    .printBtn
+    {
+        display: none;
+    }
+    #wrapper
+    {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+
+    .noprint
+    {
+        display: none;
+    }
+    input
+    {
+        border: 0;
+    }
+</style>
+</head>
+<body>
+<div id="printBtn">
+    <a href="#" onclick="javascript:window.print();return false;">[打印本页]</a> <a href="#"
+                                                                                onclick="javascript:window.close();">[关闭窗口]</a>&nbsp; <a href="/Line/Confirm/441-doc.shtml">
+    [导出Word]</a>
+</div>
+<div class="height"></div>
+<div id="wrapper" style="padding-left: 12px;">
+<table width="732" align="center" class="noTable">
+    <tr>
+        <td style="font-weight: 700; font-size: 18px;text-align:right">
+            哈尔滨左边信息技术有限公司
+        </td>
+    </tr>
+</table>
+<table width="732" style="clear: none" align="center" class="noTable">
+    <tr>
+        <td><img src="http://www.happytoo.cn//upload/Company/3/logo/3.jpg" height="80" style="position:absolute;margin-top:-30px;" />
+            <p style="text-align:right;">
+                电话：13758253257&nbsp;&nbsp;电话：43434&nbsp;&nbsp;传真：34234</p>
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="1" style="margin-top:40px;" cellspacing="0" cellpadding="2" bordercolor="#000000"
+       style="border-collapse: collapse">
+    <tr><td colspan="6" style="text-align:center"><b>品质华五+黄山+千岛湖中心岛+双水乡</b></td></tr>
+    <tr>
+        <td align="right" width="70">
+            <b>团号：</b></td>
+        <td width="144">
+            HPT20140702132137533</td>
+        <td align="right" width="70">
+            <b>组团社：</b></td>
+        <td width="250">
+            隆鼎科技有限公司</td>
+        <td align="right" width="70">
+            <b>联系人：</b></td>
+        <td>
+            何晴</td>
+    </tr>
+    <tr>
+        <td align="right" width="70">
+            <b>电话：</b></td>
+        <td width="144">0451-86270305</td>
+        <td align="right" width="70"><b>传真：</b></td>
+        <td width="250">0451-86270305</td>
+        <td align="right" width="70"><b>手机：</b></td>
+        <td>
+            15046661642
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="70"><b>出团日期：</b></td>
+        <td width="144">
+            2014-07-25
+        </td>
+        <td align="right" width="70"><b>出发交通：</b></td>
+        <td width="250">
+            /  :/: 无
+        </td>
+        <td align="right" width="70" rowspan="2"><b>是否接送：</b></td>
+        <td rowspan="2">
+            不接送
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="70"><b>返程日期：</b></td>
+        <td width="144">
+            2014-08-01
+        </td>
+        <td align="right" width="70"><b>返程交通：</b></td>
+        <td width="250">
+            /  :/: 无
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="70"><b>集合时间：</b></td>
+        <td width="144">
+            07：00
+        </td>
+        <td align="right" width="70"><b>集合地点：</b></td>
+        <td width="250">
+            北方剧场集合
+        </td>
+        <td align="right" width="70"><b>送团电话：</b></td>
+        <td>
+            1520644631</td>
+    </tr>
+    <tr>
+        <td align="right" width="70">
+            <b>团款：</b></td>
+        <td colspan="3">
+            <font color="red">￥</font>666
+        </td>
+
+        <td align="right" width="70">
+            <b>送团标志：</b></td>
+        <td>
+            李晶</td>
+    </tr>
+    <tr>
+        <td width="70" align="right">
+            <b>客人名单：</b></td>
+        <td colspan="5">
+            12341(4123)    234123(1234)    (1大0小1)婴
+        </td>
+    </tr>
+
+</table>
+<table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000">
+    <tr style='mso-yfti-irow: 0; mso-yfti-firstrow: yes; height: 13.5pt'>
+        <td width="43">
+            日期
+        </td>
+        <td width="530">
+            描述
+        </td>
+        <td class="style5">
+            餐
+        </td>
+        <td width="104">
+            住宿
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D1</b>
+        </td>
+        <td>
+            哈尔滨乘航班飞往南京，入住宾馆。参考航班：哈尔滨-南京ZH9286   17：40—22：15
+        </td>
+        <td class="style5">
+            晚
+        </td>
+        <td>
+            威尔酒店
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D2</b>
+        </td>
+        <td>
+            07:00 酒店叫早，导游办理退房事宜.
+            07:30早餐：团餐（餐标5元/人，用餐时间约30分钟）；
+            08：00前往景点：【中山陵】   游览时间：约2小时
+            景点介绍：中山陵是中华民国国父、中国民主革命先行者孙中山的陵墓，1961年成为首批全国重点文物保护单位，2007年成为首批国家5A级景区；中山陵前临苍茫平川，后踞巍峨碧嶂，气象壮丽。
+            免责声明：每天限量接待，现阶段实行排队进入，如因客流量过大导致无法入园参观，我社不承担相关责任。（每周一祭堂和墓室关闭进行日常维护，不能正常参观）。另景区电瓶车10元/人次/单程，游客自理自由选择。
+            11：30午餐：（餐标15元/人，用餐时间约30分钟）
+
+            13：00前往城市：黄山；行驶距离：约300公里；行驶时间：约5.5小时；
+            18:30晚餐：团餐餐标15元/人
+            19:00入住酒店
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            赛特酒店千思酒店
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D3</b>
+        </td>
+        <td>
+            06:00 酒店叫早，导游办理退房事宜.
+            06:30早餐：桌餐餐标5元/人
+            温馨提示：今日中餐不含，可自备一些干粮,；不含黄山缆车单程81元/人，游客可根据自身身体情况自行到缆车售票处自行购买！
+            07：00前往景点：【黄山风景区】  游览时间：约5-8小时
+            景点介绍：天之骄子，国之瑰宝，世界奇观，大自然绝唱。她是世界文化遗产、世界自然遗产、世界地质公园，是山岳型国家重点风景名胜区，是具有世界意义的天然美景；她与长江、长城和黄河同为中 华民族的象征，被世人誉为“人间仙境”、“天下第一奇山”。明代大旅行家、地理学家徐霞客两次登黄山，见黄山之胜状，叹为“生平奇览”；
+            18:30入住酒店
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            千思假日酒店
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D4</b>
+        </td>
+        <td>
+            05:00 酒店叫早，导游办理退房事宜。
+            05:00早餐：桌餐餐标5元/人（早餐打包）
+            05:30 前往城市：淳安镇；行驶距离：约280公里；行驶时间：约3.5小时；
+            07:00前往景点：【千岛湖】 游览时间：约5-6小时
+            景点介绍：千岛湖中心四岛风景区群山绵延，森林繁茂，绿视率 100% ，湖区573平方公里的湖水晶莹透澈，能见度达12米，属国家一级水体， 被原新华社社长穆青赞誉为“天下第一秀水”(具体游览根据当地旅游部门安排游船路线，可能有少许调整）沿途尽览千岛湖青山碧水。
+            14:00前往城市：杭州；行驶距离：约150公里；行驶时间：约2.5小时；
+            17:30晚餐：团餐餐标15元/人
+            18:00前往酒店入住；
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            容滕商务
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D5</b>
+        </td>
+        <td>
+            6:00 酒店叫早，导游办理退房事宜.
+            06:30早餐：团餐（餐标5元/人，用餐时间约30分钟）；
+            07：00前往景点：船游【西湖】游览时间：约1小时
+            景点介绍：杭州西湖，世界文化遗产，国家5A级旅游景区，中国首批国家重点风景名胜区，首批全国文明风景旅游区示范点，中国十大名胜古迹之一，中国主要的观赏性淡水湖泊之一，在中国的历史文化和风景名胜中占有重要地位。乘船游览西湖部分湖区，近距离观赏三潭美景，聆听导游讲述白娘子等西湖传说。
+            09:00前往景点：【西溪湿地二期】游览时间：约1小时
+            景点介绍：电影“非诚勿扰”拍摄地；优美的湿地景观、醉人的水乡田园风情和开阔的水岸空间，是都市人假日游的理想去处。
+            10:00前往城市：桐乡，行驶距离：约100公里，行驶时间：约1.5小时
+            11:30午餐：团餐餐标15元/人
+            12:30前往景点：【乌镇东栅景区】；游览时间：约1.5小时
+            景点介绍: 感受古朴典雅的水乡风情，参观茅盾故居，江南百床馆、酿酒作坊，蓝印花布作坊等。
+            14:00前往城市：上海；行驶距离：约150公里；行驶时间：约2小时；
+            16:30晚餐：团餐餐标15元/人
+            17:00前往酒店入住。
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            轩煌酒店
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D6</b>
+        </td>
+        <td>
+            07:00 酒店叫早，导游办理退房事宜.
+            07:30早餐：团餐餐标5元/人
+            08:00前往城市：苏州；行驶距离：约80公里；行驶时间：约2小时；
+            10:00前往景点：【耦园】  游览时间：约1小时
+            景点介绍：耦园为全国重点文物保护单位，已被联合国教科文组织列入世界文化遗产。此园因在住宅东西两侧各有一园，故名耦园。南北驳岸码头是耦园特色之一，尽显姑苏“人家尽枕河”的特色；
+            12:00午餐：团餐餐标15元/人
+            13:00前往景点：【盘门 】  游览时间：约1小时
+            景点介绍：世界唯一水陆城门，以瑞光塔、水陆城门、吴门桥等千年古迹为背景而建设的园林式景区；
+            14:30前往城市：周庄；行驶距离：约50公里；行驶时间：约0.5小时；
+            15:00 前往景点：【周庄】  游览时间：约1.5小时
+            景点介绍：千年历史沧桑和浓郁吴地文化孕育的周庄，以其灵秀的水乡风貌，独特的人文景观，质朴的民俗风情，成为东方文化的瑰宝。作为中国优秀传统文化杰出代表的周庄，成为吴地文化的摇篮，江南水乡的典范
+            17:30前往城市：苏州；行驶距离：约50公里；行驶时间：约0.5小时；
+            18:00 晚餐：团餐餐标15元/人
+            18:30前往酒店入住
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            九九连锁
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D7</b>
+        </td>
+        <td>
+            7:00 酒店叫早，导游办理退房事宜.
+            07:30早餐：团餐餐标5元/人
+            08:00前往城市：无锡；行驶距离：约60公里；行驶时间：约1.5小时；
+            09:30 前往无锡景点：【灵山大佛】  游览时间：约2小时
+            景点介绍：灵山大佛坐落于无锡马山秦履峰南侧，大佛所在位置系唐玄奘命名的小灵山，故名灵山大佛。灵山大佛是无锡的标志之一，对社会文化和经济发展具有重大意义；
+            13:00 午餐：团餐餐标15元/人；
+            13:30前往景点：【鼋头渚】  游览时间约：1.5小时
+            景点介绍：鼋头渚是横卧太湖西北岸的一个半岛，位于江南名城无锡，因巨石突入湖中形状酷似神龟昂首而得名。有充山隐秀、鹿顶迎晖、鼋渚春涛、横云山庄、广福寺、太湖仙岛、江南兰苑，中日樱花友谊林等众多景观，各具风貌。风景区已成为中外驰名的旅游度假休养胜地。早餐后，根据航班时间送团，结束愉快行程。参考航班：南京-哈尔滨 ZH9285 13：00—16：40
+            温馨提示：酒店中午12点前为退房时限，若您的航班较晚，今天自由活动的时间千万不要错过哦。您可以去夫子庙美食街品尝著名的盐水鸭、鸭血粉丝、鸡汁汤包，兜兜转转玄武湖，感受下南京古城的独特魅力。
+        </td>
+        <td class="style5">
+            早<br/>中<br/>晚<br/>
+        </td>
+        <td>
+            路宝宾馆
+        </td>
+    </tr>
+
+    <tr>
+        <td style="text-align: center">
+            <b>D8</b>
+        </td>
+        <td>
+            早餐后，根据航班时间送团，结束愉快行程。参考航班：南京-哈尔滨 ZH9285 13：00—16：40
+            温馨提示：酒店中午12点前为退房时限，若您的航班较晚，今天自由活动的时间千万不要错过哦。您可以去夫子庙美食街品尝著名的盐水鸭、鸭血粉丝、鸡汁汤包，兜兜转转玄武湖，感受下南京古城的独特魅力。
+        </td>
+        <td class="style5">
+            早<br/>中
+        </td>
+        <td>
+            无
+        </td>
+    </tr>
+
+</table>
+<table width="732" align="center" border="0" cellspacing="0" class="noTable" cellpadding="0">
+    <tr>
+        <td class="title">
+            服务标准
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000"
+       style="border-collapse: ">
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            包含项目：
+        </td>
+        <td align="left">
+            住   宿：高级宾馆标准间，黄山山下含空调
+            安排住宿时，若出现单男单女，尽量安排三人间或插住其他客人，如产生自然房差，旅行社与游客协商一致解决；
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            不含项目：
+        </td>
+        <td align="left">
+            本行程报价未含电瓶车、缆车、小门票 等费用
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            儿童安排：
+        </td>
+        <td align="left">
+
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            购物安排：
+        </td>
+        <td align="left">
+            全程不安排购物
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            自费项目：
+        </td>
+        <td align="left">
+
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            赠送项目：
+        </td>
+        <td align="left">
+
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            注意事项：
+        </td>
+        <td align="left">
+            1、遇国家政策性调价，核收差价由客人自理；我社保留调整和更改行程的权力，但不减少景点，不降低标准。
+            2、遇不可抗拒的因素造成的费用增加，所产生的费用请客人自理。
+            3、旅游期间如客人自愿放弃当地景点、用餐费用均不退还。
+        </td>
+    </tr>
+    <tr>
+        <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+            其他事项：
+        </td>
+        <td align="left">
+
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="1" cellspacing="0" cellpadding="1" bordercolor="#000000"
+       style="border-collapse: collapse; margin-top: 0.5em">
+    <tr>
+        <td rowspan="3" width="80" align="right">
+            <b>公司帐号：</b>
+        </td>
+        <td>
+            工商银行：6415315646131563d</br>农业银行：6134564153131546q
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="0" cellspacing="0" cellpadding="0" bordercolor="#000000"
+       style="border-collapse: collapse; margin-top: 1em; height: 18px;">
+    <tr>
+        <td class="title" style="height: 18px;">
+            温馨提醒
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="0" cellspacing="0" cellpadding="2" bordercolor="#000000"
+       style="border-collapse: collapse">
+    <tr>
+        <td>
+            儿童1.1米以下按儿童收费；费用只包含住宿、导服、半餐、旅游车位费；景区门票自理；景
+            区内倒站车自理
+        </td>
+    </tr>
+</table>
+<table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000"
+       style="border-collapse: collapse; margin-top: 1em">
+    <tr>
+        <td>
+            确认人、日期：李娜&nbsp;&nbsp;2014-07-02
+        </td>
+        <td>
+            确认人、日期：
+        </td>
+    </tr>
+    <tr>
+        <td>
+            盖 章：
+        </td>
+        <td>
+            盖 章：
+        </td>
+    </tr>
+</table>
+</div>
+
+</body>
+</html>

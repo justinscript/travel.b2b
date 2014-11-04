@@ -1,0 +1,21 @@
+<table class="tbl" cellpadding="0" cellspacing="0">
+    <tr>
+        <th>公司名称</th>
+        <th width="100">专线名称</th>
+        <th width="100">成人数</th>
+        <th width="100">儿童数</th>
+        <th width="100">婴数</th>
+    </tr>
+    #foreach($!i in [1,2,3,4,5,6,7,8])
+        <tr>
+            <input type="hidden" value="$!i" class="cid" />
+            <td>
+                <a href="/company_view/202.htm" target="_blank" class="cname">中国海峡国际旅行社</a>
+            </td>
+            <td>滑雪专线</td>
+            <td>40000</td>
+            <td>40000</td>
+            <td>17130</td>
+        </tr>
+    #end
+</table>

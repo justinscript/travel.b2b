@@ -1,0 +1,152 @@
+@charset "utf-8";
+body{line-height:160%;font-size:12px;color:#555;text-align:center;background-color:#F9F9F9}
+body,input,select,button{font-family:verdana,sans-serif}
+h1,h2,h3,h4,h5,h6,select,input,textarea,button{font-size:100%}
+body,h1,h2,h3,h4,h5,h6,ul,ol,li,form,p,dl,dt,dd,table,th,td,img,blockquote{margin:0;padding:0;border:0}
+hr{margin:0;padding:0}
+input,button,textarea,img{line-height:normal}
+abbr,acronym,address,cite,q,em,code,var,dfn,ins{font-style:normal;text-decoration:none;border:0}
+q:before,q:after{content:""}
+ul,ol{list-style:none}
+table{border-collapse:collapse;border-spacing:0}
+.ipt-c,.ipt-r{width:16px;heivght:16px;padding:0;margin:0 3px 0 0;overflow:hidden}
+.page,.header,.content,.footer{margin:auto}
+iframe{display:inherit}
+a{color:#039;text-decoration:none}
+a:hover{text-decoration:underline}
+.clear{font-size:0;line-height:0;height:1px;clear:both;overflow:hidden;visibility:hidden}
+.txt-err,.txt-impt{color:#C00}
+.txt-tips{color:#999}
+.txt-succ{color:#3D882D}
+.txt-14{font-size:14px}
+.regForm-item-ct .pswState span{-webkit-transition-property:all;-webkit-transition-duration:0.2s;-moz-transition-property:all;-moz-transition-duration:0.2s;-o-transition-property:all;-o-transition-duration:0.2s}
+select{padding:3px;font-size:14px;font-weight:bold;color:#555}
+.header .bg,.regTabs ul,.regForm-item-ct .owned .arr,.btnReg,.mainBody-side .norCont .intro,.g-msgbox .Aclose,.ico{background-image:url(/resources/images/register/glb.png);background-repeat:no-repeat}
+.content-tit,.btn,.btn-main,.btnSml{background-image:url(/resources/images/register/bgx.png);background-repeat:repeat-x}
+.ico,.btn,.btnReg,.btnRegDisable,.btn-disable,.btn-main,.btnSml{display:inline-block;+display:inline;+zoom:1;vertical-align:middle;line-height:0;font-size:0;overflow:hidden}
+.ipt{padding:4px 5px;border:#ABABAB 1px solid;box-shadow:2px 2px 3px #EDEDED inset;font-size:14px;font-weight:bold}
+.ipt-err{border-color:#C66161;background-color:#FBE2E2;color:#C00;box-shadow:2px 2px 3px #EDEDED inset}
+.ipt-focus{background-color:#FFF;border-color:#36C}
+.btn{height:28px;padding:0 20px;font-size:14px;background-position:0 -72px;border:#BBB 1px solid;text-decoration:none;line-height:28px;color:#555;border-radius:3px;outline:none}
+.btn:hover{text-decoration:none;background-position:0 -108px}
+.btn:active{text-decoration:none;background-position:0 -144px}
+.btn-disable,.btn-disable:hover,.btn-disable:active{height:28px;padding:0 20px;font-size:14px;background-color:#F5F5F5;border:#BBB 1px solid;text-decoration:none;line-height:28px;color:#555;border-radius:3px;outline:none;cursor:default;color:#999}
+.btn-main{height:28px;padding:0 20px;font-size:14px;background-position:0 -288px;border:#459830 1px solid;text-decoration:none;line-height:28px;color:#FFF;font-weight:bold;border-radius:3px;outline:none}
+.btn-main:hover{text-decoration:none;background-position:0 -324px}
+.btn-main:active{text-decoration:none;background-position:0 -360px}
+.btnSml{height:22px;padding:0 10px;font-size:12px;background-position:0 -180px;border:#BBB 1px solid;text-decoration:none;line-height:22px;color:#555;border-radius:3px;outline:none}
+.btnSml:hover{text-decoration:none;background-position:0 -216px}
+.btnSml:active{text-decoration:none;background-position:0 -252px}
+.btnReg{width:119px;height:37px;font-size:14px;background-position:0 -360px;text-decoration:none;line-height:37px;color:#FFF;outline:none;text-align:center;font-weight:bold;border:0px; cursor:pointer;}
+.btnReg:hover{text-decoration:none;background-position:-144px -360px}
+.btnReg:active{text-decoration:none;background-position:-288px -360px}
+.btnRegDisable,.btnRegDisable:hover,.btnRegDisable:active{width:119px;height:35px;font-size:14px;background-color:#F0F0F0;border:#D8D8D8 1px solid;text-decoration:none;line-height:35px;color:#999;outline:none;text-align:center;font-weight:bold;cursor:default;border-radius:3px}
+.ico-warn-big{width:30px;height:30px;background-position:0 -216px}
+.ico-mob{width:10px;height:14px;background-position:-72px -288px}
+.ico-suc-sml{width:14px;height:14px;background-position:0 -288px}
+.ico-warn-sml{width:14px;height:14px;background-position:-36px -288px}
+.ico-mob-gray{width:66px;height:116px;background-position:-634px -72px}
+.ico-warn-large{width:44px;height:44px;background-position:-144px -216px}
+.ico-err-large{width:44px;height:44px;background-position:-72px -216px}
+.header{width:960px;height:81px;margin:0 auto;text-align:left;position:relative}
+.header .bg{width:644px;height:62px;background-position:0 0;position:absolute;left:0;top:10px}
+.header .bg a{display:block;width:128px;height:27px;white-space:nowrap;text-indent:3000px;overflow:hidden;float:left}
+.header .links{width:200px;position:absolute;right:0;top:34px;text-align:right;color:#999}
+.header .links a{margin:0 5px}
+.content{width:960px;margin:0 auto;text-align:left}
+.content-tit{height:36px;background-position:0 0;background-color:#6495C6;border:#5B88B8 1px solid;border-radius:3px 3px 0 0}
+.content-tit h1{font-size:14px;line-height:36px;font-weight:normal;color:#FFF;text-indent:20px}
+.content .mainBody-wp{border:#E0E0E0 1px solid;border-top-width:0;background:url(/resources/images/register/bgy.png) repeat-y 0 0}
+.content .mainBody{width:582px;float:left;padding:50px 0 36px 20px;zoom:1}
+.content .mainBody-side{width:315px;float:right}
+.content .mainBody-noSide{background-image:none;background-color:#FFF;text-align:center;padding:40px 0}
+.content .reg-infoBox{width:440px;height:auto;position:relative;margin:30px auto 0;text-align:left;overflow:visible}
+.content .reg-infoBox .ico-warn-large,.content .reg-infoBox .ico-err-large{position:absolute;left:-60px;top:-6px}
+.content .reg-infoBox h2{font-size:22px;font-family:"microsoft yahei";color:#555;line-height:160%}
+.content .reg-infoBox .intro{color:#749FD1;font-size:14px;line-height:24px;padding:20px 0 50px;font-family:"microsoft yahei"}
+.content .reg-infoBox .codeConfirm{}
+.content .reg-infoBox .codeConfirm li{padding:9px 0}
+.content .reg-infoBox .codeConfirm li .tit{font-size:14px;color:#555;margin-right:5px}
+.content .reg-infoBox .codeConfirm li .vCode{border:#D0D0D0 1px solid}
+.content .reg-infoBox .codeConfirm li .pspace{padding-left:94px}
+.content .reg-infoBox .intro-pic{width:184px;height:142px;position:absolute;right:-50px;top:-30px}
+.content .reg-infoBox .intro-pic-1{background:url(/resources/images/register/poc_face.png) no-repeat 0 0}
+.content .reg-infoBox .intro-pic-2{background:url(/resources/images/register/fail_face.jpg) no-repeat 0 0}
+.content .reg-infoBox .result{color:#999;line-height:24px}
+.content .reg-infoBox .result .txt-tips{color:#CCC}
+.tips-big{height:53px;line-height:53px;text-indent:5px;position:relative;width:511px;background-color:#FFFFE1;border:#C6C6A8 1px solid;font-size:14px;color:#555;margin-bottom:20px}
+.tips-big .ico{position:absolute;left:15px;top:14px}
+.regTabs{height:58px;}
+.regTabs ul{width:261px;height:35px}
+.regTabs li{width:130px;height:35px;float:left}
+.regTabs a{display:block;width:130px;height:35px;line-height:35px;text-align:center;color:#555;font-size:14px}
+.regTabs .tabs1-on{background-position:0 -72px}
+.regTabs .tabs2-on{background-position:0 -144px}
+.regTabs .tabs2-on .a2,.regTabs .tabs2-on .a2:hover,.regTabs .tabs1-on .a1,.regTabs .tabs1-on .a1:hover{font-weight:bold;color:#FFF;cursor:default;text-decoration:none}
+.regForm{}
+.regForm-item{position:relative}
+.regForm-item dt{border-bottom:#CCC 1px solid;font-size:16px;font-weight:bold;line-height:30px;height:30px;margin-bottom:15px;}
+.regForm-item th{height:40px;line-height:40px;font-size:14px;width:100px;text-align:right;font-weight:normal;}
+.regForm-item-focus .tips .txt-tips{color:#333}
+.regForm-item-focusImpt .tips .txt-tips{color:#FF9304;font-weight:bold}
+.regForm-item-focusImpt .tips .txt-tips a{font-weight:normal}
+.regForm-item-tit{position:absolute;width:75px;position:absolute;left:0;top:13px;text-align:right;font-size:14px}
+.regForm-item-ct{padding:8px 0 8px 100px;zoom:1;position:relative}
+.regForm-item-ct .ipt{width:200px}
+.regForm-item-ct .switchvCode{position:absolute;left:320px;top:45px}
+.regForm-item-ct .tips{line-height:16px;padding:6px 0 4px}
+.regForm-item-ct .btns{padding-top:5px}
+.regForm-item-ct .norWidthIpt{width:322px}
+.regForm-item-ct .vCodeWidthIpt{width:222px}
+.regForm-item-ct .vCode{border:#E7E7E7 1px solid}
+.regForm-item-ct .vCode .ipt{}
+.regForm-item-ct .mob-supt{position:relative}
+.regForm-item-ct .mob-supt .ipt{padding-left:25px;width:215px}
+.regForm-item-ct .mob-supt .ico-mob{position:absolute;left:10px;top:8px}
+.regForm-item-ct .owned{width:330px;height:auto;background-color:#FFFFE1;border:#C6C6A8 2px solid;position:relative;margin-top:13px;zoom:1;overflow:visible}
+.regForm-item-ct .owned .arr{width:25px;height:14px;background-position:-576px -72px;position:absolute;left:31px;top:-14px}
+.regForm-item-ct .owned .attent{padding:14px 10px 14px 53px;zoom:1;position:relative}
+.regForm-item-ct .owned .attent .ico-warn-big{position:absolute;left:10px;top:10px}
+.regForm-item-ct .owned .attent .ctExt{padding-top:10px}
+.regForm-item-ct .owned .attent .ctExt .txt-succ{color:#039}
+.regForm-item-ct .owned .others{border-top:#C6C6A8 1px solid;background-color:#FFF;padding:10px;zoom:1;white-space:nowrap}
+.regForm-item-ct .owned .others li{white-space:nowrap;line-height:16px;padding:4px 0;width:100%;overflow:hidden;position:relative}
+.regForm-item-ct .owned .others li strong{font-weight:normal}
+.regForm-item-ct .owned .others li label{float:left;cursor:pointer}
+.regForm-item-ct .owned .others .extInfo{float:right;color:#3D882D}
+.regForm-item-ct .owned .others .disable{color:#999}
+.regForm-item-ct .owned .others .disable .extInfo{color:#999}
+.regForm-item-ct .owned .others .disable input{visibility:hidden}
+.regForm-item-ct .owned .others li.disable label{cursor:default}
+.regForm-item-ct .owned .others .input{visibility:hidden}
+.regForm-item-ct .pswState{width:180px;height:16px;zoom:1;position:absolute;right:161px;top:6px}
+.regForm-item-ct .pswState span{display:block;width:58px;height:16px;line-height:16px;background-color:#E4E4E4;border:#FFF 1px solid;float:left;margin-right:-1px;text-align:center;overflow:hidden;color:#CECECE}
+.regForm-item-ct .pswState-poor .s1{background-color:#EA9292;border:#FFF 1px solid;color:#FFF}
+.regForm-item-ct .pswState-normal .s1,.regForm-item-ct .pswState-normal .s2{background-color:#F1D93A;border:#FFF 1px solid}
+.regForm-item-ct .pswState-normal .s1{line-height:200px}
+.regForm-item-ct .pswState-normal .s2{color:#FFF}
+.regForm-item-ct .pswState-strong .s1,.regForm-item-ct .pswState-strong .s2,.regForm-item-ct .pswState-strong .s3{background-color:#5AAC47;border:#FFF 1px solid;line-height:200px}
+.regForm-item-ct .pswState-strong .s3{line-height:16px;color:#FFF}
+.mainBody-side .mobCont,.mainBody-side .norCont{background-image:url(/resources/images/register/sidebg.png);background-repeat:no-repeat}
+.mainBody-side .mobCont{width:229px;height:241px;background-position:0 0;margin:104px 0 0 51px;position:relative}
+.mainBody-side .mobCont a{display:block;width:229px;height:68px;position:absolute;left:0;bottom:0;white-space:nowrap;text-indent:3000px;overflow:hidden}
+.mainBody-side .mobCont a:hover{background:url(/resources/images/register/try_hover.png) no-repeat 0 0}
+.mainBody-side .norCont{width:211px;height:185px;background-position:-1px -255px;margin:117px 0 0 53px}
+.footer{text-align:center;clear:both;height:40px;line-height:40px;color:#999}
+.footer a{color:#999}
+.g-mask{position:absolute;z-index:998;left:0;top:0;width:100%;height:100%;background:#000;opacity:.6;filter:alpha(opacity=60)}
+.g-msgbox{outline:none;border:2px solid #90969E;width:484px;position:absolute;+zoom:1;z-index:999;font-size:12px;line-height:1.666;box-shadow:0 0 5px rgba(0,0,0,.2);background:#fff;left:50%;margin-left:-242px;top:20%}
+.g-msgbox .Aclose{display:block;width:11px;height:11px;background-position:-107px -287px;position:absolute;right:10px;top:10px;z-index:10}
+.g-msgbox .ct{padding:40px 20px 40px 100px;zoom:1;position:relative;color:#555;line-height:200%;text-align:left}
+.g-msgbox .ct .ico-warn-big{position:absolute;left:50px;top:35px}
+.g-msgbox .ft{background-color:#F6F6F6;padding:8px;text-align:right}
+.g-msgbox .ft a{font-size:12px;margin-left:10px}
+.vCodeArea-big .regForm-item-tit{top:25px}
+.vCodeArea-big .ipt{width:196px}
+.vCodeArea-big .switchvCode{left:306px;top:65px}
+.ico-vip{display:block;width:16px;height:16px;background:url(/resources/images/register/ico_vip.gif) no-repeat 0 0;position:absolute;left:-1px;top:6px;cursor:default}
+.P-msgbox-notice{padding:23px 32px;color:#555;font-size:14px;line-height:26px;text-align:left}
+.P-msgbox-notice li{font-size:12px;padding-bottom:10px}
+.mainBody-wp{overflow:hidden;_zoom:1;position:relative}
+.mainBody-wp .m-mask{opacity:0.3;filter:alpha(opacity=30);zoom:1;width:958px;height:3000px;position:absolute;left:0;top:0;z-index:10;background:#000}
+.mainBody-hasFocus-focusArea{position:relative;background-color:#FFF;z-index:11;margin-right:60px}

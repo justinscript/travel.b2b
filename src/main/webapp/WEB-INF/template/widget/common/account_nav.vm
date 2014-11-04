@@ -1,0 +1,68 @@
+<ul id="LeftNav">
+    <li>
+        <a href="#">订单管理<i class="icon iArrow"></i></a>
+        <div>
+			#if(${webUser.hasPermission(1)})
+            <a href="/account/index.htm">散客管理</a>
+			#end
+            <a href="/account/count.htm">订单统计</a>
+        </div>
+    </li>
+	#if(${webUser.hasPermission(10)})
+    <li>
+        <a href="#">产品中心<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/account/line.htm">散客线路</a>
+            <!-- <a href="/account/road.htm">接送地管理</a>-->
+            <a href="/account/template.htm">线路模板管理</a>
+            <a href="/account/traffic.htm">交通模板管理</a>
+            <a href="/account/photo.htm">图片管理</a>
+            <!-- <a href="/account/word.htm">相关文档</a>-->
+        </div>
+    </li>
+	#end
+    <li><a href="#">账务中心<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/account/finance.htm">应收款</a>
+            <a href="/account/reminder.htm">催款单生成</a>
+        </div>
+    </li>
+    <li>
+        <a href="#">客户管理<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/account/customer.htm">公共客户</a>
+        </div>
+    </li>
+    <li>
+        <a href="#">积分管理<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/account/integral.htm">已结算积分</a>
+            <a href="/account/integral/record.htm">积分记录</a>
+        </div>
+    </li>
+    <li>
+        <a href="#">公司管理<i class="icon iArrow"></i></a>
+        <div>
+			#if(${webUser.hasPermission(32)})
+            <a href="/account/company.htm">公司信息</a>
+			#end
+			#if(${webUser.hasPermission(31)})
+            <a href="/account/news.htm">公司新闻</a>
+			#end
+        </div>
+    </li>	
+    <li>
+        <a href="#">系统管理<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/account/myinfo.htm">个人信息</a>
+			#if(${webUser.hasPermission(33)})
+            <a href="/account/user.htm">用户管理</a>
+			#end
+			#if(${webUser.hasPermission(34)})
+            <a href="/account/qq.htm">在线客服</a>
+			#end
+			<a href="/account/log.htm">操作日志</a>
+        </div>
+    </li>
+
+</ul>

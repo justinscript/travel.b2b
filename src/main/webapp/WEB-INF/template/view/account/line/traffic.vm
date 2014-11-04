@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>左边网</title>
+            <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+            <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+            <link href="/static/css/main.css" rel="stylesheet" />
+            <script src="/static/js/jquery-1.11.0.min.js"></script>
+            <script src="/static/js/bootstrap.min.js"></script>
+            <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+            <script src="/static/js/jq-zuobian-init.js"></script>
+            <script src="/static/js/layer/layer.min.js"></script>
+            <script type="text/javascript" src="/static/js/powerfloat/js/jquery-powerFloat.js"></script>
+            <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+            <script src="/static/js/common.js"></script>
+            <script src="/static/js/line.js"></script>
+            <script src="/static/js/city.js"></script>
+            <script type="text/javascript">
+                $(function(){
+                $("#FilterList").filterSearch();
+				$.Menu('产品中心','交通模板管理');
+                })
+            </script>
+</head>
+<body>
+    #parse("/widget/common/account_header.vm")
+    <div id="Bodyer">
+        #parse("/widget/common/account_nav.vm")
+		<div class="M_title">
+            <div class="tit">交通模板</div>
+			<div class="Page_button"><button type="button" class="btn btn-primary btn-sm" onclick="ajaxTemple(this)" url="trafficadd.htm" title="添加交通模板" rel="700,300">创建交通</button></div>
+            </div>		
+        
+        <div id="Main">
+            <div id="tab1" >					
+					<ul id="FilterList" url="/account/trafficpage.htm">
+						<li>
+                            <span class="tit" name="tType" hide="true">交通类型：</span>
+                            <a href="#" rel="0">飞机</a>
+                            <a href="#" rel="1">汽车</a>
+                            <a href="#" rel="2">火车</a>
+                            <a href="#" rel="3">游船</a>
+                            <a href="#" rel="4">待定</a>
+                        </li>
+						<li id="FilterSearch"><span class="tit">已选条件：</span></li>
+    						<li class="title-tab">
+                            <span class="tit" name="tCat" hide="false">类型：</span>
+                                <a href="#" rel="0">出发</a>
+                                <a href="#" rel="1">返回</a>
+                            </li>
+    				</ul>  
+				<div class="tableContent"></div>
+            </div>
+            <div id="tab2">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

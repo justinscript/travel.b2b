@@ -1,0 +1,156 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="X-UA-Compatible" content="IE=EmulateIE7" />
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>哈尔滨左边信息技术有限公司《客人名单表》</title>
+<link href="/static/css/print.css" rel="stylesheet" media="all"/>
+<style type="text/css" media="print">
+    #printBtn
+    {
+        display: none;
+    }
+    .printBtn
+    {
+        display: none;
+    }
+    #wrapper
+    {
+        width: auto;
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+
+    .noprint{display:none}
+    input{border:0;}
+</style>
+</head>
+<body>
+<div id="printBtn">
+    <a href="#" onclick="javascript:window.print();return false;">[打印本页]</a> <a href="#"
+                                                                                onclick="javascript:window.close();">[关闭窗口]</a>&nbsp; <a href="/order/exportGuest/$!{line.lId}.htm">
+    [导出Word]</a>
+</div>
+<div class="height"></div>
+<div id="wrapper">
+    <table width="732" align="center" class="noTable">
+            <tr>
+                <td style="font-weight: 700; font-size: 24px; padding: 20px; text-align: center">
+                    账务通知单
+                </td>
+            </tr>
+        </table>
+        <table width="732" align="center" border="1" cellspacing="0" cellpadding="2" bordercolor="#000000"
+            style="border-collapse: ">
+            <tr>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    To：
+                </td>
+                <td align="left" width="270">
+                国旅假日
+                </td>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    From：
+                </td>
+                <td align="left">
+                    哈尔滨左边信息技术有限公司
+                </td>
+            </tr>
+            <tr>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    收件人：
+                </td>
+                <td align="left" width="270">
+                </td>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    发件人：
+                </td>
+                <td align="left">
+                    李娜
+                </td>
+            </tr>
+            <tr>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    电话：
+                </td>
+                <td align="left" width="270">
+                </td>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    电话：
+                </td>
+                <td align="left">
+                    43434
+                </td>
+            </tr>
+            <tr>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    传真：
+                </td>
+                <td align="left" width="270">
+                </td>
+                <td align="right" width="80" style="font-weight: 700; vertical-align: top">
+                    传真：
+                </td>
+                <td align="left">
+                    
+                </td>
+            </tr>
+        </table>
+        <div style="padding-top: 10px;">
+            致：<b>国旅假日</b>
+            <br />
+            <p style="text-indent: 2em">
+                2014-08-27至2014-08-30
+                贵社尚欠我社团款元，明细如下：</p>
+        </div>
+        <table width="732" align="center" border="1" cellspacing="0" cellpadding="1" bordercolor="#000000"
+            style="border-collapse: collapse; margin-top: 0.5em">
+            <tr>
+                <th width="136">
+                    订单号
+                </th>
+                <th>
+                    线路名称
+                </th>
+                <th width="80">
+                    出团日期
+                </th>
+                <th width="80">
+                    预定人
+                </th>
+                <th width="80">
+                    人数
+                </th>
+                <th width="100">
+                    金额
+                </th>
+            </tr>
+            
+        </table>
+        <div style="padding-top: 10px; text-align: center;">
+            总应收款：0&nbsp;&nbsp;总已收款：0&nbsp;&nbsp;总未收款：0</div>
+        <table width="732" align="center" border="1" cellspacing="0" cellpadding="1" bordercolor="#000000"
+            style="border-collapse: collapse; margin-top: 0.5em">
+            <tr>
+                <td rowspan="3" width="80" align="right">
+                    <b>公司帐号：</b>
+                </td>
+                <td>
+                    工商银行：6415315646131563d</br>农业银行：6134564153131546q
+                </td>
+            </tr>
+        </table>
+        <table width="732" align="center" border="0" cellspacing="0" cellpadding="2" bordercolor="#000000"
+            style="border-collapse: collapse">
+            <tr>
+                <td>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+</body>
+</html>

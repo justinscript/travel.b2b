@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelLabelCategoryMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelLabelCategoryDO" id="baseResult">
+		<id 	column="LC_ID" 				property="lcId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 		property="gmtCreate" 		jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 		property="gmtModified" 		jdbcType="TIMESTAMP"/>
+		<result column="parent_Id" 			property="parentId" 		jdbcType="INTEGER"/>
+		<result column="lc_Name" 			property="lcName" 			jdbcType="VARCHAR"/>
+		<result column="lc_Type" 			property="lcType" 			jdbcType="INTEGER"/>
+		<result column="s_Id" 				property="sId" 				jdbcType="INTEGER"/>
+		<result column="province" 			property="province" 		jdbcType="VARCHAR"/>
+		<result column="city" 				property="city" 			jdbcType="VARCHAR"/>
+		<result column="line_Type" 			property="lineType" 		jdbcType="INTEGER"/>
+		<result column="lc_sort" 			property="lcSort" 			jdbcType="INTEGER"/>
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		lc_id, gmt_create, gmt_modified, parent_id, lc_name, lc_type, s_id, province, city, line_type, lc_sort
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY LC_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="lcId != null">
+				AND lc_Id=#{lcId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="parentId != null">
+				AND parent_Id=#{parentId}
+			</if>
+			<if test="lcName != null">
+				AND lc_Name=#{lcName}
+			</if>
+			<if test="lcType != null">
+				AND lc_Type=#{lcType}
+			</if>
+			<if test="sId != null">
+				AND s_Id=#{sId}
+			</if>
+			<if test="province != null">
+				AND province=#{province}
+			</if>
+			<if test="city != null">
+				AND city=#{city}
+			</if>
+			<if test="lineType != null">
+				AND line_Type=#{lineType}
+			</if>
+			<if test="lcSort != null">
+				AND lc_Sort=#{lcSort}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+			<if test="gmtCreate != null">
+				,GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				,GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="parentId != null">
+				,parent_Id=#{parentId}
+			</if>
+			<if test="lcName != null">
+				,lc_Name=#{lcName}
+			</if>
+			<if test="lcType != null">
+				,lc_Type=#{lcType}
+			</if>
+			<if test="sId != null">
+				,s_Id=#{sId}
+			</if>
+			<if test="province != null">
+				,province=#{province}
+			</if>
+			<if test="city != null">
+				,city=#{city}
+			</if>
+			<if test="lineType != null">
+				,line_Type=#{lineType}
+			</if>
+			<if test="lcSort != null">
+				,lc_Sort=#{lcSort}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from Travel_LabelCategory
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelLabelCategoryQuery">
+		select <include refid="column"/>
+		Travel_LabelCategory
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelLabelCategoryQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from Travel_LabelCategory
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from Travel_LabelCategory WHERE lc_ID=#{lcId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelLabelCategoryDO">
+		<selectKey resultType="java.lang.Long" keyProperty="lcId" order="BEFORE">
+			SELECT Travel_LabelCategory_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into Travel_LabelCategory(<include refid="column"/>) values (
+			#{lcId},SYSTIMESTAMP,SYSTIMESTAMP,
+			#{parentId,jdbcType=INTEGER},
+			#{lcName,jdbcType=VARCHAR},
+			#{lcType,jdbcType=INTEGER},
+			#{sId,jdbcType=INTEGER},
+			#{province,jdbcType=VARCHAR},
+			#{city,jdbcType=VARCHAR},
+			#{lineType,jdbcType=INTEGER},
+			#{lcSort,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelLabelCategoryDO">
+		update Travel_LabelCategory <include refid="update_set_clause"/> where lc_ID=#{lcId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete Travel_LabelCategory where lc_ID=#{lcId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelLabelCategoryQuery">
+		select count(1) from Travel_LabelCategory <include refid="query_where_clause"/>
+	</select>
+</mapper>

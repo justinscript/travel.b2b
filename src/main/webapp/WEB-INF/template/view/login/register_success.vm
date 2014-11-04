@@ -1,0 +1,27 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<div id="register">
+  <div class="c success" id="register_success">
+      <div class="info">
+      <dl>
+      <dt><i class="ico2"></i>会员申请成功！</dt>
+      <dd>公司名：$!companyDO.cName 用户名：$!memberDO.mUserName</dd>
+      <dd>请耐心等待工作人员审核，审核期间请保持手机畅通，处理时间为1-2个工作日，如有疑问请拨打：<b>400 0378 777</b></dd>
+      </div>
+  </div>
+</div>  
+#parse("/widget/common/index1409_footer.vm")
+</body>
+</html>

@@ -1,0 +1,69 @@
+<script src="/static/js/tooltip/jquery.poshytip.min.js"></script>
+<link rel="stylesheet" href="/static/js/tooltip/tip-yellowsimple/tip-yellowsimple.css" type="text/css" />
+<script type="text/javascript">
+	$(function(){
+    	$(".moredate").click(function(event){
+			var loadi = layer.load('加载中…');
+    		$.ajax({
+    			url:"/line/linedate.htm",
+    			type:"get",
+    			dataType:"html",
+    			data:"id="+$(this).attr("data-id"),
+    			success:function(htm){
+				var pagei = $.layer({
+                    type : 1,
+                    title : false,
+                    offset:['150px' , ''],
+                    border : false,
+					shadeClose: true,
+					zIndex:999,
+                    area: ['447px', '378px'],
+                    page: {
+                        html: htm
+                    }
+                });
+    			},
+        		complete: function () {
+        			layer.close(loadi);
+        		},
+        		error: function (err) {  }
+            		})
+            	})
+		
+	})
+</script>
+<style type="text/css">
+	.min-datebox{position: relative;width:60px;height:30px;}
+	.min-date{position:absolute;z-index:999;right:60px;top:0;width:363px;height:293px;}
+</style>
+<table class="tbl" cellpadding="0" cellspacing="0">
+    <tr>
+            <th width="100">出发/抵达</th>
+            <th>线路名称</th>
+            <th width="150">结算价</th>
+            <th width="60">出团日期</th>
+</tr>
+#foreach( $!line in $list ) 
+    <tr>
+            <td>$!line.lCity/$!line.lArrivalCity</td>
+            <td>
+                #set($url='/line/' + $!{line.lGroupNumber} + '.htm')
+                <a href="$url" target="_blank">$!line.lTile</a>
+                <br/>
+                <label>标准：</label>
+                $!line.lTypeString
+                #if($!line.lIsIntegral==1)
+                    <label class="split">|</label>
+                    <label>积分：</label>
+                    $!line.lAdultIntegral/成人|$!line.lChildrenIntegral/儿童
+                #end
+            </td>
+            <td class="price">￥$!{format.formatFloat($!line.lJCrPrice)}<em>起</em></td>
+            <td><div class="min-datebox">
+					<a href="javascript:void(0)" title="预定" data-id="$!{line.lGroupNumber}" class="moredate">更多团期</a>
+					<div class="min-date"></div>
+			</div></td>
+</tr>
+#end
+</table>
+$widget.setTemplate("pagination/pager").addParam('pagination',$pagination)

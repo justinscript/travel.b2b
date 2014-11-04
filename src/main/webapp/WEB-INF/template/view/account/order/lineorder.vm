@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>左边网</title>
+            #parse("/widget/pagination/account_js.vm")
+            <script type="text/javascript">
+                $(function(){
+                    $.Menu('产品中心','散客线路')
+                })
+            </script>
+</head>
+<body>
+    #parse("/widget/common/account_header.vm")
+    <div id="Bodyer">
+        #parse("/widget/common/account_nav.vm")
+        <div class="M_title">
+            <div class="tit">线路管理</div>
+            <div class="Page_option">
+                <ul>
+                    <li class="disabled">
+                        <a href="/account/line.htm" rel="">线路列表</a>
+                    </li>
+                    <li class="disabled current">
+                        <a href="javascript:void(0)">线路订单</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div id="Main">
+                <table width="100%" class="table table-bordered order-table2">
+                    <tr>
+                        <th>线路名称：</th><td>$!line.lTile</td>
+                        <th>团号：</th><td colspan="3">$!line.lGroupNumber</td>
+                    </tr>
+                    <tr>
+                        <th>总人数：</th><td>共：$!line.lRenCount     剩：#set($shen = $!line.lRenCount - $!line.lCrCount - $!line.lXhCount)$!shen</td>
+                        <th>旅游天数：</th><td colspan="3">$!line.lDay 天</td>
+                    </tr>
+                    <tr>
+                        <th>交通类型：</th><td>$!line.lTrafficyTypeString</td>
+                        <th>是否接送：</th><td colspan="3">
+                        	#if($!line.lIsJs==0)
+                        		否
+                        	#else
+                        		是
+                        	#end
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>出发日期：</th><td>成人：$!line.lGoGroupTimeString  截止日期：$!line.lEndTimeString</td>
+                        <th>出发交通：</th><td>$!line.lTrafficyTypeString</td>
+                        <th>出发地：</th><td>$!line.lProvince-$!line.lCity</td>
+                    </tr>
+                    <tr>
+                        <th>返程日期：</th><td>$!line.lBackTimeString</td>
+                        <th>返程交通：</th><td>$!line.lTrafficBackTypeString</td>
+                        <th>抵达地：</th><td>$!line.lArrivalProvince-$!line.lArrivalCity</td>
+                    </tr>
+                    <tr>
+                        <th>集合时间：</th><td>$!line.lJhdTime</td>
+                        <th>集合地点：</th><td>$!line.lJhd</td>
+                        <th>单房差价：</th><td>$!format.formatFloat($!line.lFangPrice)</td>
+                    </tr>
+                    <tr>
+                        <th>送团标志：</th><td>$!line.lIco</td>
+                        <th>送团电话：</th><td colspan="3">$!line.lGroupTel</td>
+                    </tr>
+                    <tr>
+                        <th>成人门市：</th><td>$!format.formatFloat($!line.lCrPrice) 元/人</td>
+                        <th>小孩门市：</th><td>$!format.formatFloat($!line.lXhPrice) 元/人</td>
+                        <th>婴儿价格：</th><td>$!format.formatFloat($!line.lYPrice) 元/人</td>
+                    </tr>
+                    <tr>
+                        <th>成人结算：</th><td>$!format.formatFloat($!line.lJCrPrice) 元/人</td>
+                        <th>小孩结算：</th><td colspan="3">$!format.formatFloat($!line.lJXhPrice) 元/人</td>
+                    </tr>
+                    <tr>
+                        <th>线路说明：</th><td colspan="5">$!line.lMode</td>
+                    </tr>
+                    <tr>
+                        <th>内部备注：</th><td colspan="5">$!line.lNMode</td>
+                    </tr>
+                </table>
+                
+                <div class="order-input">
+                	#if($!line.lState == 0)
+                    	<button class="btn btn-success" type="button">预定</button>
+                    #elseif($!line.lState == 1)
+                    	<button class="btn btn-danger" type="button">停止</button>
+                    #elseif($!line.lState == 2)
+                    	<button class="btn btn-warning" type="button">客满</button>
+                    #end
+                    <a href="/account/print/line.htm" class="btn" target="_blank">打印行程</a>
+                    <a class="btn">编辑线路</a>
+                </div>
+                
+                <div class="title_form">
+                    <span>订单列表</span>
+                            <span class="fr">
+                            	
+                                <a href="/order/print/ticket.htm?id=$!line.lId" class="btn btn-info" target="_blank">送机名单</a>
+                                <a href="/order/print/guest.htm?id=$!line.lId" class="btn btn-info" target="_blank">游客名单</a>
+                                <a href="/order/print/goticket.htm?id=$!line.lId" class="btn btn-info" target="_blank">出票名单</a>
+                            </span>
+                </div>
+                <table width="100%" class="table table-bordered">
+                    <tr>
+                        <th width="60">状态</th>
+                        <th width="150">预定人/预定旅行社</th>
+                        <th width="80">订单总额</th>
+                        <th width="80">人数</th>
+                        <th width="100">操作时间</th>
+                        <th>备注</th>
+                        <th>内部备注</th>
+                        <th width="180">操作</th>
+                    </tr>
+                	#foreach( $!order in $orderList )
+                       <tr>
+                       	<td> 
+                        	#if($!order.orState==0)
+                			<font color="red">
+                				未确认
+                			</font>
+                			<br/>
+                			#elseif($!order.orState==3)
+                			<font color="#f4a460">
+                				名单不全
+                			</font>
+                			<br/>
+                			#elseif($!order.orState==2)
+                			<font color="#E6E6E6">
+                				已取消
+                			</font>
+                			<br/>
+                			#elseif($!order.orState==1)
+                			<font color="green">
+                				已确认
+                			</font>
+                			#end
+                        <td>
+                            $!order.mName  $!order.mTel<br/>
+                            $!order.cName
+                        </td>
+                        <td>
+                            	￥#set ($ddje = $!order.orFirstJcrPrice * $!order.orAdultCount + $!order.orFirstJxhPrice * $!order.orChildCount + $!order.orFirstyPrice * $!order.orBabyCount)
+                            	$!format.formatFloat($!ddje)
+                        </td>
+                        <td>
+                        	$!order.orAdultCount大$!order.orChildCount小$!order.orBabyCount婴
+                        </td>
+                        <td>预定：${dateViewTools.formatDate($!order.gmtCreate)}<br/>
+						#if($order.orState==3)确认：${dateViewTools.formatDate($!order.gmtModified)}#end
+						</td>
+                        <td>$!order.orMode</td>
+                        <td>$!order.orNMode</td>
+                        <td style="line-height: 26px;">
+								#if($!order.orState==0)<a href="javascript:confirmorder($!order.orId)" class="btn btn-mini"><i class="icon-ok"></i> 确认</a>#end
+								<a href="/order/orderdetails.htm?id=$!order.orId" class="btn btn-mini" target="_blank"><i class="icon-eye-open"></i> 查看</a>
+                                #if($order.orState!=1)<a href="javascript:ClearOrder(1,$!order.orId)" class="btn btn-mini"><i class="icon-trash"></i> 取消</a>#end
+								#if($!order.orState==1)<a href="/account/printDocOrder/$!{order.orId}.htm" class="btn btn-mini" target="_blank"><i class="icon-share"></i> 生成确认单</a>#end
+                        </td>
+                      </tr>
+                    #end
+                </table>
+            
+        </div>
+    </div>
+</body>
+</html>

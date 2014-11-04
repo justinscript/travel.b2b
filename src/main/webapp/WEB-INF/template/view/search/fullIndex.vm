@@ -1,0 +1,104 @@
+<style>
+	.contianer{
+		width:960px;
+		margin:0 auto;
+		border:1px black solid;
+		padding:1.5em;
+	}
+	td{display:inline-block;margin:10px}
+	.button{display:inline-block;padding-left:1.5em;padding-right:1.5em;background-color:#FFEBCD;border-radius:6px}
+	
+	#message{
+		display:none;
+		width:960px;
+		margin:0 auto;
+		margin-top:10px;
+		padding:1.5em;
+		border:1px black solid
+	}
+	textarea{
+		width:500px;
+		height:120px;
+		vertical-align:middle;
+	}
+	
+</style>
+<div class="contianer">
+<form>
+<table>
+	<thead>
+	</thead>
+	<tbody>
+		<tr>
+            <td>类型：
+				<select name="key">
+					<option value="word" >词库</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td id="params">
+				参数：<textarea name="param">{"title":"美的电磁炉"}</textarea>
+			</td>
+		</tr>
+		<tr>
+			<td>强制更新: 是<input type="radio" name="_force" value="y"> 否<input  type="radio" name="_force" value="n" checked></td>
+			<td>
+				<input type="button" class="button" value="历史" id="peek"/>
+				<input type="button" class="button" value="开始更新" id="fullIndex"/>
+				<input type="button" class="button" value="清空" id="clearAll"/>
+			</td>
+		</tr>
+	</tbody>
+</table>
+</form>
+</div>
+<div  style="display:hidden" id="message">
+</div>
+<script>
+	var interval ;
+	function tips(data){
+		jQuery("#message").slideUp('slow');
+		jQuery("#message").html('<span>'+data.message+'</span>');
+		if(data.result != 0){
+			jQuery("#message").css('color','red');
+		}else{
+			jQuery("#message").css('color','green');
+		}
+		jQuery("#message").slideDown('slow');
+	}
+	
+	function peek(){
+		jQuery.post('/search/peek.htm',$(document.forms[0]).serialize(),function(data){
+			tips(data);
+			if(data.result != 0){
+				clearInterval(interval);
+			}
+		});		
+	}
+	function save(){
+		jQuery.post('/search/fullIndex.htm',$(document.forms[0]).serialize(),function(data){
+			tips(data);
+		});
+		interval = setInterval(peek,10000);
+		//peek();
+	}
+	
+	function clearAll(){
+		var typeEle = jQuery('[name="key"] :checked');
+		if(confirm('你确定要清空！'+typeEle.text())){
+			jQuery.post('/search/clear.htm',{key:typeEle.val()}	,function(data){tips(data)});	
+		}
+	}
+	
+	function typeChange(){
+	}
+	
+	jQuery(function(){
+		peek();
+		jQuery("#peek").click(peek);
+		jQuery("#fullIndex").click(save);
+		jQuery('#clearAll').click(clearAll);
+		jQuery('[name="key"]').change(typeChange);
+	});
+</script>

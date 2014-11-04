@@ -1,0 +1,151 @@
+<style>
+	.token_invalid{margin:0 auto;width:960px;color:#f00;font-size:16px;font-weight:700;}
+</style>
+<div class="token_invalid">
+	<p>您的TOKEN已经失效，请重新授权！</p>
+	<p >$mytest</p>
+	<p >${dateViewTools.formatDate($mytest)}</p>
+	$dateViewTools
+</div>
+</br>
+</br>
+</br>
+<form action="/saveTest.htm" method="post" id="Line-Post">
+    <table class="table table-bordered">
+        <tr>
+            <th>姓名</th>
+            <th>性别</th>
+            <th>类型</th>
+            <th>手机</th>
+            <th>证件号</th>
+            <th>单房差</th>
+            <th>优惠价</th>
+            <th>备注</th>
+            <th>操作</th>
+        </tr>
+        <tr class="info">
+            <td><input type="text" value="$!guest.gName" class="w50" name="guest.gName"/> </td>
+            <td>
+				<select name="guest.gSex" class="w50">
+                    <option value="1">男</option>
+                    <option value="2">女</option>
+				</select>
+			</td>
+            <td>
+                <select name="guest.gType" class="w70">
+                    <option value="1">成人</option>
+                    <option value="2">儿童</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" value="$!guest.gMobile" class="w80" name="guest.gMobile"/>
+            </td>
+            <td><input type="text" value="$!guest.gCard" class="w120" name="guest.gCard"/></td>
+            <td><select name="guest.gDangFang" class="w60">
+                <option value="1">是</option>
+                <option value="2">否</option>
+            </select></td>
+            <td><input type="text" value="$!guest.gYouHui" class="w50" name="guest.gYouHui"/></td>
+            <td><input type="text" value="$!guest.gMode" name="guest.gMode"/></td>
+            <td>
+                <div class="w120" style="line-height: 26px;">
+                    <a href="#" class="btn btn-mini"><i class="icon-plus"></i> 添加</a>
+                    <a class="btn btn-mini" href="#"><i class="icon-remove"></i>删除</a>
+                </div>
+            </td>
+        </tr>
+		<tr class="info">
+            <td><input type="text" value="$!guest.gName" class="w50" name="guest.gName"/> </td>
+            <td><select name="guest.gSex" class="w50">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select></td>
+            <td>
+                <select name="guest.gType" class="w70">
+                    <option value="1">成人</option>
+                    <option value="2">儿童</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" value="$!guest.gMobile" class="w80" name="guest.gMobile"/>
+            </td>
+            <td><input type="text" value="$!guest.gCard" class="w120" name="guest.gCard"/></td>
+            <td><select name="guest.gDangFang" class="w60">
+                <option value="1">是</option>
+                <option value="2">否</option>
+            </select></td>
+            <td><input type="text" value="$!guest.gYouHui" class="w50" name="guest.gYouHui"/></td>
+            <td><input type="text" value="$!guest.gMode" name="guest.gMode"/></td>
+            <td>
+                <div class="w120" style="line-height: 26px;">
+                    <a href="#" class="btn btn-mini"><i class="icon-plus"></i> 添加</a>
+                    <a class="btn btn-mini" href="#"><i class="icon-remove"></i>删除</a>
+                </div>
+            </td>
+        </tr>
+		<tr class="info">
+            <td><input type="text" value="$!guest.gName" class="w50" name="guest.gName"/> </td>
+            <td><select name="guest.gSex" class="w50">
+                <option value="1">男</option>
+                <option value="2">女</option>
+            </select></td>
+            <td>
+                <select name="guest.gType" class="w70">
+                    <option value="1">成人</option>
+                    <option value="2">儿童</option>
+                </select>
+            </td>
+            <td>
+                <input type="text" value="$!guest.gMobile" class="w80" name="guest.gMobile"/>
+            </td>
+            <td><input type="text" value="$!guest.gCard" class="w120" name="guest.gCard"/></td>
+            <td><select name="guest.gDangFang" class="w60">
+                <option value="1">是</option>
+                <option value="2">否</option>
+            </select></td>
+            <td><input type="text" value="$!guest.gYouHui" class="w50" name="guest.gYouHui"/></td>
+            <td><input type="text" value="$!guest.gMode" name="guest.gMode"/></td>
+            <td>
+                <div class="w120" style="line-height: 26px;">
+                    <a href="#" class="btn btn-mini"><i class="icon-plus"></i> 添加</a>
+                    <a class="btn btn-mini" href="#"><i class="icon-remove"></i>删除</a>
+                </div>
+            </td>
+        </tr>
+    </table>
+	<div style="margin: 0 auto; width: 880px; text-align: center; margin-top: 10px; padding-bottom: 30px">
+    <div class="text-center">
+		<button class="btn btn-large btn-primary w200" type="submit">保存订单</button>
+    </div>
+</div>
+</form>
+</br>
+</br>
+</br>
+
+<form action="/msg/save.htm" class="userloginform" method="post" id="Line-Post">
+	消息: <input type="text" value="" class="w80" name="msg"/>
+	用户: <input type="text" value="" class="w80" name="cid"/>
+	<div style="margin: 0 auto; width: 880px; text-align: center; margin-top: 10px; padding-bottom: 30px">
+    <div class="text-center">
+		<button class="btn btn-large btn-primary w200" type="submit">保存消息</button>
+    </div>
+</div>
+</form>
+	
+<script >
+$(function(){
+    //会员登录
+    var userloginform = $(".userloginform").Validform({
+        url: "/msg/save.htm",
+        postonce: false,
+        showAllError: false,
+        ajaxPost: true,
+        callback: function (data) {
+            if (data.code == "0") {
+               
+            }
+        }
+    });
+)}
+</script>

@@ -1,0 +1,68 @@
+<script type="text/javascript">
+$(function(){
+	SiteSelect2();
+	
+})
+</script>
+<div class="title_form">客服添加</div>
+<form id="NewUserForm" method="post" action="/account/qqSave.htm">
+    <input type="hidden" name="act" value="newqq" />
+    <input type="hidden" name="sId" value="$!{service.sId}" />
+    <table width="100%" cellpadding="0" cellspacing="0" class="table tab2">
+        <tr>
+            <th width="90">
+                专线选择：
+            </th>
+            <td><input type="hidden" name="mRole" id="mRole" value="$!format.listToString($!service.zId)"/>
+               <div class="comlist"></div>
+            </td>
+        </tr>
+        <tr>
+            <th width="90">
+                用户名：
+            </th>
+            <td>
+                <span><input type="text" value="$!{service.sName}" name="sName"  datatype="*" nullmsg="用户名不能为空" /></span>
+                <div class="Validform_checktip"></div>
+                </span>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                QQ号码：
+            </th>
+            <td>
+                <span><input  nullmsg="请填写您的QQ号码" datatype="n" errormsg="QQ号码格式错误" type="text" name="sQQ" value="$!{service.sQQ}" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                手机号码：
+            </th>
+            <td>
+                <span>
+					<input nullmsg="请填写您的手机号码" datatype="n" errormsg="手机号码格式错误" type="text" name="sMobile" value="$!{service.sMobile}" class="fl" />
+					 <label class="rad"><input type="checkbox" value="86" name="zId" class="mRole">是否接受订单提醒</label>
+				</span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>		
+        <tr>
+            <th>
+                排序：
+            </th>
+            <td>
+                <span><input type="text" value="$!{service.sSort}" name="sSort" datatype="n" ignore="ignore" class="w50"/></span>
+				<div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr><td></td>
+            <td>
+                <button class="btn btn-primary" type="submit" onclick="OrgFormL(this)">提交</button>
+            </td>
+        </tr>
+    </table>
+    <div class="clear">
+    </div>
+</form>

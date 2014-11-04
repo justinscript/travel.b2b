@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelBlackListMapper">
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelBlackListFullDO" id="fullResult">
+		<id 	column="b_Id" 			property="bId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />
+    	<result column="GMT_MODIFIED"	property="gmtModified" 	jdbcType="TIMESTAMP" />
+    	<result column="be_C_Id" 		property="beCId" 		jdbcType="INTEGER" />
+    	<result column="c_Id" 			property="cId" 			jdbcType="INTEGER" />
+    	<result column="m_Id" 			property="mId" 			jdbcType="INTEGER" />
+    	<result column="b_Remark" 		property="bRemark" 		jdbcType="VARCHAR" />
+    	<result column="be_c_name" 		property="beCName" 		jdbcType="VARCHAR" />
+    	<result column="c_name" 		property="cName" 		jdbcType="VARCHAR" />
+    	<result column="m_name" 		property="mName" 		jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelBlackListDO" id="baseResult">
+		<id 	column="b_Id" 			property="bId" 			jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP" />
+    	<result column="GMT_MODIFIED"	property="gmtModified" 	jdbcType="TIMESTAMP" />
+    	<result column="be_C_Id" 		property="beCId" 		jdbcType="INTEGER" />
+    	<result column="c_Id" 			property="cId" 			jdbcType="INTEGER" />
+    	<result column="m_Id" 			property="mId" 			jdbcType="INTEGER" />
+    	<result column="b_Remark" 		property="bRemark" 		jdbcType="VARCHAR" />
+	</resultMap>
+	
+	<resultMap type="com.zb.app.biz.domain.TravelBlackListThinDO" id="thinResult">
+		<result column="c_name" 			property="cName" 		jdbcType="VARCHAR"/>
+    	<result column="be_c_id" 			property="beCId" 		jdbcType="INTEGER" />
+    	<result column="black_count" 		property="blackCount" 	jdbcType="INTEGER" />
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+			b_id, gmt_create, gmt_modified, be_c_id, c_id, m_id, b_remark
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY B_ID DESC
+	</sql>
+	
+	<!-- 条件查询 -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="bId != null">
+				b_Id=#{bId}
+			</if>
+			<if test="gmtCreate != null">
+				and gmt_Create T_CAT=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				and gmt_Modified=#{gmtModified}
+			</if>
+			<if test="beCId != null">
+				and be_C_Id=#{beCId}
+			</if>
+			<if test="cId != null">
+				and C_ID=#{cId}
+			</if>
+			<if test="mId != null">
+				and m_Id=#{mId}
+			</if>
+			<if test="bRemark != null">
+				and b_Remark=#{bRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP" suffixOverrides=",">
+			<if test="gmtCreate != null">
+				,gmt_Create T_CAT=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				,gmt_Modified=#{gmtModified}
+			</if>
+			<if test="beCId != null">
+				,be_C_Id=#{beCId}
+			</if>
+			<if test="cId != null">
+				,C_ID=#{cId}
+			</if>
+			<if test="mId != null">
+				,m_Id=#{mId}
+			</if>
+			<if test="bRemark != null">
+				,b_Remark=#{bRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from Travel_BlackList
+	</select>
+	
+	<!-- 查询所有公司被拉黑的次数 -->
+	<select id="queryAllCompanyBlack" resultMap="thinResult">
+		<include refid="PAGINATION.paginationStart"/>
+		select c.c_name as c_name, b.be_c_id as be_c_id, count(1) as black_count from travel_blacklist b left join travel_company c on b.be_c_id = c.c_id group by c.c_name, b.be_c_id
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	<select id="thinCount" resultType="java.lang.Integer">
+		select count(distinct be_c_id) from travel_blacklist b left join travel_company c on b.be_c_id = c.c_id
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="fullResult" parameterType="com.zb.app.biz.query.TravelBlackListQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select a.*,b.c_name as be_c_name,c.c_name as c_name, d.m_name as m_name 
+		from travel_blacklist a 
+		left join travel_company b on a.be_c_id = b.c_id 
+		left join travel_company c on a.c_id = c.c_id 
+		left join travel_member d on a.m_id = d.m_id
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<select id="find" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+		select <include refid="column" /> from Travel_BlackList
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+  	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getBlackCount" parameterType="java.lang.Integer" resultType="java.lang.Integer">
+		select count(1) from travel_blacklist <include refid="query_where_clause"/>
+	</select>
+	
+	<!-- 查询公司被拉黑的次数 -->
+	<select id="getById" parameterType="com.zb.app.biz.query.TravelBlackListQuery" resultMap="baseResult">
+		select <include refid="column"/> from Travel_BlackList WHERE b_ID=#{bId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelBlackListDO">
+		<selectKey resultType="java.lang.Long" keyProperty="bId" order="BEFORE">
+			SELECT Travel_BlackList_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into Travel_BlackList (<include refid="column"/>) values (
+			#{bId},
+			SYSTIMESTAMP,
+			SYSTIMESTAMP,
+			#{beCId,jdbcType=INTEGER},
+			#{cId,jdbcType=INTEGER},
+			#{mId,jdbcType=INTEGER},
+			#{bRemark,jdbcType=VARCHAR}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelBlackListDO">
+		update Travel_BlackList <include refid="update_set_clause"/>
+		where b_ID=#{bId}
+	</update>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelBlackListQuery">
+		select count(1) from Travel_BlackList <include refid="query_where_clause"/>
+	</select>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete Travel_BlackList WHERE b_ID = #{bId,jdbcType=INTEGER}
+	</delete>
+</mapper>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    #parse("/widget/pagination/account_js.vm")
+    <script type="text/javascript">
+            $(function(){
+               $.Menu("系统大厅","系统大厅");
+            })
+        </script>
+</head>
+<body>
+
+#parse("widget/common/account_header.vm")
+    <div id="Bodyer">
+       #parse("widget/common/account_nav.vm")
+
+        <div id="Main">
+            <div class="i_memo">
+                <div class="i_head">
+					#if(!$!mPic || $!mPic=="")
+						<img src="/static/img/nohead.jpg" width="120" />
+					#else
+						<img src="$!mPic" width="120" />
+					#end
+                </div>
+                <div class="i_r">
+                    <span class="i_name">$!{webUser.getNick()}<em>欢迎您！</em></span>
+                    <span>$!{webUser.getCompanyName()}</span><br />
+                    <dl>
+                        <dt>上次登录时间：</dt><dd>${dateViewTools.formatFullDate($!mLastLoginTime)}</dd>
+                    </dl>
+                    <dl>
+                        <dt>订单提醒：</dt>
+						<dd><a href="/account/index.htm">最新订单(<span id="NewOrder">$!newOrder</span>)</a></dd>
+                        <dd><a href="/account/index.htm#orState=0">未确认订单(<span id="NoOrder">
+							#if(!$!{unConfirm} || $!{unConfirm}=="")
+								0
+							#else
+								$!unConfirm
+							#end
+						</span>)</a></dd>
+                        <dd><a href="/account/index.htm#orState=1">已确认订单(<span id="OkOrder">
+							#if(!$!{confirm} || $!{confirm}=="")
+								0
+							#else
+								$confirm
+							#end
+						</span>)</a></dd>
+                    </dl>
+                </div>
+
+            </div>
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelGiftClassMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelGiftClassDO" id="baseResult">
+		<id 	column="GC_ID" 			property="gcId" 		jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 	jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 	property="gmtModified" 	jdbcType="TIMESTAMP"/>
+		<result column="GC_NAME" 		property="gcName" 		jdbcType="VARCHAR"/>
+		<result column="GC_PARENTID" 	property="gcParentId" 	jdbcType="INTEGER"/>	
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		GC_ID,GMT_CREATE,GMT_MODIFIED,GC_NAME,GC_PARENTID
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY GC_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="gcId != null">
+				AND GC_ID=#{gcId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="gcName != null">
+				AND GC_NAME=#{gcName}
+			</if>
+			<if test="gcParentId != null">
+				AND GC_PARENTID=#{gcParentId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="gcName != null">
+				GC_NAME=#{gcName},
+			</if>
+			<if test="gcParentId != null">
+				GC_PARENTID=#{gcParentId}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_GIFTCLASS
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelGiftClassQuery">
+		select <include refid="column"/>
+		from TRAVEL_GIFTCLASS
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelGiftClassQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_GIFTCLASS
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_GIFTCLASS WHERE GC_ID=#{gcId,jdbcType=INTEGER}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelGiftClassDO">
+		<selectKey resultType="java.lang.Long" keyProperty="gcId" order="BEFORE">
+			SELECT TRAVEL_GIFTCLASS_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_GIFTCLASS(<include refid="column"/>) values (
+			#{gcId},SYSTIMESTAMP,SYSTIMESTAMP,
+			#{gcName,jdbcType=VARCHAR},#{gcParentId,jdbcType=INTEGER}
+			)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelGiftClassDO">
+		update TRAVEL_GIFTCLASS <include refid="update_set_clause"/> where GC_ID=#{gcId}
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_GIFTCLASS where GC_ID=#{gcId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelGiftClassQuery">
+		select count(1) from TRAVEL_GIFTCLASS <include refid="query_where_clause"/>
+	</select>
+</mapper>

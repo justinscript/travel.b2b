@@ -1,0 +1,247 @@
+<style>
+	.clearfix:after {
+		clear:both;
+		content:".";
+		display:block;
+		font-size:0;
+		height:0;
+		visibility:hidden;
+	}
+	
+	a{text-decoration:none;}
+
+	.clearfix { display:block; }
+	
+	
+	.grid-s5m0 .main-wrap{
+		margin-left:0;
+	}
+	
+	
+	#tab-container{
+		width:100%;
+		border:1px red solid;
+		padding:1.5em;
+	}
+	
+	.tab-hd{
+		border-radius:5px;
+		padding:10px;
+	}	
+	
+	.tab-hd , .tab-hd ul {background-color:#fff;}
+	
+	
+	.tabs-skin-a .tab-hd{
+	}
+	
+	.tabs-skin-a .trigger{
+		float:left;
+		border:#666 solid 1px;
+		background-color:#fff;
+		margin-right:5px;
+		position:relative;
+		top:1px;
+		width:10em;
+		border-radius:5px;
+		text-align:center;
+		line-height:18px;
+		height:18px;
+	}
+	
+	.tabs-skin-a .trigger a{
+		font-weight:700;
+	}
+	
+	.tabs-skin-a .current{
+		background-color:#e5e5e5;
+	}
+	
+	.tabs-skin-a .tab-bd{border:#333 solid 1px;float:left}
+	.tabs-skin-a .tab-bd .tab-panel{display:none}
+	.tabs-skin-a .tab-bd .current{display:block}
+	
+	.tabs-skin-a  .tab-panel{width:1124px;margin:0 auto;}
+	
+	#message{
+		background-color: #000000;
+        border: 1px solid black;
+        font-size: 14px;
+        font-weight: 900;
+        min-height:200px;
+		max-height:500px;
+		position:relative;
+        text-align: left;
+        width: 1124px;
+	}
+	
+	
+	td{padding:10px 20px;}
+	
+	#versionControll table,#versionControll table tr,#versionControll table tr th,#versionControll table td{border:1px black solid;width:100%;}
+	
+</style>
+<div id="tab-container" class="clearfix">
+    <div class="tabs tabs-skin-a clearfix">
+    	<div class="tab-hd clear">
+    		<ul class="clearfix">
+    			<li class="trigger current"><a href="#classic-dress" title="Build">Build</a></li>
+    			<li class="trigger"><a href="#classic-dress" title="版本控制">版本控制</a></li>
+    		</ul>
+    	</div>
+    	<div class="tab-bd clear">
+    		<div class="tab-panel current" id="">
+    			<form id="searchBuild">
+    			<table>
+    				<tbody>
+            		<tr>
+                        <td>类型：
+            				<select name="key">
+								<option value="word" selected data-versiontype="word">词库</option>
+            					<option value="product" data-versiontype="hotword_search">旅游线路</option>
+            				</select>
+            			</td>
+						<td>
+							版本：
+							<select name="version">
+                            </select>
+						</td>
+            			<td>强制: 是<input type="radio" name="_force" value="y"> 否<input  type="radio" name="_force" value="n" checked></td>
+            			<td>
+            				<input type="button" class="button" value="历史" onclick="manage('peek')"/>
+            				<input type="button" class="button" value="开始更新" onclick="manage('index')"/>
+            				<input type="button" class="button" value="清空" onclick="manage('clear')"/>
+            				<input type="button" class="button" value="切换到该版本" onclick="manage('useNewVersion')"/>
+            				<input type="button" class="button" value="创建新版本" onclick="manage('createNewVersion')"/>
+            			</td>
+            		</tr>
+    			</table>
+    			</form>
+    		</div>
+    		<div class="tab-panel" id="versionControll">
+				<table>
+					<thead><tr><th width="15%">类型</th><th width="70%">类型</th><th width="15%">操作</th></tr></thead>
+    				<tbody>
+					#foreach($search in $searchs)
+            		<tr>
+                        <td>
+            					<h3>$search.desc</h3>
+            			</td>
+						<td>
+							<table>
+								<tr>
+								#foreach($version in $versionMap.get($search))
+									$version.version $version.gmtModified <input type="radio" name="version" value="$version.version"/>
+								#end
+								</tr>
+							</table>
+						</td>
+						<td></td>	
+            		</tr>
+					#end
+    			</table>
+    		</div>
+    	</div>
+	</div>
+	<div id="message">
+		
+	</div>
+</div>
+<script>
+	var interval ;
+	function tips(data){
+		jQuery("#message").slideUp('slow');
+		jQuery("#message").html('<span>'+data.message+'</span>');
+		if(data.result != 0){
+			jQuery("#message").css('color','red');
+		}else{
+			jQuery("#message").css('color','green');
+		}
+		jQuery("#message").slideDown('slow');
+	}
+	
+	function peek(){
+		jQuery.post('/search/peek.htm',$(document.forms[0]).serialize(),function(data){
+			tips(data);
+			if(data.result != 0){
+				clearInterval(interval);
+			}
+		});		
+	}
+	
+	function manage(option){
+		$.ajax({
+				url: "/search/manage.htm",
+				type: "post",
+				data:"option="+option+"&key=product&version=1",
+				dataType: "json",
+				contentType: "application/x-www-form-urlencoded; charset=utf-8",
+				success: function (data) {
+					if(data.result == 0){
+						if(option == "useNewVersion"|| option == "createNewVersion"){
+							typeChange();
+						}else if(option == "index"){
+							interval = setInterval(peek,1000);
+						}
+					}else{
+						if(option == "peek"){
+							clearInterval(interval);
+						}
+					}
+				}
+		});
+	}
+	
+	
+	function render(versions){
+		var option = '';
+			for(var i = 0 ; i < versions.length;i++){
+					var item = versions[i];
+					var version = item['version'];
+					var date = item['gmtModified'];
+					var status = item['status'];
+					if(item['inUse']){
+						option = option +  '<option value="'+version+'" selected="">当前版本'+version+' '+date+'</option>';
+					}else if(status == 1){
+						option = option +  '<option value="'+version+'">未激活'+version+' '+date+'</option>';
+					}else{
+						option = option +  '<option value="'+version+'">正常'+version+' '+date+'</option>';
+					}
+				}
+				jQuery('[name="version"]').html(option);
+	}
+	
+	function typeChange(){
+		var selectedOption = jQuery('[name="key"] :checked');
+		var vtype = selectedOption.data("versiontype");
+		var currentType = jQuery('[name="version"]').data('versiontype');
+		if(vtype && vtype == currentType){
+			return ;
+		}else{
+			var versions = selectedOption.data("versions");
+			if(!versions){
+				jQuery.post('/search/getAllVersion.htm',{versionType:vtype},function(data){
+					if(data.result != 0){
+						tips(data);
+					}else if(data.data.length > 0){
+        				versions = data.data;
+        				selectedOption.data('versions',versions);
+						render(versions);
+					}else{
+            			tips({result:1,message:vtype+'缺少版本号，请创建！'});
+					}	
+				},"json");
+			}else{
+				render(versions);
+			}
+		}
+	}
+	
+	jQuery(function(){
+		var demoTabs = new jQuery.app.tab({container:'#tab-container'});
+		demoTabs.init();
+		typeChange();
+		jQuery('[name="key"]').change(typeChange);
+	});
+	
+</script>

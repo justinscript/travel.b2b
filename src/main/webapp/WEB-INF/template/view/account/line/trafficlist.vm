@@ -1,0 +1,40 @@
+<link href="/static/css/page.css" rel="stylesheet" />
+<div style="padding:10px;">
+    <form method="post" action="/account/trafficlist.htm">
+        <input type="text" name="tTraffic" value="" />
+        <input type="submit" value="查询" />
+    </form>
+</div>
+<table cellpadding="3" cellspacing="0" border="0" width="100%" class="alertTable">
+    <tbody>
+            <tr>
+                <th valign="middle">
+                    交通名称
+                </th>
+                <th width="90" valign="middle">
+                    类型
+                </th>
+                <th width="60">
+                    选择
+                </th>
+            </tr>
+    </tbody>
+    <tbody>
+		#foreach($traffic in $trafficlist)
+        <tr>
+            <td style="border-left: 1px solid #ccc">
+				$!traffic.tTraffic
+            </td>
+            <td style="text-align: right">
+				$!traffic.tTypeString
+            </td>
+            <td align="center">
+                <a href="javascript:void(0)" onclick="parent.InsertTraffic($!traffic.tId);">导入</a>
+            </td>
+        </tr>
+		#end
+    </tbody>
+</table>
+<div>
+    $widget.setTemplate("pagination/pager").addParam('pagination',$pagination)
+</div>

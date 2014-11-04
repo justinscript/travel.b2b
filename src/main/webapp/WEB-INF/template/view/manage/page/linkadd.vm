@@ -1,0 +1,112 @@
+	<script type="text/javascript" src="/static/js/swfupload/js/swfupload.js"></script>
+    <script type="text/javascript" src="/static/js/swfupload/js/handlers.js"></script>
+	<script type="text/javascript" src="/static/js/swfuploadone.js"></script>
+	<script type="text/javascript">
+    $(function(){
+        DefProvince('$!{link.province}','$!{link.city}');//默认站点
+    })
+</script>
+
+<form id="NewUserForm" method="post" action="/zbmanlogin/saveLink.htm">
+    <input type="hidden" name="adId" value="$!{link.adId}" />
+    <input type="hidden" name="act" value="newlink" />
+	<input type="hidden" name="site" id="siteId" value="$!{link.site}" />
+    <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+		<tr>
+            <th width="110">默认站点：</th>
+            <td>
+                <span>
+					<select name="siteId" id="DefProvince" class="w100" onchange="DefSelect(this)" nullmsge="站点不能为空" datatype="*">
+						<option value="">请选择</option>
+					</select>
+    				<select name="chugangId" id="DefCity" class="w100" nullmsge="出发地不能为空" datatype="*" onchange="DefCitySelect(this)">
+                        <option value="">请选择</option>
+                    </select>
+				</span>
+            </td>
+        </tr>		
+        <tr>
+            <th width="90">
+                栏目类别:
+            </th>
+            <td>
+                <span>
+					<select name="location">
+						#set($adLocation=$!{enumViewTools.getAlladLocation()})
+						#foreach($location in $adLocation)
+							<option value="$!{location.getValue()}" #if($!{link.location}==$!{location.getValue()}) selected #end>$!{location.getName()}</option>
+						#end
+                    </select>
+                </span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                栏目标题:
+            </th>
+            <td>
+                <span><input class="w300" nullmsg="标题不能为空" datatype="*" errormsg="标题不能为空"  type="text" name="title" value="$!{link.title}" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                栏目内容:
+            </th>
+            <td class="td_padding">
+                <span><textarea datatye="*" name="content" style="width: 800px;height:100px;">$!{link.content}</textarea></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+		<tr>
+            <th valign="top" style="padding-top:10px;">封面图片:</th>
+            <td>
+    			<div style="position:relative;padding:0;margin:0;">
+    				<span id="spanButtonPlaceholder"></span>              
+    				<div id="divFileProgressContainer" style="position:absolute;left:150px;top:0"></div>
+    			</div>
+				#if(!$!{link.pic} || $!{link.pic}=="")
+					<img style="width:90px;height:90px;" src="/static/img/nopic.jpg" id="showImage"/>
+				#else
+					<img style="width:90px;height:90px" src="$!{link.pic}" id="showImage"/>
+				#end
+                <input type="hidden" name="pic" id="uploadImage" />
+            </td>
+        </tr>		
+        <tr>
+            <th>
+                广告链接：
+            </th>
+            <td>
+                <span><input class="w300" nullmsg="链接不能为空" datatype="*"  type="text" name="link" value="$!{link.link}" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>
+		<tr>
+            <th>
+                广告排序：
+            </th>
+            <td>
+                <span><input class="w50" nullmsg="排序不能为空" datatype="n" errormsg="排序必须为数字"  type="text" name="sort" value="$!{link.sort}" /></span>
+                <div class="Validform_checktip"></div>
+            </td>
+        </tr>	
+		<tr>
+			<th>状态：</th>
+			<td>
+    			<label class="rad"><input type="radio" name="state"  value="1" #if($!{link.state}!=0) checked #end />正常</label>
+                <label class="rad"><input type="radio" name="state"  value="0" #if($!{link.state}==0) checked #end >停止</label>
+			</td>
+		</tr>
+        <tr>
+            <td>
+            </td>
+            <td>
+				<input type="submit" value="提交" class="btn btn-primary" onclick="OrgFormL(this)"/>
+            </td>
+        </tr>
+    </table>
+    <div class="clear">
+    </div>
+</form>

@@ -1,0 +1,260 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelIntegralMapper">
+
+	<!-- 返回集 -->
+	<resultMap type="com.zb.app.biz.domain.TravelIntegralDO" id="baseResult">
+		<id 	column="I_ID" 			property="iId" 				jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP"/>
+		<result column="C_ID" 			property="cId" 				jdbcType="INTEGER"/>
+		<result column="M_ID" 			property="mId" 				jdbcType="INTEGER"/>
+		<result column="I_SOURCE" 		property="iSource" 			jdbcType="INTEGER"/>
+		<result column="I_BALANCE" 		property="iBalance" 		jdbcType="INTEGER"/>
+		<result column="I_FROZEN" 		property="iFrozen" 			jdbcType="INTEGER"/>
+		<result column="I_ALTOGETHER" 	property="iAltogether" 		jdbcType="INTEGER"/>
+		<result column="I_ADDINTEGRAL" 	property="iAddintegral" 	jdbcType="INTEGER"/>
+		<result column="L_ID" 			property="lId" 				jdbcType="INTEGER"/>
+		<result column="I_REMARK" 		property="iRemark" 			jdbcType="VARCHAR"/>		
+	</resultMap>
+	<resultMap type="com.zb.app.biz.domain.TravelIntegralFullDO" id="fullBaseResult">
+		<id 	column="I_ID" 			property="iId" 				jdbcType="INTEGER"/>
+		<result column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP"/>
+		<result column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP"/>
+		<result column="C_ID" 			property="cId" 				jdbcType="INTEGER"/>
+		<result column="M_ID" 			property="mId" 				jdbcType="INTEGER"/>
+		<result column="I_SOURCE" 		property="iSource" 			jdbcType="INTEGER"/>
+		<result column="I_BALANCE" 		property="iBalance" 		jdbcType="INTEGER"/>
+		<result column="I_FROZEN" 		property="iFrozen" 			jdbcType="INTEGER"/>
+		<result column="I_ALTOGETHER" 	property="iAltogether" 		jdbcType="INTEGER"/>
+		<result column="I_ADDINTEGRAL" 	property="iAddintegral" 	jdbcType="INTEGER"/>
+		<result column="L_ID" 			property="lId" 				jdbcType="INTEGER"/>
+		<result column="I_REMARK" 		property="iRemark" 			jdbcType="VARCHAR"/>
+		
+		<result column="l_gogrouptime" 		property="lGoGroupTime" 		jdbcType="TIMESTAMP"/>
+		<result column="l_groupnumber" 	property="lGroupNumber" 	jdbcType="VARCHAR"/>
+		<result column="l_title" 			property="lTitle" 				jdbcType="VARCHAR"/>
+		<result column="c_name" 		property="cName" 			jdbcType="VARCHAR"/>
+		<result column="m_name" 		property="mName" 			jdbcType="VARCHAR"/>
+		<result column="m_username" 		property="mUserName" 			jdbcType="VARCHAR"/>
+	</resultMap>
+	
+	<!-- 字段集 -->
+	<sql id="column">
+		i_id, gmt_create, gmt_modified, c_id, m_id, i_source, i_balance, i_addintegral, l_id, i_remark, i_frozen, i_altogether
+	</sql>
+	
+	<!-- 排序 -->
+	<sql id="orderby_clause">
+		ORDER BY I_ID DESC
+	</sql>
+	
+	<!-- 条件SQL -->
+	<sql id="query_where_clause">
+		<trim prefix="where" prefixOverrides="and|or">
+			<if test="iId != null">
+				I_ID=#{iId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="cId != null">
+				AND C_ID=#{cId}
+			</if>
+			<if test="mId != null">
+				AND M_ID=#{mId}
+			</if>
+			<if test="iSource != null">
+				AND I_SOURCE=#{iSource}
+			</if>
+			<if test="iBalance != null">
+				AND I_BALANCE=#{iBalance}
+			</if>
+			<if test="iFrozen != null">
+				AND I_FROZEN=#{iFrozen}
+			</if>
+			<if test="iAltogether != null">
+				AND I_ALTOGETHER=#{iAltogether}
+			</if>
+			<if test="iAddintegral != null">
+				AND I_ADDINTEGRAL=#{iAddintegral}
+			</if>
+			<if test="lId != null">
+				AND l_Id=#{lId}
+			</if>
+			<if test="iRemark != null">
+				AND i_Remark=#{iRemark}
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 联表条件SQL -->
+	<sql id="full_query_where_clause">
+		<trim prefix="where a.l_id is not null and" prefixOverrides="and|or">
+			<if test="iId != null">
+				AND I_ID=#{iId}
+			</if>
+			<if test="gmtCreate != null">
+				AND GMT_CREATE=#{gmtCreate}
+			</if>
+			<if test="gmtModified != null">
+				AND GMT_MODIFIED=#{gmtModified}
+			</if>
+			<if test="cId != null">
+				AND a.C_ID=#{cId}
+			</if>
+			<if test="mId != null">
+				AND a.M_ID=#{mId}
+			</if>
+			<if test="iSource != null">
+				AND I_SOURCE=#{iSource}
+			</if>
+			<if test="iBalance != null">
+				AND I_BALANCE=#{iBalance}
+			</if>
+			<if test="iFrozen != null">
+				AND I_FROZEN=#{iFrozen}
+			</if>
+			<if test="iAltogether != null">
+				AND I_ALTOGETHER=#{iAltogether}
+			</if>
+			<if test="iAddintegral != null">
+				AND I_ADDINTEGRAL=#{iAddintegral}
+			</if>
+			<if test="lId != null">
+				AND l_Id=#{lId}
+			</if>
+			<if test="iRemark != null">
+				AND i_Remark=#{iRemark}
+			</if>
+		</trim>
+	</sql>
+	<!-- 更新赋值SQL -->
+	<sql id="update_set_clause">
+		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">
+			<if test="cId != null">
+				C_ID=#{cId},
+			</if>
+			<if test="mId != null">
+				M_ID=#{mId},
+			</if>
+			<if test="iSource != null">
+				I_SOURCE=#{iSource},
+			</if>
+			<if test="iBalance != null">
+				I_BALANCE=#{iBalance},
+			</if>
+			<if test="iFrozen != null">
+				I_FROZEN=#{iFrozen}
+			</if>
+			<if test="iAltogether != null">
+				I_ALTOGETHER=#{iAltogether}
+			</if>
+			<if test="iAddintegral != null">
+				I_ADDINTEGRAL=#{iAddintegral}
+			</if>
+			<if test="lId != null">
+				l_Id=#{lId},
+			</if>
+			<if test="iRemark != null">
+				i_Remark=#{iRemark},
+			</if>
+		</trim>
+	</sql>
+	
+	<!-- 查询所有 -->
+	<select id="list" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_INTEGRAL
+	</select>
+	
+	<!-- 查询余额 -->
+	<select id="queryBala" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		select * from travel_integral 
+		<trim prefix="where" prefixOverrides="and|or">
+		<if test="mId != null">
+			and m_id = #{mId}
+		</if>
+		<if test="cId!=null">
+			and c_id = #{cId}
+		</if> 
+			and 2 > ROWNUM
+		</trim>  
+		order by i_id DESC
+	</select>
+	
+	<!-- 条件查询 -->
+	<select id="listQuery" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		select <include refid="column"/>
+		from TRAVEL_INTEGRAL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="listPagination" resultMap="baseResult" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select <include refid="column"/>
+		from TRAVEL_INTEGRAL
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	
+	<!-- 联表分页查询 -->
+	<select id="fullListPagination" resultMap="fullBaseResult" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		<include refid="PAGINATION.paginationStart"/>
+		select a.*,b.l_gogrouptime as l_gogrouptime,b.l_groupnumber as l_groupnumber,b.l_title as l_title,c.c_name as c_name,d.m_name as m_name,d.m_username as m_username
+		from travel_integral a 
+		left join travel_line b on a.l_id = b.l_Id 
+		left join travel_company c on a.c_id = c.c_id 
+		left join travel_member d on a.m_id = d.m_id
+		<include refid="full_query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd"/>
+	</select>
+	<!-- 联表总条数 -->
+	<select id="fullCount" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		select count(1) from travel_integral a 
+		left join travel_line b on a.l_id = b.l_Id 
+		left join travel_company c on a.c_id = c.c_id 
+		left join travel_member d on a.m_id = d.m_id
+		<include refid="full_query_where_clause"/>
+	</select>
+	
+	<!-- 根据编号查询 -->
+	<select id="getById" parameterType="java.lang.Integer" resultMap="baseResult">
+		select <include refid="column"/> from TRAVEL_INTEGRAL where I_ID=#{iId}
+	</select>
+	
+	<!-- 添加 -->
+	<insert id="insert"  parameterType="com.zb.app.biz.domain.TravelIntegralDO">
+		<selectKey resultType="java.lang.Long" keyProperty="iId" order="BEFORE">
+			SELECT TRAVEL_INTEGRAL_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_INTEGRAL(<include refid="column"/>) VALUES (
+						#{iId},SYSTIMESTAMP,SYSTIMESTAMP,#{cId,jdbcType=INTEGER},
+						#{mId,jdbcType=INTEGER},#{iSource,jdbcType=INTEGER},
+						#{iBalance,jdbcType=INTEGER},#{iAddintegral,jdbcType=INTEGER},
+						#{lId,jdbcType=INTEGER},#{iRemark,jdbcType=VARCHAR},
+						#{iFrozen,jdbcType=INTEGER},#{iAltogether,jdbcType=INTEGER}
+		)
+	</insert>
+	
+	<!-- 修改 -->
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelIntegralDO">
+		update TRAVEL_INTEGRAL <include refid="update_set_clause"/> where I_ID=#{iId} 
+	</update>
+	
+	<!-- 删除 -->
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_INTEGRAL where I_ID=#{iId}
+	</delete>
+	
+	<!-- 总条数 -->
+	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelIntegralQuery">
+		select count(1) from TRAVEL_INTEGRAL <include refid="query_where_clause"/>
+	</select>
+</mapper>

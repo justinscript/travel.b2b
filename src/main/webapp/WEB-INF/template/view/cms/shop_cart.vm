@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>积分礼品-左边旅游同业平台</title>
+        <link href="/static/css/newindex/main.css" rel="stylesheet" />
+        <link href="/static/css/newindex/style.css" rel="stylesheet" />
+        <link href="/static/css/newindex/shop.css" rel="stylesheet" type="text/css"/>
+        <script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+    	<script src="/static/js/kinMaxShow/jquery.kinMaxShow-1.0.min.js" type="text/javascript"></script>
+        <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+		<script src="/static/js/layer/layer.min.js"></script>		
+        <script src="/static/js/jquery.cookie.js" language="javascript" type="text/javascript" ></script>
+        <script src="/static/js/home.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $(function() {
+                GetP('Province', 'City', 'County', ["", "", ""]);
+                GetMenu("积分商城");
+                GetJf();
+            });
+			function GetJf(){
+                var jfCount = (parseInt($("#cart_num").val()) * parseFloat($("#OrderJf").val()));
+                $("#jfCount").html(jfCount);
+                $("#OrderCountPost").val(jfCount);
+            }
+        </script>
+    </head>
+    
+    <body>
+        #parse("/widget/common/index_top.vm")
+        <div id="ShopMaxShow">
+            <div style="text-align:center">
+                <a href="#" target="_blank">
+                    <img src="http://www.zuobian.com/upload/link/20140414/20140414034139.jpg"
+                    alt="" />
+                </a>
+            </div>
+        </div>
+        <div id="i_main">
+            <div class="png_bg">
+                <div class="cbox">
+                    <div class="clear">
+                    </div>
+                    <div class="shop_view">
+                        <div class="shop_title">
+                            <span>
+                                填写核对订单信息
+                            </span>
+                        </div>
+                        <div class="shop_cart">
+                            <div class="title">
+                                礼品清单
+                            </div>
+                            <form method="post" action="/addGiftOrder.htm">
+                                <div class="cart_table">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>
+                                                礼品编号
+                                            </th>
+                                            <th>
+                                                礼品名称
+                                            </th>
+                                            <th>
+                                                市场价格
+                                            </th>
+                                            <th>
+                                                兑换积分
+                                            </th>
+                                            <th>
+                                                兑换数量
+                                            </th>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                $!gift.gId
+                                            </td>
+                                            <td>
+                                                <a href="/shop/view-70.shtml">
+                                                    $!gift.gTitle
+                                                </a>
+                                            </td>
+                                            <td>
+                                                <font color="red">
+                                                    ¥$!gift.gPrice
+                                                </font>
+                                            </td>
+                                            <td>
+                                                $!gift.gRedemption
+                                                <input type="hidden" id="OrderJf" value="$!gift.gRedemption" />
+                                            </td>
+                                            <td>
+                                                <input type="text" value="1" name="goCount" id="cart_num" size="3" onblur="GetJf();"/>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                                <input type="hidden" name="act" value="cart" />
+                                <input type="hidden" name="goIntegralCount" id="OrderCountPost" datatype="*"
+                                value="" />
+                                <input type="hidden" name="gId" value="$!gift.gId"/>
+                                <div class="title">
+                                    收货人信息
+                                </div>
+                                <div class="cart_info">
+                                    <table width="100%" cellpadding="0" cellspacing="0">
+                                        <tr>
+                                            <th>
+                                                可用积分：
+                                            </th>
+                                            <td>
+                                                <b id="SxJf" style="color: red">
+                                                    $!integralDO.iBalance
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                所需积分：
+                                            </th>
+                                            <td>
+                                                <b id="jfCount" style="color: red">
+                                                </b>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                收货人姓名：
+                                            </th>
+                                            <td>
+                                                <input type="text" datatype="*" value="" name="goName" nullmsg="请填写收货人姓名"
+                                                class="input2" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                省/市/区：
+                                            </th>
+                                            <td>
+                                                <span>
+                                                    <select name="goProvince" id="Province" datatype="*" errormsg="所在省份不能为空"
+                                                    nullmsg="所在省份不能为空">
+                                                    </select>
+                                                    <select name="goCity" id="City" datatype="*" errormsg="所在地级市不能为空" nullmsg="所在地级市不能为空">
+                                                    </select>
+                                                    <select name="goCounty" id="County" datatype="*" errormsg="所在地级省不能为空" nullmsg="所在地级省不能为空">
+                                                    </select>
+                                                </span>
+                                                详细地址：
+                                                <input type="text" value="" datatype="*" name="goAddress" class="input2"
+                                                style="width: 200px;" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                手机号码：
+                                            </th>
+                                            <td>
+                                                <input type="text" value="" datatype="m" name="goMobile"
+                                                class="input2" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                固定电话：
+                                            </th>
+                                            <td>
+                                                <input type="text" value="" datatype="*" name="goTel"
+                                                class="input2" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <th>
+                                                邮箱：
+                                            </th>
+                                            <td>
+                                                <input type="text" value="" name="goEmail" class="input2" />
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                            </td>
+                                            <td>
+                                                <input type="submit" value="" class="cart_submit" />
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <div class="clear">
+                    </div>
+                </div>
+            </div>
+        </div>
+        #parse("/widget/common/index_footer.vm")
+    </body>
+
+</html>

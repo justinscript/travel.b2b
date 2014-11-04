@@ -1,0 +1,24 @@
+<div id="Header">
+        <div id="Menu">
+    		<ul id="TopNav">
+            <li class="fr msg">
+                <i class="icon iMsg"></i>消息<span>[0]</span><i class="icon iArrow"></i>
+                <div>
+                </div>
+            </li>
+            <li class="fr">
+                <b>欢迎您，$!{webUser.getCompanyName()}【$!{webUser.getNick()}】</b> | <a href="/loginOut.htm">[退出]</a>
+            </li>
+        </ul>
+        <a href="/" class="icon logo">左边网</a>
+        <div class="Menu_list">
+        <a href="/account/home.htm"><i class="icon i15"></i>系统大厅</a>
+		<a href="/account/line.htm"><i class="icon i7"></i>产品中心</a>
+        <a href="/account/index.htm"><i class="icon i8"></i>订单管理</a>
+        <a href="/account/finance.htm"><i class="icon i9"></i>账务中心</a>
+        <a href="/account/integral.htm"><i class="icon i10"></i>积分管理</a>
+        <a href="/account/customer.htm"><i class="icon i11"></i>客户管理</a>
+        </div>
+        <span class="icon iTel">400-0378-7777</span>
+    </div>
+</div>

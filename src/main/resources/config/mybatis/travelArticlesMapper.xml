@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelArticlesMapper" >
+  	<resultMap id="BaseResultMap" type="com.zb.app.biz.domain.TravelArticlesDO" >
+  		<id 		column="A_ID" 			property="aId" 				jdbcType="DECIMAL" />
+    	<result 	column="GMT_CREATE" 	property="gmtCreate" 		jdbcType="TIMESTAMP" />
+    	<result 	column="GMT_MODIFIED" 	property="gmtModified" 		jdbcType="TIMESTAMP" />
+    	
+    	<result 	column="SOURCE" 		property="source" 			jdbcType="INTEGER" />
+    	<result 	column="TITLE" 			property="title" 			jdbcType="VARCHAR" />
+    	<result 	column="CONTENT" 		property="content" 			jdbcType="VARCHAR" />
+    	<result 	column="SORT" 			property="sort" 			jdbcType="INTEGER" />
+    	<result 	column="STATE" 			property="state" 			jdbcType="INTEGER" />
+  	</resultMap>
+  	
+  	<sql id="table_columns_without_id">
+  		GMT_CREATE,GMT_MODIFIED,SOURCE,TITLE,CONTENT,SORT,STATE
+   	</sql>
+  
+  	<sql id="columns" >
+  		A_ID,<include refid="table_columns_without_id"/>
+  	</sql>
+  	
+  	<sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="t.aId !=null ">  
+	            A_ID = #{t.aId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="t.source !=null ">  
+	            and SOURCE = #{t.source, jdbcType=INTEGER}
+	        </if>  
+	        <if test="t.title != null and t.title != '' ">  
+	            and TITLE = #{t.title, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="t.content != null and t.content != '' ">  
+	            and CONTENT = #{t.content, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="t.state !=null ">  
+	            and STATE = #{t.state, jdbcType=INTEGER}
+	        </if>
+	        <if test="t.sort !=null ">  
+	            and SORT = #{t.sort, jdbcType=INTEGER}
+	        </if>
+	        <if test="startGmtCreate != null and startGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE >= to_date(#{startGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtCreate != null and endGmtCreate != '' ">  
+	            and <![CDATA[ GMT_CREATE <= to_date(#{endGmtCreate, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]> 
+	        </if>
+	        <if test="startGmtModified != null and startGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{startGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="endGmtModified != null and endGmtModified != '' ">  
+	            and <![CDATA[ GMT_MODIFIED >= to_date(#{endGmtModified, jdbcType=VARCHAR},'yyyy-mm-dd hh24:mi:ss')]]>
+	        </if>
+	        <if test="likeTitle !=null and likeTitle != '' ">
+				and TITLE like '%'||#{likeTitle, jdbcType=VARCHAR}||'%'
+			</if>
+	    </trim> 
+  	</sql>
+  		
+  	<sql id="update_where_clause">
+		<trim prefix="where" prefixOverrides="and|or"> 
+	        <if test="aId !=null ">  
+	            A_ID = #{aId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="source !=null ">  
+	            and SOURCE = #{source, jdbcType=INTEGER}
+	        </if>  
+	        <if test="title != null and title != '' ">  
+	            and TITLE = #{title, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="content != null and content != '' ">  
+	            and CONTENT = #{content, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="state !=null ">  
+	            and STATE = #{state, jdbcType=INTEGER}
+	        </if>
+	        <if test="sort !=null ">  
+	            and SORT = #{sort, jdbcType=INTEGER}
+	        </if>  
+	    </trim>
+   	</sql>
+  		
+  	<sql id="update_set_clause">
+  		<trim prefix="set GMT_MODIFIED=SYSTIMESTAMP," suffixOverrides=",">  
+	        <if test="source !=null ">  
+	            SOURCE = #{source, jdbcType=INTEGER},
+	        </if>  
+	        <if test="title != null and title != '' ">  
+	            TITLE = #{title, jdbcType=VARCHAR},
+	        </if>  
+	        <if test="content != null and content != '' ">  
+	            CONTENT = #{content, jdbcType=VARCHAR}, 
+	        </if>  
+	        <if test="state !=null ">  
+	            STATE = #{state, jdbcType=INTEGER},
+	        </if>
+	        <if test="sort !=null ">  
+	            SORT = #{sort, jdbcType=INTEGER},
+	        </if> 
+   		</trim>
+  	</sql>
+  		
+  	<sql id="orderby_clause">
+        order by GMT_MODIFIED asc
+    </sql>
+  
+   	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+   		<if test="limitSize != null" >
+   			<include refid="PAGINATION.paginationStart" />
+   		</if>
+   		select  <include refid="columns" /> 
+   		from TRAVEL_ARTICLES 
+   		<include refid="orderby_clause"/>
+	  	<if test="limitSize != null" >
+	        <include refid="PAGINATION.paginationEnd" />
+	    </if>
+  	</select>
+  	
+  	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelArticlesQuery">
+   		select  <include refid="columns" /> 
+   		from TRAVEL_ARTICLES 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+  
+  	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelArticlesQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="columns"/>
+		from TRAVEL_ARTICLES 
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelArticlesQuery" >
+  		select <include refid="columns"/>
+        from TRAVEL_ARTICLES
+        <include refid="query_where_clause"/>
+        <include refid="orderby_clause"/>
+  	</select>
+  
+   	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelArticlesDO" useGeneratedKeys="true">
+   		<selectKey resultType="java.lang.Long" keyProperty="aId" order="BEFORE" >
+	      select TRAVEL_ARTICLES_SEQ.NEXTVAL as aId from DUAL
+	   	</selectKey>
+	   	insert into TRAVEL_ARTICLES (<include refid="columns"/>)
+	   	values (#{aId},SYSTIMESTAMP,SYSTIMESTAMP, 
+	   		#{source,jdbcType=INTEGER},
+	   		#{title,jdbcType=VARCHAR},
+	   		#{content,jdbcType=VARCHAR},
+	   		#{sort,jdbcType=INTEGER},
+	   		1
+	   	)
+   	</insert>
+   	
+   	<update id="update" parameterType="com.zb.app.biz.domain.TravelArticlesDO">
+   		update TRAVEL_ARTICLES 
+       	<include refid="update_set_clause"/>
+       	<include refid="update_where_clause"/>
+  	</update>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelArticlesQuery">
+  		select count(1)
+        from TRAVEL_ARTICLES  
+       	<include refid="query_where_clause"/>
+   	</select>
+   	
+  	<delete id="deleteById" parameterType="java.lang.Integer">
+  		delete from TRAVEL_ARTICLES where A_ID = #{id,jdbcType=INTEGER}
+  	</delete>
+  	
+  	<select id="getById" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  		select <include refid="columns" /> 
+  		from TRAVEL_ARTICLES 
+  		where A_ID = #{id,jdbcType=INTEGER}
+  	</select>
+  
+   	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelArticlesDO">
+   		update TRAVEL_ARTICLES 
+   		<include refid="update_set_clause"/>
+	    where A_ID = #{aId,jdbcType=INTEGER}
+  	</update>
+  	
+</mapper>

@@ -1,0 +1,68 @@
+<div class="footer">
+  <div class="bar">
+    <ul>
+      <li>为什么选择左边<i class="i1"></i></li>
+      <li><i class="i2"></i>百万品质线路任选</li>
+      <li><i class="i3"></i>万家批发商优质服务</li>
+      <li><i class="i4"></i>全网性价比最高</li>
+      <li><i class="i5"></i>旅游一站式服务</li>
+    </ul>
+  </div>
+  <div class="c link">
+    <dl>
+    <dt>新手帮助</dt>
+    <dd>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    </dd>
+    </dl>
+    <dl>
+    <dt>组团社问题</dt>
+    <dd>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    </dd>
+    </dl>
+    <dl>
+    <dt>批发商问题</dt>
+    <dd>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    </dd>
+    </dl>
+    <dl>
+    <dt>订购指南</dt>
+    <dd>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    </dd>
+    </dl>
+    <dl>
+    <dt>关于左边</dt>
+    <dd>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    <a href="">关于我们</a>
+    </dd>
+    </dl>
+    <dl class="fr">
+      <dt>左边公众账号</dt>
+      <span><img src="/static/img/1409/wx.jpg" height="116" /></span>
+    </dl>
+  </div>
+  <div class="copyright">Copyright © 2013 版权所有 左边网. All Rights Reserved.浙ICP备11057101号</div>
+</div>

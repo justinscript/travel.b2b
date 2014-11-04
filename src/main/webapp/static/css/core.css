@@ -1,0 +1,49 @@
+@charset "utf-8";
+/* CSS Document */
+h2,ul,li{padding:0;margin:0; list-style:none}
+
+/*日期高度*/
+.calendar_box{width:510px;border:1px solid #E6E6E6;padding-bottom:3px;background: #F8F8F8}/*框架宽度*/
+.calendar_t li{width:72px;height:24px; line-height:24px;float:left;text-align:center; color:#999;padding:0;}/*周框架宽*/
+.calendar_d{margin-left:3px;}
+.calendar_d li{width:72px;height:56px;float:left;padding:0;}/*日框架宽*/
+/*上下月*/
+.calendar_tit{font-size:14px; color:#666; text-align:center;margin:0 auto;border-bottom:1px solid #E6E6E6;height:24px;line-height:24px;}
+.calendar_m{color:#999; text-align:center;position:relative;height:24px;line-height:24px;}
+.calendar_m span{display:block;}
+
+.calendar_d_box{border:2px solid #ffec91; background:#faffdb;padding:4px}
+.calendar_d_over .calendar_d_box{border:2px solid #a1bb71; background:#faffdb;}
+/*日期*/
+.calendar_t,.calendar_d{overflow:hidden; zoom:1;width:100%;}
+.calendar_d_box{overflow:hidden; zoom:1;height:55px;_height:55px; border:1px solid #fff;cursor:pointer;}
+.calendar_d_box:hover{border:1px solid #fff; background: #ffec91}
+.calendar_d_box_no_hover{overflow:hidden; zoom:1;padding:4px;height:50px;_height:50px; border:1px solid #fff; font-family:Arial, Helvetica, sans-serif;}
+.calendar_d_box_selected{border:2px solid #a1bb71; background:#faffdb;}
+.calendar_day,.calendar_balance,.calendar_balance1{display:block;height:14px;line-height:14px;}
+.calendar_day{position:absolute;color:#666;font-size:12px!important;}
+.calendar_price,.calendar_price1,.calendar_price2{float:right; width:100%; text-align:right; color:#ff6600;line-height:16px;height:16px;}
+.calendar_price1{color:darkgreen;width: 35px;}
+.calendar_price2 b{display:none}
+
+
+
+.search_pp_cal_nevm{position:absolute;left:0;top:0;}
+.search_pp_cal_nextm{position:absolute;right:0;top:0;}
+.search_pp_cal_nevm,.search_pp_cal_nextm{width:100px; margin:auto;height:24px;line-height:24px;overflow:hidden;font-size:14px;}
+.cal_nevm_icon{width:100px; height:20px;cursor:pointer;}
+.cal_nextm_icon{width:100px; height:20px;cursor:pointer;}
+
+.cal_nevm_no_icon{width:33px; height:20px; margin:50px auto 30px; background:url(../img/global.gif) no-repeat -187px -376px;}
+.cal_nextm_no_icon{width:33px; height:20px; margin:30px auto 0; background:url(../img/global.gif) no-repeat -251px -376px;}
+.cal_nextm_text{margin-top:60px;}
+.search_pp_lastm_d .calendar_day{color:#ddd;}
+.calendar_d li.calendar_d_nextm{ background:#f5ffdd;}
+
+.month_1{background:#f8f8f8;}
+
+
+.month_2,.month_3,.month_4,.month_5,.month_6{background:#f5ffdd;}
+.cursor{background:#ffec91}
+.month_1 .calendar_day{color:#999999;}
+

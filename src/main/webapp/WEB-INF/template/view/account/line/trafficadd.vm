@@ -1,0 +1,101 @@
+<script>
+	#if($!type=="update")
+		$("#L_backType").val("$!traffic.tCat");
+		$("#L_TrafficType").val("$!traffic.tType");
+		#if($!traffic.tType==0)
+			$("#tTrafficT").val("$!traffic.tTrafficStrings[7]");
+		#else
+			$("#nofei").val("$!traffic.tTraffic");
+		#end
+		#if($!traffic.tType != '0')
+			$(".L_TrafficType div:eq(1)").show();
+			$(".L_TrafficType div:eq(0)").hide();
+		#end
+	#end
+</script>
+<div style="margin:20px 0 20px 0;">
+#if($!type=="update")
+	<form id="OrgForm" method="post" action="/account/updatetraffic.htm">
+	<input type="hidden" name="tId" value="$!traffic.tId"/>
+#else
+	<form id="OrgForm" method="post" action="/account/addtraffic.htm">
+#end
+<input type="hidden" name="act" value="SaveTraffic" />
+<table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+<tr><td width="100">
+<select class="form-control input-sm w80"  name="tCat" id="L_backType" >
+    <option value="0">出发</option>
+    <option value="1">返回</option>
+    </select>
+    </td>
+    <td>
+    <select class="form-control input-sm w80"  name="tType" id="L_TrafficType" onchange="tabCar(this)">
+        <option value="0">飞机</option>
+        <option value="1">汽车</option>
+        <option value="2">火车</option>
+        <option value="3">游船</option>
+        <option value="4">待定</option>
+    </select>
+</td></tr>
+
+<tr>
+<td colspan="2">
+<div class="L_TrafficType">
+	#if($!traffic.tType==0 || $!type!="update")
+<div class="fl flight_fieji">
+	
+    <label><input type="text" name="tTraffic" class="form-control input-sm w50 fl"   value="$!traffic.tTrafficStrings[0]" /></label>
+    <label>-</label>
+    <label><input type="text" class="form-control input-sm w50 fl" name="tTraffic" value="$!traffic.tTrafficStrings[1]" /></label>
+    <label><input type="text" name="tTraffic" class="form-control input-sm w50 fl" value="$!traffic.tTrafficStrings[2]"  /></label>
+    <label><input type="text"  name="tTraffic" id="w_s1" class="form-control input-sm w40 fl trigger_num"  value="$!traffic.tTrafficStrings[3]"/></label>
+    <label>时</label>
+    <label><input type="text"  name="tTraffic" id="w_s2" class="form-control input-sm w40 fl trigger_num" value="$!traffic.tTrafficStrings[4]"/></label>
+    <label>分 -</label>
+    <label><input type="text" name="tTraffic" id="w_s3" class="form-control input-sm w40 fl trigger_num" value="$!traffic.tTrafficStrings[5]"/></label>
+    <label>时</label>
+    <label><input type="text"  name="tTraffic" id="w_s4" class="form-control input-sm w40 fl trigger_num" value="$!traffic.tTrafficStrings[6]"/></label>
+    <label>分</label>
+    <label>
+	<select name="tTraffic" id="tTrafficT" class="form-control input-sm w100"  >
+		<option value="无">是否经停</option><option value="直飞" style="color:blue">直飞</option><option value="经停" style="color:blue">经停</option><option value="中转" style="color:blue">中转</option>
+    </select>
+    </label>
+	
+</div>
+<div class="fl flight_other " style="display:none ">
+    <label><input type="text" id="nofei" name="tTraffic" class="form-control input-sm w200 fl"/></label>
+</div>
+#else
+	<div class="fl flight_fieji">
+	
+    <label><input type="text" name="tTraffic" class="form-control input-sm w50 fl"   value="" /></label>
+    <label>-</label>
+    <label><input type="text" class="form-control input-sm w50 fl" name="tTraffic" value="" /></label>
+    <label><input type="text" name="tTraffic" class="form-control input-sm w50 fl" value=""  /></label>
+    <label><input type="text"  name="tTraffic" id="w_s1" class="form-control input-sm w40 fl trigger_num"  value=""/></label>
+    <label>时</label>
+    <label><input type="text"  name="tTraffic" id="w_s2" class="form-control input-sm w40 fl trigger_num" value=""/></label>
+    <label>分 -</label>
+    <label><input type="text" name="tTraffic" id="w_s3" class="form-control input-sm w40 fl trigger_num" value=""/></label>
+    <label>时</label>
+    <label><input type="text"  name="tTraffic" id="w_s4" class="form-control input-sm w40 fl trigger_num" value=""/></label>
+    <label>分</label>
+    <label>
+	<select name="tTraffic" id="tTrafficT" class="form-control input-sm w100"  >
+		<option value="无">是否经停</option><option value="直飞" style="color:blue">直飞</option><option value="经停" style="color:blue">经停</option><option value="中转" style="color:blue">中转</option>
+    </select>
+    </label>
+	
+</div>
+<div class="fl flight_other " style="display:none ">
+    <label><input type="text" id="nofei" name="tTraffic" class="form-control input-sm w200 fl" value="$!traffic.tTraffic"/></label>
+</div>
+#end
+</div>
+</td>
+</tr>
+<tr><td align="center" colspan="2"><button type="submit" class="btn btn-primary" onclick="OrgForm(1,this)">保存</button></td></tr>
+</table>
+</form>
+</div>

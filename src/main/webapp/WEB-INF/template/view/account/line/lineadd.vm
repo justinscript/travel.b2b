@@ -1,0 +1,648 @@
+<!DOCTYPE html>
+<html>
+    <head lang="en">
+        <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1">
+                <meta http-equiv="X-UA-Compatible" content="IE=edge">
+                    <title>线路添加</title>
+                    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+                    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+                    <link href="/static/css/main.css" rel="stylesheet" />
+                    <script src="/static/js/jquery-1.11.0.min.js"></script>
+                    <script src="/static/js/bootstrap.min.js"></script>
+                    <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+                    <script src="/static/js/jq-zuobian-init.js"></script>
+                    <script src="/static/js/jquery.nav.js"></script>
+                    <script src="/static/js/layer/layer.min.js"></script>
+					<script src="/static/js/powerfloat/jquery-powerFloat.js"></script>
+                    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+                    <link href="/static/css/core.css" rel="stylesheet" />
+                    <script src="/static/js/common.js"></script>
+                    <script src="/static/js/line.js"></script>
+                    <script src="/static/js/city.js"></script>
+</head>
+<body data-spy="scroll" data-target=".navbar-example">
+    <div id="line_head">
+        <div id="line_Menu">
+            <a href="/" class="icon logo">左边网</a>
+            <div class="Menu_list">
+                <ul id="nav">
+                    <li>
+                        <a href="#line_info">
+                            <i class="icon i1"></i>
+                            基本信息</a>
+                    </li>
+                    <li>
+                        <a href="#line_traffic">
+                            <i class="icon i2"></i>
+                            交通行程</a>
+                    </li>
+                    <li>
+                        <a href="#line_price">
+                            <i class="icon i3"></i>
+                            线路价格</a>
+                    </li>
+                    <li>
+                        <a href="#line_memo">
+                            <i class="icon i4"></i>
+                            相关信息</a>
+                    </li>
+                    <li>
+                        <a href="#line_desc">
+                            <i class="icon i5"></i>
+                            线路说明</a>
+                    </li>
+                </ul>
+            </div>
+            <span class="icon iTel">400-0378-7777</span>
+        </div>
+    </div>
+    <div class="line_main">
+        <form action="/account/addLine.htm" method="post" id="Line-Post" name="line">
+			#if($type=="update")
+				<input type="hidden" name="lId" value="$!line.lId"/>
+				#set($disabled="disabled='disabled'")
+			#end
+            <div id="line_info">
+            <div class="line-title icl">
+                <div class="icl ico-xc fl">基本信息</div>
+            </div>				
+                <table width="100%" cellpadding="2" cellspacing="1" class="tab2">
+                    <tr>
+                        <th width="100">专线类别：</th>
+                        <td>
+                            <label>
+								#if($type=="update")
+									$widget.setTemplate("site/site").addParam('name',"zId").addParam("id","AddSelectColumn").addParam("errormsg","请选择专线!").addParam("isCompany","true").addParam("type","update")
+									#else
+										$widget.setTemplate("site/site").addParam('name',"zId").addParam("id","AddSelectColumn").addParam("errormsg","请选择专线!").addParam("isCompany","true")
+								#end
+                            </label>
+                            <span class="l10">总人数：</span>
+                            <label>
+                                <input type="text" class=" w50" id="L_RenCount" name="lRenCount" value="$!line.lRenCount" nullmsg="请填写人数" onkeyup="value=value.replace(/[^\d]/g,'');" onblur="JF($('#jf'));" datatype="n" errormsg="请正确填写人数，必须为数值" />
+                            </label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>线路名称：</th>
+                        <td>
+                            <input class=" fl w600"  type="text" id="L_Title" $!{disabled} name="lTile" value="$!line.lTile"  nullmsg="接送地不能为空" datatype="*" errormsg="接送地不能为空" />
+							#if($type!="update")
+                            <button type="button" id="importline" class="btn btn-primary btn-sm" onclick="GetTemple(this)" title="导入模板" url="templatelist.htm">导入模板</button>
+							#end
+                        </td>
+                    </tr>
+                    <tr>
+                        <th valign="top" style="padding-top:10px;">出团日期：</th>
+                        <td>
+                            #if($type=="update")
+								<input type="hidden" name="lGoGroupTime" value="$!line.lGoGroupTime.toGMTString()"/>
+                                $!line.lGoGroupTimeString
+							#else
+								<input type="hidden" name="lGoGroupTimeString" id="GoGroupTimeString" datatype="*" nullmsg="出团日期不能为空"/>
+                                <div id="GetCalendar"></div>
+                            #end
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>
+                            截止日期：
+                        </th>
+                        <td>
+                            <span>提前</span>
+                            <span>
+                                <input class=" w50 fl trigger_num" rel="/account/num.htm?act=day" type="text" value="$!line.lEndTimeInteger" id="EndTime" name="lEndTimeInteger"  nullmsg="截止天数不能为空" datatype="*" errormsg="截止天数不能为空" />
+                            </span>
+                            <span>天截止</span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>线路类型：</th>
+                        <td>
+                            <select $!{disabled} name="lType" id="L_Type" class=" w100" >
+								#foreach($!typeenum in $!{enumViewTools.getAllLineType()})
+									<option value="$!typeenum.value">$!typeenum.name</option>
+								#end
+                            </select>
+                        </td>
+                    </tr>
+					<tr>
+                        <th>使用抵用券：</th>
+                        <td>
+								<label class="rad"><input type="radio" name="lIsVouchers" value="1"/>是</label>
+                                <label class="rad"><input type="radio" checked="checked"  name="lIsVouchers" value="0" />否</label>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th>使用积分：</th>
+                        <td>
+								<label class="rad"><input id="integralyes" type="radio" name="lIsIntegral" value="1" onclick="IsIntegral(this)" />是</label>
+                                <label class="rad"><input id="integralno" checked="checked" type="radio"  name="lIsIntegral" onclick="IsIntegral(this)" value="0" />否</label>
+                        </td>
+                    </tr>
+                    <tr id="isIntegral" class="none">
+                        <th style="padding-top: 10px" valign="top">积分返利：</th>
+                        <td valign="top">
+                            <div style="line-height: 30px;">
+                                <span>
+                                    <input type="text" id="jf" class=" w50 fl" value="$!line.lAdultIntegral"  onkeyup="value=value.replace(/[^\d]/g,'');"  onblur="JF(this);"  name="lAdultIntegral" />
+                                </span>
+                                <span>/成人</span>
+								<span>
+                                    <input type="text" id="jf" class=" w50 fl" value="$!line.lChildrenIntegral" onkeyup="value=value.replace(/[^\d]/g,'');"  onblur="JF(this);"name="lChildrenIntegral" />
+                                </span>
+                                <span>/儿童</span>
+                          
+</div>
+</td>
+</tr>
+
+</table>
+        </div>
+        <div id="line_traffic">
+            <div class="line-title icl">
+                <div class="icl ico-feiji fl">路线行程</div>
+            </div>	
+            <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
+                <tr>
+                    <th width="100">出发城市：</th>
+                    <td>
+                        <select name="lProvince" id="Province" datatype="*" class="fl m5 w100" $!{disabled}></select>
+                        <select name="lCity" id="City" datatype="*" class="fl  m5 w100" $!{disabled}></select>
+                        <select name="lArea" id="County" datatype="*" class="fl m5 w100"  $!{disabled}></select>
+                        <span class="fl" >至</span>
+                        <select name="lArrivalProvince" id="Province2" datatype="*" class="fl m5 w100"  $!{disabled}></select>
+                        <select name="lArrivalCity" id="City2" datatype="*" class="fl m5 w100" $!{disabled}></select>
+                        <select name="lArrivalArea" id="County2" datatype="*" class="fl m5 w100" $!{disabled} ></select>
+                    </td>
+                </tr>
+                <tr>
+                    <th>出发交通：</th>
+                    <td>
+                        <label>
+                            <select class=" w80"  name="lTrafficyType" id="L_TrafficType" onchange="tabCar(this)">
+                                <option value="0">飞机</option>
+                                <option value="1">汽车</option>
+                                <option value="2">火车</option>
+                                <option value="3">游船</option>
+                                <option value="4">待定</option>
+                            </select>
+                        </label>
+                        <div class="L_TrafficType">
+                            <div class="fl flight_fieji">
+                                <label>
+                                    <input type="text" name="lGoTraffic" class=" w50 fl"   value="$!line.lGoTrafficStrings[0]" />
+                                </label>
+                                <label>-</label>
+                                <label>
+                                    <input type="text" class=" w50 fl" name="lGoTraffic" value="$!line.lGoTrafficStrings[1]" />
+                                </label>
+                                <label>
+                                    <input type="text" name="lGoTraffic" class=" w50 fl" value="$!line.lGoTrafficStrings[2]"  />
+                                </label>
+                                <label>
+                                    <input type="text"  name="lGoTraffic" value="$!line.lGoTrafficStrings[3]" id="w_s1" size="1" rel="/account/num.htm?act=hour"  class=" w40 fl trigger_num"  />
+                                </label>
+                                <label>时</label>
+                                <label>
+                                    <input type="text"  name="lGoTraffic" value="$!line.lGoTrafficStrings[4]" id="w_s2" size="1" rel="/account/num.htm?act=minute" class=" w40 fl trigger_num" />
+                                </label>
+                                <label>分 -</label>
+                                <label>
+                                    <input type="text" name="lGoTraffic" value="$!line.lGoTrafficStrings[5]" id="w_s3" size="1" rel="/account/num.htm?act=hour"   class=" w40 fl trigger_num" />
+                                </label>
+                                <label>时</label>
+                                <label>
+                                    <input type="text"  name="lGoTraffic" value="$!line.lGoTrafficStrings[6]" id="w_s4" size="1" rel="/account/num.htm?act=minute"  class=" w40 fl trigger_num"  />
+                                </label>
+                                <label>分</label>
+                                <label>
+                                    <select name="lGoTraffic" id="lGoTrafficremark" class=" w100"  >
+                                        <option value="无">是否经停</option>
+                                        <option value="直飞" style="color:blue">直飞</option>
+                                        <option value="经停" style="color:blue">经停</option>
+                                        <option value="中转" style="color:blue">中转</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="fl flight_other" style="display:none">
+                                <label>
+									#if($!line.lTrafficyType != 0)
+										#set($go=$!line.lGoTraffic)
+									#end
+                                    <input type="text" name="lGoTraffic" id="lGoTraffico" class=" w200 fl"  value="$!go"  />
+                                </label>
+                            </div>
+                            <div class="fl flight_temple">
+                                <button type="button" class="btn btn-primary btn-sm TrafficUrl" onclick="GetTemple(this)" title="导入模板" url="trafficlist.htm?tCat=0&tType=0">导入</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr>
+                <tr>
+                    <th>返回交通：</th>
+                    <td>
+                        <label>
+                            <select class=" w80"  name="lTrafficBackType" id="L_TrafficBackType" onchange="tabCar(this)">
+                                <option value="0">飞机</option>
+                                <option value="1">汽车</option>
+                                <option value="2">火车</option>
+                                <option value="3">游船</option>
+                                <option value="4">待定</option>
+                            </select>
+                        </label>
+                        <div class="L_TrafficBackType">
+                            <div class="fl flight_fieji">
+                                <label>
+                                    <input type="text" name="lBackTraffice" class="w50"   value="$!line.lBackTrafficeStrings[0]" />
+                                </label>
+                                <label>-</label>
+                                <label>
+                                    <input type="text" name="lBackTraffice" class="w50"  value="$!line.lBackTrafficeStrings[1]" />
+                                </label>
+                                <label>
+                                    <input type="text" name="lBackTraffice" class="w50" value="$!line.lBackTrafficeStrings[2]"  />
+                                </label>
+                                <label>
+                                    <input type="text"  name="lBackTraffice" id="f_s1" value="$!line.lBackTrafficeStrings[3]" size="1" rel="/account/num.htm?act=hour"  class=" w40 fl trigger_num"  />
+                                </label>
+                                <label>时</label>
+                                <label>
+                                    <input type="text"  name="lBackTraffice" id="f_s2" value="$!line.lBackTrafficeStrings[4]" size="1" rel="/account/num.htm?act=minute" class=" w40 fl trigger_num" />
+                                </label>
+                                <label>分 -</label>
+                                <label>
+                                    <input type="text" name="lBackTraffice" id="f_s3" value="$!line.lBackTrafficeStrings[5]" size="1" rel="/account/num.htm?act=hour"   class=" w40 fl trigger_num" />
+                                </label>
+                                <label>时</label>
+                                <label>
+                                    <input type="text"  name="lBackTraffice" id="f_s4" value="$!line.lBackTrafficeStrings[6]" size="1" rel="/account/num.htm?act=minute"  class=" w40 fl trigger_num"  />
+                                </label>
+                                <label>分</label>
+                                <label>
+                                    <select name="lBackTraffice" id="lBackTrafficeremark" class=" w100"  >
+                                        <option value="无">是否经停</option>
+                                        <option value="直飞" style="color:blue">直飞</option>
+                                        <option value="经停" style="color:blue">经停</option>
+                                        <option value="中转" style="color:blue">中转</option>
+                                    </select>
+                                </label>
+                            </div>
+                            <div class="fl flight_other" style="display:none">
+                                <label>
+									#if($!line.lTrafficBackType != 0)
+										#set($back=$!line.lBackTraffice)
+									#end
+									<input type="text" name="lBackTraffice" id="lBackTrafficeo" class=" w200 fl"  value="$!back"  />
+                                </label>
+                            </div>
+                            <div class="fl flight_temple">
+                                <button type="button" class="btn btn-primary btn-sm TrafficUrl" onclick="GetTemple(this)" title="导入模板" url="trafficlist.htm?tCat=1&tType=0">导入</button>
+                            </div>
+                        </div>
+                    </td>
+                </tr><tr><th>封面图片：</th><td><input type="hidden" value="$!line.lPhotoCover" name="lPhotoCover" id="lPhotoCover"><span id="defPic">
+								#if($!line.lPhotoCover)
+									<img src="$!line.lPhotoCover" class="img-polaroid" style="width:100px;height:100px"/>
+								#end</span><button type="button" id="PicList" class="btn btn-primary btn-sm" title="选择封面图片">选择封面图片</button></td></tr>
+                <tr>
+                    <th>行程天数：</th>
+                    <td>
+                        <input type="text" value="$!line.lDay" id="L_DayCount" name="lDay" onblur="AddXC();"  onkeyup="value=value.replace(/[^\d]/g,'')" datatype="n" size="1"  style="width: 41px" nullmsg="请填写天数" datatype="n" errormsg="请正确填写天数，必须为数值"  />
+                        <input type="hidden" value="0" id="L_DayCounts"/>
+                    </td>
+                </tr>
+				
+            </table>
+
+            <!--行程-->
+            <div id="RoteList"  style="display:block">
+				#foreach($!ro in $!route)
+						#set($index=$!{velocityCount} - 1)
+						<table width="100%" cellspacing="0" cellpadding="0" >
+							<tr>
+								<td width="80" class="day">第$!{velocityCount}天</td>
+								<td>
+									<input type="text" class="form-control" value="$!ro.rCar" name="routelist[${index}].rCar"  placeholder="交通" style="width:250px;margin-bottom:6px;"><br/>
+									<textarea	class="form-control w500" name="routelist[${index}].rContent" placeholder="行程">$!ro.rContent</textarea>
+								</td>
+								<td width="200" class="c" valign="top">
+									<button type="button" class="btn btn-default btn-sm" onclick="ajaxTemple(this,${index})" title="导入图片" url="/account/resourcelist.htm" rel="980,540">导入图片</button>
+									<input type="hidden" value="$!ro.rPicpath" class="linephoto" name="routelist[${index}].rPicpath"/>
+									<div class="xc-photo">
+										<ul class="xc-photo-list">
+											#foreach($pic in $!ro.rPicpathStrings)
+												<li>
+													<img width="50" height="50" src="$pic">
+												</li>
+											#end
+										</ul>
+									</div>
+								</td>
+								<td width="200" class="c">
+									#set($checked="")
+									#set($noon="")
+									#set($night="")
+									##多选框赋值
+									#foreach($eat in $!ro.rCanStrings)
+    									#if($eat == "早")
+    										#set($checked="checked='checked'")
+    									#elseif($eat == "中")
+    										#set($noon="checked='checked'")
+    									#else
+    										#set($night="checked='checked'")
+    									#end
+    								#end
+									<label><input type="checkbox" $!{checked} value="早" name="routelist[${index}].rCan"/>早</label>
+									<label><input type="checkbox" $!{noon}    value="中" name="routelist[${index}].rCan"/>中</label>
+									<label><input type="checkbox" $!{night}   value="晚" name="routelist[${index}].rCan"/>晚</label><br/>
+									<textarea name="routelist[${index}].rZhu"class="form-control" placeholder="酒店">$!ro.rZhu</textarea>
+								</td>
+							</tr>
+						</table>
+				#end
+            </div>
+        </div>
+		
+        <!--价格-->
+        <div id="line_price">
+			<div class="line-title icl">
+                <div class="icl ico-jiage fl">线路价格</div>
+            </div>	
+            <div class="tab3">
+                <dl>
+                    <dd>成人门市价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lCrPrice)}"name="lCrPrice"/>
+                    </dt>
+                    <dd>儿童门市价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lXhPrice)}"name="lXhPrice"/>
+                    </dt>
+                    <dd>婴儿门市价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lYPrice)}"name="lYPrice"/>
+                    </dt>
+                </dl>
+                <dl>
+                    <dd>成人结算价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJCrPrice)}"name="lJCrPrice"/>
+                    </dt>
+                    <dd>儿童结算价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJXhPrice)}"name="lJXhPrice"/>
+                    </dt>
+                    <dd>婴儿结算价：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJYPrice)}"name="lJYPrice"/>
+                    </dt>
+                    <dd>单房差：</dd>
+                    <dt>
+                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lFangPrice)}" name="lFangPrice"/>
+                    </dt>
+                </dl>
+            </div>
+        </div>
+        <!--相关信息-->
+        <div id="line_memo">
+			<div class="line-title icl">
+                <div class="icl ico-xgxx fl">相关信息</div>
+            </div>			
+            <div class="tab3">
+				#*
+                <dl>
+                    <dd>是否接送：</dd>
+                    <dt style="height: 24px; ">
+                        <div class="jsd">
+                            <div id="js_switch" class="off">
+                                <span id="js_on"  class="trigger_isjs_1"></span>
+                                <span id="js_off"></span>
+                            </div>
+							
+                            <div class="zd_selected" style="float: left;"></div>
+                            <span id="EditR" style="display:none ">
+                                <button type="button" class="btn btn-danger btn-xs trigger_isjs" src="targetBox">修改</button>
+                                &nbsp;&nbsp;接送模式：<label>
+                                    <input type="radio"  name="L_IsJsType" value="0" checked />
+                                </label>
+                                含接送&nbsp;&nbsp;&nbsp;&nbsp;
+                                <label>
+                                    <input type="radio" name="L_IsJsType" value="1" />
+                                    可选接送</label>
+                            </span>
+                            <input type="hidden" name="lIsJs" id="L_Isjs" value="0" />
+                        </div>
+                    </dt>
+                </dl>*#
+                <dl>
+                    <dd>送团标志：</dd>
+                    <dt>
+                        <input type="text" value="$!line.lIco" name="lIco" id="lIco"/>
+                    </dt>
+                    <dd>集合地点：</dd>
+                    <dt>
+                        <input type="text"value="$!line.lJhd"  name="lJhd" id="lJhd"/>
+                    </dt>
+                    <dd>地陪：</dd>
+                    <dt>
+                        <input type="text"value="$!line.lDipei"  name="lDipei" id="lDipei"/>
+                    </dt>
+                </dl>
+                <dl>
+                    <dd>送团电话：</dd>
+                    <dt>
+                        <input type="text"value="$!line.lGroupTel"  name="lGroupTel" id="lGroupTel"/>
+                    </dt>
+                    <dd>集合时间：</dd>
+                    <dt>
+                        <input type="text" value="$!line.lJhdTime"  name="lJhdTime" id="lJhdTime"/>
+                    </dt>
+                </dl>
+                <dl>
+                    <dd>线路说明：</dd>
+                    <dt>
+                        <textarea cols="100" rows="3" class="w600" name="lMode" id="lMode">$!line.lMode</textarea>
+                    </dt>
+                </dl>
+                <dl>
+                    <dd>内部备注：</dd>
+                    <dt>
+                        <textarea cols="100" rows="3" class="w600" name="lNMode" id="lNMode">$!line.lNMode</textarea>
+                    </dt>
+                </dl>
+            </div>
+        </div>
+        <div id="line_desc">
+            <div class="line-title icl">
+                <div class="icl ico-shuoming fl">线路说明</div>
+            </div>	
+            <table cellpadding="0" width="100%" cellspacing="0" class="tab4">
+                <tr>
+                    <td width="40%" valign="bottom">
+                        包含项目:
+                    </td>
+                    <td width="40%" valign="bottom">
+                        不包含项目:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" name="lYesItem" id="lYesItem">$!line.lYesItem</textarea>
+                    </td>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" name="lNoItem" id="lNoItem">$!line.lNoItem</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom">
+                        儿童安排:
+                    </td>
+                    <td valign="bottom">
+                        购物安排:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" name="lChildren" id="lChildren">$!line.lChildren</textarea>
+                    </td>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" name="lShop" id="lShop">$!line.lShop</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom">
+                        可选项目:
+                    </td>
+                    <td valign="bottom">
+                        赠送项目:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lExpenseItem" id="lExpenseItem">$!line.lExpenseItem</textarea>
+                    </td>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lPreseItem" id="lPreseItem">$!line.lPreseItem</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom">
+                        注意事项:
+                    </td>
+                    <td valign="bottom">
+                        其他事项:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lAttention" id="lAttention">$!line.lAttention</textarea>
+                    </td>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lOther" id="lOther">$!line.lOther</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td valign="bottom">
+                        温馨提示:
+                    </td>
+                    <td>旅游法相关信息:
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control"  name="lReminder" id="lReminder">$!line.lReminder</textarea>
+                    </td>
+                    <td>
+                        <textarea cols="0" rows="0" style="width: 95%; height: 100px;" class="form-control" name="lTourContent" id="L_TourContent">$!line.lTourContent</textarea>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center">
+                        <button type="submit" class="btn btn-primary btn-lg">保存信息</button>
+                    </td>
+                </tr>
+            </table>
+        </div>
+</form>
+</div>
+<div id="targetBox" class="target_box" style="display: none">
+    <div class="target_list">
+        <div class="a2">
+            <a alt="1" href="javascript:void(0)">上海北京</a>
+            <a alt="2" href="javascript:void(0)">上海</a>
+            <a alt="3" href="javascript:void(0)">上海</a>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+
+	  $(function(){
+			$('#nav').onePageNav();
+			#if($type)
+				//修改页面进行赋值
+				$("#AddSelectColumn").val('$!line.zId');
+				$("#L_Type").val('$!line.lType');
+				$("#L_TrafficType").val('$!line.lTrafficyType');
+				$("#L_TrafficBackType").val('$!line.lTrafficBackType');
+				if($!line.lTrafficyType != '0'){
+					$(".L_TrafficType div:eq(0)").hide();
+					$(".L_TrafficType div:eq(1)").show();
+				}else{
+					$("#lGoTrafficremark").val("$!line.lGoTrafficStrings[7]");
+				}
+				if($!line.lTrafficBackType != '0'){
+					$(".L_TrafficBackType div:eq(0)").hide();
+					$(".L_TrafficBackType div:eq(1)").show();
+				}else{
+					$("#lBackTrafficeremark").val("$!line.lBackTrafficeStrings[7]");
+				}
+				#if($!line.lIsIntegral == 1)
+					$("#integralyes").attr("checked","checked");
+					$("#isIntegral").show();
+				#else
+					$("#integralno").attr("checked","checked");
+					$("#isIntegral").hide();
+				#end
+        		GetP('Province', 'City', 'County',  ["$!line.lProvince", "$!line.lCity", "$!line.lArea"]);
+       			GetP('Province2', 'City2', 'County2', ["$!line.lArrivalProvince", "$!line.lArrivalCity", "$!line.lArrivalArea"]);
+			#else	
+				GetP('Province', 'City', 'County', ["", "", ""]);
+       			GetP('Province2', 'City2', 'County2', ["", "", ""]);
+        		
+			#end
+			#if($type!="update")
+				var dateTimeStr=('${dateViewTools.getNow()}').split("-")
+				$("#GetCalendar").calendar({
+        			multiple:true,
+        			toId:"GoGroupTimeString",
+					defDate:new Date(dateTimeStr[0],dateTimeStr[1],dateTimeStr[2])
+					
+        		})
+			#end
+        	//线路提交
+        	var Line_Post=$("#Line-Post").Validform({
+        		url:#if($type=="update")
+					"/account/lineupdate.htm"
+					#else
+					"/account/addLine.htm"
+					#end,
+        		postonce:true,
+        		tiptype:1,
+        		showAllError:false,
+       			ajaxPost:true,
+        		callback:function(data)
+       			{
+        			if(data.code==0)
+        			{
+        				setTimeout(function () {$.Hidemsg();location.reload();
+							//window.close();
+						}, 1000);
+       				}
+        		}
+        	})
+        })
+</script>
+</body>
+</html>

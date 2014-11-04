@@ -1,0 +1,95 @@
+
+    <script type="text/javascript">
+    	$(function(){
+    		//读取专线
+			
+			var currentUsed=$("#currentUsed").val();
+    		var h = "";var h1="";
+    		var t="";
+    		var t1="";
+			var hover="";
+    		$.ajax({
+               url: "/fullSite.htm",
+               dataType: "json",
+               success: function (data) {
+                   $.each(data.data, function (index, content) {
+                	   if(index==0){
+                	   		t1="<li class=\"cur\"><a href=\"javascript:void(0)\" title=\""+content.sName+"\">"+content.sName+"</a></li>";
+                	   		h1="<div style=\"display:block\">";
+                	   }else
+                		   {
+                		   t1="<li><a href=\"javascript:void(0)\" title=\""+content.sName+"\">"+content.sName+"</a></li>"
+                		   h1="<div>"
+                		}
+                	   t=t+t1;
+                      h=h+h1
+                       $.each(content.chufaList, function (i, con) {
+                    	   h = h+" <dl><dt><span class=\"fl\">" + con.cName + "：</span></dt>";
+                           h = h+"<dd  class=\"travelLines\">";
+                           $.each(con.columnList,function(m,com){
+						   	   if(currentUsed.indexOf(com.zId+'|')>=0){
+							   		hover="class='hover'";
+							   }else
+							   {
+							   		hover="";
+							   }
+                        	   h =h+"<a title=\"" + com.zName + "\" rel=\"" + com.zId + "\" "+hover+">" + com.zName + "</a>";   
+                           })
+                          
+                           h = h + "</dd></dl>";
+                       })
+                       h=h+"</div>";
+                       
+                   })
+                   
+                  $("#site_tab").html(t);
+                   $(".cf-column").html(h);
+                   $(".travelLines").on("click","a",function(){
+           			var t=0;var txt="";var zid=$(this).attr("rel")
+           			if($(this).attr("class")=="hover"){
+           				$(this).removeClass("hover");
+           				t=1;
+           				txt="取消成功";
+           			}else{
+           				$(this).addClass("hover");
+           				t=2;
+           				txt="添加成功";
+           			}
+           			
+           			$.ajax({
+           				url:"/zbmanlogin/company/bindColumn.htm",
+           				type:"post",
+           				dataType:"json",
+						data:"cId="+$("#Cid").val()+"&zId="+zid+"&isAdd="+t,
+           				success:function(data){
+						
+           					if(data.code==0){
+           						layer.msg(txt, 1, 1);
+           					}else{
+           						layer.msg("操作失败", 1, 2);
+           					}
+           				}
+           			})
+           		})
+               }
+           })
+    		
+    		$("#site_tab").on("click","li",function(){
+    			$(this).parent().find("li").removeClass("cur");
+    			$(this).addClass("cur");
+    			$(".cf-column div").hide().eq($(this).index()).show();
+    			
+    		})
+    	})
+    </script>
+
+<div class="title-tab">
+    <ul class="tab fl" id="site_tab">
+    </ul>
+    
+</div>
+<input type="hidden" value="$!id" id="Cid"/>
+<input type="hidden" value="$!currentUsed" id="currentUsed"/>
+<div class="cf-column">
+	
+</div>

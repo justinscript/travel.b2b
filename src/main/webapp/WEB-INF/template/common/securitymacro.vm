@@ -1,0 +1,35 @@
+#########html xss filter#############
+#macro(SHTML $security_h_t_m_l_z)$!{security_h_t_m_l_z}#end
+#########xml encode #############
+#macro(SXML $security_x_m_l_z)$!{security_x_m_l_z}#end
+#########javascript encode #############
+#macro(SJS $security_j_s_z)$!{security_j_s_z}#end
+#########pure text html encode, it is a compatibility purpose, shun double escaped#############
+#macro(SPURETEXT $security_p_u_r_e_t_e_x_t_z)$!{security_p_u_r_e_t_e_x_t_z}#end
+#########pure text as literal #############
+#macro(SLITERAL $security_l_i_t_e_r_a_l_z)$!{security_l_i_t_e_r_a_l_z}#end
+#########url output #############
+#macro(SURL $security_u_r_l_z)$!{security_u_r_l_z}#end
+#macro(SJSON $security_j_s_o_n_z)$!{security_j_s_o_n_z}#end
+#macro(SJSON_DOM $security_j_s_o_n_d_o_m_z)$!{security_j_s_o_n_d_o_m_z}#end
+
+############## validator ####################
+#macro( getErrorCode $objectName $field)
+#set($errors = $springMacroRequestContext.getErrors($objectName))#if($errors && $errors.fieldErrors && $errors.fieldErrors.size()>0)#foreach($e in $errors.fieldErrors)#if("$!field"=="$e.field")$e.code#end#end#end
+#end
+
+#macro( Pattern $objectName $field $message)
+	#if("#getErrorCode($objectName,$field)"=="Pattern")
+		$!message
+	#end
+#end
+#macro( NotNull $objectName $field $message)
+	#if("#getErrorCode($objectName,$field)"=="NotNull")
+		$!message
+	#end
+#end
+#macro( Size $objectName $field $message)
+	#if("#getErrorCode($objectName,$field)"=="Size")
+		$!message
+	#end
+#end

@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>线路添加</title>
+    <link href="/static/css/main.css" rel="stylesheet" />
+    <link href="/static/css/line.css" rel="stylesheet"/>
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet" />
+    <link href="/static/css/bootstrap-theme.min.css" rel="stylesheet" />
+    <script src="/static/js/jquery-1.11.0.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
+    <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
+    <script src="/static/js/tooltip/jquery.poshytip.min.js"></script>
+    <link href="/static/js/tooltip/tip-yellowsimple/tip-yellowsimple.css" rel="stylesheet" type="text/css" />
+    <script src="/static/js/common.js"></script>
+	<script src="/static/js/jq-zuobian-order.js"></script>
+    <script src="/static/js/Validform/js/Validform_v5.3.2.js" type="text/javascript"></script>
+    <link rel="stylesheet" type="text/css" href="/static/js/autocomplete/jquery.autocomplete.css" />
+    <link rel="stylesheet" type="text/css" href="/static/js/autocomplete/thickbox.css" />
+    <script type="text/javascript" src="/static/js/autocomplete/jquery.bgiframe.min.js"></script>
+    <script type="text/javascript" src="/static/js/autocomplete/jquery.ajaxQueue.js"></script>
+    <script type="text/javascript" src="/static/js/autocomplete/thickbox-compressed.js"></script>
+    <script type="text/javascript" src="/static/js/autocomplete/jquery.autocomplete.pack.js"></script>	
+	<script type="text/javascript">
+		$(function(){
+			$(".RenNum").each(function(){
+				if($(this).val()>0){
+				AddCounts($(this).val(),$(this).attr("id"));
+				}
+			})		
+		})
+	</script>
+</head>
+<body >
+<div id="line_head">
+    <div id="line_Menu">
+        <a href="/" class="icon logo">左边网</a>
+        <div class="Menu_list">
+            <ul id="nav">
+                <li class="current"><a href="#line_info"><i class="icon i2"></i>周边短线</a></li>
+                <li><a href="#line_traffic"><i class="icon i1"></i>国内长线</a></li>
+                <li><a href="#line_price"><i class="icon i3"></i>国际长线</a></li>
+                <li><a href="#line_memo"><i class="icon i4"></i>相关信息</a></li>
+                <li><a href="#line_desc"><i class="icon i5"></i>线路说明</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+<div class="line_main">
+<form id="NewOrder" method="post" action="/order/addOrder.htm" onkeydown="if(event.keyCode==13){return false;}">
+<input value="LineOrder" name="act" type="hidden">
+<input value="$!line.lId" name="lId" type="hidden">
+<input value="3" name="C_Id" type="hidden">
+<div class="order-static or_st1">
+    <ul class="up">
+        <li>提交订单</li>
+        <li>确认订单</li>
+        <li>付款</li>
+        <li>交易完成</li>
+    </ul>
+    <ul class="downs">
+        <li>等待提交</li>
+        <li>待批发商确认入库</li>
+        <li>等待付款</li>
+        <li>交易完成</li>
+    </ul>
+</div>
+<h1><a href="/line/$!{line.lGroupNumber}.htm" target="_blank">$!line.lTile</a></h1>
+<table width="100%" class="table table-bordered order-table2">
+	
+    <tbody>
+    <tr>
+        <th>
+            团号
+        </th>
+        <td width="345">
+            $!line.lId
+        </td>
+        <th>
+            旅游天数
+        </th>
+        <td>
+            $!line.lDay天
+        </td>
+    </tr>
+    <tr>
+        <th>
+            出团日期
+        </th>
+        <td>
+            $!line.lGoGroupTimeString
+            <input name="orGoGroupTime" value="$!line.lGoGroupTime" type="hidden">
+        </td>
+        <th>
+            返程日期
+        </th>
+        <td>
+            $!line.lBackTimeString
+        </td>
+    </tr>
+    <tr>
+        <th>
+            去程交通
+        </th>
+        <td>
+            $!line.lGoTraffic / $!line.lTrafficyTypeString
+        </td>
+        <th>
+            返程交通
+        </th>
+        <td>
+            $!line.lBackTraffice / $!line.lTrafficBackTypeString
+        </td>
+    </tr>
+    <tr>
+        <th>
+            门市价格
+        </th>
+        <td>
+            <span>成人：<b t="priceCr">$!format.formatFloat($!line.lCrPrice)</b>元/人</span>
+            <span>儿童：<b t="priceXh">$!format.formatFloat($!line.lXhPrice)</b>元/人</span>
+            <span>婴儿：<b t="priceYr">$!format.formatFloat($!line.lYPrice)</b>元/人</span>
+            <input id="L_CrPrice" name="orFirstCrPrice" value="$!line.lCrPrice" type="hidden">
+            <input id="L_XhPrice" name="orFirstXhPrice" value="$!line.lXhPrice" type="hidden">
+            <input id="L_YPrice" name="orFirstyPrice" value="$!line.lYPrice" type="hidden">
+        </td>
+        <th>
+            结算价格
+        </th>
+        <td>
+            <span>成人：<b t="jpriceCr">$!format.formatFloat($!line.lJCrPrice)</b>元/人</span>
+            <span>儿童：<b t="jpriceXh">$!format.formatFloat($!line.lJXhPrice)</b>元/人</span>
+            <span>婴儿：<b t="jpriceXh">$!format.formatFloat($!line.lJYPrice)</b>元/人</span>
+            <input name="orFirstJcrPrice" id="L_JCrPrice" value="$!line.lJCrPrice" type="hidden">
+            <input name="orFirstJxhPrice" id="L_JXhPrice" value="$!line.lJXhPrice" type="hidden">
+            <input name="orFirstJyPrice"  id="L_JYPrice" value="$!line.lJYPrice" type="hidden">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            单房差
+        </th>
+        <td colspan="3">
+            $!format.formatFloat($!line.lFangPrice)元<input name="orDangFangPrice" value="$!line.lFangPrice" type="hidden">
+        </t1>
+    </tr>
+    #if($!line.lAdultIntegral)
+    <tr>
+        <th>
+            积分活动
+        </th>
+        <td colspan="3">
+            <input name="orAdultIntegral" value="$!line.lAdultIntegral" type="hidden">
+            <input name="orChildrenIntegral" value="$!line.lChildrenIntegral" type="hidden">
+            <b style="color: red">成人$!line.lAdultIntegral</b> 个积分/<b style="color: blue">人,</b>
+            <b style="color: red">儿童$!line.lChildrenIntegral</b> 个积分/<b style="color: blue">人</b> 
+            <font color="red">(婴儿不包括活动范围)</font>
+        </td>
+    </tr>
+    #end
+    </tbody></table>
+<br>
+<input name="cId" value="$!line.cId" type="hidden">
+<div class="line-title icl">
+    <div class="icl ico-xc fl">预定信息</div>
+    <span>以下预定信息请您填写</span>
+</div>
+<br>
+<table width="100%" class="table table-bordered order-table2">
+    <tbody><tr>
+        <th>
+            剩余人数
+        </th>
+        <td colspan="3">
+            剩余
+            #set ($shenyu = $line.lRenCount - $line.lCrCount - $line.lXhCount)
+            $!shenyu
+            人可预订
+        </td>
+    </tr>
+    <tr>
+        <th>
+            成人人数<input value="$!shenyu" id="ShenRen" type="hidden">
+				<input type="hidden" value="" name="Ren_Count" id="Ren_Count" datatype="n" nullmsg="请选择人数"/>
+        </th>
+        <td width="345">
+            <input id="sCrCount" name="orAdultCount" value="0" type="hidden">
+            <select class="w60 RenNum" name="CrCount" id="CrCount" onchange="AddCount(this)">
+            	#foreach( $index in [0..$shenyu] )
+					#if($!people[0]==$index)
+     				<option value="$index" selected>$index</option>
+					#else
+					<option value="$index" >$index</option>	
+					#end
+				#end
+        	</select>
+        </td>
+        <th>
+            儿童人数
+        </th>
+        <td>
+            <input id="sXhCount" name="orChildCount" value="0" type="hidden">
+            <select class="w60 RenNum" name="XhCount" id="XhCount" onchange="AddCount(this)">
+				#foreach( $index in [0..$shenyu] )
+     				#if($!people[1]==$index)
+     				<option value="$index" selected>$index</option>
+					#else
+					<option value="$index" >$index</option>	
+					#end
+				#end
+        	</select>
+            <input id="sYingErCount" name="orBabyCount" value="0" type="hidden">
+            &nbsp;&nbsp;&nbsp;&nbsp;<span style="margin-left:50px;">婴儿：</span>
+			<select class="w60 RenNum" id="YingErCount" onchange="AddCount(this)">
+
+            #foreach( $index in [0..$shenyu] )
+					#if($!people[2]==$index)
+     				<option value="$index" selected>$index</option>
+					#else
+					<option value="$index" >$index</option>	
+					#end
+			#end
+
+        </select>
+            <span style="margin-left:10px;"> (不占用机位)</span>
+        </td>
+    </tr>
+    #if($!cType==2)
+    <tr>
+        <th>
+            预留组团社：
+        </th>
+        <td>
+            <input type="hidden" value="" name="customId" id="mId"/>
+            <input name="orCname" value="" id="tourName" class="w200" datatype="chinese" nullmsg="联系人姓名不能为空" errormsg="联系人姓名必须为中文" type="text">
+            <input type="hidden" value="" name="tourCid" id="cId" datatype="n" nullmsg="组团社不存在，请重新查找" errormsg="组团社不存在，请重新查找"/>
+        </td>
+         <th>
+            计调：
+        </th>
+        <td>
+            <select name="" id="SelectMember">
+                <option value="">请选择</option>
+			</select>
+        </td>     
+    </tr>
+    <tr>
+        <th>
+            联系人姓名
+        </th>
+        <td>
+            <input name="orName" value="" id="or_name" class="w200" datatype="chinese" nullmsg="联系人姓名不能为空" errormsg="联系人姓名必须为中文" type="text">
+        </td>
+        <th>
+            联系人手机
+        </th>
+        <td>
+            <input name="orMobile" value="" id="or_mobile" class="w200" datatype="m" nullmsg="联系人手机不能为空" errormsg="联系人手机格式不对" type="text">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系人电话
+        </th>
+        <td>
+            <input ignore="ignore" value="" name="orTel" id="or_tel" class="w200" datatype="t" type="text" nullmsg="联系人电话不能为空" errormsg="电话格式不能，例：021-88886666">
+        </td>
+        <th>
+            联系人传真
+        </th>
+        <td>
+            <input name="orFax" value="" id="or_fax" class="w200" datatype="t" ignore="ignore"  type="text" errormsg="传真格式不能，例：021-88886666">
+        </td>
+    </tr>
+    #else
+    <tr>
+        <th>
+            联系人姓名
+        </th>
+        <td>
+            <input name="orName" value="$!member.mName" id="or_name" class="w200" datatype="chinese" nullmsg="联系人姓名不能为空" errormsg="联系人姓名必须为中文" type="text">
+        </td>
+        <th>
+            联系人手机
+        </th>
+        <td>
+            <input name="orMobile" value="$!member.mMobile" id="or_mobile" class="w200" datatype="m" nullmsg="联系人手机不能为空" errormsg="联系人手机格式不对" type="text">
+        </td>
+    </tr>
+    <tr>
+        <th>
+            联系人电话
+        </th>
+        <td>
+            <input ignore="ignore" value="$!member.mTel" name="orTel" id="or_tel" class="w200" datatype="t" type="text" nullmsg="联系人电话不能为空" errormsg="电话格式不能，例：021-88886666">
+        </td>
+        <th>
+            联系人传真
+        </th>
+        <td>
+            <input name="orFax" value="$!member.mFax" id="or_fax" class="w200" datatype="t" ignore="ignore"  type="text" errormsg="传真格式不能，例：021-88886666">
+        </td>
+    </tr>
+    #end
+    <tr>
+        <th>
+            订单备注
+        </th>
+        <td colspan="3">
+            <textarea name="orMode" id="intro" style="width: 90%;"></textarea>
+        </td>
+    </tr>
+    </tbody></table>
+
+<input name="Or_Js" value="0,0" type="hidden">
+
+<div class="line-title icl">
+    <div class="icl ico-ren fl">游客名单</div>
+    <span></span>
+</div>
+<br/>
+
+<table width="100%" class="table table-bordered" id="MingDangTable">
+    <tr>
+        <th width="74">
+            姓名
+        </th>
+        <th width="40">
+            性别
+        </th>
+        <th width="40">
+            类型
+        </th>
+        <th width="110">
+            手机
+        </th>
+        <th width="150">
+            证件号
+        </th>
+        <th width="60">
+            单房差
+        </th>
+        <th>
+            备注
+        </th>
+    </tr>
+</table>
+<div style="margin: 0 auto; width: 880px; text-align: center;padding: 20px 0">
+    <div class="text-center"><button class="btn btn-large btn-primary w200" type="submit" >提交订单</button>
+    </div>
+</div>
+</form>
+</div>
+
+<div id="tbox">
+    <ul>
+        <!--<li class="tel"><a href="#">联系商家</a></li>
+        <li class="qq"><a href="#">在线客服</a>-->
+        </li>
+        <li class="top" id="top_btn"><a href="javascript:void(0)">返回顶端</a></li>
+    </ul>
+</div>
+<script type="text/javascript">
+    $(function(){
+	
+		$("#SelectMember").change(function(){
+			var info=$(this).val().replace("null","").split("|");
+			$("#or_name").val(info[1]);
+			$("#mId").val(info[0]);
+			$("#or_mobile").val(info[3]);
+			$("#or_tel").val(info[4]);
+			$("#or_fax").val(info[5]);
+		})
+
+        $("#NewOrder").Validform({
+            tiptype:1,
+            ajaxPost:true,
+            postonce:true,
+            callback:function(data)
+            {
+                if(data.code==0)
+                {
+                    setTimeout(function () {
+                        $.Hidemsg();
+                        location.href="/tour/order.htm";
+                    }, 1000);
+                }
+            }
+        });
+    })
+
+$("#tourName").autocomplete("/allCompany.htm?type=tour",{
+    dataType:'json',
+    parse:function(da) {
+        var parsed = []; 
+		data=da.data;
+        for (var i = 0; i < data.length; i++) {  
+            parsed[parsed.length] = {  
+            data: data[i],  
+            value: data[i].cId,  
+            result: data[i].cName
+            };  
+        }  
+        return parsed;  
+    },  
+    formatItem: function(item) {
+    	return "<div>"+item.cName+"</div>";  
+     },  
+    formatMatch: function(item) {  
+        return item.cName;  
+    },  
+    formatResult: function(item) {  
+    	return item.cName;  
+    }  
+     }).result(function(event, item, formatted) {            
+        $("#cId").val(item.cId);
+		SelecttourMember(item.cId);
+    });  
+
+</script>
+</body>
+</html>

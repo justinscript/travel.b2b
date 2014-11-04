@@ -1,0 +1,38 @@
+
+<div id="FilterList">
+<ul>
+	<li class="title-tab">
+		<a class="hover">出港地</a>
+	</li>
+	<li class="fr"><button type="button" class="btn btn-warning btn-sm" onclick="ajaxTemple(this,$id)" url="chufa.htm" title="出港地添加" rel="800,300" >出港地添加</button></li>
+</ul>
+
+</div>
+
+<input type="hidden" value="$id" id="sToId"/>
+<div class="cf-column">
+
+	#foreach($!cf in $chufaList) 
+	#set($columnList=$!{cf.columnList})
+	<dl>
+        <dt>
+            <span class="fl">$!{cf.chufa.sName}</span>
+        	<span class="fr">
+             	<a href="javascript:void(0)" class="label link" onclick="ajaxTemple(this,$!{cf.chufa.sId})" url="chufaUpdate.htm" title="出港地修改" rel="800,300"><i class="icon-edit icon-white"></i> 修改</a>
+              	<a href="javascript:void(0)" class="label label-important link" href="javascript:void(0)" onclick="DelList('/chufadel.htm',1,this,3)"><i class="icon-remove icon-white"></i> 删除</a>
+        	</span>
+        </dt>
+        <dd class="travelLines">
+        
+        	#foreach($!column in $!columnList)
+            <a onclick="EditColumn($!{column.zId},this)" id="$!{column.zId}">
+				#if($!{column.zHot}==1) <i class="icon iHot"></i> #end
+				$!{column.zName}
+			</a>
+            #end
+            
+            <button onclick="NewColumn($!{cf.chufa.sId},$!{cf.chufa.sToid},this)" class="btn btn-primary">添加专线</button>
+        </dd>
+    </dl>
+	#end
+</div>

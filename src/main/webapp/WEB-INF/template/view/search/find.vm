@@ -1,0 +1,7 @@
+<form action="/search/search.htm" method="post">
+	<select name="type">
+		<option value="product">产品</option>
+	</select>
+	<input name="keyword"/>
+	<input type="submit" value="确定"/>
+</form>

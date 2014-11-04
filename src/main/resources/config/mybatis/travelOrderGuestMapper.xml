@@ -1,0 +1,250 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zb.app.biz.mapper.TravelOrderGuestMapper">
+
+	<resultMap type="com.zb.app.biz.domain.TravelOrderGuestDO" id="BaseResultMap">
+		<id column="G_ID" 							property="gId" 						jdbcType="INTEGER" />
+		<result column="GMT_CREATE" 				property="gmtCreate" 				jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" 				property="gmtModified" 				jdbcType="TIMESTAMP" />
+		<result column="OR_ID" 						property="orId" 					jdbcType="INTEGER" />
+		<result column="L_ID" 						property="lId" 						jdbcType="INTEGER" />
+		<result column="G_NAME" 					property="gName" 					jdbcType="VARCHAR" />
+		<result column="G_SEX" 						property="gSex" 					jdbcType="INTEGER" />
+		<result column="G_TYPE" 					property="gType" 					jdbcType="INTEGER" />
+		<result column="G_CARD" 					property="gCard" 					jdbcType="VARCHAR" />
+		<result column="G_MOBILE" 					property="gMobile" 					jdbcType="VARCHAR" />
+		<result column="G_DANGFANG" 				property="gDangFang" 				jdbcType="INTEGER" />
+		<result column="G_MODE" 					property="gMode" 					jdbcType="FLOAT" />
+		<result column="G_COSTPRICE" 				property="gCostPrice" 				jdbcType="FLOAT" />
+		<result column="G_DANGFANGPRICE" 			property="gDangFangPrice" 			jdbcType="FLOAT" />
+		<result column="G_YOUHUI" 					property="gYouHui" 					jdbcType="FLOAT" />
+		<result column="G_JSPRICE" 					property="gJsPrice" 				jdbcType="FLOAT" />
+	</resultMap>
+	<resultMap type="com.zb.app.biz.domain.TravelOrderGuestFullDO" id="FullBaseResultMap">
+		<id column="G_ID" 							property="gId" 						jdbcType="INTEGER" />
+		<result column="GMT_CREATE" 				property="gmtCreate" 				jdbcType="TIMESTAMP" />
+		<result column="GMT_MODIFIED" 				property="gmtModified" 				jdbcType="TIMESTAMP" />
+		<result column="OR_ID" 						property="orId" 					jdbcType="INTEGER" />
+		<result column="L_ID" 						property="lId" 						jdbcType="INTEGER" />
+		<result column="G_NAME" 					property="gName" 					jdbcType="VARCHAR" />
+		<result column="G_SEX" 						property="gSex" 					jdbcType="INTEGER" />
+		<result column="G_TYPE" 					property="gType" 					jdbcType="INTEGER" />
+		<result column="G_CARD" 					property="gCard" 					jdbcType="VARCHAR" />
+		<result column="G_MOBILE" 					property="gMobile" 					jdbcType="VARCHAR" />
+		<result column="G_DANGFANG" 				property="gDangFang" 				jdbcType="INTEGER" />
+		<result column="G_MODE" 					property="gMode" 					jdbcType="FLOAT" />
+		<result column="G_COSTPRICE" 				property="gCostPrice" 				jdbcType="FLOAT" />
+		<result column="G_DANGFANGPRICE" 			property="gDangFangPrice" 			jdbcType="FLOAT" />
+		<result column="G_YOUHUI" 					property="gYouHui" 					jdbcType="FLOAT" />
+		<result column="G_JSPRICE" 					property="gJsPrice" 				jdbcType="FLOAT" />
+		<result column="C_NAME" 					property="cName" 					jdbcType="VARCHAR" />
+		<result column="C_MOBILE" 					property="cMobile" 					jdbcType="VARCHAR" />
+		<result column="C_TEL" 						property="cTel" 					jdbcType="VARCHAR" />
+		<result column="M_NAME" 					property="mName" 					jdbcType="VARCHAR" />
+		<result column="l_JXhPrice" 				property="lJCrPrice" 				jdbcType="FLOAT" />
+		<result column="l_JXhPrice" 				property="lJXhPrice" 				jdbcType="FLOAT" />
+		<result column="l_JYPrice" 					property="lJYPrice" 				jdbcType="FLOAT" />
+	</resultMap>
+	
+	<sql id="column">
+		G_ID,GMT_CREATE,GMT_MODIFIED,OR_ID,L_ID,G_NAME,G_SEX,G_TYPE,G_CARD,G_MOBILE,G_DANGFANG,G_MODE,G_COSTPRICE,G_DANGFANGPRICE,G_YOUHUI,G_JSPRICE
+	</sql>
+	
+	<sql id="orderby_clause">
+        order by G_ID asc
+    </sql>
+    
+    <sql id="query_where_clause">
+  		<trim prefix="where" prefixOverrides="and|or"> 
+  			<if test="orId !=null ">  
+	            OR_ID = #{orId, jdbcType=INTEGER}
+	        </if> 
+	        <if test="lId !=null ">  
+	            and L_ID = #{lId, jdbcType=INTEGER}
+	        </if>  
+	        <if test="gName != null and gName != '' ">  
+	            and G_NAME = #{gName, jdbcType=VARCHAR}  
+	        </if>  
+	        <if test="gSex !=null ">  
+	            and G_SEX = #{gSex, jdbcType=INTEGER}
+	        </if>
+	        <if test="gType !=null ">  
+	            and G_TYPE = #{gType, jdbcType=INTEGER}
+	        </if>
+	        <if test="gCard != null and gCard != '' ">  
+	            and G_CARD = #{gCard, jdbcType=VARCHAR}  
+	        </if> 
+	        <if test="gMobile != null and gMobile != '' ">  
+	            and G_MOBILE = #{gMobile, jdbcType=VARCHAR}  
+	        </if> 
+	        <if test="gDangFang !=null ">  
+	            and G_DANGFANG = #{gDangFang, jdbcType=INTEGER}
+	        </if>
+	        <if test="gMode !=null ">  
+	            and G_MODE = #{gMode, jdbcType=FLOAT}
+	        </if>
+	        <if test="gCostPrice !=null ">  
+	            and G_COSTPRICE = #{gCostPrice, jdbcType=FLOAT}
+	        </if>
+	        <if test="gDangFangPrice !=null ">  
+	            and G_DANGFANGPRICE = #{gDangFangPrice, jdbcType=FLOAT}
+	        </if>
+	        <if test="gYouHui !=null ">  
+	            and G_YOUHUI = #{gYouHui, jdbcType=FLOAT}
+	        </if>
+	        <if test="gJsPrice !=null ">  
+	            and G_JSPRICE = #{gJsPrice, jdbcType=FLOAT}
+	        </if>
+	    </trim> 
+  	</sql>
+  
+   	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
+   		<if test="limitSize != null" >
+   			<include refid="PAGINATION.paginationStart" />
+   		</if>
+   		select  <include refid="column" /> 
+   		from TRAVEL_ORDERGUEST 
+   		<include refid="orderby_clause"/>
+	  	<if test="limitSize != null" >
+	        <include refid="PAGINATION.paginationEnd" />
+	    </if>
+  	</select>
+  	
+  	<select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelOrderGuestQuery">
+   		select  <include refid="column" /> 
+   		from TRAVEL_ORDERGUEST 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
+  
+  	<select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelOrderGuestQuery">
+  		<include refid="PAGINATION.paginationStart" />
+		select <include refid="column"/>
+		from TRAVEL_ORDERGUEST 
+		<include refid="query_where_clause"/>
+		<include refid="orderby_clause"/>
+		<include refid="PAGINATION.paginationEnd" />
+  	</select>
+  	
+  	<select id="count" resultType="java.lang.Integer" parameterType="com.zb.app.biz.query.TravelOrderGuestQuery">
+  		select count(1)
+        from TRAVEL_ORDERGUEST  
+       	<include refid="query_where_clause"/>
+   	</select>
+  	
+  	<select id="find" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelOrderGuestQuery" >
+  		select <include refid="column"/>
+        from TRAVEL_ORDERGUEST
+        <include refid="query_where_clause"/>
+        <include refid="orderby_clause"/>
+  	</select>
+	<!-- 根据线路ID查询所有游客 -->
+	<select id="getByLId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select a.* from travel_orderguest a left join travel_order b on a.or_id = b.or_id left join travel_line c on b.l_id = c.l_id where c.l_id = #{lId}
+	</select>
+	
+	<!-- 根据线路ID查询所有游客费用 -->
+	<select id="getByLIdAndPrice" parameterType="java.lang.Integer" resultMap="FullBaseResultMap">
+		select a.*,d.c_name as c_name,d.c_tel as c_tel,d.c_mobile as c_mobile,e.m_name as mName,
+		c.l_jcrprice as l_jcrprice,c.l_jxhprice as l_jxhprice,c.l_jyprice as l_jyprice
+		from travel_orderguest a 
+		left join travel_order b on a.or_id = b.or_id 
+		left join travel_line c on b.l_id = c.l_id 
+		left join travel_company d on b.customcompany_id = d.c_id 
+		left join travel_member e on b.custom_id = e.m_id 
+		where c.l_id = #{lId}
+	</select>
+	
+	<select id="getById" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="column" />
+		from TRAVEL_ORDERGUEST where G_ID=#{gId}
+	</select>
+	
+	<select id="getByOrId" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select <include refid="column" />
+		from TRAVEL_ORDERGUEST where or_ID=#{orId}
+	</select>
+	
+	<insert id="insert" parameterType="com.zb.app.biz.domain.TravelOrderGuestDO">
+		<selectKey resultType="java.lang.Long" keyProperty="gId" order="BEFORE">
+			SELECT TRAVEL_ORDERGUEST_SEQ.NEXTVAL AS ID FROM DUAL
+		</selectKey>
+		insert into TRAVEL_ORDERGUEST(<include refid="column" />) 
+		values ( #{gId}, SYSTIMESTAMP, SYSTIMESTAMP,
+			#{orId,jdbcType=INTEGER},
+			#{lId,jdbcType=INTEGER},
+			#{gName,jdbcType=VARCHAR},
+			#{gSex,jdbcType=INTEGER},
+			#{gType,jdbcType=INTEGER},
+			#{gCard,jdbcType=VARCHAR},
+			#{gMobile,jdbcType=VARCHAR},
+			#{gDangFang,jdbcType=INTEGER},
+			#{gMode,jdbcType=VARCHAR},
+			#{gCostPrice,jdbcType=FLOAT},
+			#{gDangFangPrice,jdbcType=FLOAT},
+			#{gYouHui,jdbcType=FLOAT},
+			#{gJsPrice,jdbcType=FLOAT}
+		)
+	</insert>
+	
+	<update id="updateById" parameterType="com.zb.app.biz.domain.TravelOrderGuestDO">
+		update TRAVEL_ORDERGUEST set GMT_MODIFIED = SYSTIMESTAMP,
+		<trim suffixOverrides=",">
+			<if test="gmtCreate != null">
+				GMT_CREATE=#{gmtCreate},
+			</if>
+			<if test="gmtModified != null">
+				GMT_MODIFIED=#{gmtModified},
+			</if>
+			<if test="orId != null">
+				OR_ID=#{orId},
+			</if>
+			<if test="lId != null">
+				L_ID=#{lId},
+			</if>
+			<if test="gName != null">
+				G_NAME=#{gName},
+			</if>
+			<if test="gSex != null">
+				G_SEX=#{gSex},
+			</if>
+			<if test="gType != null">
+				G_TYPE=#{gType},
+			</if>
+			<if test="gCard != null">
+				G_CARD=#{gCard},
+			</if>
+			<if test="gMobile != null">
+				G_MOBILE=#{gMobile},
+			</if>
+			<if test="gDangFang != null">
+				G_DANGFANG=#{gDangFang},
+			</if>
+			<if test="gMode != null">
+				G_MODE=#{gMode},
+			</if>
+			<if test="gCostPrice != null">
+				G_COSTPRICE=#{gCostPrice},
+			</if>
+			<if test="gDangFangPrice != null">
+				G_DANGFANGPRICE=#{gDangFangPrice},
+			</if>
+			<if test="gYouHui != null">
+				G_YOUHUI=#{gYouHui},
+			</if>
+			<if test="gJsPrice != null">
+				G_JSPRICE=#{gJsPrice}
+			</if>
+		</trim>
+		where G_ID = #{gId}
+	</update>
+	
+	<delete id="deleteById" parameterType="java.lang.Integer">
+		delete TRAVEL_ORDERGUEST
+		where G_ID = #{gId}
+	</delete>
+	<select id="countByOrderGuest" resultType="java.lang.Integer">
+		SELECT COUNT(1)
+		from TRAVEL_ORDERGUEST
+	</select>
+</mapper>

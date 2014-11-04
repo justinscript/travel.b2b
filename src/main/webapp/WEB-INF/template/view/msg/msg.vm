@@ -1,0 +1,144 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+	<head>
+    	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+        <title>websocket</title>
+        <script type="text/javascript" src="/static/js/jquery-1.11.0.min.js"></script>
+        <script type="text/javascript" src="/static/js/jquery.json.min.js"></script>
+        <script type="text/javascript"> 
+	     	//约定通信action
+	        //CLIENT_REGIST(1),// Client注册服务
+    		//CLIENT_REGIST_FAILED(2),// Client注册服务失败,可能未登录
+	        //CLIENT_CLOSED(3),// Client取消注册服务,客户端主动关闭连接
+	        //CLIENT_RETURN_RESULT(4),// Client处理完后返回结果
+	        //CLIENT_SEND_MESSAGE(5)Client主动请求数据,Client发送消息
+	        //CLIENT_HEARTBEAT(6),// Client端心跳检测
+	        //SERVER_SEND_MESSAGE(7),// Server发送消息
+	        //SERVER_CLOSED(8),// Server主动关闭连接
+	        //SERVER_HEARTBEAT(9);// Server端心跳检测
+	        //ERROR_FORMAT_MESSAGE(10);// 错误数据格式
+	        //发送数据格式json
+	        //{"action":5,"type":"","data":""}
+	        //接收数据格式json(code类型SUCCESS(0)成功, ERROR(1)失败, NEED_LOGIN(2)未登录, SUBMITED(3)重复提交, FORBIDDEN(4)重定向,HEARTBEAT(6)心跳检测,ERROR_FORMAT(10)错误数据格式)
+	        //{"code":5,"message":"","data":"[{"type":"0"},{d}]"}
+	        
+        	var host ="dev.zuobian.com";
+	        
+            var heartbeat_timer = 0;//缓冲时间
+            var last_health = -1; 
+            var health_timeout = 3000*10;
+            var push_url="ws://" + host + "/push/msg.htm";
+            var status_code = "$zuobian$";
+            var J = $;
+            
+            var dataParam = {
+            	  
+            }
+            var request = {   
+                  action: '6',  
+                  type: 'client_heartbeat', 
+                  data:status_code  //data可以是对象dataParam
+            };  
+            var request_encoded = J.toJSON(request);
+
+            $(function(){
+                ws = ws_conn(push_url); 
+                $("#send_btn").click(function(){
+                    var msg = $("#mysendbox").val();
+                    console.log(msg);
+                    var msg_request = {
+                   		action: '5',  
+                        type: 'send_data', 
+                        data:msg  //data可以是对象dataParam
+                    }
+                    ws.send(J.toJSON(msg_request));
+                    $("#mysendbox").val("");
+                });
+            });
+
+            function keepalive(ws){
+                var time = new Date();
+                if(last_health != -1 && (time.getTime() - last_health > health_timeout)){
+                        //此时即可以认为连接断开，可是设置重连或者关闭
+                        $("#keeplive_box").html( "服务器没有响应." ).css({"color":"red"});
+                        ws.close();
+                }
+                else{
+                    $("#keeplive_box").html("连接正常").css({"color":"green"});
+                    if(ws.bufferedAmount == 0){
+                        ws.send(request_encoded);        
+                    }
+                }
+            }
+
+            //websocket function
+            function ws_conn(to_url){
+                to_url = to_url || "";
+                if(to_url == ""){
+                    return false;
+                }
+                clearInterval(heartbeat_timer);
+                $("#statustxt").html("Connecting...");
+                var ws = new WebSocket(to_url);
+              	ws.onopen=function(){
+                    $("#statustxt").html("connected.");    
+                    $("#send_btn").attr("disabled", false);
+                    heartbeat_timer = setInterval(function(){keepalive(ws)}, 2000*10);
+					
+					var onlineCount=parseInt($("#onlineCount").text());
+					$("#onlineCount").text(onlineCount + 1);
+                }
+                ws.onerror=function(){
+                    $("#statustxt").html("error.");
+                    $("#send_btn").attr("disabled", true);
+                    clearInterval(heartbeat_timer);
+                    $("#keeplive_box").html("连接出错.").css({"color":"red"});
+                }
+                ws.onclose=function(){
+                    $("#statustxt").html("closed.");
+                    $("#send_btn").attr("disabled", true);
+                    clearInterval(heartbeat_timer);
+                    $("#keeplive_box").html("连接已关闭.").css({"color":"red"});
+                }
+                ws.onmessage=function(msg){
+                    var time = new Date();
+                    var msgData = msg.data;
+                    if(msgData.code == "6" && msgData.data == status_code){
+                        last_health = time.getTime();
+                        return;
+                    }
+                    if(msgData.code == "9" && msgData.data == status_code){
+                    	keepalive(ws);
+                    }
+                    //alert(msgData)
+                    $("#chatbox").val($("#chatbox").val() + msgData  + "\n");
+                    $("#chatbox").attr("scrollTop",$("#chatbox").attr("scrollHeight"));
+                }
+                return ws;
+            }
+        </script>
+    </head>
+
+    <body>
+		
+		<div align="center">
+        	<a href="/comset/show.htm?sortcount=true">实时在线用户数【<span id="onlineCount">$!onlineCount</span>】</a>&nbsp;
+        	<span style="float:right">IP:$!{systemInfo.getIpaddress()}</span><br/>
+        	<span style="float:right">DB:$!{systemInfo.getDbinfo()}</span>
+    	</div>
+    	<div>
+            <p>web socket连接状态:&nbsp;&nbsp;<span id="statustxt">连接中...</span></p>
+            <p>心跳状态：<span id="keeplive_box">检测中...</span></p>
+            <p>
+              <textarea name="chatbox" id="chatbox" cols="55" rows="20" readonly="readonly"></textarea>
+            </p>
+            <p>
+              <p>发送文本到Websocket服务器</p>
+              <input name="mysendbox" type="text" id="mysendbox" size="50" />
+              &nbsp;
+              <input type="button" name="send_btn" id="send_btn" value="Send" disabled="disabled" />
+              <input type="button" onclick="javascript:ws.close()" value="Close"/>
+            </p>
+		</div>
+    </body>
+</html> 

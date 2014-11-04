@@ -1,0 +1,52 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>左边网-全国最大的旅游同业收客平台,专业组团，同业分销,机票预定,景点门票,积分兑换</title>
+<meta name="keywords" content="同业收客,专业组团,自助游,自由行,机票预定,景点门票,积分兑换">
+<link href="/static/css/1409/common.css" rel="stylesheet" />
+<link rel="stylesheet" type="text/css" href="/static/css/1409/style.css">
+<script src="/static/js/jquery-1.11.0.min.js" charset="utf-8" type="text/javascript"></script>
+<script src="/static/js/jq-zuobian-bundle-0.0.1.js" type="text/javascript"></script>
+<script src="/static/js/layer/layer.min.js"></script>
+<script src="/static/js/1409/zb.js" type="text/javascript"></script>
+</head>
+<body>
+#parse("/widget/common/index1409_header.vm")
+<div id="wrapper">
+    <div class="c">
+      <div class="left">
+        <dl>
+          <dd class="hover"><a href="#"><i class="ico2 i5"></i>积分商城</a></dd>
+          <dt style="display:block;">
+			#foreach($!gClass in $!gClassList)
+				<a href="/shop.htm">$!gClass.gcName</a>
+            #end
+          </dt>
+        </dl>
+      </div>
+      <div class="right">
+        <div class="shop_view">
+          <div class="shop_memo">
+            <div class="l"><img src="$!gift.gPic"></div>
+            <div class="r">
+              <h4>$!gift.gTitle</h4>
+              <dl><dd>礼品编号：</dd><dt>$!gift.gId</dt></dl>
+              <dl><dd>市场价格：</dd><dt><del>￥$!gift.gPrice</del></dt></dl>
+              <dl><dd>兑换积分：</dd><dt><b>$!gift.gRedemption</b></dt></dl>
+              <a href="/shop_cart.htm?id=$!gift.gId">立即兑换</a>
+            </div>
+          </div>
+          <div class="shop_desc">
+            <h5>礼品介绍</h5>
+            <div class="text">
+              $!gift.gContent
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+#parse("/widget/common/index1409_footer.vm")
+</body>
+</html>

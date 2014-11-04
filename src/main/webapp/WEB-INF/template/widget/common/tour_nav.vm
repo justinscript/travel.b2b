@@ -1,0 +1,45 @@
+<ul id="LeftNav">
+    <li>
+        <a href="#">产品预订<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/tour/line/longLine.htm">国内长线</a>
+            <a href="/tour/line/shortLine.htm">周边短线</a>
+            <a href="/tour/line/internationalLine.htm">国际线路</a>
+        </div>
+    </li>
+    <li>
+        <a href="#">订单管理<i class="icon iArrow"></i></a>
+        <div>
+			#if(${webUser.hasPermission(1)})
+            <a href="/tour/order.htm" >散客订单</a>
+			#end
+            <a href="/tour/count.htm">收客分析</a>
+        </div>
+    </li>
+    <li><a href="#">账务中心<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/tour/finance.htm">应付款</a>
+        </div>
+    </li>
+    <li><a href="#">积分管理<i class="icon iArrow"></i></a>
+        <div>
+            <a href="/tour/integral.htm">积分记录</a>
+            <a href="/tour/integral/cart.htm">消费记录</a>
+        </div>
+    </li>
+	#if(${webUser.hasPermission(30)})
+    <li>
+        <a href="#">系统管理<i class="icon iArrow"></i></a>
+        <div>
+			#if(${webUser.hasPermission(32)})
+            <a href="/tour/company.htm">公司信息</a>
+			#end
+            <a href="/tour/myinfo.htm">个人信息</a>
+			#if(${webUser.hasPermission(33)})
+            <a href="/tour/user.htm">用户管理</a>
+			#end
+            <a href="/loginOut.htm">退出系统</a>
+        </div>
+    </li>
+	#end
+</ul>
