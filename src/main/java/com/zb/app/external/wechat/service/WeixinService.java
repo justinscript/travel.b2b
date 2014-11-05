@@ -202,45 +202,4 @@ public class WeixinService {
             return url;
         }
     }
-
-    @SuppressWarnings("unused")
-    public static void main(String[] args) {
-        WeixinConfig config = new WeixinConfig("wxa4dce1222cd08378", "fe10993651d0a43ca24534584c438e94",
-                                               "huoxingaiguang20121227172233");
-        WeixinService service = new WeixinService(config);
-        // service.getAccessToken();
-        service.getUserInfo("o3OCLjt92fD7eQ2I8IH6ZXzoSX_A");
-        service.getUserInfo("o3OCLjgf42X038Ceg0zjC46XWWU0");
-        service.getUserInfo("o3OCLjgnEQ4x_9uxiTkz5_eE0XtM");
-        service.getUserInfo("o3OCLjuP8wwmW5l171JVMom3a6Zw");
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String time = sdf.format(new Date(System.currentTimeMillis()));
-        String a = "点击<a href='http://m.mall.huoxing.com'>火星商城</a>";
-        WeixinMessage weixinMessage = new WeixinTextMessage("o3OCLjgf42X038Ceg0zjC46XWWU0", a);
-        WeixinMessage weixinMessage2 = new WeixinTextMessage("o3OCLjt92fD7eQ2I8IH6ZXzoSX_A", a);
-        WeixinNewsMessage weixinMessage3 = new WeixinNewsMessage("o3OCLjgf42X038Ceg0zjC46XWWU0");
-        weixinMessage3.addArticle("今天推荐", "碎花吊带 rocawear RCW009", "http://m.mall.huoxing.com/product/item/308.htm",
-                                  "http://s3.huoxingimg.com/87/35/8735_426.jpg");
-        WeixinNewsMessage weixinMessage4 = new WeixinNewsMessage("o3OCLjt92fD7eQ2I8IH6ZXzoSX_A");
-        weixinMessage4.addArticle("今天推荐", "碎花吊带 rocawear RCW009", "http://m.mall.huoxing.com/product/item/308.htm",
-                                  "http://s3.huoxingimg.com/87/35/8735_426.jpg");
-
-        WeixinNewsMessage weixinNewsMessage5 = new WeixinNewsMessage("o3OCLjgf42X038Ceg0zjC46XWWU0");
-        weixinNewsMessage5.addArticle("今日推荐", "", "http://m.mall.huoxing.com/product/list.htm",
-                                      "http://style2.uzaiguangcdn.com/img/site/amazon/home2/home/12/zb_1.jpg");
-        weixinNewsMessage5.addArticle("爱装扮", "火星人-爱装扮", "http://m.mall.huoxing.com/product/list.htm",
-                                      "http://s1.uzaiguangcdn.com/56/81/55/568155_80.jpg");
-        weixinNewsMessage5.addArticle("爱装扮", "火星人-爱生活", "http://m.mall.huoxing.com/product/list.htm",
-                                      "http://s2.uzaiguangcdn.com/79/36/48/793648_80.png");
-        try {
-            // service.sendMessage(weixinMessage);
-            // service.sendMessage(weixinMessage2);
-            // service.sendMessage(weixinNewsMessage5);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        File file = new File("/user/home/zxc/Desktop/thumb.jpg");
-        // service.upload(file, "thumb");
-        // BZS8JNGWIE891z0LvO1wf3IjQ69ie-QGNOHkSsceI6BeTNt-rqLSbvh4IJ55UO5u
-    }
 }
