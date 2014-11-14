@@ -181,7 +181,14 @@ public class ManageController extends BaseController {
     @RequestMapping(value = "/company/ljUpdateCompany.htm")
     public ModelAndView ljUpdateCompany(ModelAndView mav, Long id) {
         TravelCompanyDO companyDO = companyService.getById(id);
-        mav.addObject("company", companyDO);
+        TravelCompanyVO companyVO =  new TravelCompanyVO();
+        BeanUtils.copyProperties(companyVO, companyDO);
+        String[] tmp = StringUtils.split(companyVO.getcCityTop(), ",");
+        if (tmp != null && tmp.length == 2) {
+        	companyVO.setcMoProvince(Integer.parseInt(tmp[0]));
+        	companyVO.setcMoCity(Integer.parseInt(tmp[1]));
+        }
+        mav.addObject("company", companyVO);
         mav.addObject("cType", "update");
         mav.setViewName("/manage/company/add");
         return mav;
@@ -308,6 +315,22 @@ public class ManageController extends BaseController {
             return JsonResultUtils.success(memberDO, "修改成功!");
         } else {
             return JsonResultUtils.error(memberDO, "修改失败!");
+        }
+    }
+    /**
+     * 删除用户
+     * 
+     * @param id
+     * @return
+     */
+    @RequestMapping(value = "/company/deleteUser.htm", produces = "application/json", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult deleteUser(Long id) {
+        boolean b = memberService.delete(id);
+        if (b) {
+            return JsonResultUtils.success(id, "删除成功!");
+        } else {
+            return JsonResultUtils.error(id, "删除失败!");
         }
     }
 
@@ -637,5 +660,4 @@ public class ManageController extends BaseController {
             return JsonResultUtils.error(companyDO, "修改失败!");
         }
     }
-
 }

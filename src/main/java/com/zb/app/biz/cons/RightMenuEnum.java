@@ -12,17 +12,45 @@ import com.zb.app.common.authority.Right;
  */
 public enum RightMenuEnum {
 
-    ORDER_MANAGE(1, "订单管理", Right.SHOW_ORDER_MENU, Right.VIEW_ORDER, Right.CANCEL_ORDER, Right.MODIFY_ORDER),
+    /**
+     * manage right
+     */
+    COMPANY_MANAGE(1, "公司管理", Right.SHOW_COMPANY_MENU, Right.MANAGE_COMPANY_MENU, Right.ACCOUNT_COMPANY_MENU,
+                   Right.TOUR_COMPANY_MENU, Right.BLACKLIST_MENU),
 
-    PRODUCT_MANAGE(2, "产品中心", Right.SHOW_PRODUCT_MENU, Right.CREATE_PRODUCT, Right.MODIFY_PRODUCT,
-                   Right.REMOVE_PRODUCT, Right.SAVE_PRODUCT, Right.CREATE_LINE_TEMPLATE, Right.MODIFY_LINE_TEMPLATE,
-                   Right.COPY_LINE_TEMPLATE, Right.DELETE_LINE_TEMPLATE, Right.CREATE_TRAFFIC_TEMPLATE,
-                   Right.MODIFY_TRAFFIC_TEMPLATE, Right.DELETE_TRAFFIC_TEMPLATE, Right.UPLOAD_PHOTOS,
-                   Right.MODIFY_PHOTOS, Right.DELETE_PHOTOS),
+    LINE_MANAGE(2, "线路管理", Right.SHOW_LINE_MENU, Right.SHORT_LINE, Right.LONG_LINE, Right.INTERNATIONAL_LINE,
+                Right.LINE_TEMPLATE),
 
-    SYSTEM_MANAGE(3, "系统管理", Right.SHOW_COMPANY_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
-                  Right.ONLINE_SERVICE),
+    ORDER_MANAGE(3, "订单管理", Right.SHOW_ORDER_MENU, Right.FIT_ORDER, Right.COUNT_ORDER),
 
+    NEWS_MANAGE(4, "新闻管理", Right.SHOW_NEWS_MENU, Right.TRAVEL_NEWS, Right.USER_NEWS, Right.WEB_NEWS),
+
+    GIFT_MANAGE(5, "礼品管理", Right.SHOW_GIFT_MENU, Right.GIFT_LIST, Right.GIFT_ORDER_MANAGE, Right.GIFT_CLASS),
+
+    SYSTEM_MANAGE(6, "系统管理", Right.SHOW_COMPANY_MENU, Right.SITE_MANAGE_MENU, Right.SITE_TAG_MENU,
+                  Right.AD_MANAGE_MENU, Right.WEB_MANAGE_MENU),
+
+    INTEGRAL_MANAGE(7, "积分管理", Right.SHOW_INTEGRAL_MENU, Right.INTEGRAL_LIST, Right.INTEGRAL_ADD),
+
+    COUNT_MANAGE(8, "统计分析", Right.SHOW_COUNT_MENU, Right.ACCOUNT_COUNT_MANAGE, Right.LOGIN_COUNT, Right.REGISTER_COUNT),
+
+    /**
+     * account right
+     */
+    ORDER_ACCOUNT(1, "订单管理", Right.SHOW_ORDER_MENU, Right.VIEW_ORDER, Right.CANCEL_ORDER, Right.MODIFY_ORDER),
+
+    PRODUCT_ACCOUNT(2, "产品中心", Right.SHOW_PRODUCT_MENU, Right.CREATE_PRODUCT, Right.MODIFY_PRODUCT,
+                    Right.REMOVE_PRODUCT, Right.SAVE_PRODUCT, Right.CREATE_LINE_TEMPLATE, Right.MODIFY_LINE_TEMPLATE,
+                    Right.COPY_LINE_TEMPLATE, Right.DELETE_LINE_TEMPLATE, Right.CREATE_TRAFFIC_TEMPLATE,
+                    Right.MODIFY_TRAFFIC_TEMPLATE, Right.DELETE_TRAFFIC_TEMPLATE, Right.UPLOAD_PHOTOS,
+                    Right.MODIFY_PHOTOS, Right.DELETE_PHOTOS),
+
+    SYSTEM_ACCOUNT(3, "系统管理", Right.SHOW_COMPANY_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
+                   Right.ONLINE_SERVICE),
+
+    /**
+     * tour right
+     */
     ORDER_TOUR(1, "订单管理", Right.SHOW_ORDER_MENU, Right.VIEW_ORDER, Right.CANCEL_ORDER, Right.MODIFY_ORDER),
 
     PRODUCT_TOUR(2, "产品中心", Right.SHOW_PRODUCT_MENU),

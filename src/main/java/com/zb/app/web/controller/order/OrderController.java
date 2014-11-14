@@ -30,9 +30,11 @@ import com.zb.app.biz.domain.TravelOrderFullDO;
 import com.zb.app.biz.domain.TravelOrderGuestDO;
 import com.zb.app.biz.domain.TravelOrderGuestFullDO;
 import com.zb.app.biz.domain.TravelRouteDO;
+import com.zb.app.biz.domain.TravelServiceDO;
 import com.zb.app.biz.query.TravelLineQuery;
 import com.zb.app.biz.query.TravelOrderQuery;
 import com.zb.app.biz.query.TravelRouteQuery;
+import com.zb.app.biz.query.TravelServiceQuery;
 import com.zb.app.biz.service.combiz.ICallBack;
 import com.zb.app.common.authority.AuthorityPolicy;
 import com.zb.app.common.authority.Right;
@@ -43,6 +45,7 @@ import com.zb.app.common.core.lang.BeanUtils;
 import com.zb.app.common.interceptor.annotation.ExportWordFile;
 import com.zb.app.common.result.JsonResultUtils;
 import com.zb.app.common.result.JsonResultUtils.JsonResult;
+import com.zb.app.common.util.PushSMSUtils;
 import com.zb.app.common.velocity.CustomVelocityLayoutView;
 import com.zb.app.web.controller.BaseController;
 import com.zb.app.web.tools.WebUserTools;
@@ -320,7 +323,7 @@ public class OrderController extends BaseController implements ICallBack {
         TravelOrderFullDO order = orderService.find(new TravelOrderQuery(id));
         TravelLineDO line = lineService.getTravelLineById(order.getlId());
         List<TravelOrderGuestDO> guestList = orderService.getByOrId(id);
-
+        mav.addObject("cType", WebUserTools.getCompanyType().getValue());
         mav.addObject("guests", guestList);
         mav.addObject("line", new TravelLineVO(line));
         mav.addObject("order", new TravelOrderFullVO(order));
@@ -492,6 +495,14 @@ public class OrderController extends BaseController implements ICallBack {
             orderService.addTravelOrderGuest(guestList);
             orderService.updateTravelOrder(upOrder);
             lineService.updateTravelLine(line);
+            List<TravelServiceDO> serviceDOs = companyService.list(new TravelServiceQuery(order.getcId()));
+            List<String> mobiles = new ArrayList<String>();
+            for (TravelServiceDO travelServiceDO : serviceDOs) {
+				if(travelServiceDO.getsIsReceive() == 1){
+					mobiles.add(travelServiceDO.getsMobile());
+				}
+			}
+            //PushSMSUtils.getInstance().sendNewOrderSMS(upOrder.getOrOrderId(), mobiles.toArray(new String[mobiles.size()]));
             return JsonResultUtils.success("预定成功!");
         } else if (actionType == UPDATE_ORDER_CALLBACK) {
             TravelOrderDO orderDO = (TravelOrderDO) params[0];
@@ -518,6 +529,8 @@ public class OrderController extends BaseController implements ICallBack {
                                                                            WebUserTools.getMid(), WebUserTools.getCid());
             // 添加日志
             operationLogService.insertTravelOperationLog(operationLogDO);
+            if(orderDO.getOrMobile() != null)
+            	PushSMSUtils.getInstance().sendOrderModifySMS(newOrder.getOrOrderId(), orderDO.getOrMobile());
             return JsonResultUtils.success("更新成功!");
         } else if (actionType == DELETE_ORDER_CALLBACK) {
             Long id = (Long) params[0];

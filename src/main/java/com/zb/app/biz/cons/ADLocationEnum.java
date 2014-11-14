@@ -16,21 +16,23 @@ public enum ADLocationEnum {
 
     INDEX_RIGHT(2, "首页右侧"),
 
-    SERVICES_BANNERS(3, "左边服务-横幅"),
+    INDEX_FOOTER(3, "首页横幅底侧"),
 
-    ACCOUT_BANNERS(4, "商家大全-横幅"),
+    SERVICES_BANNERS(4, "左边服务-横幅"),
 
-    ABOUT_BANNERS(5, "关于我们-横幅"),
+    ACCOUT_BANNERS(5, "商家大全-横幅"),
 
-    NEWS_BANNERS(6, "新闻资讯-横幅"),
+    ABOUT_BANNERS(6, "关于我们-横幅"),
 
-    QUESTION_BANNERS(7, "常见问题-横幅"),
+    NEWS_BANNERS(7, "新闻资讯-横幅"),
 
-    MALL_BANNERS(8, "商城横幅"),
+    QUESTION_BANNERS(8, "常见问题-横幅"),
 
-    RECOMMENDED_BANNERS(9, "推荐商家"),
+    MALL_BANNERS(9, "商城横幅"),
 
-    FOOTER_BANNERS(10, "页底广告");
+    RECOMMENDED_BANNERS(10, "推荐商家"),
+
+    FOOTER_BANNERS(11, "页底广告");
 
     private int    value;
 

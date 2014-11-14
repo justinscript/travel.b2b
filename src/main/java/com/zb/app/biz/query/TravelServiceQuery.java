@@ -30,7 +30,10 @@ public class TravelServiceQuery extends Pagination {
     public TravelServiceQuery(Long cId, String sName) {
         this(cId, sName, null);
     }
-
+    
+    public TravelServiceQuery(Long cId) {
+        this(cId, null, null);
+    }
     public TravelServiceQuery(Long cId, String sName, String sQQ) {
         service.setcId(cId);
         service.setsName(sName);

@@ -24,11 +24,13 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zb.app.biz.cons.ADLocationEnum;
 import com.zb.app.biz.cons.ColumnCatEnum;
+import com.zb.app.biz.cons.CompanyStateEnum;
 import com.zb.app.biz.cons.CompanyTypeEnum;
 import com.zb.app.biz.cons.LineStateEnum;
 import com.zb.app.biz.cons.LineTemplateEnum;
 import com.zb.app.biz.cons.MemberTypeEnum;
 import com.zb.app.biz.cons.PhotoTypeEnum;
+import com.zb.app.biz.cons.TravelNewsTypeEnum;
 import com.zb.app.biz.domain.TravelAdvertisementDO;
 import com.zb.app.biz.domain.TravelCompanyDO;
 import com.zb.app.biz.domain.TravelIntegralDO;
@@ -107,6 +109,7 @@ public class LoginController extends BaseController {
         TravelNewsQuery query = new TravelNewsQuery();
         query.setNowPageIndex(0);
         query.setPageSize(10);
+        query.setnType(TravelNewsTypeEnum.WEB_NEWS.value);
         PaginationList<TravelNewsDO> list = cmsService.showNewsPagination(query, new DefaultIpageUrl());
         mav.addObject("newsList", list);
 
@@ -141,6 +144,7 @@ public class LoginController extends BaseController {
         companyQuery.setNowPageIndex(0);
         companyQuery.setPageSize(3);
         companyQuery.setcType(CompanyTypeEnum.TOUR.getValue());
+        companyQuery.setcState(CompanyStateEnum.NORMAL.getValue());
         PaginationList<TravelCompanyDO> companyDOs = companyService.showCompanyPagination(companyQuery,
                                                                                           new DefaultIpageUrl());
         mav.addObject("companyDOs", companyDOs);
@@ -153,7 +157,11 @@ public class LoginController extends BaseController {
         List<TravelAdvertisementDO> adList = cmsService.list(new TravelAdvertisementQuery(
                                                                                           ADLocationEnum.INDEX_BANNERS.getValue(),
                                                                                           WebUserTools.getChugangId()));
+        List<TravelAdvertisementDO> adFooterList = cmsService.list(new TravelAdvertisementQuery(
+                                                                                                ADLocationEnum.INDEX_FOOTER.getValue(),
+                                                                                                WebUserTools.getChugangId()));
         mav.addObject("adList", adList);
+        mav.addObject("adFooterList", adFooterList);
 
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
         return mav;

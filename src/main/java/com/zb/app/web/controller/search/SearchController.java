@@ -6,6 +6,7 @@
 package com.zb.app.web.controller.search;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -24,7 +25,11 @@ import org.springframework.web.servlet.ModelAndView;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.zb.app.common.core.SpringContextAware;
+import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.CollectionUtils;
+import com.zb.app.common.pagination.PagesPagination;
+import com.zb.app.common.pagination.PaginationParser;
+import com.zb.app.common.pagination.PaginationParser.IPageUrl;
 import com.zb.app.common.result.JsonResultUtils;
 import com.zb.app.common.result.JsonResultUtils.JsonResult;
 import com.zb.app.common.util.DateViewTools;
@@ -118,19 +123,15 @@ public class SearchController extends BaseController {
     }
 
     @RequestMapping(value = "/productSearch.htm")
-    public ModelAndView linesearch(ModelAndView model, String type, String keyword, boolean expectMatch,
-                                   ProductSearchQuery query) {
-        type = "zuobian";
-        long starttime = System.currentTimeMillis();
-        // 查询类型
-        SearchTypeEnum searchType = SearchTypeEnum.getByValue(type);
+    public ModelAndView linesearch(ModelAndView model, final String type, final String keyword, boolean expectMatch,
+                                   final ProductSearchQuery query, Integer page) {
+        // 类型设置
+        SearchTypeEnum searchType = SearchTypeEnum.getByValue(StringUtils.isEmpty(type) ? "zuobian" : type);
         if (searchType == null) {
             searchType = SearchTypeEnum.PRODUCT;
         }
-        // 版本
-        Integer version = null;
-        version = getVersion(VersionType.product);
-        // 设置搜索条件
+        // 版本设置
+        Integer version = getVersion(VersionType.product);
         // 专线设置
         if (query.getzId() == null) {
             SiteCacheTools siteCacheTools = (SiteCacheTools) SpringContextAware.getBean("siteCacheTools");
@@ -140,40 +141,65 @@ public class SearchController extends BaseController {
             for (List<ColumnThinVO> list : column.values()) {
                 columnlist.addAll(list);
             }
-            Long[] zIds = CollectionUtils.getLongValueArrays(columnlist, "zId");
-            query.setzIds(zIds);
+            query.setzIds(CollectionUtils.getLongValueArrays(columnlist, "zId"));
         } else {
             query.setzIds(query.getzId());
         }
+
         // 分词
-        List<String> _segWords = analyzer.segWords(keyword == null ? "" : keyword);
+        List<String> _segWords = StringUtils.isEmpty(keyword) ? Collections.<String> emptyList() : analyzer.segWords(keyword);
         query.setProducts(_segWords);
         query.setExpectMatch(expectMatch);
+
+        // 分页
+        page = Argument.isNotPositive(page) ? 0 : page - 1;
+        query.setNowPageIndex(page);
+        query.setStart(query.getNowPageIndex() * query.getRows());
+
         // 查询到的集合
         List<ProductSearchField> list = productSearch.search(version, query);
         for (ProductSearchField productSearchField : list) {
             for (String regex : _segWords) {
-                productSearchField.setlTile(highLight(productSearchField.getlTile(), regex));
-                productSearchField.setlMode(highLight(productSearchField.getlMode(), regex));
-                productSearchField.setlYesItem(highLight(productSearchField.getlYesItem(), regex));
-                productSearchField.setlNoItem(highLight(productSearchField.getlNoItem(), regex));
-                productSearchField.setlChildren(highLight(productSearchField.getlChildren(), regex));
-                productSearchField.setlShop(highLight(productSearchField.getlShop(), regex));
-                productSearchField.setlExpenseItem(highLight(productSearchField.getlExpenseItem(), regex));
-                productSearchField.setlPreseItem(highLight(productSearchField.getlPreseItem(), regex));
-                productSearchField.setrContent(highLight(productSearchField.getrContent(), regex));
-                productSearchField.setrCar(highLight(productSearchField.getrCar(), regex));
+                handleSearchResult(productSearchField, regex);
             }
         }
-        logger.error("search Product user time : 【{}】", System.currentTimeMillis() - starttime);
+
+        PagesPagination pagination = PaginationParser.getPaginationList(page, query.getRows(), query.getAllRecordNum(),
+                                                                        new IPageUrl() {
+
+                                                                            @Override
+                                                                            public String parsePageUrl(Object... objs) {
+                                                                                String str = "/search/productSearch.htm?page="
+                                                                                             + (Integer) objs[1];
+                                                                                if (type != null) {
+                                                                                    str += "&type=" + type;
+                                                                                }
+                                                                                if (keyword != null) {
+                                                                                    str += "&keyword=" + keyword;
+                                                                                }
+                                                                                if (query.getlArrivalCity() != null) {
+                                                                                    str += "&lArrivalCity="
+                                                                                           + query.getlArrivalCity();
+                                                                                }
+                                                                                if (query.getlDay() != null) {
+                                                                                    str += "&lDay=" + query.getlDay();
+                                                                                }
+                                                                                if (query.getlType() != null) {
+                                                                                    str += "&lType=" + query.getlType();
+                                                                                }
+                                                                                return str;
+                                                                            }
+                                                                        });
+
         model.addObject("linelist", list);
         model.addObject("keyword", keyword);
-        // 传递参数
         model.addObject("lDay", query.getlDay());
         model.addObject("lType", query.getlType());
         model.addObject("city", query.getlArrivalCity());
-        model.addObject("searchcount", list.size());
+        model.addObject("searchcount", query.getAllRecordNum());
+        model.addObject("pagination", pagination);
         model.setViewName("search/searchLine");
+
         // 获取所有抵达城市
         model.addObject("citylists", lineService.getCityByCid(WebUserTools.getChugangId()));
         return model;
@@ -228,22 +254,15 @@ public class SearchController extends BaseController {
             case PRODUCT:
                 version = getVersion(VersionType.product);
                 List<String> _segWords = analyzer.segWords(keyword);
+
                 ProductSearchQuery query = new ProductSearchQuery(_segWords);
+
                 query.setExpectMatch(expectMatch);
                 data = productSearch.search(version, query);
                 List<ProductSearchField> list = (List<ProductSearchField>) data;
                 for (ProductSearchField productSearchField : list) {
                     for (String regex : _segWords) {
-                        productSearchField.setlTile(highLight(productSearchField.getlTile(), regex));
-                        productSearchField.setlMode(highLight(productSearchField.getlMode(), regex));
-                        productSearchField.setlYesItem(highLight(productSearchField.getlYesItem(), regex));
-                        productSearchField.setlNoItem(highLight(productSearchField.getlNoItem(), regex));
-                        productSearchField.setlChildren(highLight(productSearchField.getlChildren(), regex));
-                        productSearchField.setlShop(highLight(productSearchField.getlShop(), regex));
-                        productSearchField.setlExpenseItem(highLight(productSearchField.getlExpenseItem(), regex));
-                        productSearchField.setlPreseItem(highLight(productSearchField.getlPreseItem(), regex));
-                        productSearchField.setrContent(highLight(productSearchField.getrContent(), regex));
-                        productSearchField.setrCar(highLight(productSearchField.getrCar(), regex));
+                        handleSearchResult(productSearchField, regex);
                     }
                 }
                 data = list;
@@ -327,6 +346,18 @@ public class SearchController extends BaseController {
     // //// private method
     // ////
     // ///////////////////////////////////////////////////////////////
+    private void handleSearchResult(ProductSearchField productSearchField, String regex) {
+        productSearchField.setlTile(highLight(productSearchField.getlTile(), regex));
+        productSearchField.setlMode(highLight(productSearchField.getlMode(), regex));
+        productSearchField.setlYesItem(highLight(productSearchField.getlYesItem(), regex));
+        productSearchField.setlNoItem(highLight(productSearchField.getlNoItem(), regex));
+        productSearchField.setlChildren(highLight(productSearchField.getlChildren(), regex));
+        productSearchField.setlShop(highLight(productSearchField.getlShop(), regex));
+        productSearchField.setlExpenseItem(highLight(productSearchField.getlExpenseItem(), regex));
+        productSearchField.setlPreseItem(highLight(productSearchField.getlPreseItem(), regex));
+        productSearchField.setrContent(highLight(productSearchField.getrContent(), regex));
+        productSearchField.setrCar(highLight(productSearchField.getrCar(), regex));
+    }
 
     private JsonResult clear(String key, Integer version) {
         SearchTypeEnum searchType = SearchTypeEnum.getByValue(key);

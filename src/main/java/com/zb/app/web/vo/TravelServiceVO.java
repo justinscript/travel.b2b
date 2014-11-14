@@ -29,7 +29,9 @@ public class TravelServiceVO {
     @NotEmpty(message = "客服QQ不能为空")
     private String     sQQ;        // 客服QQ
     private Integer    sSort;      // 排序(大号排前)
-
+    private String            sMobile;                                // 客服手机
+    private Integer           sIsReceive;                             // 是否接受信息   0=否 ，1=是
+    
     public Long getsId() {
         return sId;
     }
@@ -93,4 +95,20 @@ public class TravelServiceVO {
     public void setsSort(Integer sSort) {
         this.sSort = sSort;
     }
+
+	public String getsMobile() {
+		return sMobile;
+	}
+
+	public void setsMobile(String sMobile) {
+		this.sMobile = sMobile;
+	}
+
+	public Integer getsIsReceive() {
+		return sIsReceive;
+	}
+
+	public void setsIsReceive(Integer sIsReceive) {
+		this.sIsReceive = sIsReceive;
+	}
 }

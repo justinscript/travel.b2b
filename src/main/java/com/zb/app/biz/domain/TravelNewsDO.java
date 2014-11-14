@@ -29,7 +29,7 @@ public class TravelNewsDO implements Serializable {
     private Long              cId;                                     // 公司ID
     @NotNull(message = "专线ID不能为空")
     private Long              zId;                                     // 专线ID
-    @NotNull(message = "新闻类型不能为空")
+    // @NotNull(message = "新闻类型不能为空")
     private Integer           nType;                                   // 新闻类型
     @NotEmpty(message = "新闻标题不能为空")
     private String            nTitle;                                  // 新闻标题

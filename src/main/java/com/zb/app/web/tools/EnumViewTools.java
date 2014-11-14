@@ -27,22 +27,20 @@ public class EnumViewTools {
 
     private static List<OrderStateEnum> orderStateEnumList; // 订单状态枚举
     private static List<LineTypeEnum>   lineTypeEnumList;  // 线路类型枚举
-    private static List<ADLocationEnum> adLocationEnumList;
+    private static List<ADLocationEnum> adLocationEnumList; // 广告展示位置枚举
     private static List<LineDayEnum>    lineDayEnumList;   // 线路天数枚举类
-    private static List<TheSidebarEnum> theSidebarEnumList; //侧边栏枚举类
-    
-    
+    private static List<TheSidebarEnum> theSidebarEnumList; // 侧边栏枚举类
+
     public static List<TheSidebarEnum> getallTheSidebar() {
         if (theSidebarEnumList == null) {
-        	theSidebarEnumList = new ArrayList<TheSidebarEnum>();
+            theSidebarEnumList = new ArrayList<TheSidebarEnum>();
             for (TheSidebarEnum _enum : TheSidebarEnum.values()) {
-            	theSidebarEnumList.add(_enum);
+                theSidebarEnumList.add(_enum);
             }
             theSidebarEnumList = Collections.unmodifiableList(theSidebarEnumList);
         }
         return theSidebarEnumList;
     }
-    
 
     public static List<OrderStateEnum> getAllOrderState() {
         if (orderStateEnumList == null) {
@@ -77,9 +75,17 @@ public class EnumViewTools {
         return lineTypeEnumList;
     }
 
+    public static List<RightMenuEnum> getManageRightMenu() {
+        List<RightMenuEnum> rightMenuEnumList = Arrays.asList(new RightMenuEnum[] { RightMenuEnum.COMPANY_MANAGE,
+                RightMenuEnum.LINE_MANAGE, RightMenuEnum.ORDER_MANAGE, RightMenuEnum.NEWS_MANAGE,
+                RightMenuEnum.GIFT_MANAGE, RightMenuEnum.SYSTEM_MANAGE, RightMenuEnum.INTEGRAL_MANAGE,
+                RightMenuEnum.COUNT_MANAGE });
+        return Collections.unmodifiableList(rightMenuEnumList);
+    }
+
     public static List<RightMenuEnum> getAccountRightMenu() {
-        List<RightMenuEnum> rightMenuEnumList = Arrays.asList(new RightMenuEnum[] { RightMenuEnum.ORDER_MANAGE,
-                RightMenuEnum.PRODUCT_MANAGE, RightMenuEnum.SYSTEM_MANAGE });
+        List<RightMenuEnum> rightMenuEnumList = Arrays.asList(new RightMenuEnum[] { RightMenuEnum.ORDER_ACCOUNT,
+                RightMenuEnum.PRODUCT_ACCOUNT, RightMenuEnum.SYSTEM_ACCOUNT });
         return Collections.unmodifiableList(rightMenuEnumList);
     }
 
@@ -113,7 +119,7 @@ public class EnumViewTools {
         }
         return LineTypeEnum.getAction(v).getName();
     }
-    
+
     public static String rightMenuEnumName(Integer v) {
         if (v == null) {
             return StringUtils.EMPTY;

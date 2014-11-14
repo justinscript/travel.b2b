@@ -34,6 +34,10 @@ public class WebUserTools {
     public static CompanyTypeEnum getCompanyType() {
         return current() == null ? null : current().getType();
     }
+    
+    public static MemberTypeEnum getMemberType() {
+        return current() == null ? null : current().getmType();
+    }
 
     public static Long getCid() {
         return current() == null ? null : current().getcId();

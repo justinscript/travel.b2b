@@ -14,7 +14,13 @@ public enum ArticlesSourceEnum {
 
     ABOUT_ZUOBIAN(1, "关于左边"),
 
-    HELP_CENTER(2, "帮助中心");
+    HELP_CENTER(2, "帮助中心"),
+
+    ORDER_GUIDE(3, "订购指南"),
+
+    ACCOUNT_ISSUE(4, "批发商问题"),
+
+    TOUR_ISSUE(5, "组团社问题");
 
     private int    value;
 

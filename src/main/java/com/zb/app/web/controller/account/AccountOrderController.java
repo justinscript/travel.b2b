@@ -33,6 +33,7 @@ import com.zb.app.common.pagination.PaginationParser.DefaultIpageUrl;
 import com.zb.app.common.result.JsonResultUtils;
 import com.zb.app.common.result.JsonResultUtils.JsonResult;
 import com.zb.app.common.util.DateViewTools;
+import com.zb.app.common.util.PushSMSUtils;
 import com.zb.app.common.velocity.CustomVelocityLayoutView;
 import com.zb.app.web.controller.BaseController;
 import com.zb.app.web.tools.WebUserTools;
@@ -123,6 +124,8 @@ public class AccountOrderController extends BaseController {
     public JsonResult cancelOrder(TravelOrderDO orderDO) {
         Boolean b = orderService.cancelOrder(orderDO);
         if (b) {
+        	if(orderDO.getOrMobile() != null)
+            	PushSMSUtils.getInstance().sendOrderCancelSMS(orderDO.getOrOrderId(), orderDO.getOrMobile());
             return JsonResultUtils.success(orderDO, "取消成功!");
         } else {
             return JsonResultUtils.success(orderDO, "取消失败!");
@@ -183,6 +186,8 @@ public class AccountOrderController extends BaseController {
             financeDO.setfReceivable(travelOrderDO.getOrPirceCount().floatValue());
             financeDO.setfReceipt((float) 0);
             financeService.addTravelFinance(financeDO);
+            if(travelOrderDO.getOrMobile() != null)
+            	PushSMSUtils.getInstance().sendOrderConfirmSMS(travelOrderDO.getOrOrderId(), travelOrderDO.getOrMobile());
             return JsonResultUtils.success(orderDO, "确认成功!");
         } else {
             return JsonResultUtils.error(orderDO, "确认失败!");

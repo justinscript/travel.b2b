@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.commons.lang.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -33,9 +34,7 @@ import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.BeanUtils;
 import com.zb.app.common.core.lang.CollectionUtils;
 import com.zb.app.common.interceptor.annotation.ExportWordFile;
-import com.zb.app.common.pagination.PagesPagination;
 import com.zb.app.common.pagination.PaginationList;
-import com.zb.app.common.pagination.PaginationParser;
 import com.zb.app.common.pagination.PaginationParser.DefaultIpageUrl;
 import com.zb.app.common.pagination.PaginationParser.IPageUrl;
 import com.zb.app.common.result.JsonResultUtils;
@@ -66,13 +65,19 @@ public class LineController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/line/{id}.htm")
-    public ModelAndView lineshow(@PathVariable("id") String id, ModelAndView mv) {
+    public ModelAndView lineshow(@PathVariable("id")
+    String id, ModelAndView mv) {
         mv.setViewName("line/line");
         TravelLineQuery query = new TravelLineQuery();
+        if (StringUtils.isEmpty(id)) {
+            return mv;
+        }
         if (NumberParser.isNumber(id)) {
-            query.setlId(Long.parseLong(id));
-        } else {
-            query.setlGroupNumber(id);
+            if (id.length() == 8) {
+                query.setlGroupNumber(id);
+            } else {
+                query.setlId(Long.parseLong(id));
+            }
         }
         // 查询线路
         TravelLineDO trline = lineService.find(query);
@@ -93,9 +98,9 @@ public class LineController extends BaseController {
         // 查询客服
         TravelServiceQuery servicequery = new TravelServiceQuery(trline.getcId(), null);
         List<TravelServiceDO> servicelist = companyService.list(servicequery);
-        //浏览量增加
-        TravelLineDO lineup=new TravelLineDO(trline.getlId());
-        lineup.setlViews((trline.getlViews()==null?0:trline.getlViews())+1);
+        // 浏览量增加
+        TravelLineDO lineup = new TravelLineDO(trline.getlId());
+        lineup.setlViews((trline.getlViews() == null ? 0 : trline.getlViews()) + 1);
         lineService.updateTravelLine(lineup);
         // 添加进模型
         mv.addObject("servicelist", servicelist);
@@ -112,7 +117,8 @@ public class LineController extends BaseController {
      */
     @RequestMapping("/printdoc/{id}.htm")
     @ExportWordFile(value = "行程单")
-    public ModelAndView exportDoc(@PathVariable("id") Long id, ModelAndView mav) {
+    public ModelAndView exportDoc(@PathVariable("id")
+    Long id, ModelAndView mav) {
         if (Argument.isNotPositive(id)) {
             return createErrorJsonMav("参数错误!", null);
         }
@@ -215,35 +221,32 @@ public class LineController extends BaseController {
         TravelLineQuery.parse(query, null, null, page, pagesize, LineTemplateEnum.Line.getValue());
         query.setlState(LineStateEnum.NORMAL.getValue());
         // 查询
-        PaginationList<TravelLineDO> list = lineService.listGroup(query, new DefaultIpageUrl());
-        PagesPagination pagination = PaginationParser.getPaginationList(query.getNowPageIndex(), query.getPageSize(),
-                                                                        query.getAllRecordNum(), new IPageUrl() {
+        PaginationList<TravelLineDO> list = lineService.listGroup(query, new IPageUrl() {
 
-                                                                            @Override
-                                                                            public String parsePageUrl(Object... objs) {
-                                                                                String str = "/line/showline.htm?page="
-                                                                                             + (Integer) objs[1];
-                                                                                if (query.getlArrivalCity() != null) {
-                                                                                    str += "&lArrivalCity="
-                                                                                           + query.getlArrivalCity();
-                                                                                }
-                                                                                if (query.getlDay() != null) {
-                                                                                    str += "&lDay=" + query.getlDay();
-                                                                                }
-                                                                                if (query.getlType() != null) {
-                                                                                    str += "&lType=" + query.getlType();
-                                                                                }
-                                                                                return str;
-                                                                            }
+            @Override
+            public String parsePageUrl(Object... objs) {
+                String str = "/line/showline.htm?page=" + (Integer) objs[1];
+                if (query.getlArrivalCity() != null) {
+                    str += "&lArrivalCity=" + query.getlArrivalCity();
+                }
+                if (query.getlDay() != null) {
+                    str += "&lDay=" + query.getlDay();
+                }
+                if (query.getlType() != null) {
+                    str += "&lType=" + query.getlType();
+                }
+                return str;
+            }
 
-                                                                        });
+        });
+
         model.addObject("list", BeanUtils.convert(TravelLineVO.class, list));
         // 线路总数
         TravelLineQuery queryline = new TravelLineQuery();
         queryline.setlState(LineStateEnum.NORMAL.getValue());
         queryline.setlTemplateState(LineTemplateEnum.Line.getValue());
         model.addObject("linecount", lineService.countByGroup(queryline));
-        model.addObject("pagination", pagination);
+        model.addObject("pagination", list.getQuery());
         model.addObject("searchcount", lineService.countByGroup(query));
         // 已定人数
         model.addObject("orderGuestCount", orderService.countByOrderGuest());

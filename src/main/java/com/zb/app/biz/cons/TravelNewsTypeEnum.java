@@ -14,11 +14,11 @@ import org.apache.commons.lang.StringUtils;
  */
 public enum TravelNewsTypeEnum {
 
-    TRAVEL_news(1, "news"),
+    TRAVEL_NEWS(1, "travelNews"),
 
-    USER_news(2, "notice"),
+    USER_NEWS(2, "userNews"),
 
-    WEB_news(3, "userinfo");
+    WEB_NEWS(3, "webNews");
 
     public int     value;
     private String name;

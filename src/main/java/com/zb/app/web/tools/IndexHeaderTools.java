@@ -20,18 +20,18 @@ import com.zb.app.common.pagination.PaginationParser.DefaultIpageUrl;
 
 /**
  * @author ZhouZhong
- *
  */
 public class IndexHeaderTools {
-	@Autowired
-    protected CmsService cmsService;
-	
-	@Autowired
-	protected IntegralService integralService;
-	
-	public Map<Integer, PaginationList<TravelLabelCategoryDO>> getTag() {
-		Map<Integer, PaginationList<TravelLabelCategoryDO>> navMap = new LinkedHashMap<Integer, PaginationList<TravelLabelCategoryDO>>();
-		// 出港点标签mav
+
+    @Autowired
+    protected CmsService      cmsService;
+
+    @Autowired
+    protected IntegralService integralService;
+
+    public Map<Integer, PaginationList<TravelLabelCategoryDO>> getTag() {
+        Map<Integer, PaginationList<TravelLabelCategoryDO>> navMap = new LinkedHashMap<Integer, PaginationList<TravelLabelCategoryDO>>();
+        // 出港点标签mav
         TravelLabelCategoryQuery categoryQuery = new TravelLabelCategoryQuery();
         categoryQuery.setsId(WebUserTools.getChugangId());
         categoryQuery.setLineType(ColumnCatEnum.SHORT_LINE.getValue());
@@ -51,9 +51,9 @@ public class IndexHeaderTools {
         navMap.put(3, internationalCategoryDOs);
         return navMap;
     }
-	
+
     public PaginationList<TravelGiftDO> getGiftList() {
-		// 积分商城
+        // 积分商城
         TravelGiftQuery giftQuery = new TravelGiftQuery();
         giftQuery.setPageSize(6);
         PaginationList<TravelGiftDO> giftDOs = integralService.listPagination(giftQuery, new DefaultIpageUrl());

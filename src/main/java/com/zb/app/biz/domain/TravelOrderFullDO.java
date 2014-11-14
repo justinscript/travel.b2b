@@ -17,7 +17,7 @@ public class TravelOrderFullDO extends TravelOrderDO {
     private static final long serialVersionUID = 3579103073017982030L;
 
     private String            lTile;                                  // 线路标题
-    private Integer            lViews;                                  // 线路浏览量
+    private Integer           lViews;                                  // 线路浏览量
     private String            mTel;
     private String            cName;
     private String            mName;

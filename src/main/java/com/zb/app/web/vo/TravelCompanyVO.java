@@ -48,6 +48,8 @@ public class TravelCompanyVO {
     private String  cRecommend;  // 推荐
     private Date    cLoginTime;  // 登录日期
     private Integer cState;      // 状态（0=未审核，1=正常，2=停止）
+    private Integer cMoProvince;      // 默认站点
+    private Integer cMoCity;      // 默认站点
 
     public Long getcId() {
         return cId;
@@ -257,7 +259,23 @@ public class TravelCompanyVO {
         this.cRecommend = cRecommend;
     }
 
-    @Override
+    public Integer getcMoProvince() {
+		return cMoProvince;
+	}
+
+	public void setcMoProvince(Integer cMoProvince) {
+		this.cMoProvince = cMoProvince;
+	}
+
+	public Integer getcMoCity() {
+		return cMoCity;
+	}
+
+	public void setcMoCity(Integer cMoCity) {
+		this.cMoCity = cMoCity;
+	}
+
+	@Override
     public String toString() {
         return ReflectionToStringBuilder.toString(this, ToStringStyle.MULTI_LINE_STYLE);
     }

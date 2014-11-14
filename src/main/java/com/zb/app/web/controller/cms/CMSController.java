@@ -62,9 +62,10 @@ import com.zb.app.web.vo.TravelLineVO;
 @Controller
 public class CMSController extends BaseController {
 
-	private static final int DEFAULT_LIMIT = 10;
+    private static final int DEFAULT_LIMIT = 10;
     private static final int MAX_LIMIT     = 20;
-	/**
+
+    /**
      * 商家大全
      * 
      * @return
@@ -172,7 +173,7 @@ public class CMSController extends BaseController {
     public ModelAndView news_view(ModelAndView mav, Long id) {
         TravelNewsDO newsDO = cmsService.getById(id);
         mav.addObject("news", newsDO);
-        mav.setViewName("cms/news_view");
+        mav.setViewName("cms/1409/news_view");
         return mav;
     }
 
@@ -204,8 +205,7 @@ public class CMSController extends BaseController {
 
             @Override
             public String parsePageUrl(Object... objs) {
-                return "/shop.htm?page="
-                       + (Integer) objs[1];
+                return "/shop.htm?page=" + (Integer) objs[1];
             }
         });
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
@@ -328,6 +328,102 @@ public class CMSController extends BaseController {
         mv.addObject("articles", articlesDO);
         return mv;
     }
+    /**
+     * tourIssue 页面
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/tourIssue/{id}.htm")
+    public ModelAndView tourIssue(@PathVariable("id")
+    Long id, ModelAndView mv) {
+        mv.setViewName("cms/1409/tourIssue");
+        mv.addObject("source", ArticlesSourceEnum.TOUR_ISSUE.getName());
+        if (Argument.isNotPositive(id)) {
+            return mv;
+        }
+
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.TOUR_ISSUE.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return mv;
+        }
+        TravelArticlesDO articlesDO = new TravelArticlesDO();
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+            if (articles.getaId() == id) {
+                articlesDO = articles;
+            }
+        }
+
+        mv.addObject("nav", navMap);
+        mv.addObject("articles", articlesDO);
+        return mv;
+    }
+    /**
+     * accountIssue 页面
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/accountIssue/{id}.htm")
+    public ModelAndView accountIssue(@PathVariable("id")
+    Long id, ModelAndView mv) {
+        mv.setViewName("cms/1409/accountIssue");
+        mv.addObject("source", ArticlesSourceEnum.ACCOUNT_ISSUE.getName());
+        if (Argument.isNotPositive(id)) {
+            return mv;
+        }
+
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.ACCOUNT_ISSUE.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return mv;
+        }
+        TravelArticlesDO articlesDO = new TravelArticlesDO();
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+            if (articles.getaId() == id) {
+                articlesDO = articles;
+            }
+        }
+
+        mv.addObject("nav", navMap);
+        mv.addObject("articles", articlesDO);
+        return mv;
+    }
+    /**
+     * orderGuide 页面
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/orderGuide/{id}.htm")
+    public ModelAndView orderGuide(@PathVariable("id")
+    Long id, ModelAndView mv) {
+        mv.setViewName("cms/1409/orderGuide");
+        mv.addObject("source", ArticlesSourceEnum.ORDER_GUIDE.getName());
+        if (Argument.isNotPositive(id)) {
+            return mv;
+        }
+
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.ORDER_GUIDE.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return mv;
+        }
+        TravelArticlesDO articlesDO = new TravelArticlesDO();
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+            if (articles.getaId() == id) {
+                articlesDO = articles;
+            }
+        }
+
+        mv.addObject("nav", navMap);
+        mv.addObject("articles", articlesDO);
+        return mv;
+    }
 
     /**
      * detail 页面(系统告示,新闻资讯)
@@ -344,6 +440,7 @@ public class CMSController extends BaseController {
         // cmsService.getById(id);
         return mv;
     }
+
     /**
      * 根据条件查询公司
      * 
@@ -353,7 +450,7 @@ public class CMSController extends BaseController {
     @ResponseBody
     public JsonResult queryCompanyByConditions(TravelCompanyQuery query, Integer limit) {
         List<TravelCompanyDO> list = companyService.showCompanyPagination(query);
-        
+
         List<Map<String, ?>> mapList = CollectionUtils.toMapList(list, "cId", "cName", "cSpell");
         // StringBuilder sb = new StringBuilder();
         String cond = query.getQ() == null ? StringUtils.EMPTY : query.getQ();
@@ -381,6 +478,7 @@ public class CMSController extends BaseController {
         }
         return JsonResultUtils.success(result);
     }
+
     /**
      * 得到条目个数
      * 

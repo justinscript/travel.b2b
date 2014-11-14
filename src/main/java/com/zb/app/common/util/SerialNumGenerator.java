@@ -42,21 +42,32 @@ public class SerialNumGenerator {
         return prefix + middle + num;
     }
 
+    public synchronized static String createProductSerNo(Long id) {
+        return getSuffix(id);
+    }
+
     private static String getSuffix(Long id) {
         Long num = 1l;
+        Random random = new Random();
         if (id != null) {
-            num = id % 100000;// 对id进行取模运算
+            num = id * (random.nextInt(1000));
+            if (num < 100) {
+                num = num * (random.nextInt());
+            }
+            num = (id * (random.nextInt(1000))) % 100000;// 对id进行取模运算
         }
 
-        Random random = new Random();
         StringBuffer suffixBuffer = new StringBuffer();
         suffixBuffer.append(String.valueOf(num)).append(random.nextInt(1000));
         return StringUtils.leftPad(suffixBuffer.toString(), 8, '0');
     }
 
     public static void main(String[] args) {
-        for (long i = 1; i < 1000; i++) {
-            System.out.println(createTradeNo(i));
+        for (long i = 1; i < 100000; i++) {
+            String id = createProductSerNo(i);
+            System.out.println(id);
+            System.out.println(id.length());
+            System.out.println(id.length() == 8);
         }
     }
 }

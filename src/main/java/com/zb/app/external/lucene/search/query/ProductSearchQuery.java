@@ -8,6 +8,7 @@ package com.zb.app.external.lucene.search.query;
 import java.io.Serializable;
 import java.util.List;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 
@@ -21,8 +22,14 @@ public class ProductSearchQuery implements SearchQuery, Serializable {
 
     private static final long serialVersionUID = 3401107234009904866L;
 
-    private int               rows             = 30;                  // 行数
+    // 当前页面处于第几页，页面从0开始计数，在页面上显示则从1开始
+    private int               nowPageIndex     = 0;
+    // 所有的记录数
+    private int               allRecordNum;
+
+    private int               rows             = 10;                  // 行数
     private int               start;                                  // 开始
+
     private String            Title;                                  // 线路标题
     private Integer           lType;                                  // 线路类型
     private Integer           lDay;                                   // 线路天数
@@ -142,12 +149,28 @@ public class ProductSearchQuery implements SearchQuery, Serializable {
 
     @Override
     public String getSortFiled() {
-        return "lTile";
+        return StringUtils.EMPTY;
     }
 
     @Override
     public ORDER getOrderBy() {
-        return ORDER.asc;
+        return ORDER.desc;
+    }
+
+    public int getNowPageIndex() {
+        return nowPageIndex;
+    }
+
+    public void setNowPageIndex(int nowPageIndex) {
+        this.nowPageIndex = nowPageIndex;
+    }
+
+    public int getAllRecordNum() {
+        return allRecordNum;
+    }
+
+    public void setAllRecordNum(int allRecordNum) {
+        this.allRecordNum = allRecordNum;
     }
 
     @Override

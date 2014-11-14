@@ -21,6 +21,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zb.app.biz.cons.CompanyTypeEnum;
 import com.zb.app.biz.cons.OrderStateEnum;
+import com.zb.app.biz.cons.TravelNewsTypeEnum;
 import com.zb.app.biz.domain.TravelBlackListDO;
 import com.zb.app.biz.domain.TravelCompanyDO;
 import com.zb.app.biz.domain.TravelMemberDO;
@@ -204,6 +205,7 @@ public class AccountCustomerController extends BaseController {
         query.setNowPageIndex(Argument.isNotPositive(page) ? 0 : page - 1);
         query.setPageSize(20);
         query.setcId(WebUserTools.getCid());
+        query.setnType(TravelNewsTypeEnum.TRAVEL_NEWS.value);
         PaginationList<TravelNewsDO> list = cmsService.showNewsPagination(query, new DefaultIpageUrl());
 
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
@@ -231,9 +233,8 @@ public class AccountCustomerController extends BaseController {
     @RequestMapping(value = "/addNews.htm", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult addNews(TravelNewsDO newsDO) {
-        Long cId = WebUserTools.getCid();
-        newsDO.setcId(cId);
-        newsDO.setnType(1);
+        newsDO.setcId(WebUserTools.getCid());
+        newsDO.setnType(TravelNewsTypeEnum.TRAVEL_NEWS.value);
         cmsService.addTravelNews(newsDO);
         return JsonResultUtils.success(newsDO, "创建成功!");
     }
@@ -413,7 +414,7 @@ public class AccountCustomerController extends BaseController {
     public ModelAndView qq(ModelAndView mav) {
         mav.setViewName("account/customer/qqlist");
 
-        List<TravelServiceDO> list = companyService.list(new TravelServiceQuery());
+        List<TravelServiceDO> list = companyService.list(new TravelServiceQuery(WebUserTools.getCid()));
         mav.addObject("list", list);
         return mav;
     }
@@ -467,6 +468,9 @@ public class AccountCustomerController extends BaseController {
         TravelServiceDO serviceDO = new TravelServiceDO();
         BeanUtils.copyProperties(serviceDO, service);
         serviceDO.setcId(WebUserTools.getCid());
+        if(serviceDO.getsIsReceive() == null){
+        	serviceDO.setsIsReceive(0);
+        }
         if (service.getsId() != null && service.getsId() > 0) {
             companyService.updateById(serviceDO);
             companyService.realDelServiceSite(serviceDO.getsId());
@@ -504,18 +508,17 @@ public class AccountCustomerController extends BaseController {
         boolean isDel = companyService.realDelService(id);
         return isDel ? JsonResultUtils.success("删除成功!") : JsonResultUtils.error("删除失败!");
     }
-    
-    
+
     // 操作日志
     @RequestMapping(value = "/log.htm")
     public String log() {
-    	
+
         return "/account/log/index";
     }
-    
+
     @RequestMapping(value = "/loglist.htm")
     public ModelAndView loglist(ModelAndView mav, TravelOperationLogQuery query, Integer page) {
-    	query.setNowPageIndex(Argument.isNotPositive(page) ? 0 : page - 1);
+        query.setNowPageIndex(Argument.isNotPositive(page) ? 0 : page - 1);
         query.setPageSize(20);
         query.setcId(WebUserTools.getCid());
         PaginationList<TravelOperationLogFullDO> list = operationLogService.listPagination(query, new DefaultIpageUrl());
@@ -526,5 +529,5 @@ public class AccountCustomerController extends BaseController {
         mav.addObject("pagination", list.getQuery());
         mav.setViewName("/account/log/indexlist");
         return mav;
-    }   
+    }
 }

@@ -13,6 +13,7 @@ import org.apache.solr.client.solrj.SolrQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.util.StringFormatter;
 import com.zb.app.external.lucene.solr.query.SearchQuery;
 import com.zb.app.external.lucene.solr.query.SuggestQuery;
@@ -53,7 +54,7 @@ public class BaseSolrQueryConvert {
     }
 
     protected static String filterQuery(String value) {
-        value = value == null ? value : value.replaceAll(invalid_chars_reg, " ");
+        value = value == null ? value : value.replaceAll(invalid_chars_reg, "");
         return StringFormatter.matcherRegex(value, REGEX);
     }
 
@@ -87,13 +88,19 @@ public class BaseSolrQueryConvert {
         return solrQuery;
     }
 
-    protected static SolrQuery createSearchQuery(List<String> params, SearchQuery searchQuery) {
+    protected static SolrQuery createSearchQuery(List<String> params, List<String> fiters, SearchQuery searchQuery) {
         SolrQuery solrQuery = new SolrQuery();
         String query = null;
-        if (params.isEmpty()) {
+        if (Argument.isEmpty(params)) {
             query = ("*:*");
         } else {
             query = StringUtils.join(params, " AND ");
+            if (!StringUtils.join(params.toArray()).contains("*")) {
+                solrQuery.setRequestHandler("/browse");
+            }
+        }
+        if (Argument.isNotEmpty(fiters)) {
+            solrQuery.setFilterQueries(StringUtils.join(fiters, " AND "));
         }
         solrQuery.setQuery(query);
         solrQuery.setStart(searchQuery.getStart());

@@ -24,6 +24,8 @@ import com.zb.app.biz.query.TravelGiftOrderQuery;
 import com.zb.app.biz.query.TravelGiftQuery;
 import com.zb.app.biz.query.TravelIntegralQuery;
 import com.zb.app.biz.service.impl.FileServiceImpl.IFileHandle;
+import com.zb.app.common.authority.AuthorityPolicy;
+import com.zb.app.common.authority.Right;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.pagination.PaginationList;
 import com.zb.app.common.pagination.PaginationParser.DefaultIpageUrl;
@@ -42,7 +44,8 @@ import com.zb.app.web.tools.WebUserTools;
 @Controller
 @RequestMapping("/zbmanlogin")
 public class ManageIntegralController extends BaseController {
-
+	
+	@AuthorityPolicy(authorityTypes = { Right.GIFT_LIST })
     @RequestMapping(value = "/giftlist.htm")
     public ModelAndView gift(ModelAndView mav, TravelGiftQuery query, Integer page) {
         query.setPageSize(20);
@@ -73,7 +76,7 @@ public class ManageIntegralController extends BaseController {
         mav.setViewName("/manage/gift/add");
         return mav;
     }
-
+    
     @RequestMapping(value = "/addGift.htm", produces = "application/json", method = RequestMethod.POST)
     @ResponseBody
     public JsonResult addGift(ModelAndView mav, final TravelGiftDO travelGiftDO) {

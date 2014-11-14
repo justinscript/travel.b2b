@@ -24,53 +24,24 @@ import com.zb.app.external.lucene.solr.utils.BaseSolrQueryConvert;
 public class ZuobianSolrQueryConvert extends BaseSolrQueryConvert {
 
     public static SolrQuery to(ProductSearchQuery query) {
+        String q = StringUtils.join(query.getProducts().toArray(new String[0]), " ");
         List<String> params = new ArrayList<String>();
-        String product = null;
-        String[] fields = new String[] { "lTile", "lMode", "lYesItem", "lArrivalCity", "lNoItem", "lChildren", "lShop",
-                "lExpenseItem", "lPreseItem", "rContent", "rCar" };
-        if (query.getProducts() != null && query.getProducts().size() != 0) {
-            // 精确搜索
-            if (query.isExpectMatch()) {
-                int i = 0;
-                for (String s : query.getProducts()) {
-                    s = filterQuery(s);
-                    if (StringUtils.isNotBlank(s)) {
-                        product = i > 0 ? product + String.format(" AND \\regex:%s", s) : String.format("(\\regex:%s",
-                                                                                                        s);
-                        i++;
-                    }
-                }
-                product += ")";
-            }
-            // 模糊搜索
-            else {
-                product = StringUtils.join(query.getProducts().toArray(new String[0]), " ");
-                product = product.length() == 1 ? "*" + product + "*" : filterQuery(product);
-                if (StringUtils.isNotBlank(product)) {
-                    product = String.format("\\regex:%s", product);
-                }
-            }
-            // 生成全文检索字符串
-            String param = "";
-            for (String string : fields) {
-                param += product.replaceAll("\\\\regex", string);
-                if (!string.equals("rCar")) {
-                    param += " OR ";
-                }
-            }
-            params.add("(" + param + ")");
+        if (StringUtils.isNotBlank(q)) {
+            params.add(q.length()==1?"lTile:*"+q+"*":filterQuery(q));
         }
+        // 过滤查询
+        List<String> fiter = new ArrayList<String>();
         // 产品编号不为空
         if (query.getlGroupNumber() != null && query.getlGroupNumber() != "") {
-            params.add("lGroupNumber:" + query.getlGroupNumber());
+            fiter.add("lGroupNumber:" + query.getlGroupNumber());
         }
         // 线路类型不为空
         if (query.getlType() != null && query.getlGroupNumber() != "") {
-            params.add("lType:" + query.getlType());
+            fiter.add("lType:" + query.getlType());
         }
         // 旅行天数不为空
         if (query.getlDay() != null && query.getlDay() != 0) {
-            params.add("lDay:" + query.getlDay());
+            fiter.add("lDay:" + query.getlDay());
         }
         // 专线类别不为空
         if (query.getzIds() != null) {
@@ -78,13 +49,13 @@ public class ZuobianSolrQueryConvert extends BaseSolrQueryConvert {
             for (Long zid : query.getzIds()) {
                 paramszid += "zId:" + zid + " OR ";
             }
-            params.add("(" + paramszid.substring(0, paramszid.length() - 4) + ")");
+            fiter.add("(" + paramszid.substring(0, paramszid.length() - 4) + ")");
         }
         // 抵达城市不为空
         if (query.getlArrivalCity() != null && query.getlArrivalCity() != "") {
-            params.add("lArrivalCity:" + query.getlArrivalCity());
+            fiter.add("lArrivalCity:" + query.getlArrivalCity());
         }
-        SolrQuery solrQuery = createSearchQuery(params, query);
+        SolrQuery solrQuery = createSearchQuery(params, fiter, query);
         logger.debug("ZuobianSolrQueryConvert solr query: [{}]", solrQuery.toString());
         return solrQuery;
     }
@@ -128,7 +99,7 @@ public class ZuobianSolrQueryConvert extends BaseSolrQueryConvert {
             sb.append(")");
             params.add(sb.toString());
         }
-        SolrQuery solrQuery = createSearchQuery(params, query);
+        SolrQuery solrQuery = createSearchQuery(params, null, query);
         return solrQuery;
     }
 }

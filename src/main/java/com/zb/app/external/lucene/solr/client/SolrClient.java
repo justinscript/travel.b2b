@@ -42,7 +42,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
+import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.result.Result;
+import com.zb.app.external.lucene.solr.callback.SolrCallback;
 import com.zb.app.external.lucene.solr.exception.SolrServerUnAvailableException;
 import com.zb.app.external.lucene.solr.utils.BaseSolrQueryConvert;
 import com.zb.app.external.lucene.solr.utils.CounterMonitor;
@@ -100,7 +102,8 @@ public class SolrClient {
      * @param solrQuery 使用{@link SolrQueryConvert}进行转化
      * @return
      */
-    public <T> List<T> query(String corename, final Class<T> returnType, final SolrQuery solrQuery) {
+    public <T> List<T> query(String corename, final Class<T> returnType, final SolrQuery solrQuery,
+                             final SolrCallback... callbacks) {
         final HttpSolrServer server = getOrCreateSolrServer(corename);
         final List<T> queryResult = new ArrayList<T>();
         exec(new Executor() {
@@ -116,6 +119,11 @@ public class SolrClient {
                 if (beans != null) {
                     queryResult.addAll(beans);
                 }
+                if (Argument.isNotEmptyArray(callbacks)) {
+                    for (SolrCallback callback : callbacks) {
+                        callback.handleSolrResult(query);
+                    }
+                }
                 return Result.success();
             }
         });
@@ -130,6 +138,7 @@ public class SolrClient {
      * @param solrQuery 使用{@link SolrQueryConvert}进行转化
      * @return
      */
+    @SuppressWarnings("unchecked")
     public <T> List<T> querys(String corename, final Class<T> returnType, final SolrQuery solrQuery) {
         // 设置高亮
         solrQuery.setParam("hl", "true"); // highlighting
@@ -389,7 +398,7 @@ public class SolrClient {
         Result exec() throws SolrServerException, IOException;
     }
 
-    public static Object toBean(SolrDocument record, Class clazz) {
+    public static Object toBean(SolrDocument record, Class<?> clazz) {
 
         Object o = null;
         try {
@@ -414,8 +423,8 @@ public class SolrClient {
         return o;
     }
 
-    public static Object toBeanList(SolrDocumentList records, Class clazz) {
-        List list = new ArrayList();
+    public static Object toBeanList(SolrDocumentList records, Class<?> clazz) {
+        List<Object> list = new ArrayList<Object>();
         for (SolrDocument record : records) {
             list.add(toBean(record, clazz));
         }

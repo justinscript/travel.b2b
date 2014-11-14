@@ -157,8 +157,7 @@ public class TravelLineServiceImpl implements LineService {
                     break;
                 }
                 travelLineDao.updateById(new TravelLineDO(event.getlId(),
-                                                          SerialNumGenerator.createSerNo(event.getlId(),
-                                                                                         SerialNumGenerator.l_prefix)));
+                                                          SerialNumGenerator.createProductSerNo(event.getlId())));
                 logger.error("TravelLineServiceImpl Handle lineRegist 【success!】,event.getlId()={}!", event.getlId());
 
             default:
@@ -223,9 +222,9 @@ public class TravelLineServiceImpl implements LineService {
         if (travelLines.length == 1) {
             Long lId = travelLines[0].getlId();
             if (travelLines[0].getlTemplateState() == 0) {
-                travelLineDao.updateById(new TravelLineDO(travelLines[0].getlId(),
-                                                          SerialNumGenerator.createSerNo(travelLines[0].getlId(),
-                                                                                         SerialNumGenerator.l_prefix)));
+                travelLineDao.updateById(new TravelLineDO(
+                                                          travelLines[0].getlId(),
+                                                          SerialNumGenerator.createProductSerNo(travelLines[0].getlId())));
             }
             return lId.intValue();
         }

@@ -14,6 +14,8 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zb.app.biz.domain.TravelOrderCountDO;
 import com.zb.app.biz.domain.TravelOrderFullDO;
 import com.zb.app.biz.query.TravelOrderQuery;
+import com.zb.app.common.authority.AuthorityPolicy;
+import com.zb.app.common.authority.Right;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.BeanUtils;
 import com.zb.app.common.pagination.PaginationList;
@@ -30,7 +32,7 @@ import com.zb.app.web.vo.TravelOrderFullVO;
 @Controller
 @RequestMapping("/zbmanlogin")
 public class ManageOrderController extends BaseController {
-
+	@AuthorityPolicy(authorityTypes = { Right.VIEW_ORDER })
     @RequestMapping(value = "/orderlist.htm")
     public ModelAndView order(ModelAndView mav, TravelOrderQuery query, Integer page) {
         query.setPageSize(20);
@@ -50,7 +52,7 @@ public class ManageOrderController extends BaseController {
     public String order(){
     	return "/manage/order/index";
     }
-
+    
     @RequestMapping(value = "/ordercount.htm")
     public ModelAndView ordercount(ModelAndView mav) {
         List<TravelOrderCountDO> orderCountList = orderService.getOrderCount(new TravelOrderQuery());

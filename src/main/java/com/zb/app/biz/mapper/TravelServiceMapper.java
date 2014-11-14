@@ -12,5 +12,5 @@ import com.zb.app.biz.domain.TravelServiceDO;
  * @author ZhouZhong 2014-7-24 下午5:48:36
  */
 public interface TravelServiceMapper extends BaseMapper<TravelServiceDO> {
-
+	
 }

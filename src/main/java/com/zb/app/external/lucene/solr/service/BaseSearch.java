@@ -11,10 +11,14 @@ import java.util.Collections;
 import java.util.List;
 
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.client.solrj.response.TermsResponse.Term;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zb.app.common.result.Result;
+import com.zb.app.common.util.NumberParser;
+import com.zb.app.external.lucene.search.query.ProductSearchQuery;
+import com.zb.app.external.lucene.solr.callback.SolrCallback;
 import com.zb.app.external.lucene.solr.client.SolrClient;
 import com.zb.app.external.lucene.solr.pojo.SearchField;
 import com.zb.app.external.lucene.solr.query.SearchQuery;
@@ -84,13 +88,22 @@ public abstract class BaseSearch<T extends SearchField, Q extends SearchQuery> i
     }
 
     @Override
-    public List<T> search(Integer version, Q query) {
+    public List<T> search(Integer version, final Q query) {
         Result result = beforeSearch(query);
         if (result != null && !result.isSuccess()) {
             return Collections.<T> emptyList();
         }
         SolrQuery solrQuery = convert(query);
-        return solrClient.query(getCoreName(version), filedType, solrQuery);
+        return solrClient.query(getCoreName(version), filedType, solrQuery, new SolrCallback() {
+
+            @Override
+            public void handleSolrResult(QueryResponse result) {
+                if (query instanceof ProductSearchQuery) {
+                    Long numFound = result.getResults().getNumFound();
+                    ((ProductSearchQuery) query).setAllRecordNum(NumberParser.convertToInt(numFound, 0));
+                }
+            }
+        });
     }
 
     public List<Term> suggest(Integer version, Q query) {

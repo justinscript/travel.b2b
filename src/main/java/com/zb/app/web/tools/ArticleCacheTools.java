@@ -23,7 +23,8 @@ public class ArticleCacheTools {
 
     @Autowired
     protected CmsService cmsService;
-
+    
+    //关于左边
     public Map<Long, String> getAboutZuobian() {
         List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.ABOUT_ZUOBIAN.getValue()));
@@ -36,10 +37,53 @@ public class ArticleCacheTools {
         }
         return navMap;
     }
-
+    
+    //帮助中心
     public Map<Long, String> getHelpCenter() {
         List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.HELP_CENTER.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return null;
+        }
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+        }
+        return navMap;
+    }
+    
+    //组团社问题
+    public Map<Long, String> getTourIssue() {
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.TOUR_ISSUE.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return null;
+        }
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+        }
+        return navMap;
+    }
+    
+    //批发商问题
+    public Map<Long, String> getAccountIssue() {
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.ACCOUNT_ISSUE.getValue()));
+        if (advertisementList == null || advertisementList.size() == 0) {
+            return null;
+        }
+        Map<Long, String> navMap = new LinkedHashMap<Long, String>();
+        for (TravelArticlesDO articles : advertisementList) {
+            navMap.put(articles.getaId(), articles.getTitle());
+        }
+        return navMap;
+    }
+    
+    //订购指南
+    public Map<Long, String> getOrderGuide() {
+        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+                                                                                           ArticlesSourceEnum.ORDER_GUIDE.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }

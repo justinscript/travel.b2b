@@ -87,14 +87,14 @@ public class ManageCmsController extends BaseController {
             return JsonResultUtils.error(rs.getMessage());
         }
         ObjectUtils.trim(news);
+        news.setnType(TravelNewsTypeEnum.WEB_NEWS.value);
         if (news.getnId() != null && news.getnId() > 0) {
             cmsService.updateById(news);
             return JsonResultUtils.success("修改成功!");
         }
-        news.setnType(TravelNewsTypeEnum.TRAVEL_news.value);
         PaginationList<TravelNewsDO> list = cmsService.showNewsPagination(new TravelNewsQuery(
                                                                                               news.getnTitle(),
-                                                                                              TravelNewsTypeEnum.TRAVEL_news),
+                                                                                              TravelNewsTypeEnum.WEB_NEWS),
                                                                           new DefaultIpageUrl());
         if (list != null && list.size() > 0) {
             return JsonResultUtils.error("新闻标题已经存在!");

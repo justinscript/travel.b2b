@@ -41,7 +41,7 @@ public class ReturnPointTask extends AbstractTask {
     }
 
     /**
-     * 每隔十分钟执行一次
+     * 每天凌晨0点执行一次
      */
     @Scheduled(cron = "0 0 0 * * ?")
     public void returnPointTask() {

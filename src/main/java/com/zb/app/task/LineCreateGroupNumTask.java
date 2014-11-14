@@ -57,8 +57,7 @@ public class LineCreateGroupNumTask extends AbstractTask {
         List<TravelLineDO> list = lineService.list(query);
         for (TravelLineThinDO dol : list) {
             lineService.updateTravelLine(new TravelLineDO(dol.getlId(),
-                                                          SerialNumGenerator.createSerNo(dol.getlId(),
-                                                                                         SerialNumGenerator.l_prefix)));
+                                                          SerialNumGenerator.createProductSerNo(dol.getlId())));
         }
     }
 }
