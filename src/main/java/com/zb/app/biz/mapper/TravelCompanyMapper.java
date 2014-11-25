@@ -5,6 +5,8 @@
  */
 package com.zb.app.biz.mapper;
 
+import java.util.List;
+
 import com.zb.app.biz.base.BaseMapper;
 import com.zb.app.biz.domain.TravelCompanyDO;
 import com.zb.app.biz.query.TravelCompanyQuery;
@@ -23,4 +25,6 @@ public interface TravelCompanyMapper extends BaseMapper<TravelCompanyDO> {
     public TravelCompanyDO getByName(TravelCompanyQuery query);
 
 	public Integer countByAccount(TravelCompanyQuery companyQuery);
+
+	public List<TravelCompanyDO> listQuery(TravelCompanyQuery query);
 }

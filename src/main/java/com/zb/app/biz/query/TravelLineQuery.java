@@ -182,6 +182,14 @@ public class TravelLineQuery extends Pagination implements Serializable {
     public TravelLineQuery(Long lId) {
         setlId(lId);
     }
+    
+    /***
+     * 线路分组编号
+     * @param lProduct
+     */
+    public TravelLineQuery(String lProduct) {
+        setlProduct(lProduct);
+    }
 
     public Long getlId() {
         return lId;
@@ -224,7 +232,7 @@ public class TravelLineQuery extends Pagination implements Serializable {
     }
 
     public void setlTile(String lTile) {
-        this.lTile = lTile;
+        this.lTile = lTile.replaceAll(" ", "");
     }
 
     public Integer getlType() {

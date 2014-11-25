@@ -45,7 +45,7 @@
 		#if(${webUser.hasPermission(1)})
         <a href="/order/orderdetails.htm?id=$!order.orId" class="btn btn-mini" target="_blank"><i class="icon-eye-open"></i> 查看</a>
 		#end
-        <a href="/printdoc/$!{order.lId}.htm" class="btn btn-mini" target="_blank"><i class="icon-print"></i> 导出</a>
+        <a href="/printdoc/$!{order.lId}.htm" class="btn btn-mini" target="_blank"><i class="icon-print"></i> 导出行程</a>
 		#if(${webUser.hasPermission(2)})
 			#if($order.orState==2)
 				<a href="javascript:ClearOrder(1,$!order.orId)" class="btn btn-mini"><i class="icon-question-sign"></i> 取消原因</a>

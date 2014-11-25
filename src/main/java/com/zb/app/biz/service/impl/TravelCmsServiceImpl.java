@@ -28,6 +28,7 @@ import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.ArrayUtils;
 import com.zb.app.common.pagination.PaginationList;
 import com.zb.app.common.pagination.PaginationParser.IPageUrl;
+import com.zb.app.web.vo.TravelArticlesVO;
 
 /**
  * 新闻
@@ -173,6 +174,17 @@ public class TravelCmsServiceImpl implements CmsService {
         }
         return articlesDao.deleteById(id);
     }
+    
+
+
+	@Override
+	public List<TravelArticlesVO> listQueryVO(
+			TravelArticlesQuery travelArticlesQuery) {
+		if (travelArticlesQuery == null) {
+            return Collections.<TravelArticlesVO> emptyList();
+        }
+        return articlesDao.listQueryVO(travelArticlesQuery);
+	}
 
     // /////////////////////////////////////////////////////////////////////////////////////
     // ////

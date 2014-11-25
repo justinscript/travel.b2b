@@ -45,7 +45,7 @@ public class ArrayUtils {
 
     public static <T extends Object> String[] convert(T[] array) {
         if (Argument.isEmptyArray(array)) {
-            logger.error("array is null!");
+            logger.debug("ArrayUtils.convert array is null!");
             return null;
         }
         String[] result = new String[array.length];
@@ -57,7 +57,7 @@ public class ArrayUtils {
 
     public static String[] removeBlankElement(String[] array) {
         if (Argument.isEmptyArray(array)) {
-            logger.error("array is null!");
+            logger.debug("ArrayUtils.removeBlankElement array is null!");
             return null;
         }
         List<String> list = new ArrayList<String>(Arrays.asList(array));
@@ -77,7 +77,7 @@ public class ArrayUtils {
     @SuppressWarnings("unchecked")
     public static <E> E[] removeNullElement(E[] array) {
         if (Argument.isEmptyArray(array)) {
-            logger.error("array is null!");
+            logger.debug("ArrayUtils.removeNullElement array is null!");
             return null;
         }
         int notNullValueCount = array.length;
@@ -101,7 +101,7 @@ public class ArrayUtils {
     @SuppressWarnings({ "rawtypes", "unchecked" })
     public static <E> E[] replaceNullElement(E[] array, IHandle handle) {
         if (handle == null) {
-            logger.error("handle is null!");
+            logger.error("ArrayUtils.replaceNullElement handle is null!");
             throw new RuntimeException();
         }
         if (Argument.isEmptyArray(array)) {

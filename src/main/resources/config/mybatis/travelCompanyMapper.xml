@@ -197,6 +197,13 @@
   	from Travel_Company 
   	ORDER BY c_id DESC
   </select>
+  <!-- 根据条件查询所有 -->
+   <select id="listQuery" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
+  	select  <include refid="columns" /> 
+  	from Travel_Company 
+  	<include refid="query_where_clause" />
+  	ORDER BY c_id DESC
+  </select>
   <!-- 分页查询 -->
   <select id="listPagination" resultMap="BaseResultMap" parameterType="com.zb.app.biz.query.TravelCompanyQuery">
  	<include refid="PAGINATION.paginationStart" />

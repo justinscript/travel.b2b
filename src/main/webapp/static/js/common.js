@@ -19,6 +19,21 @@ $(function(){
 			}
 		});
 	}
+	
+	  $("#loginbox").click(function(){
+          $.layer({
+           type: 1, 
+           area: ['400px', '280px'],
+           border: [0], 
+           title: [
+               '请先登录,谢谢！',
+               'border:none; background:#61BA7A; color:#fff;line-height:40px;' 
+           ],
+           page: {
+               url: '/loginbox.htm'
+           },
+           });       
+	  })
 
 	//选择卡
 	$("#myTab li").click(function(){
@@ -99,7 +114,13 @@ $(function(){
 			        		dataType:"json",
 			        		data:"id="+id+"&state="+state,		        		
 			        		success:function(msg){
-			        			alert(msg.code);
+			        			if(msg.code==0)
+			        				{
+			        				alert("操作成功！");
+			        				location.reload();
+			        				}else{
+			        					alert("操作失败！请重新操作！");
+			        				};
 			        		}
 			        	});
 			        }, no: function(){
@@ -821,15 +842,15 @@ function CompanyState(obj,t)
 	    shade: [0],
 	    area: ['auto','auto'],
 	    dialog: {
-	        msg: '您确定修改该公司的状态吗？',
+	        msg: '您确定修改该公司的状态吗XX？',
 	        btns: 2,                    
 	        type: 4,
 	        btn: ['确定','取消'],
 	        yes: function(){
 	        	$.ajax({
-	        		url:"/companystate.htm",
+	        		url:"/zbmanlogin/company/updateCompany.htm",
 	        		type:"post",
-	        		data:"?t="+t,
+		        		data:"cId="+t+"&cState=1",
 	        		dataType:"json",
 	        		success:function(msg){
 	        			if(msg.code==0){

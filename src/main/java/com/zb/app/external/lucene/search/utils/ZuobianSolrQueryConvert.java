@@ -24,17 +24,25 @@ import com.zb.app.external.lucene.solr.utils.BaseSolrQueryConvert;
 public class ZuobianSolrQueryConvert extends BaseSolrQueryConvert {
 
     public static SolrQuery to(ProductSearchQuery query) {
-        String q = StringUtils.join(query.getProducts().toArray(new String[0]), " ");
         List<String> params = new ArrayList<String>();
-        if (StringUtils.isNotBlank(q)) {
-            params.add(q.length()==1?"lTile:*"+q+"*":filterQuery(q));
+        // 参数设置
+        if (Argument.isNotEmpty(query.getProducts())) {
+            String q = StringUtils.join(query.getProducts().toArray(new String[0]), " ");
+            if (StringUtils.isNotBlank(q)) {
+                params.add(q.length() == 1 ? "lTile:*" + q + "*" : filterQuery(q));
+            }
         }
-        // 过滤查询
-        List<String> fiter = new ArrayList<String>();
         // 产品编号不为空
         if (query.getlGroupNumber() != null && query.getlGroupNumber() != "") {
-            fiter.add("lGroupNumber:" + query.getlGroupNumber());
+            params.add("lGroupNumber:" + query.getlGroupNumber());
         }
+        // 产品分组不为空
+        if (query.getProduct() != null && query.getProduct() != "") {
+            params.add("lProduct:" + query.getProduct());
+        }
+
+        // 过滤查询
+        List<String> fiter = new ArrayList<String>();
         // 线路类型不为空
         if (query.getlType() != null && query.getlGroupNumber() != "") {
             fiter.add("lType:" + query.getlType());

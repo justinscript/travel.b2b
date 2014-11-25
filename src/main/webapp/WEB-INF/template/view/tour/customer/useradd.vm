@@ -99,15 +99,19 @@ $(function(){
                 管理类型：
             </th>
             <td>
-                #if($!member.mType!=0)
-                	<label class="rad"><input type="radio" name="mType"  value="0" />超级管理员</label>
-                	<label class="rad"><input type="radio" name="mType" value="1" checked/>普通管理员</label>
-                #else
-                	<label class="rad"><input type="radio" name="mType"  value="0" checked />超级管理员</label>
-                	<label class="rad"><input type="radio" name="mType" value="1" />普通管理员</label>
+                #if($!member.mType==1)
+                	<label class="rad"><input type="radio" name="mType"  value="0" #if(${webUser.getMemberType().value} == 1)disabled#end/>超级管理员</label>
+                	<label class="rad"><input type="radio" name="mType" value="1" checked #if(${webUser.getMemberType().value} == 1)disabled#end />普通管理员</label>
+                #elseif($!member.mType==0)
+                	<label class="rad"><input type="radio" name="mType"  value="0" checked #if(${webUser.getMemberType().value} == 1)disabled#end/>超级管理员</label>
+                	<label class="rad"><input type="radio" name="mType" value="1" #if(${webUser.getMemberType().value} == 1)disabled#end/>普通管理员</label>
+				#else
+                	<label class="rad"><input type="radio" name="mType"  value="0" #if(${webUser.getMemberType().value} == 1)disabled#end/>超级管理员</label>
+                	<label class="rad"><input type="radio" name="mType" value="1" checked />普通管理员</label>
                 #end
             </td>
         </tr>
+		#if(${webUser.getMemberType().value} == 0)
 		<tr id="quanxian" #if($!member.mType==0) class="hide"#end>
         <th class="valigntop">用户权限 ：</th>
         <td><input type="hidden" name="mRole" id="mRole" value="$!member.mRole"/>
@@ -125,7 +129,8 @@ $(function(){
                 #end             
         	</div>
         </td>
-        </tr>		
+        </tr>
+		#end
         <tr>
             <th>
                 状态$!member.mState：
@@ -140,12 +145,15 @@ $(function(){
                 #end
             </td>
         </tr>
-        <tr><td></td>
+		#if(${webUser.getMemberType().value} == 0 || ${webUser.getMid()} == $!member.mId)
+        <tr>
+			<td></td>
             <td>
                 <span><button class="btn btn-primary" type="submit" onclick="OrgFormR(this)">提交</button></span>
 				<span id="msgdemo"></span>
             </td>
         </tr>
+		#end
     </table>
     <div class="clear">
     </div>

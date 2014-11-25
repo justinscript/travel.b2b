@@ -22,7 +22,7 @@
 <body>
 <div class="user_header">
   <div class="logo"><a href="/"></a><span>会员登录</span></div>
-  <div class="h-menu"><a href="#">返回首页</a><a href="#">帮助中心</a><a href="#">联系我们</a></div>
+  <div class="h-menu"><a href="/">返回首页</a><a href="/help/11.htm">帮助中心</a><a href="/about/4.htm">联系我们</a></div>
 </div>
 <div class="logins">
 <div class="banner"></div>

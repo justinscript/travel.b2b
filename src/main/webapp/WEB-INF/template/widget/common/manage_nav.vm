@@ -1,71 +1,137 @@
 <ul id="LeftNav">
+	<li><a href="#">系统大厅<i class="icon iArrow"></i></a></li>
+		    #if(${webUser.hasPermission(40)})
             <li>
                 <a href="#">公司管理<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(41)})
                     <a href="/zbmanlogin/m/manage.htm">总管理</a>
+					#end
+					#if(${webUser.hasPermission(42)})
                     <a href="/zbmanlogin/m/account.htm">批发商</a>
+					#end
+					#if(${webUser.hasPermission(43)})
                     <a href="/zbmanlogin/m/tour.htm">组团社</a>
+					#end
                     <!--<a href="/zbmanlogin/m/person.htm">直客会员</a>-->
+					#if(${webUser.hasPermission(44)})
                     <a href="/zbmanlogin/black.htm">黑名单反馈</a>
+					#end
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(90)})
             <li>
                 <a href="#">线路管理<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(91)})
                     <a href="/zbmanlogin/line/shortLine.htm">周边短线</a>
+					#end
+					#if(${webUser.hasPermission(92)})
                     <a href="/zbmanlogin/line/longLine.htm">国内长线</a>
+					#end
+					#if(${webUser.hasPermission(93)})
                     <a href="/zbmanlogin/line/internationalLine.htm">国际线路</a>
+					#end
+					#if(${webUser.hasPermission(94)})
 					<a href="/zbmanlogin/line/template.htm">线路模板</a>
+					#end
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(0)})
             <li><a href="#">订单管理<i class="icon iArrow"></i></a>
                 <div>
 					#if(${webUser.hasPermission(1)})
                     <a href="/zbmanlogin/order.htm">散客订单</a>
 					#end
+					#if(${webUser.hasPermission(5)})
                     <a href="/zbmanlogin/ordercount.htm">订单统计</a>
+					#end
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(50)})
             <li>
                 <a href="#">新闻管理<i class="icon iArrow"></i></a>
                 <div>
-                    <a href="/zbmanlogin/info/news.htm">旅游资讯</a>
-                    <a href="/zbmanlogin/info/notice.htm">最新公告</a>
-                    <a href="/zbmanlogin/info/userinfo.htm">用户资讯</a>
+					#if(${webUser.hasPermission(51)})
+                    <a href="/zbmanlogin/info/travelNews.htm">旅游资讯</a>
+					#end
+					#if(${webUser.hasPermission(52)})
+                    <a href="/zbmanlogin/info/webNews.htm">网站公告</a>
+					#end
+					#if(${webUser.hasPermission(53)})
+                    <a href="/zbmanlogin/info/userNews.htm">用户资讯</a>
+					#end
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(60)})
             <li>
                 <a href="#">礼品管理<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(61)})
                     <a href="/zbmanlogin/gift.htm">礼品列表</a>
+					#end
+					#if(${webUser.hasPermission(62)})
                     <a href="/zbmanlogin/gift_cart.htm">订单管理</a>
+					#end
+					#if(${webUser.hasPermission(63)})
                     <a href="/zbmanlogin/gift_sort.htm">礼品类别</a>
+					#end
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(30)})
             <li>
                 <a href="#">系统管理<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(35)})
                     <a href="/zbmanlogin/site/index.htm">站点管理</a>
+					#end
+					#if(${webUser.hasPermission(36)})
 					<a href="/zbmanlogin/site/tag.htm">站点标签</a>
+					#end
+					#if(${webUser.hasPermission(38)})
                     <a href="/zbmanlogin/page.htm">网站栏目</a>
+					#end
+					#if(${webUser.hasPermission(37)})
                     <a href="/zbmanlogin/link.htm">广告管理</a>
+					#end
                     <a href="/zbmanlogin/photo.htm">照片墙管理</a>
                     <a href="#">接口管理</a>
                 </div>
             </li>
+			#end
+			#if(${webUser.hasPermission(70)})
             <li>
                 <a href="#">积分管理<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(71)})
                     <a href="/zbmanlogin/integral.htm">积分记录</a>
+					#end
+					#if(${webUser.hasPermission(72)})
                     <a href="/zbmanlogin/integral/add.htm">积分充值</a>
+					#end
                 </div>
             </li>			
+			#end
+			#if(${webUser.hasPermission(80)})
             <li>
                 <a href="#">统计分析<i class="icon iArrow"></i></a>
                 <div>
+					#if(${webUser.hasPermission(81)})
                     <a href="/zbmanlogin/count/recruiting.htm">批发商收客</a>
+					#end
+					#if(${webUser.hasPermission(82)})
                     <a href="/zbmanlogin/count/login.htm">登录统计</a>
+					#end
+					#if(${webUser.hasPermission(83)})
                     <a href="/zbmanlogin/count/reg.htm">注册统计</a>
+					#end
                 </div>
             </li>
+			#end
         </ul>
+		<script src="http://s6.cnzz.com/stat.php?id=5763643&web_id=5763643" language="JavaScript"></script>

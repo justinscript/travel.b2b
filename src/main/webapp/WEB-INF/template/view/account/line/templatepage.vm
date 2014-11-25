@@ -4,6 +4,7 @@
         <th width="120">出发/抵达</th>
         <th>线路名称</th>
         <th width="80">天数</th>
+		<th width="120">更新日期</th>
         <th width="60">操作</th>
     </tr>
     #foreach($!temp in $!template)
@@ -15,6 +16,7 @@
             <label>标准：</label>$!temp.lTypeString
         </td>
         <td>$!temp.lDay天</td>
+		<td>${dateViewTools.format($!temp.gmtModified,'yyyy-MM-dd HH:mm')}</td>
         <td>
      <div class="w120" style="line-height: 26px;">
            <a href="javascript:Page_Add($!temp.lId,'/account/templateupdate.htm','修改线路模板')" class="btn btn-primary btn-mini"><i class="icon-eye-open icon-white"></i> 修改</a>

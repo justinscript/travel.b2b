@@ -547,4 +547,9 @@ public class TravelCompanyServiceImpl implements CompanyService {
     public Integer countByAccount(TravelCompanyQuery companyQuery) {
         return travelCompanyDao.countByAccount(companyQuery);
     }
+
+	@Override
+	public List<TravelCompanyDO> listQuery(TravelCompanyQuery query) {
+		return travelCompanyDao.listQuery(query);
+	}
 }

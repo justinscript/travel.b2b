@@ -1,7 +1,7 @@
 /*
- * Copyright 2011-2016 YueJi.com All right reserved. This software is the confidential and proprietary information of
- * YueJi.com ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only in
- * accordance with the terms of the license agreement you entered into with YueJi.com.
+ * Copyright 2014-2017 ZuoBian.com All right reserved. This software is the confidential and proprietary information of
+ * ZuoBian.com ("Confidential Information"). You shall not disclose such Confidential Information and shall use it only
+ * in accordance with the terms of the license agreement you entered into with ZuoBian.com.
  */
 package com.zb.app.biz.cons;
 
@@ -45,7 +45,7 @@ public enum RightMenuEnum {
                     Right.MODIFY_TRAFFIC_TEMPLATE, Right.DELETE_TRAFFIC_TEMPLATE, Right.UPLOAD_PHOTOS,
                     Right.MODIFY_PHOTOS, Right.DELETE_PHOTOS),
 
-    SYSTEM_ACCOUNT(3, "系统管理", Right.SHOW_COMPANY_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
+    SYSTEM_ACCOUNT(3, "系统管理", Right.SHOW_SYSTEM_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
                    Right.ONLINE_SERVICE),
 
     /**
@@ -55,7 +55,7 @@ public enum RightMenuEnum {
 
     PRODUCT_TOUR(2, "产品中心", Right.SHOW_PRODUCT_MENU),
 
-    SYSTEM_TOUR(3, "系统管理", Right.SHOW_COMPANY_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
+    SYSTEM_TOUR(3, "系统管理", Right.SHOW_SYSTEM_MENU, Right.COMPANY_NEWS, Right.COMPANY_INFO, Right.USER_MANAGE,
                 Right.ONLINE_SERVICE);
 
     private int     value;

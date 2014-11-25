@@ -31,6 +31,7 @@ public class ProductSearchQuery implements SearchQuery, Serializable {
     private int               start;                                  // 开始
 
     private String            Title;                                  // 线路标题
+    private String            product;                                // 线路分组
     private Integer           lType;                                  // 线路类型
     private Integer           lDay;                                   // 线路天数
     private Long[]            zIds;                                   // 专线类别
@@ -39,6 +40,14 @@ public class ProductSearchQuery implements SearchQuery, Serializable {
     private List<String>      products;                               // 分词后集合
     private String            lGroupNumber;                           // 产品编号
     private boolean           expectMatch      = false;               // 是否精确
+
+    public String getProduct() {
+        return product;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
+    }
 
     public Long getzId() {
         return zId;
@@ -80,8 +89,9 @@ public class ProductSearchQuery implements SearchQuery, Serializable {
         this.lArrivalCity = lArrivalCity;
     }
 
-    public ProductSearchQuery(String lGroupNumber) {
+    public ProductSearchQuery(String lGroupNumber, String lProduct) {
         this.lGroupNumber = lGroupNumber;
+        this.product = lProduct;
     }
 
     public String getlGroupNumber() {

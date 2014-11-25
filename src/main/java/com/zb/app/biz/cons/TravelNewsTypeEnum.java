@@ -7,6 +7,8 @@ package com.zb.app.biz.cons;
 
 import org.apache.commons.lang.StringUtils;
 
+import com.zb.app.common.util.NumberParser;
+
 /**
  * 旅游资讯(1),用户资讯(2),网站公告(3)
  * 
@@ -41,7 +43,7 @@ public enum TravelNewsTypeEnum {
 
     public static TravelNewsTypeEnum getAction(int value) {
         for (TravelNewsTypeEnum type : values()) {
-            if (value == type.getValue()) return type;
+            if (NumberParser.isEqual(value, type.getValue()) ) return type;
         }
         return null;
     }

@@ -24,11 +24,17 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.zb.app.biz.cons.CompanyStateEnum;
+import com.zb.app.biz.cons.CompanyTypeEnum;
+import com.zb.app.biz.domain.TravelCompanyDO;
+import com.zb.app.biz.query.TravelCompanyQuery;
 import com.zb.app.common.core.SpringContextAware;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.CollectionUtils;
 import com.zb.app.common.pagination.PagesPagination;
+import com.zb.app.common.pagination.PaginationList;
 import com.zb.app.common.pagination.PaginationParser;
+import com.zb.app.common.pagination.PaginationParser.DefaultIpageUrl;
 import com.zb.app.common.pagination.PaginationParser.IPageUrl;
 import com.zb.app.common.result.JsonResultUtils;
 import com.zb.app.common.result.JsonResultUtils.JsonResult;
@@ -187,6 +193,9 @@ public class SearchController extends BaseController {
                                                                                 if (query.getlType() != null) {
                                                                                     str += "&lType=" + query.getlType();
                                                                                 }
+                                                                                if (query.getzId() != null) {
+                                                                                    str += "&zId=" + query.getzId();
+                                                                                }
                                                                                 return str;
                                                                             }
                                                                         });
@@ -196,12 +205,23 @@ public class SearchController extends BaseController {
         model.addObject("lDay", query.getlDay());
         model.addObject("lType", query.getlType());
         model.addObject("city", query.getlArrivalCity());
+        model.addObject("zId", query.getzId());
         model.addObject("searchcount", query.getAllRecordNum());
         model.addObject("pagination", pagination);
         model.setViewName("search/searchLine");
 
         // 获取所有抵达城市
         model.addObject("citylists", lineService.getCityByCid(WebUserTools.getChugangId()));
+        
+        // 商家推荐
+        TravelCompanyQuery companyQuery = new TravelCompanyQuery();
+        companyQuery.setNowPageIndex(0);
+        companyQuery.setPageSize(6);
+        companyQuery.setcType(CompanyTypeEnum.ACCOUNT.getValue());
+        companyQuery.setcState(CompanyStateEnum.NORMAL.getValue());
+        PaginationList<TravelCompanyDO> companyDOs = companyService.showCompanyPagination(companyQuery,
+                                                                                          new DefaultIpageUrl());
+        model.addObject("companyDOs", companyDOs);
         return model;
     }
 

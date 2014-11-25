@@ -11,9 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.zb.app.biz.domain.TravelGiftOrderFullDO;
 import com.zb.app.biz.domain.TravelIntegralDO;
-import com.zb.app.biz.domain.TravelIntegralDealDO;
 import com.zb.app.biz.query.TravelGiftOrderQuery;
-import com.zb.app.biz.query.TravelIntegralDealQuery;
 import com.zb.app.biz.query.TravelIntegralQuery;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.pagination.PaginationList;
@@ -32,7 +30,7 @@ import com.zb.app.web.tools.WebUserTools;
 public class TourIntegralController extends BaseController {
 
     @RequestMapping(value = "/integral.htm")
-    public ModelAndView integral(ModelAndView mav, TravelIntegralDealQuery query, Integer page) {
+    public ModelAndView integral(ModelAndView mav, TravelIntegralQuery query, Integer page) {
         TravelIntegralQuery integralQuery = new TravelIntegralQuery();
         integralQuery.setcId(WebUserTools.getCid());
         integralQuery.setmId(WebUserTools.getMid());
@@ -44,7 +42,7 @@ public class TourIntegralController extends BaseController {
         query.setcId(WebUserTools.getCid());
         query.setmId(WebUserTools.getMid());
 
-        PaginationList<TravelIntegralDealDO> list = integralService.listPagination(query, new DefaultIpageUrl());
+        PaginationList<TravelIntegralDO> list = integralService.listPagination(query, new DefaultIpageUrl());
 
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
         mav.addObject("tidList", list);

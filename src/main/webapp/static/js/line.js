@@ -68,7 +68,7 @@ $(function () {
 					str+='<a href="javascript:void(0)"><img src="'+picsplit[i]+'" class="img-polaroid"  /></a> ';
 				}
 			}
-		})
+		});
 		if(str!='')
 		{
 			var Coverimg = $.layer({

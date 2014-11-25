@@ -14,6 +14,7 @@
     <script src="/static/js/bootstrap.min.js"></script>
     <script src="/static/js/jq-zuobian-bundle-0.0.1.js"></script>
     <script src="/static/js/jquery.nav.js"></script>
+	<script src="/static/js/layer/layer.min.js"></script>
 	<script src="/static/js/jquery.printPage.js"></script>
     <script src="/static/js/tooltip/jquery.poshytip.min.js"></script>
     <script src="/static/js/jq-zuobian-order.js"></script>
@@ -53,7 +54,7 @@
 </div>
 <div class="line_main">
 
-<h1>$!line.lTile</h1>
+<h1><em>线路编号：$!line.lGroupNumber</em>[$!line.lDay天]$!line.lTile</h1>
 <div class="line-box1">
     <div class="line-img">
         <div class="zoombox">
@@ -72,7 +73,6 @@
     </div>
     <div class="line-desc">
         <div class="line-jb">
-            <dl><dd>线路编号：</dd><dt>$!line.lGroupNumber</dt></dl>
             <dl class="price">
                 <dd>成人价格：</dd><dt><span>¥<i>$!{AdultPrice}</i></span>起</dt>
                 <dd class="ll">儿童价格：</dd><dt><span>¥<i>$!{ChildrenPrice}</i></span>起</dt>
@@ -97,8 +97,11 @@
 					</dt>
             </dl>
             <dl>
-                <dd>旅游天数：</dd><dt>$!line.lDay天  </dt><dt class="ll"><span>$!line.lGoGroupTimeString</span> 至 <span>$!line.lBackTimeString</span></dt>
+                <dd>旅游天数：</dd><dt>$!line.lDay天  </dt>
             </dl>
+            <dl>
+                <dd>日期范围：</dd><dt><span>$!line.lGoGroupTimeString</span> 至 <span>$!line.lBackTimeString</span></dt>
+            </dl>			
             <dl>
                 <dd>往返交通：</dd><dt>$!line.lTrafficyTypeString</dt><dt style="background:url(/static/img/line.jpg) no-repeat 0 -2px;width:40px;height:10px;margin:0 5px;"></dt><dt>$!line.lTrafficBackTypeString</dt>
             </dl>
@@ -106,8 +109,10 @@
                 <dd>集合时间：</dd><dt>$!line.lJhdTime</dt>
             </dl>
         </div>
+
         <div class="line-company">
-            <ul>
+		#if($!{webUser.getCid()}!=0)
+			 <ul>
                 <li><span>供应商：</span><font color="blue">$!company.cName</font></li>
                 <li><span><i></i>联系人：</span>$!company.cCustomname</li>
                 <li><span><i></i>联系电话：</span>$!company.cTel</li>
@@ -117,13 +122,20 @@
 					#end
                 </li>
             </ul>
+		#else
+			<div class="must">
+            <span>提示：只有登录后才能预定产品!</span>
+            <a href="javascript:void(0)" class="userlogin" id="loginbox">请先登录</a> <p>没有账号请点击<a href="/register.htm">这里注册</a></p>
+            </div>
+       #end
         </div>
     </div>
 </div>
 <div class="line-box2">
     <div class="rilis" id="GetCalendar"></div>
     <div class="line-order">
-        <div class="line-form">
+        #if($!{webUser.getCid()}!=0)
+		<div class="line-form">
             <div class="icl tit">
                 <span class="fl">剩余人数：
 					#if($!line.lStateString == "客满")
@@ -176,7 +188,7 @@
             </div>
 		 </form>
         </div>
-
+		#end
         <div class="line-fx">
             <p>微信扫描二维码，推荐给客户！</p>
             <div class="wx" style="margin:auto; position:relative;z-index:1;"></div>
@@ -299,8 +311,8 @@
 		
 		$('.wx').qrcode({
             render : 'table', 
-            width: 120,    
-            height:120,  
+            width: 150,    
+            height:150,  
             foreground:'#000',
 			ecLevel: 'Q',
             text:location.href

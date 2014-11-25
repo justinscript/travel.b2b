@@ -12,9 +12,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import com.zb.app.biz.cons.ArticlesSourceEnum;
-import com.zb.app.biz.domain.TravelArticlesDO;
 import com.zb.app.biz.query.TravelArticlesQuery;
 import com.zb.app.biz.service.interfaces.CmsService;
+import com.zb.app.web.vo.TravelArticlesVO;
 
 /**
  * @author ZhouZhong
@@ -26,13 +26,13 @@ public class ArticleCacheTools {
     
     //关于左边
     public Map<Long, String> getAboutZuobian() {
-        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+        List<TravelArticlesVO> advertisementList = cmsService.listQueryVO(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.ABOUT_ZUOBIAN.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }
         Map<Long, String> navMap = new LinkedHashMap<Long, String>();
-        for (TravelArticlesDO articles : advertisementList) {
+        for (TravelArticlesVO articles : advertisementList) {
             navMap.put(articles.getaId(), articles.getTitle());
         }
         return navMap;
@@ -40,13 +40,13 @@ public class ArticleCacheTools {
     
     //帮助中心
     public Map<Long, String> getHelpCenter() {
-        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+        List<TravelArticlesVO> advertisementList = cmsService.listQueryVO(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.HELP_CENTER.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }
         Map<Long, String> navMap = new LinkedHashMap<Long, String>();
-        for (TravelArticlesDO articles : advertisementList) {
+        for (TravelArticlesVO articles : advertisementList) {
             navMap.put(articles.getaId(), articles.getTitle());
         }
         return navMap;
@@ -54,13 +54,13 @@ public class ArticleCacheTools {
     
     //组团社问题
     public Map<Long, String> getTourIssue() {
-        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+        List<TravelArticlesVO> advertisementList = cmsService.listQueryVO(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.TOUR_ISSUE.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }
         Map<Long, String> navMap = new LinkedHashMap<Long, String>();
-        for (TravelArticlesDO articles : advertisementList) {
+        for (TravelArticlesVO articles : advertisementList) {
             navMap.put(articles.getaId(), articles.getTitle());
         }
         return navMap;
@@ -68,13 +68,13 @@ public class ArticleCacheTools {
     
     //批发商问题
     public Map<Long, String> getAccountIssue() {
-        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+        List<TravelArticlesVO> advertisementList = cmsService.listQueryVO(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.ACCOUNT_ISSUE.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }
         Map<Long, String> navMap = new LinkedHashMap<Long, String>();
-        for (TravelArticlesDO articles : advertisementList) {
+        for (TravelArticlesVO articles : advertisementList) {
             navMap.put(articles.getaId(), articles.getTitle());
         }
         return navMap;
@@ -82,13 +82,13 @@ public class ArticleCacheTools {
     
     //订购指南
     public Map<Long, String> getOrderGuide() {
-        List<TravelArticlesDO> advertisementList = cmsService.list(new TravelArticlesQuery(
+        List<TravelArticlesVO> advertisementList = cmsService.listQueryVO(new TravelArticlesQuery(
                                                                                            ArticlesSourceEnum.ORDER_GUIDE.getValue()));
         if (advertisementList == null || advertisementList.size() == 0) {
             return null;
         }
         Map<Long, String> navMap = new LinkedHashMap<Long, String>();
-        for (TravelArticlesDO articles : advertisementList) {
+        for (TravelArticlesVO articles : advertisementList) {
             navMap.put(articles.getaId(), articles.getTitle());
         }
         return navMap;

@@ -126,6 +126,7 @@
 		<id column="L_ID" 						property="lId" 					jdbcType="DECIMAL" />
 		<result column="L_GROUPNUMBER" 			property="lGroupNumber" 		jdbcType="VARCHAR" />
 		<result column="L_TITLE" 				property="lTile" 				jdbcType="VARCHAR" />
+		<result column="L_PRODUCT" 				property="lProduct" 			jdbcType="VARCHAR" />
 		<result column="L_GOGROUPTIME"			property="lGoGroupTime" 		jdbcType="TIMESTAMP" />
 		<result column="L_ARRIVALCITY" 			property="lArrivalCity" 		jdbcType="VARCHAR" />
 		<result column="L_PHOTOCOVER" 			property="lPhotoCover" 			jdbcType="VARCHAR" />
@@ -155,7 +156,7 @@
 	
 	<!-- 索引列 -->
 	<sql id="searchcolumns">
-		L_ID,L_GROUPNUMBER,L_TITLE,L_GOGROUPTIME,L_ARRIVALCITY,L_PHOTOCOVER,L_MODE,L_YESITEM,L_NOITEM,L_CHILDREN,L_SHOP,L_EXPENSEITEM,L_PRESEITEM,L_TYPE,L_DAY,Z_ID,L_JCRPRICE
+		L_ID,L_GROUPNUMBER,L_TITLE,L_GOGROUPTIME,L_ARRIVALCITY,L_PHOTOCOVER,L_MODE,L_YESITEM,L_NOITEM,L_CHILDREN,L_SHOP,L_EXPENSEITEM,L_PRESEITEM,L_TYPE,L_DAY,Z_ID,L_JCRPRICE,L_PRODUCT
 	</sql>
 	<!-- 	父类列(TravelLineThinDo) -->
 	<sql id="thincolumns">
@@ -450,7 +451,7 @@
 				L_TOURCONTENT = #{lTourContent,jdbcType=INTEGER},
 			</if>
 			<if test="lPhotoCover != null">
-				L_PHOTOCOVER = #{lPhotoCover,jdbcType=VARCHAR}
+				L_PHOTOCOVER = #{lPhotoCover,jdbcType=VARCHAR},
 			</if>
 			<if test="lViews != null">
 				L_VIEWS=#{lViews}
@@ -484,6 +485,10 @@
 
 	<sql id="orderby_date">
 		order by L_GOGROUPTIME ASC
+	</sql>
+	
+	<sql id="orderby_price">
+		order by L_JCRPRICE ASC
 	</sql>
 
 	<select id="list" resultMap="BaseResultMap" parameterType="java.util.Map">
@@ -535,6 +540,7 @@
         FROM TRAVEL_LINE
 		<include refid="query_where_clause" />
         ) WHERE RN = 1
+        <include refid="orderby_price" />
 		<include refid="PAGINATION.paginationEnd" />
 	</select>
 

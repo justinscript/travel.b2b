@@ -275,7 +275,51 @@ public class ManageIntegralController extends BaseController {
         integralDO.setiSource(IntegralSourceEnum.recharge.value);
         if(integralYE == null){
         	integralDO.setiBalance(integralDO.getiAddintegral());
-        	integralDO.setiFrozen(0L);
+        	integralDO.setiFrozen(0);
+        }else{
+        	integralDO.setiBalance(integralYE.getiBalance() + integralDO.getiAddintegral());
+        	integralDO.setiFrozen(integralYE.getiFrozen());
+        }
+    	integralDO.setiAltogether(integralDO.getiBalance() + integralDO.getiFrozen());
+        Integer i = integralService.addTravelIntegral(integralDO);
+        return i == 0 ? JsonResultUtils.error(integralDO, "充值失败!") : JsonResultUtils.success(integralDO, "充值成功!");
+    }
+    /**
+     * 组团社积分添加
+     * 
+     * @return
+     */
+    @RequestMapping(value = "/tourAddIntegral.htm", produces = "application/json", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult tourAddIntegral(ModelAndView mav, final TravelIntegralDO integralDO, Long accId) {
+    	if(accId != null){
+	    	TravelIntegralQuery accIntegralQuery = new TravelIntegralQuery();
+	        accIntegralQuery.setcId(accId);
+	        TravelIntegralDO accIntegral = integralService.queryBala(accIntegralQuery);
+	        if(accIntegral == null){
+	        	return JsonResultUtils.error(integralDO, "批发商没有积分!");
+	        }
+	        if(accIntegral.getiBalance() < integralDO.getiAddintegral()){
+	        	return JsonResultUtils.error(integralDO, "批发商积分不足!");
+	        }
+	        TravelIntegralDO newACC = new TravelIntegralDO();
+	        newACC.setcId(accId);
+	        newACC.setiSource(IntegralSourceEnum.transfer.value);
+	        newACC.setiAddintegral(0 - integralDO.getiAddintegral());
+	        newACC.setiBalance(accIntegral.getiBalance() + newACC.getiAddintegral());
+	        newACC.setiFrozen(accIntegral.getiFrozen());
+	        newACC.setiAltogether(newACC.getiBalance() + newACC.getiFrozen());
+	        newACC.setiRemark(integralDO.getiRemark());
+	        integralService.addTravelIntegral(newACC);
+    	}
+    	TravelIntegralQuery integralQuery = new TravelIntegralQuery();
+        integralQuery.setcId(integralDO.getcId());
+        integralQuery.setmId(integralDO.getmId());
+        TravelIntegralDO integralYE = integralService.queryBala(integralQuery);
+        integralDO.setiSource(IntegralSourceEnum.recharge.value);
+        if(integralYE == null){
+        	integralDO.setiBalance(integralDO.getiAddintegral());
+        	integralDO.setiFrozen(0);
         }else{
         	integralDO.setiBalance(integralYE.getiBalance() + integralDO.getiAddintegral());
         	integralDO.setiFrozen(integralYE.getiFrozen());

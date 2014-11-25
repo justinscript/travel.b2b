@@ -31,12 +31,12 @@
 		<result column="L_ID" 			property="lId" 				jdbcType="INTEGER"/>
 		<result column="I_REMARK" 		property="iRemark" 			jdbcType="VARCHAR"/>
 		
-		<result column="l_gogrouptime" 		property="lGoGroupTime" 		jdbcType="TIMESTAMP"/>
+		<result column="l_gogrouptime" 	property="lGoGroupTime" 	jdbcType="TIMESTAMP"/>
 		<result column="l_groupnumber" 	property="lGroupNumber" 	jdbcType="VARCHAR"/>
-		<result column="l_title" 			property="lTitle" 				jdbcType="VARCHAR"/>
+		<result column="l_title" 		property="lTitle" 			jdbcType="VARCHAR"/>
 		<result column="c_name" 		property="cName" 			jdbcType="VARCHAR"/>
 		<result column="m_name" 		property="mName" 			jdbcType="VARCHAR"/>
-		<result column="m_username" 		property="mUserName" 			jdbcType="VARCHAR"/>
+		<result column="m_username" 	property="mUserName" 		jdbcType="VARCHAR"/>
 	</resultMap>
 	
 	<!-- 字段集 -->

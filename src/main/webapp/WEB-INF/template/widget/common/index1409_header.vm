@@ -63,7 +63,7 @@
        <div class="t_search">
        <div id="search_select" class="search_select">
        <span class="tit"><b>线路</b> <i class="ico"></i></span>
-       <ul id="curtlist" style=""><li data="1">线路</li><li data="2">景点</li><li data="3">旅行社</li><li data="4">综合</li><li data="5">门票</li></ul></div>
+       </div>
        <form action="/search/productSearch.htm" method=""><input type="hidden" name="tn" id="tn" value="line"><input type="text" class="text" value="$!{keyword}" id="keyword" name="keyword"  tip="请输入目的地"><button type="submit" name="">搜&nbsp;索</button></div></form>
    </div>
    <div class="clear"></div>
@@ -78,7 +78,7 @@
               <div class="tit"><a href="#">周边短线</a></div>
               <div class="li">
 				  #foreach($short in $!{indexHeaderTools.getTag().get(1)})
-					<a href="/search/productSearch.htm?lArrivalCity=$!short.lcName">$!short.lcName</a>
+					<a href="/search/productSearch.htm?keyword=$!short.lcName">$!short.lcName</a>
 				  #end
               </div>
               <span class="line"></span>
@@ -88,7 +88,7 @@
               <div class="tit"><a href="#">国内长线</a></div>
               <div class="li">
                   #foreach($long in $!{indexHeaderTools.getTag().get(2)})
-					<a href="/search/productSearch.htm?lArrivalCity=$!long.lcName">$!long.lcName</a>
+					<a href="/search/productSearch.htm?keyword=$!long.lcName">$!long.lcName</a>
 				  #end
               </div>
               <span class="line"></span>
@@ -98,7 +98,7 @@
               <div class="tit"><a href="#">国际线路</a></div>
               <div class="li">
                   #foreach($international in $!{indexHeaderTools.getTag().get(3)})
-					<a href="/search/productSearch.htm?lArrivalCity=$!international.lcName">$!international.lcName</a>
+					<a href="/search/productSearch.htm?keyword=$!international.lcName">$!international.lcName</a>
 				  #end
               </div>
               <span class="line"></span>

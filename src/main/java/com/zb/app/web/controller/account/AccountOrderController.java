@@ -124,8 +124,10 @@ public class AccountOrderController extends BaseController {
     public JsonResult cancelOrder(TravelOrderDO orderDO) {
         Boolean b = orderService.cancelOrder(orderDO);
         if (b) {
-        	if(orderDO.getOrMobile() != null)
+        	if(orderDO.getOrMobile() != null){
+        		logger.debug("发送信息");
             	PushSMSUtils.getInstance().sendOrderCancelSMS(orderDO.getOrOrderId(), orderDO.getOrMobile());
+        	}
             return JsonResultUtils.success(orderDO, "取消成功!");
         } else {
             return JsonResultUtils.success(orderDO, "取消失败!");
@@ -186,8 +188,10 @@ public class AccountOrderController extends BaseController {
             financeDO.setfReceivable(travelOrderDO.getOrPirceCount().floatValue());
             financeDO.setfReceipt((float) 0);
             financeService.addTravelFinance(financeDO);
-            if(travelOrderDO.getOrMobile() != null)
+            if(travelOrderDO.getOrMobile() != null){
+            	logger.debug("发送信息");
             	PushSMSUtils.getInstance().sendOrderConfirmSMS(travelOrderDO.getOrOrderId(), travelOrderDO.getOrMobile());
+            }
             return JsonResultUtils.success(orderDO, "确认成功!");
         } else {
             return JsonResultUtils.error(orderDO, "确认失败!");

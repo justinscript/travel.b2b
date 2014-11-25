@@ -7,6 +7,7 @@ $(function(){
 <form id="NewUserForm" method="post" action="/zbmanlogin/saveNews.htm">
     <input type="hidden" name="nId" value="$!news.nId" />
     <input type="hidden" name="act" value="newuser" />
+	<input type="hidden" name="zId" value="0" />
     <table width="100%" cellpadding="0" cellspacing="0" class="tab2">
         <tr>
             <th width="110">默认站点：</th>

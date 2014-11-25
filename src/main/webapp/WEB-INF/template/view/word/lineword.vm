@@ -328,6 +328,7 @@
     </w:docPr>
     <w:body>
         <wx:sect>
+			#if($!{webUser.getCid()}!=0)
             <w:p wsp:rsidR="003548B1" wsp:rsidRPr="00971580" wsp:rsidRDefault="003119E2" wsp:rsidP="003548B1">
                 <w:pPr>
                     <w:jc w:val="right"/>
@@ -362,9 +363,6 @@
                             <v:path o:extrusionok="f" gradientshapeok="t" o:connecttype="rect"/>
                             <o:lock v:ext="edit" aspectratio="t"/>
                         </v:shapetype>
-                        <v:shape id="_x0000_s1026" type="#_x0000_t75" style="position:absolute;left:0;text-align:left;margin-left:0;margin-top:0;width:164pt;height:74pt;z-index:1;mso-position-horizontal:left">
-                            <v:imagedata src="static/img/logo.jpg"/>
-                        </v:shape>
                     </w:pict>
                 </w:r>
                 <aml:annotation aml:id="0" w:type="Word.Bookmark.Start" w:name="DJS_Name"/>
@@ -473,6 +471,7 @@
                     </w:rPr>
                 </w:pPr>
             </w:p>
+			#end
             <w:tbl>
                 <w:tblPr>
                     <w:tblW w:w="0" w:type="auto"/>

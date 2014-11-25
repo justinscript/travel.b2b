@@ -27,27 +27,27 @@
           <dl>
             <dd>目的地：</dd>
             <dt>
-				<a href="/search/productSearch.htm?lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}" #if(!$!{city} || $!{city}=='') class="hover" #end>全部</a>
+				<a href="/search/productSearch.htm?lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}&zId=$!{zId}" #if(!$!{city} || $!{city}=='') class="hover" #end>全部</a>
 				#foreach($citylist in $!citylists)
-					<a href="/search/productSearch.htm?lArrivalCity=$citylist&lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}" #if($!{citylist} == $!{city}) class="hover"#end>$citylist</a>
+					<a href="/search/productSearch.htm?lArrivalCity=$citylist&lDay=$!{lDay}&lType=$!{lType}&keyword=$!{keyword}&zId=$!{zId}" #if($!{citylist} == $!{city}) class="hover"#end>$citylist</a>
 				#end
 			</dt>
           </dl>
           <dl>
             <dd>行程天数：</dd>
             <dt>
-				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lType=$!{lType}&keyword=$!{keyword}" #if(!$!{lDay} || $!{lDay}=='') class="hover" #end>全部</a>
+				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lType=$!{lType}&keyword=$!{keyword}&zId=$!{zId}" #if(!$!{lDay} || $!{lDay}=='') class="hover" #end>全部</a>
 				#foreach($!day in ${enumViewTools.getAllLineDay()})
-					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!day.value&lType=$!{lType}&keyword=$!{keyword}" #if($!day.value == $!{lDay})class="hover"#end>$!day.name</a>
+					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!day.value&lType=$!{lType}&keyword=$!{keyword}&zId=$!{zId}" #if($!day.value == $!{lDay})class="hover"#end>$!day.name</a>
 				#end
 			</dt>
           </dl>
           <dl>
             <dd>类型：</dd>
             <dt>
-				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&keyword=$!{keyword}"  #if(!$!{lType} || $!{lType}=='') class="hover" #end>全部</a>
+				<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&keyword=$!{keyword}&zId=$!{zId}"  #if(!$!{lType} || $!{lType}=='') class="hover" #end>全部</a>
 				#foreach($!typeenum in ${enumViewTools.getAllLineType()})
-					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&lType=$!typeenum.value&keyword=$!{keyword}" #if($!typeenum.value == $!{lType})class="hover"#end>$!typeenum.name</a>
+					<a href="/search/productSearch.htm?lArrivalCity=$!{city}&lDay=$!{lDay}&lType=$!typeenum.value&keyword=$!{keyword}&zId=$!{zId}" #if($!typeenum.value == $!{lType})class="hover"#end>$!typeenum.name</a>
 				#end
 			</dt>
           </dl>                    
@@ -64,13 +64,11 @@
 					<dt class="desc"><b>$!{enumViewTools.lineTypeEnumName($!line.lType)}</b>$!line.lMode</dt>
 					<dt><span>行程天数：<em>$!line.lDay天</em></span></dt>
 					<dt class="time">
-						<span>最近团期：<em>10-1,10-210-1,10-210-1,10-210-1,10-2</em></span>
 						<span class="rili">更多团期</span>
 					</dt>
-					<dt class="route">行程概览：<em>苏州 > 上海 > 北京</em></dt>
 				</dl>
 				<div class="price"><span>￥$!{format.formatFloat($!line.lJCrPrice)}起</span></div>
-				<a href="#" class="order">预定</a>
+				<a href="$url" target="_blank" class="order">预定</a>
         </div>
 		#end
       </div>
@@ -81,12 +79,13 @@
       <div class="r-column">
         <div class="tit">周边短线</div>
         <div class="list">
-          <a href="#">海南专线</a>
+          <a href="/search/productSearch.htm?tn=line&keyword=&zId=89">温泉专线</a>
+		  <a href="/search/productSearch.htm?tn=line&keyword=&zId=135">滑雪专线</a>
         </div>
       </div>
 
       <div class="rbox">
-        <div class="tit"><span>商家推荐</span><a href="#">更多...</a></div>
+        <div class="tit"><span>商家推荐</span><a href="/company.htm">更多...</a></div>
         <ul>
             #foreach($companyDO in $!companyDOs)
 				<li>

@@ -27,13 +27,15 @@
         </dl>
       </div>
       <div class="right">
-        <div class="tit"><h2>推荐礼品</h2></div>
+        <div class="tit"><h2>推荐礼品 </h2></div>
 			<div class="shoplist" id="shoplist">
 				#foreach($!gift in $!giftList)
 					<dl>
 						<dd><a href="/shop_view.htm?id=$!gift.gId"><img data-original="$!gift.gPic" src="/static/img/grey.gif" title="$!gift.gTitle" alt="$!gift.gTitle" ></a></dd>
 						<dt class="tt">$!gift.gTitle</dt>
-						<dt><span><b>积</b>$!gift.gRedemption</span><a href="/shop_cart.htm?id=$!gift.gId">立即兑换</a></dt>
+						#if($!{webUser.getCid()}!=0)
+							<dt><span><b>积</b>$!gift.gRedemption</span><a href="/shop_cart.htm?id=$!gift.gId">立即兑换</a></dt>
+						#end
             		</dl>
 				#end
         	</div>

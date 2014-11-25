@@ -14,7 +14,6 @@ import org.apache.http.client.entity.UrlEncodedFormEntity;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.message.BasicNameValuePair;
-import org.apache.http.protocol.HTTP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -42,8 +41,9 @@ import com.zb.app.common.core.lang.Argument;
 public class PushSMSUtils {
 
     private static Logger          logger          = LoggerFactory.getLogger(PushSMSUtils.class);
-    private static String          PUSH_SERVER_URL = "http://121.52.221.108/send/gsend.aspx";
-
+    private static String          PUSH_SERVER_URL = "http://218.8.241.211:8080/api/sendsmsi.php";
+    // http://218.8.241.211:8080/api/sendsms.php?
+    // loginname=106&password=106lejin&number=13918731742,13795463925,18616799662,18912386146&content=zuobian%20Test!
     @Autowired
     private ThreadPoolTaskExecutor executor;
 
@@ -126,19 +126,18 @@ public class PushSMSUtils {
         sendPushMsg(StringUtils.join(mobile, ","), msg, StringUtils.EMPTY);
     }
 
-    @SuppressWarnings("deprecation")
     private void sendPushMsg(String mobiles, String msg, String sequeid) {
         DefaultHttpClient client = new DefaultHttpClient();
         HttpPost httpPost = new HttpPost(PUSH_SERVER_URL);
         List<BasicNameValuePair> params = new ArrayList<BasicNameValuePair>();
-        params.add(new BasicNameValuePair("name", "weiying"));
-        params.add(new BasicNameValuePair("pwd", "weiying1234"));
-        params.add(new BasicNameValuePair("dst", mobiles));
-        params.add(new BasicNameValuePair("msg", msg));
-        params.add(new BasicNameValuePair("sequeid", sequeid));
+        params.add(new BasicNameValuePair("loginname", "zbw"));
+        params.add(new BasicNameValuePair("password", "zbw123"));
+        params.add(new BasicNameValuePair("number", mobiles));
+        params.add(new BasicNameValuePair("content", msg));
+        // params.add(new BasicNameValuePair("sequeid", sequeid));
 
         try {
-            httpPost.setEntity(new UrlEncodedFormEntity(params, HTTP.UTF_8));
+            httpPost.setEntity(new UrlEncodedFormEntity(params, "gb2312"));
             HttpResponse response = client.execute(httpPost);
 
             int statusCode = response.getStatusLine().getStatusCode();
@@ -158,10 +157,9 @@ public class PushSMSUtils {
         for (int i = 1; i < 11; i++) {
             PushSMSUtils pushUtils = new PushSMSUtils();
             System.out.println("左边网,短信测试!!!收到请不要回复,谢谢! 第" + i + "次测试,Test Start!");
-            pushUtils.sendPushMsg("13918731742,15001968175,18616799662,18912386146", "左边网,短信测试!!!收到请不要回复,谢谢! 第" + i
-                                                                                     + "次测试", "123456");
-            pushUtils.sendPushMsg(String.format("您有新的订单[订单号：%s]，请您及时处理。", "C20141111009876"), "13918731742",
-                                  "15001968175", "18616799662", "18912386146");
+
+            pushUtils.sendPushMsg("您有新的订单[订单号：3]，请您及时处理【左边网】", "15001968175", "18616799662", "18912386146");
+
             System.out.println("左边网,短信测试!!!收到请不要回复,谢谢! 第" + i + "次测试,Test End!");
 
             System.out.println("Now,start sleep!");

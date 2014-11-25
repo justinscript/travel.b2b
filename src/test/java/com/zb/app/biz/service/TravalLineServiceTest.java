@@ -135,13 +135,14 @@ public class TravalLineServiceTest extends BaseTestCase {
                 linedo.setlTemplateState(LineTemplateEnum.Template.getValue());
                 linedo.setlTourContent(rs.getString("L_TourContent"));
                 // 获取线路对应的公司原名称
-                ResultSet cid = stmt3.executeQuery("SELECT C_NAME,C_TYPE FROM TRAVEL_COMPANY WHERE C_ID=" + rs.getInt("C_ID"));
+                ResultSet cid = stmt3.executeQuery("SELECT C_NAME,C_TYPE FROM TRAVEL_COMPANY WHERE C_ID="
+                                                   + rs.getInt("C_ID"));
                 while (cid.next()) {
                     TravelCompanyQuery query = new TravelCompanyQuery();
                     query.setcName(cid.getString("C_NAME"));
-                    if(cid.getInt("C_TYPE") == 0){
+                    if (cid.getInt("C_TYPE") == 0) {
                         query.setcType(3);
-                    }else{
+                    } else {
                         query.setcType(cid.getInt("C_TYPE"));
                     }
                     TravelCompanyDO travelCompanyDO = service.getByName(query);

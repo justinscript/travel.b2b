@@ -14,4 +14,4 @@
 <script src="/static/js/jq-zuobian-order.js"></script>
 <script src="/static/js/laydate/laydate.js"></script>
 <script type="text/javascript" src="/static/js/jquery.json.min.js"></script>
-<script type="text/javascript" src="/static/js/msg.js"></script>
+<!--<script type="text/javascript" src="/static/js/msg.js"></script>-->

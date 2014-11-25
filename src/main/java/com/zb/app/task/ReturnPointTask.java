@@ -79,14 +79,14 @@ public class ReturnPointTask extends AbstractTask {
                 integralDJ.setiSource(IntegralSourceEnum.return_point.value);
                 integralDJ.setcId(customCompanyId);
                 integralDJ.setmId(customId);
-                integralDJ.setiAddintegral(new Long(totalIntegral));
+                integralDJ.setiAddintegral(new Integer(totalIntegral));
                 if (integralDO == null) {
-                    integralDJ.setiBalance(new Long(totalIntegral));
-                    integralDJ.setiFrozen(0L);
+                    integralDJ.setiBalance(new Integer(totalIntegral));
+                    integralDJ.setiFrozen(0);
                     integralDJ.setiAltogether(integralDJ.getiBalance() + integralDJ.getiFrozen());
                 } else {
                     integralDJ.setiBalance(integralDO.getiBalance() + totalIntegral);
-                    integralDJ.setiFrozen(integralDO.getiFrozen() == null ? 0L : integralDO.getiFrozen());
+                    integralDJ.setiFrozen(integralDO.getiFrozen() == null ? 0 : integralDO.getiFrozen());
                     integralDJ.setiAltogether(integralDJ.getiBalance() + integralDJ.getiFrozen());
                 }
                 integralService.addTravelIntegral(integralDJ);
@@ -100,7 +100,7 @@ public class ReturnPointTask extends AbstractTask {
                     integral.setiSource(IntegralSourceEnum.frozen_return.value);
                     integral.setcId(order.getcId());
                     integral.setiBalance(integralDO.getiBalance() + integralDO.getiFrozen() - totalIntegral);
-                    integral.setiFrozen(0L);
+                    integral.setiFrozen(0);
                     integral.setiAltogether(integral.getiBalance() + integral.getiFrozen());
                     integralService.addTravelIntegral(integral);
                 }

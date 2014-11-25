@@ -105,7 +105,7 @@ public class ClassLoaderUtils {
     }
 
     public static void main(String[] args) throws Exception {
-        List<?> load = load("com/yue/fbiz/item/title/builder", new ClassNameFilter(false, "Abstract"));
+        List<?> load = load("com/zb/app/biz/item/title/builder", new ClassNameFilter(false, "Abstract"));
         for (Object obj : load) {
             System.err.println(obj);
         }

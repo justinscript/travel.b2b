@@ -12,51 +12,41 @@
     <dl>
     <dt>新手帮助</dt>
     <dd>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
+		#foreach($help in $!{articleCacheTools.getHelpCenter().keySet()})
+			<a href="/help/$!{help}.htm">$!{articleCacheTools.getHelpCenter().get($help)}</a>
+		#end
     </dd>
     </dl>
     <dl>
     <dt>组团社问题</dt>
     <dd>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
+		#foreach($tourIssue in ${articleCacheTools.getTourIssue().keySet()})
+			<a href="/tourIssue/$!{tourIssue}.htm">$!{articleCacheTools.getTourIssue().get($tourIssue)}</a>
+		#end
     </dd>
     </dl>
     <dl>
     <dt>批发商问题</dt>
     <dd>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
+		#foreach($accountIssue in ${articleCacheTools.getAccountIssue().keySet()})
+			<a href="/accountIssue/$!{accountIssue}.htm">$!{articleCacheTools.getAccountIssue().get($accountIssue)}</a>
+		#end
     </dd>
     </dl>
     <dl>
     <dt>订购指南</dt>
     <dd>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
+		#foreach($orderGuide in ${articleCacheTools.getOrderGuide().keySet()})
+			<a href="/orderGuide/$!{orderGuide}.htm">$!{articleCacheTools.getOrderGuide().get($orderGuide)}</a>
+		#end
     </dd>
     </dl>
     <dl>
     <dt>关于左边</dt>
     <dd>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
-    <a href="">关于我们</a>
+		#foreach($about in ${articleCacheTools.getAboutZuobian().keySet()})
+			<a href="/about/$!{about}.htm">$!{articleCacheTools.getAboutZuobian().get($about)}</a>
+		#end
     </dd>
     </dl>
     <dl class="fr">
@@ -66,3 +56,4 @@
   </div>
   <div class="copyright">Copyright © 2013 版权所有 左边网. All Rights Reserved.浙ICP备11057101号</div>
 </div>
+<script src="http://s6.cnzz.com/stat.php?id=5763643&web_id=5763643" language="JavaScript"></script>

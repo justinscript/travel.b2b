@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.zb.app.biz.cons.CompanyStateEnum;
 import com.zb.app.biz.cons.CompanyTypeEnum;
 import com.zb.app.biz.cons.LineStateEnum;
 import com.zb.app.biz.cons.LineTemplateEnum;
@@ -65,19 +66,17 @@ public class LineController extends BaseController {
      * @return
      */
     @RequestMapping(value = "/line/{id}.htm")
-    public ModelAndView lineshow(@PathVariable("id")
-    String id, ModelAndView mv) {
+    public ModelAndView lineshow(@PathVariable("id") String id, ModelAndView mv) {
         mv.setViewName("line/line");
         TravelLineQuery query = new TravelLineQuery();
-        if (StringUtils.isEmpty(id)) {
+        if (StringUtils.isEmpty(id) || !NumberParser.isNumber(id)) {
             return mv;
         }
-        if (NumberParser.isNumber(id)) {
-            if (id.length() == 8) {
-                query.setlGroupNumber(id);
-            } else {
-                query.setlId(Long.parseLong(id));
-            }
+
+        if (id.length() == 8) {
+            query.setlGroupNumber(id);
+        } else {
+            query.setlId(Long.parseLong(id));
         }
         // 查询线路
         TravelLineDO trline = lineService.find(query);
@@ -98,10 +97,17 @@ public class LineController extends BaseController {
         // 查询客服
         TravelServiceQuery servicequery = new TravelServiceQuery(trline.getcId(), null);
         List<TravelServiceDO> servicelist = companyService.list(servicequery);
-        // 浏览量增加
-        TravelLineDO lineup = new TravelLineDO(trline.getlId());
-        lineup.setlViews((trline.getlViews() == null ? 0 : trline.getlViews()) + 1);
-        lineService.updateTravelLine(lineup);
+        if (!WebUserTools.hasLogin()
+            || !(CompanyTypeEnum.isAccount(WebUserTools.getCompanyType()) || CompanyTypeEnum.isManage(WebUserTools.getCompanyType()))) {
+            // 浏览量增加
+            TravelLineDO lineup = new TravelLineDO(trline.getlId());
+            lineup.setlViews((trline.getlViews() == null ? 0 : trline.getlViews()) + 1);
+            lineService.updateTravelLine(lineup);
+        }
+        TravelLineQuery queryv = new TravelLineQuery();
+        queryv.setColumnType(1);
+        queryv.setlProduct(trline.getlProduct());
+        trDo.setlViews(lineService.countByGroup(queryv));
         // 添加进模型
         mv.addObject("servicelist", servicelist);
         mv.addObject("line", trDo);
@@ -117,8 +123,7 @@ public class LineController extends BaseController {
      */
     @RequestMapping("/printdoc/{id}.htm")
     @ExportWordFile(value = "行程单")
-    public ModelAndView exportDoc(@PathVariable("id")
-    Long id, ModelAndView mav) {
+    public ModelAndView exportDoc(@PathVariable("id") Long id, ModelAndView mav) {
         if (Argument.isNotPositive(id)) {
             return createErrorJsonMav("参数错误!", null);
         }
@@ -133,7 +138,7 @@ public class LineController extends BaseController {
         List<TravelRouteDO> routelist = lineService.list(query);
         line.setRoutelist(routelist);
         // 查询线路发布公司
-        TravelCompanyDO company = companyService.getById(trdo.getcId());
+        TravelCompanyDO company = companyService.getById(WebUserTools.getCid());
         mav.addObject("line", StringFormatter.objectFieldEscape(line));
         mav.addObject("comp", company);
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
@@ -253,8 +258,9 @@ public class LineController extends BaseController {
         // 商家推荐
         TravelCompanyQuery companyQuery = new TravelCompanyQuery();
         companyQuery.setNowPageIndex(0);
-        companyQuery.setPageSize(3);
-        companyQuery.setcType(CompanyTypeEnum.TOUR.getValue());
+        companyQuery.setPageSize(6);
+        companyQuery.setcType(CompanyTypeEnum.ACCOUNT.getValue());
+        companyQuery.setcState(CompanyStateEnum.NORMAL.getValue());
         PaginationList<TravelCompanyDO> companyDOs = companyService.showCompanyPagination(companyQuery,
                                                                                           new DefaultIpageUrl());
         model.addObject("companyDOs", companyDOs);

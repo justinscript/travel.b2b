@@ -42,8 +42,11 @@
 				<ul>
                         <li class="title-tab">
                             <span class="tit" name="lState" hide="false">类型：</span>
-                            <a href="#" rel="0">关于我们</a>
-                            <a href="#" rel="1">帮助中心</a>
+                            <a href="#" rel="1">关于我们</a>
+                            <a href="#" rel="2">帮助中心</a>
+							<a href="#" rel="3">订购指南</a>
+							<a href="#" rel="4">批发商问题</a>
+							<a href="#" rel="5">组团社问题</a>
                         </li>
                         <div id="FilterSearch" class="hide"><span class="tit">已选条件：</span></div>
                     </ul>
@@ -68,7 +71,7 @@
 				
 				#foreach($!page in $list) 
                 <tr>
-					<td>#if($!{page.source}==1) 关于左边 #elseif($!{page.source}==2) 帮助中心 #end</td>
+					<td>#if($!{page.source}==1) 关于左边 #elseif($!{page.source}==2) 帮助中心#elseif($!{page.source}==3) 订购指南#elseif($!{page.source}==4) 批发商问题#elseif($!{page.source}==5) 组团社问题 #end</td>
 					#if($!{page.source}==1) #set($url="/about/"+$!{page.aId}+".htm") #elseif($!{page.source}==2) #set($url="/help/"+$!{page.aId}+".htm") #end
                     <td><a href="$url">$!{page.title}</a></td>
                     <td>${dateViewTools.formatDate($page.gmtCreate)}</td>

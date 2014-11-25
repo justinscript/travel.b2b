@@ -197,7 +197,9 @@
             <th>手机</th>
             <th>证件号</th>
             <th>单房差</th>
-            <th>优惠价</th>
+			#if($!cType==2)
+				<th>优惠价</th>
+			#end
             <th>备注</th>
             #if($!order.orState!=1)<th>操作</th>#end
         </tr>
@@ -244,7 +246,9 @@
                 	<option value="0">是</option>
                 #end
             </select></td>
-            <td><input type="text" name="guestVOs.gYouHui" value="$!format.formatFloat($!guest.gYouHui)" class="w50"/></td>
+            #if($!cType==2)
+				<td><input type="text" name="guestVOs.gYouHui" value="$!format.formatFloat($!guest.gYouHui)" class="w50"/></td>
+			#end
             <td><input type="text" name="guestVOs.gMode" value="$!guest.gMode"/></td>
 			#if($!order.orState!=1)
             <td>

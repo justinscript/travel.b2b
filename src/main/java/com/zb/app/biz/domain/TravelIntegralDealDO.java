@@ -29,8 +29,8 @@ public class TravelIntegralDealDO implements Serializable {
     private Integer           idIntegral;                              // 消耗积分
     private Integer           goId;                                    // 积分订单id
     private Integer           gId;                                     // 积分产品id
-    private Integer           lId;
-    private String            idRemark;
+    private Integer           lId;									   // 线路ID
+    private String            idRemark;								   // 备注
 
     public Long getIdId() {
         return idId;

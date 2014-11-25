@@ -19,6 +19,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zb.app.biz.domain.TravelCompanyDO;
 import com.zb.app.biz.domain.TravelMemberDO;
 import com.zb.app.biz.query.TravelMemberQuery;
+import com.zb.app.common.authority.AuthorityHelper;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.BeanUtils;
 import com.zb.app.common.pagination.PaginationList;
@@ -96,29 +97,31 @@ public class TourController extends BaseController {
 
     @RequestMapping(value = "/password.htm")
     public ModelAndView newsadd(ModelAndView mav, Long id) {
-    	mav.addObject("mId", id);
+        mav.addObject("mId", id);
         mav.setViewName("/tour/customer/password");
         return mav;
     }
+
     @RequestMapping(value = "/updatePassword.htm", produces = "application/json")
     @ResponseBody
     public JsonResult updatePassword(TravelMemberDO travelMemberDO, String newpw) {
-    	TravelMemberQuery query = new TravelMemberQuery();
-    	query.setmId(travelMemberDO.getmId());
-    	query.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberDO.getmPassword()));
-    	List<TravelMemberDO> memberDOs = memberService.listQuery(query);
-    	if(memberDOs.size() == 0 || memberDOs == null){
-    		return JsonResultUtils.error(travelMemberDO, "原密码错误!");
-    	}
-    	
-    	travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(newpw));
-    	Boolean bool = memberService.update(travelMemberDO);
+        TravelMemberQuery query = new TravelMemberQuery();
+        query.setmId(travelMemberDO.getmId());
+        query.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberDO.getmPassword()));
+        List<TravelMemberDO> memberDOs = memberService.listQuery(query);
+        if (memberDOs.size() == 0 || memberDOs == null) {
+            return JsonResultUtils.error(travelMemberDO, "原密码错误!");
+        }
+
+        travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(newpw));
+        Boolean bool = memberService.update(travelMemberDO);
         if (bool) {
             return JsonResultUtils.success(travelMemberDO, "密码修改成功!");
         } else {
             return JsonResultUtils.error(travelMemberDO, "密码修改失败!");
         }
     }
+
     /**
      * 更新用户信息
      * 
@@ -132,6 +135,11 @@ public class TourController extends BaseController {
         BeanUtils.copyProperties(travelMemberDO, travelMemberVO);
         if (StringUtils.isNotEmpty(travelMemberDO.getmPassword())) {
             travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberDO.getmPassword()));
+        }
+        if (StringUtils.isNotEmpty(travelMemberVO.getmRole()) && StringUtils.contains(travelMemberVO.getmRole(), ",")) {
+            String role = travelMemberVO.getmRole();
+            role = AuthorityHelper.makeAuthority(role);
+            travelMemberDO.setmRole(role);
         }
         Boolean bool = memberService.update(travelMemberDO);
         if (bool) {
@@ -160,10 +168,10 @@ public class TourController extends BaseController {
         mav.setViewName("/tour/customer/userlist");
         return mav;
     }
-    
-    @RequestMapping(value="/user.htm")
-    public String user(){
-    	return "/tour/customer/user";
+
+    @RequestMapping(value = "/user.htm")
+    public String user() {
+        return "/tour/customer/user";
     }
 
     @RequestMapping(value = "/useradd.htm")
@@ -179,6 +187,12 @@ public class TourController extends BaseController {
         travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberVO.getmPassword()));
         travelMemberDO.setmUserName(StringUtils.lowerCase(travelMemberVO.getmUserName()));
         travelMemberDO.setcId(WebUserTools.getCid());
+
+        if (StringUtils.isNotEmpty(travelMemberVO.getmRole())) {
+            String role = AuthorityHelper.makeAuthority(travelMemberVO.getmRole());
+            travelMemberDO.setmRole(role);
+        }
+
         Integer i = memberService.insert(travelMemberDO);
         return i == 0 ? JsonResultUtils.error(travelMemberDO, "添加失败!") : JsonResultUtils.success(travelMemberDO,
                                                                                                  "添加成功!");
@@ -195,6 +209,11 @@ public class TourController extends BaseController {
         if (memberDO != null && StringUtils.isNotEmpty(memberDO.getmPassword())) {
             memberDO.setmPassword(EncryptBuilder.getInstance().decrypt(memberDO.getmPassword()));
         }
+        if (StringUtils.isNotEmpty(memberDO.getmRole())) {
+            String role = AuthorityHelper.createRightStr(memberDO.getmRole());
+            memberDO.setmRole(role);
+        }
+
         mav.addObject("member", memberDO);
         mav.addObject("type", "update");
         mav.setViewName("/tour/customer/useradd");
@@ -207,6 +226,11 @@ public class TourController extends BaseController {
         if (memberDO != null && StringUtils.isNotEmpty(memberDO.getmPassword())) {
             memberDO.setmPassword(EncryptBuilder.getInstance().encrypt(memberDO.getmPassword()));
         }
+        if (StringUtils.isNotEmpty(memberDO.getmRole())) {
+            String role = AuthorityHelper.makeAuthority(memberDO.getmRole());
+            memberDO.setmRole(role);
+        }
+
         boolean b = memberService.update(memberDO);
         if (b) {
             return JsonResultUtils.success(memberDO, "修改成功!");

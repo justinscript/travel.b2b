@@ -71,7 +71,7 @@ nullmsg="用户名不能为空" errormsg="用户名至少4个字符,最多18个�
 <dl>
 <dt>真实姓名：</dt>
 <dd><span><input type="text" value="" name="mName" datatype="chinese" nullmsg="真实姓名不能为空" errormsg="姓名必须为中文"
-class="reginput" /></span> <label class="Validform_checktip">*必须为中文</label></dd>
+class="reginput" /></span><label class="Validform_checktip">*必须为中文</label></dd>
 </dl>
 <dl>
 <dt>手机号码：</dt>
@@ -106,22 +106,26 @@ nullmsg="请再输入一次密码" errormsg="两次密码不一致" class="regin
       </form>      
       </div>
       <div class="right">
-        <div class="login"><a href="#">已有账号，请点击这里登录</a></div>
+        <div class="login"><a href="/userlogin.htm">已有账号，请点击这里登录</a></div>
         <div class="box">
           <dl>
             <dd><i class="ico2 i1"></i>会员注册须知</dd>
             <dt>
-            <p>目前左边只受理旅行社单会员注册</p>
-<p>注册会员需要提供营业执照复印件、法人身份证复印件、经营许可证复印件</p>
-<p>申请成功后左边网工作人员进行核验身份后正式开通</p>
+            <p>1、左边网只受理旅游企业（组团社与批发商）的会员注册，不受理非旅游企业与个人的注册。</p>
+            <p>2、请根据企业类型进行注册，如果同时有组团社和批发商两个类型，请分别进行注册。</p>
+            <p>3、注册为批发商时，请及时与我公司客服人员联系，并提供企业的一证一照的电子版或者复印件，以便进行审核。</p>
+            <p>4、注册完成后，请等待我公司审核，我公司人员将及时告知您审核结果。</p>
             </dt>
           </dl>
           <dl>
-            <dd><i  class="ico2 i2"></i>左边网为会员提供那些服务？</dd>
+            <dd><i  class="ico2 i2"></i>左边网注册会员服务项目？</dd>
             <dt>
-            <p>浏览本网站信息</p>
-<p>自主发布地接交易信息</p>
-<p>网上在线采购和销售服务</p>
+            <p>1、旅游线路相关信息在线浏览、查询</p>
+            <p>2、旅游线路在线预定</p>
+            <p>3、在线订单处理与管理</p>
+            <p>4、旅游线路发布、推广</p>
+            <p>5、财务应收、应付款项管理</p>
+            <p>6、商家在线客服沟通</p>
             </dt>
           </dl>
           <dl>
@@ -129,7 +133,6 @@ nullmsg="请再输入一次密码" errormsg="两次密码不一致" class="regin
             <dt>
             <p>
             <span><i class="ico2 i4"></i>400 0378 777</span>
-             <span><i class="ico2 i5"></i>QQ客服</span>
             </p>
             </dt>
           </dl>                    

@@ -12,6 +12,14 @@
     	<result 	column="SORT" 			property="sort" 			jdbcType="INTEGER" />
     	<result 	column="STATE" 			property="state" 			jdbcType="INTEGER" />
   	</resultMap>
+  	<resultMap id="SimpleResultMap" type="com.zb.app.web.vo.TravelArticlesVO" >
+  		<id 		column="A_ID" 			property="aId" 				jdbcType="DECIMAL" />
+    	
+    	<result 	column="SOURCE" 		property="source" 			jdbcType="INTEGER" />
+    	<result 	column="TITLE" 			property="title" 			jdbcType="VARCHAR" />
+    	<result 	column="SORT" 			property="sort" 			jdbcType="INTEGER" />
+    	<result 	column="STATE" 			property="state" 			jdbcType="INTEGER" />
+  	</resultMap>
   	
   	<sql id="table_columns_without_id">
   		GMT_CREATE,GMT_MODIFIED,SOURCE,TITLE,CONTENT,SORT,STATE
@@ -19,6 +27,11 @@
   
   	<sql id="columns" >
   		A_ID,<include refid="table_columns_without_id"/>
+  	</sql>
+  	
+  	<!-- Vo的列 -->
+  	<sql id="columns_vo" >
+  		A_ID,SOURCE,TITLE,SORT,STATE
   	</sql>
   	
   	<sql id="query_where_clause">
@@ -183,4 +196,10 @@
 	    where A_ID = #{aId,jdbcType=INTEGER}
   	</update>
   	
+  	<select id="listQueryVO" resultMap="SimpleResultMap" parameterType="com.zb.app.biz.query.TravelArticlesQuery">
+   		select  <include refid="columns_vo" /> 
+   		from TRAVEL_ARTICLES 
+   		<include refid="query_where_clause"/>
+   		<include refid="orderby_clause"/>
+  	</select>
 </mapper>

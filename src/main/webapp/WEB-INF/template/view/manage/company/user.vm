@@ -27,7 +27,10 @@
         <td>暂无</td>
         <td>$!member.mMobile</td>
         <td>${dateViewTools.formatDate($!member.gmtCreate)}</td>
-        <td><a href="javascript:void(0)" onclick="GetTemple(this)" url="/zbmanlogin/company/ljUpdateUser.htm?id=$!member.mId" title="修改用户"  class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i> 修改</a></td>
+        <td>
+			<a href="javascript:void(0)" onclick="GetTemple(this)" url="/zbmanlogin/company/ljUpdateUser.htm?id=$!member.mId" title="修改用户"  class="btn btn-primary btn-mini"><i class="icon-edit icon-white"></i> 修改</a>
+			<a href="javascript:void(0)" title="删除" onClick="DelList('/zbmanlogin/company/deleteUser.htm',$!member.mId,this,3);return false"  class="btn btn-mini"><i class="icon-remove"></i> 删除</a>
+		</td>
     </tr>
     #end
 </table>

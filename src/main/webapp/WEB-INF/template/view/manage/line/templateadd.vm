@@ -54,11 +54,11 @@
                 <input type="hidden" id="R_Quyu" name="R_Quyu"  />
                 <select name="lProvince" id="Province" datatype="*" class="w100"  ></select>
                 <select name="lCity" id="City" datatype="*" class="w100"   ></select>
-                <select name="lArea" id="County" datatype="*"  class="w100"  ></select>
+                <select name="lArea" id="County"  class="w100"  ></select>
                 至
                 <select name="lArrivalProvince" id="Province2" datatype="*"  class="w100"  ></select>
                 <select name="lArrivalCity" id="City2" datatype="*"  class="w100"  ></select>
-                <select name="lArrivalArea" id="County2" datatype="*"  class="w100"  ></select>
+                <select name="lArrivalArea" id="County2"  class="w100"  ></select>
             </span>
         </td>
     </tr>

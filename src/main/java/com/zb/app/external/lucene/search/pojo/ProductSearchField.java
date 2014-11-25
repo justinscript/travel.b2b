@@ -29,6 +29,8 @@ public class ProductSearchField implements SearchField, Serializable {
     @Field
     private String            lGroupNumber;                            // 团号
     @Field
+    private String            lProduct;                                // 所属分组
+    @Field
     private String            lTile;                                   // 标题
     @Field
     private Date              lGoGroupTime;                            // 出团日期
@@ -68,6 +70,14 @@ public class ProductSearchField implements SearchField, Serializable {
     private List<String>      pinyin;                                  // 标题全拼
     @Field
     private List<String>      abbre;                                   // 标题首字母
+
+    public String getlProduct() {
+        return lProduct;
+    }
+
+    public void setlProduct(String lProduct) {
+        this.lProduct = lProduct;
+    }
 
     public float getlJCrPrice() {
         return lJCrPrice;

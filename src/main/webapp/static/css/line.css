@@ -53,6 +53,7 @@ a:hover{ -webkit-transition:color .3s ease; }
 #line_Menu .current:hover{border-color:#f60;background-color:#fff; color:#111;}
 .blue{color:#0000CC!important;}
 .line_main h1{font-size:18px;margin:10px 0;color:#000000;line-height: 40px;}
+.line_main h1 em{font-size:12px;color:#ccc;}
 .line-box1{overflow: hidden;_zoom:1;margin-bottom:5px;}
 .line-box1 .line-img{float:left;width:510px;}
 .line-box1 .line-desc{overflow: hidden;_zoom:1;}
@@ -65,6 +66,10 @@ a:hover{ -webkit-transition:color .3s ease; }
 .line-box1 .line-company li{font-size:14px;line-height:24px;}
 .line-box1 .line-company li span{color:#000000;}
 .line-box1 .line-company li img{vertical-align:middle;}
+.line-box1 .line-company .must span{display: block;}
+.line-box1 .line-company .must .userlogin{display: block;width:160px;line-height:40px;text-align:center; font-size:16px;color:#fff;background:red;margin:10px 0;float: left;}
+.line-box1 .line-company .must p{float: left;line-height: 40px;margin-left: 20px;}
+.line-box1 .line-company .must p a{color:red;display: inline-block;margin-left:2px;line-height: 20px;}
 .line-box1 .line-desc span{color:#ff0000;}
 .line-box1 .line-desc dl dd,.line-box1 .line-desc dl dt{float:left;font-weight: normal;line-height:20px;}
 .line-box1 .line-desc .ll{margin-left: 30px;}

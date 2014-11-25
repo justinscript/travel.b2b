@@ -181,12 +181,12 @@ public class ManageController extends BaseController {
     @RequestMapping(value = "/company/ljUpdateCompany.htm")
     public ModelAndView ljUpdateCompany(ModelAndView mav, Long id) {
         TravelCompanyDO companyDO = companyService.getById(id);
-        TravelCompanyVO companyVO =  new TravelCompanyVO();
+        TravelCompanyVO companyVO = new TravelCompanyVO();
         BeanUtils.copyProperties(companyVO, companyDO);
         String[] tmp = StringUtils.split(companyVO.getcCityTop(), ",");
         if (tmp != null && tmp.length == 2) {
-        	companyVO.setcMoProvince(Integer.parseInt(tmp[0]));
-        	companyVO.setcMoCity(Integer.parseInt(tmp[1]));
+            companyVO.setcMoProvince(Integer.parseInt(tmp[0]));
+            companyVO.setcMoCity(Integer.parseInt(tmp[1]));
         }
         mav.addObject("company", companyVO);
         mav.addObject("cType", "update");
@@ -269,6 +269,12 @@ public class ManageController extends BaseController {
         BeanUtils.copyProperties(travelMemberDO, travelMemberVO);
         travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberVO.getmPassword()));
         travelMemberDO.setmUserName(StringUtils.lowerCase(travelMemberVO.getmUserName()));
+
+        if (StringUtils.isNotEmpty(travelMemberVO.getmRole())) {
+            String role = AuthorityHelper.createRightStr(travelMemberVO.getmRole());
+            travelMemberDO.setmRole(role);
+        }
+
         Integer i = memberService.insert(travelMemberDO);
         return i == 0 ? JsonResultUtils.error(travelMemberDO, "添加失败!") : JsonResultUtils.success(travelMemberDO,
                                                                                                  "添加成功!");
@@ -283,8 +289,7 @@ public class ManageController extends BaseController {
     public ModelAndView ljUpdateUser(ModelAndView mav, Long id) {
         TravelMemberDO memberDO = memberService.getById(id);
         if (StringUtils.isNotEmpty(memberDO.getmRole())) {
-            String role = memberDO.getmRole();
-            role = AuthorityHelper.createRightStr(role);
+            String role = AuthorityHelper.createRightStr(memberDO.getmRole());
             memberDO.setmRole(role);
         }
         if (StringUtils.isNotEmpty(memberDO.getmPassword())) {
@@ -317,6 +322,7 @@ public class ManageController extends BaseController {
             return JsonResultUtils.error(memberDO, "修改失败!");
         }
     }
+
     /**
      * 删除用户
      * 

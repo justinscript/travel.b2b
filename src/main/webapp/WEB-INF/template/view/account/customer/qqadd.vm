@@ -43,7 +43,7 @@ $(function(){
             <td>
                 <span>
 					<input nullmsg="请填写您的手机号码" datatype="n" errormsg="手机号码格式错误" type="text" name="sMobile" value="$!{service.sMobile}" class="fl" />
-					 <label class="rad"><input type="checkbox" value="86" name="zId" class="mRole">是否接受订单提醒</label>
+					 <label class="rad"><input type="checkbox" value="1" name="sIsReceive" class="mRole">是否接受订单提醒</label>
 				</span>
                 <div class="Validform_checktip"></div>
             </td>

@@ -33,11 +33,6 @@
        
         <div id="tab1" >
                         <ul id="FilterList">
-                             <li>
-                                <span class="tit">类型：</span>
-                                <a href="#">可用积分</a>
-                                <a href="#">冻结积分</a>
-                            </li>
                             <li>
                                 <span class="tit">分类：</span>
                                 <a href="#">收入积分</a>
@@ -66,13 +61,13 @@
                             <tr>
                                <td>${dateViewTools.formatDate($!tid.gmtCreate)}</td>
                                <td class="" >
-                               		#if($!tid.idIntegral>0)
-                               			+$!tid.idIntegral
+                               		#if($!tid.iAddintegral>0)
+                               			+$!tid.iAddintegral
                                		#else
-                               			$!tid.idIntegral
+                               			$!tid.iAddintegral
                                		#end
                                </td>
-                               <td>$!tid.idRemark</td>
+                               <td>$!tid.iRemark</td>
                             </tr>
                             #end                         
                         </table>

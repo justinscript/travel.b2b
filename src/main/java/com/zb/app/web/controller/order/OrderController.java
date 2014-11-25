@@ -170,7 +170,7 @@ public class OrderController extends BaseController implements ICallBack {
      * @return
      */
     @RequestMapping("/exportTicket/{id}.htm")
-    @ExportWordFile(value = "Ticket")
+    @ExportWordFile(value = "送机名单")
     public ModelAndView exportTicket(@PathVariable("id")
     Long id, ModelAndView mav) {
         if (Argument.isNotPositive(id)) {
@@ -196,7 +196,7 @@ public class OrderController extends BaseController implements ICallBack {
      * @return
      */
     @RequestMapping("/exportGoTicket/{id}.htm")
-    @ExportWordFile(value = "GoTicket")
+    @ExportWordFile(value = "出票名单")
     public ModelAndView exportGoTicket(@PathVariable("id")
     Long id, ModelAndView mav) {
         if (Argument.isNotPositive(id)) {
@@ -222,7 +222,7 @@ public class OrderController extends BaseController implements ICallBack {
      * @return
      */
     @RequestMapping("/exportGuest/{id}.htm")
-    @ExportWordFile(value = "Guest")
+    @ExportWordFile(value = "游客名单")
     public ModelAndView exportGuest(@PathVariable("id")
     Long id, ModelAndView mav) {
         if (Argument.isNotPositive(id)) {
@@ -502,7 +502,8 @@ public class OrderController extends BaseController implements ICallBack {
 					mobiles.add(travelServiceDO.getsMobile());
 				}
 			}
-            //PushSMSUtils.getInstance().sendNewOrderSMS(upOrder.getOrOrderId(), mobiles.toArray(new String[mobiles.size()]));
+            logger.debug("发送信息");
+            PushSMSUtils.getInstance().sendNewOrderSMS(upOrder.getOrOrderId(), mobiles.toArray(new String[mobiles.size()]));
             return JsonResultUtils.success("预定成功!");
         } else if (actionType == UPDATE_ORDER_CALLBACK) {
             TravelOrderDO orderDO = (TravelOrderDO) params[0];
@@ -529,8 +530,10 @@ public class OrderController extends BaseController implements ICallBack {
                                                                            WebUserTools.getMid(), WebUserTools.getCid());
             // 添加日志
             operationLogService.insertTravelOperationLog(operationLogDO);
-            if(orderDO.getOrMobile() != null)
+            if(orderDO.getOrMobile() != null){
+            	logger.debug("发送信息");
             	PushSMSUtils.getInstance().sendOrderModifySMS(newOrder.getOrOrderId(), orderDO.getOrMobile());
+            }
             return JsonResultUtils.success("更新成功!");
         } else if (actionType == DELETE_ORDER_CALLBACK) {
             Long id = (Long) params[0];

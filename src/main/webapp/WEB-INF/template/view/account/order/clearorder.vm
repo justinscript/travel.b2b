@@ -19,6 +19,8 @@
 <form action="/account/cancelOrder.htm" method="post" id="ClearOrderForm">
     <table width="100%" cellspacing="0" cellpadding="0" class="tab2">
     		<input type="hidden" name="orId" value="$!order.orId" />
+			<input type="hidden" name="orOrderId" value="$!order.orOrderId" />
+			<input type="hidden" name="orMobile" value="$!order.orMobile" />
             <tr><td>
             <span><textarea name="orClearMode" style="width:400px;height:150px;" datatype="*" nullmsg="请填写订单取消原因">$!order.orClearMode</textarea></span>
             <span class="Validform_checktip">请填写订单取消原因！</span>

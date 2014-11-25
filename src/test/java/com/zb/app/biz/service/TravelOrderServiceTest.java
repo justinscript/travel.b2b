@@ -33,8 +33,8 @@ public class TravelOrderServiceTest extends BaseTestCase {
      * 根据编号查询：
      */
     @Test
-    public void testGetByTravelOrderById(){
-        TravelOrderDO toDo=service.getTravelOrderById(21L);
+    public void testGetByTravelOrderById() {
+        TravelOrderDO toDo = service.getTravelOrderById(21L);
         logger.debug(toDo.toString());
     }
 
@@ -64,13 +64,14 @@ public class TravelOrderServiceTest extends BaseTestCase {
      * 删除方法：OK
      */
     @Test
-    public void testDeleteTravelOrder(){
-        logger.debug(""+service.deleteTravelOrder(999999L));
+    public void testDeleteTravelOrder() {
+        logger.debug("" + service.deleteTravelOrder(999999L));
     }
 
     // /////////////////////////////////////////////////////////////////////////////////////
     // /////订单游客测试
     // /////////////////////////////////////////////////////////////////////////////////////
+
     /***
      * 添加方法：OK
      */
@@ -96,8 +97,8 @@ public class TravelOrderServiceTest extends BaseTestCase {
      * 根据编号查询：OK
      */
     @Test
-    public void testGetByTravelorderGuestById(){
-        TravelOrderGuestDO do1=service.getTravelOrderGuestById(9L);
+    public void testGetByTravelorderGuestById() {
+        TravelOrderGuestDO do1 = service.getTravelOrderGuestById(9L);
         logger.debug(do1.toString());
     }
 
@@ -117,8 +118,8 @@ public class TravelOrderServiceTest extends BaseTestCase {
      * 删除方法：OK
      */
     @Test
-    public void testDeleteTravelOrderGuest(){
-        logger.debug(""+service.deleteTravelOrderGuest(23L));
+    public void testDeleteTravelOrderGuest() {
+        logger.debug("" + service.deleteTravelOrderGuest(23L));
     }
 
     @Override
@@ -127,5 +128,4 @@ public class TravelOrderServiceTest extends BaseTestCase {
             service = (OrderService) getBean("travelOrderServiceImpl");
         }
     }
-
 }

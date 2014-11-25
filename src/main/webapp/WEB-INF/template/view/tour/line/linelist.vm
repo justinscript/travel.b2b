@@ -1,36 +1,22 @@
 <script src="/static/js/tooltip/jquery.poshytip.min.js"></script>
 <link rel="stylesheet" href="/static/js/tooltip/tip-yellowsimple/tip-yellowsimple.css" type="text/css" />
 <script type="text/javascript">
-	$(function(){
-    	$(".moredate").click(function(event){
-			var loadi = layer.load('加载中…');
-    		$.ajax({
-    			url:"/line/linedate.htm",
-    			type:"get",
-    			dataType:"html",
-    			data:"id="+$(this).attr("data-id"),
-    			success:function(htm){
-				var pagei = $.layer({
-                    type : 1,
-                    title : false,
-                    offset:['150px' , ''],
-                    border : false,
-					shadeClose: true,
-					zIndex:999,
-                    area: ['447px', '378px'],
-                    page: {
-                        html: htm
-                    }
-                });
-    			},
-        		complete: function () {
-        			layer.close(loadi);
-        		},
-        		error: function (err) {  }
-            		})
-            	})
-		
-	})
+$(function(){
+
+  
+$('.moredate').on('click', function(){
+		$.layer({
+                type : 1,
+                title : false,
+                offset:['150px' , ''],
+                border : false,
+				shadeClose: true,
+				zIndex:999,
+                area: ['447px', '378px'],
+                page: {url:"/line/linedate.htm?id="+$(this).attr("data-id")}
+		 })
+   })
+})
 </script>
 <style type="text/css">
 	.min-datebox{position: relative;width:60px;height:30px;}

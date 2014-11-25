@@ -70,7 +70,7 @@
 }
 .rili {
   display: inline-block;
-  margin-left: 50px;
+  margin-left: 0px;
   background: url(/static/img/1409/ico.png) no-repeat 0 -72px;
   padding-left: 20px;
 }
@@ -443,8 +443,9 @@
   box-shadow: 2px 2px 3px rgba(0, 0, 0, 0.2);
   background: #fff;
 }
-.banner {
+.topimg {
   margin-top: 10px;
+  height:390px;
 }
 .slide_box {
   margin-left: 220px;
@@ -680,8 +681,11 @@
 .rbox ul li {
   border-bottom: dotted 1px #E6E6E6;
   padding: 5px 0;
-  height: 72px;
+  height: 24px;
   overflow: hidden;
+}
+.rbox ul li:last-child{
+	border-bottom:none;
 }
 .rbox ul li a {
   word-break: keep-all;
@@ -762,6 +766,7 @@
 }
 .i_line .pic p {
   display: block;
+  width:230px;
   border-bottom: 1px solid #eee;
   line-height: 22px;
   padding: 4px 5px;
@@ -820,7 +825,6 @@
 }
 .i_line .li .time span {
   display: inline-block;
-  margin-left: 50px;
   background: url(/static/img/1409/ico.png) no-repeat 0 -72px;
   padding-left: 20px;
 }
@@ -987,7 +991,6 @@
 }
 .line-li .item dl .time .rili {
   display: inline-block;
-  margin-left: 50px;
   background: url(/static/img/1409/ico.png) no-repeat 0 -72px;
   padding-left: 20px;
 }
@@ -1204,6 +1207,10 @@
   font-size: 18px;
   text-align: center;
   margin-bottom: 15px;
+}
+#wrapper .right .detail .d-memo {
+  font-size: 12px;display: block;margin-bottom:20px;color:#ccc;
+  text-align: center;
 }
 #wrapper .right .detail .d-content {
   font-size: 14px;

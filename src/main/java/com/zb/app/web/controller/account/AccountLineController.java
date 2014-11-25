@@ -22,18 +22,21 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.zb.app.biz.cons.IntegralSourceEnum;
+import com.zb.app.biz.cons.LineStateEnum;
 import com.zb.app.biz.cons.LineTemplateEnum;
 import com.zb.app.biz.cons.LogTableEnum;
 import com.zb.app.biz.domain.TravelIntegralDO;
 import com.zb.app.biz.domain.TravelLineDO;
 import com.zb.app.biz.domain.TravelLineThinDO;
 import com.zb.app.biz.domain.TravelOperationLogDO;
+import com.zb.app.biz.domain.TravelOrderDO;
 import com.zb.app.biz.domain.TravelPhotoDO;
 import com.zb.app.biz.domain.TravelRouteDO;
 import com.zb.app.biz.domain.TravelSiteFullDO;
 import com.zb.app.biz.domain.TravelTrafficDO;
 import com.zb.app.biz.query.TravelIntegralQuery;
 import com.zb.app.biz.query.TravelLineQuery;
+import com.zb.app.biz.query.TravelOrderQuery;
 import com.zb.app.biz.query.TravelPhotoQuery;
 import com.zb.app.biz.query.TravelRouteQuery;
 import com.zb.app.biz.query.TravelTrafficQuery;
@@ -105,7 +108,7 @@ public class AccountLineController extends BaseController {
             if (integralDO == null) {
                 return JsonResultUtils.error("积分不足");
             }
-            Long cintegral = integralDO.getiBalance();
+            Integer cintegral = integralDO.getiBalance();
             integral = line.getlAdultIntegral() > line.getlChildrenIntegral() ? line.getlRenCount() * groupTimes.length
                                                                                 * line.getlAdultIntegral() : line.getlRenCount()
                                                                                                              * groupTimes.length
@@ -168,7 +171,7 @@ public class AccountLineController extends BaseController {
         boolean bool = tlid != 0 && roid != 0;
         if (bool) {
             // 增量更新索引
-            PaginationList<ProductSearchField> list = lineService.listProductSearch(new TravelLineQuery(tr.getlId()));
+            PaginationList<ProductSearchField> list = lineService.listProductSearch(new TravelLineQuery(rom));
             solrClient.addBeans("zuobian", list);
             // 冻结积分
             if (line.getlIsIntegral() == 1) {
@@ -197,7 +200,6 @@ public class AccountLineController extends BaseController {
         if (id == null || id.equals("")) {
             return JsonResultUtils.error("请选择数据!");
         }
-        TravelLineThinDO trdo = new TravelLineThinDO();
         // 字符串转Long数组
         String[] ids = id.substring(1, id.length()).split(",");
         Long[] lids = new Long[ids.length];
@@ -205,35 +207,45 @@ public class AccountLineController extends BaseController {
             lids[i] = Long.parseLong(ids[i]);
         }
         // 设置条件
+        TravelLineThinDO trdo = new TravelLineThinDO();
         trdo.setlState(state);
-        //设置最后修改人ID
+        // 设置最后修改人ID
         trdo.setlEditUserId(WebUserTools.getMid().intValue());
+        // 获取修改前线路
         List<TravelLineDO> oldlineDOs = new ArrayList<TravelLineDO>();
         for (Long lid : lids) {
             TravelLineDO oldLine = lineService.getTravelLineById(lid);
             oldlineDOs.add(oldLine);
         }
+        // 批量修改
         int result = lineService.updateLines(lids, trdo);
 
-        if (result == 0) return JsonResultUtils.error("修改失败!");
-        List<TravelLineDO> newlineDOs = new ArrayList<TravelLineDO>();
-        for (Long lid : lids) {
-            TravelLineDO oldLine = lineService.getTravelLineById(lid);
-            newlineDOs.add(oldLine);
+        if (result == 0) {
+            return JsonResultUtils.error("修改失败!");
+        } else {
+            // 修改成功则添加日志
+            List<TravelLineDO> newlineDOs = new ArrayList<TravelLineDO>();
+            for (Long lid : lids) {
+                TravelLineDO oldLine = lineService.getTravelLineById(lid);
+                newlineDOs.add(oldLine);
+                //更新索引
+                updateSolr(oldLine);
+            }
+            // 判断对象值得改变
+            List<Map<String, String>> lst = BeanUtils.fieldEditableList(oldlineDOs, newlineDOs);
+            for (int i = 0; i < lst.size(); i++) {
+                TravelOperationLogDO operationLogDO = new TravelOperationLogDO(LogTableEnum.LINELOG.value,
+                                                                               newlineDOs.get(i).getlId(),
+                                                                               newlineDOs.get(i).getlGroupNumber(),
+                                                                               lst.get(i).get("oldString"),
+                                                                               lst.get(i).get("newString"),
+                                                                               WebUserTools.getMid(),
+                                                                               WebUserTools.getCid());
+                // 添加日志
+                operationLogService.insertTravelOperationLog(operationLogDO);
+            }
+            return JsonResultUtils.success(null, "修改成功!");
         }
-        // 判断对象值得改变
-        List<Map<String, String>> lst = BeanUtils.fieldEditableList(oldlineDOs, newlineDOs);
-        for (int i = 0; i < lst.size(); i++) {
-            TravelOperationLogDO operationLogDO = new TravelOperationLogDO(LogTableEnum.LINELOG.value,
-                                                                           newlineDOs.get(i).getlId(),
-                                                                           newlineDOs.get(i).getlGroupNumber(),
-                                                                           lst.get(i).get("oldString"),
-                                                                           lst.get(i).get("newString"),
-                                                                           WebUserTools.getMid(), WebUserTools.getCid());
-            // 添加日志
-            operationLogService.insertTravelOperationLog(operationLogDO);
-        }
-        return JsonResultUtils.success(null, "修改成功!");
     }
 
     /**
@@ -312,7 +324,7 @@ public class AccountLineController extends BaseController {
         line.setlEndTime(date.getTime());
         // 删除行程
         lineService.deleteTravelRouteByLineid(line.getlId());
-        //最后修改人ID
+        // 最后修改人ID
         line.setlEditUserId(WebUserTools.getMid().intValue());
         // 添加行程
         int roid = 0;
@@ -338,11 +350,7 @@ public class AccountLineController extends BaseController {
             // 添加日志
             operationLogService.insertTravelOperationLog(operationLogDO);
             // *****************修改成功便更新索引
-            ProductSearchQuery query = new ProductSearchQuery(newLine.getlGroupNumber());
-            solrClient.del("zuobian", query.toSolrQuery());
-            PaginationList<ProductSearchField> field = lineService.listProductSearch(new TravelLineQuery(
-                                                                                                         newLine.getlId()));
-            solrClient.addBeans("zuobian", field);
+            updateSolr(newLine);
             return JsonResultUtils.success(null, "修改成功!");
         } else {
             return JsonResultUtils.error("修改失败!");
@@ -409,14 +417,20 @@ public class AccountLineController extends BaseController {
     @RequestMapping("/deleteline.htm")
     @ResponseBody
     public JsonResult deleteline(Long id) {
+        // 判断该线路是否有订单
+        TravelOrderQuery query = new TravelOrderQuery();
+        query.setlId(id);
+        List<TravelOrderDO> list = orderService.list(query);
+        if (Argument.isNotEmpty(list)) {
+            return JsonResultUtils.error("线路已产生订单,无法删除!");
+        }
         TravelLineDO tr = lineService.getTravelLineById(id);
         tr.setlDelState(1);
         lineService.deleteTravelRouteByLineid(tr.getlId());
         boolean bool = lineService.updateTravelLine(tr);
         // 删除成功便删除索引
         if (bool) {
-            ProductSearchQuery query = new ProductSearchQuery(tr.getlGroupNumber());
-            solrClient.del("zuobian", query.toSolrQuery());
+            updateSolr(tr);
         }
         return bool ? JsonResultUtils.success(null, "删除成功!") : JsonResultUtils.error("删除失败!");
     }
@@ -593,5 +607,23 @@ public class AccountLineController extends BaseController {
         String now = DateViewTools.format(new Date(), "yyyyMMddHHmmssSSS");
         int num = new Random().nextInt(50000) + 10000;
         return now + num;
+    }
+
+    /***
+     * 更新索引
+     * 
+     * @param line
+     */
+    private void updateSolr(TravelLineDO line) {
+        ProductSearchQuery query = new ProductSearchQuery(null, line.getlProduct());
+        solrClient.del("zuobian", query.toSolrQuery());
+        TravelLineQuery queryline = new TravelLineQuery();
+        queryline.setlTemplateState(LineTemplateEnum.Line.getValue());
+        queryline.setlState(LineStateEnum.NORMAL.getValue());
+        queryline.setlProduct(line.getlProduct());
+        PaginationList<ProductSearchField> field = lineService.listProductSearch(queryline);
+        if (Argument.isNotEmpty(field)) {
+            solrClient.addBeans("zuobian", field);
+        }
     }
 }

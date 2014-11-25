@@ -192,7 +192,7 @@
    </insert>
   <!-- 删除 -->
   <update id="deleteById" parameterType="java.lang.Integer">
-  		update Travel_Member set gmt_Modified = SYSTIMESTAMP, m_state = 1 where m_id = #{mId,jdbcType=INTEGER}
+  		delete Travel_Member where m_id = #{mId,jdbcType=INTEGER}
   </update>
   <!-- 修改 -->
    <update id="updateById" parameterType="com.zb.app.biz.domain.TravelMemberDO">

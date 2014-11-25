@@ -11,10 +11,12 @@
 		<result 	column="S_NAME" 		property="sName" 			jdbcType="VARCHAR" />
 		<result 	column="S_QQ" 			property="sQQ" 				jdbcType="VARCHAR" />
 		<result 	column="S_SORT" 		property="sSort" 			jdbcType="INTEGER" />
+		<result 	column="S_MOBILE" 		property="sMobile" 			jdbcType="VARCHAR" />
+		<result 	column="S_ISRECEIVE" 	property="sIsReceive" 		jdbcType="INTEGER" />
 	</resultMap>
 	
 	<sql id="column">
-		S_ID, GMT_CREATE, GMT_MODIFIED, C_ID, S_NAME, S_QQ, S_SORT
+		S_ID, GMT_CREATE, GMT_MODIFIED, C_ID, S_NAME, S_QQ, S_SORT, S_MOBILE, S_ISRECEIVE
 	</sql>
 	
   	<sql id="orderby_clause">
@@ -109,7 +111,9 @@
 			#{cId,jdbcType=INTEGER},
 			#{sName,jdbcType=VARCHAR},
 			#{sQQ,jdbcType=VARCHAR},
-			#{sSort,jdbcType=INTEGER}
+			#{sSort,jdbcType=INTEGER},
+			#{sMobile,jdbcType=VARCHAR},
+			#{sIsReceive,jdbcType=INTEGER}
 		)
 	</insert>
 	

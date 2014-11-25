@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>左边网</title>
+    <script type="text/javascript">
+            $(function(){
+               $.Menu("系统大厅","系统大厅");
+            })
+        </script>
+</head>
+<body>
+#parse("widget/common/manage_header.vm")
+    <div id="Bodyer">
+       #parse("widget/common/manage_nav.vm")
+
+        <div id="Main">
+            <div class="i_memo">
+                <div class="i_head">
+					#if(!$!mPic || $!mPic=="")
+						<img src="/static/img/nohead.jpg" width="120" />
+					#else
+						<img src="$!mPic" width="120" />
+					#end
+                </div>
+                <div class="i_r">
+                    <span class="i_name">$!{webUser.getNick()}<em>欢迎您！</em></span>
+                    <span>$!{webUser.getCompanyName()}</span><br />
+                    <dl>
+                        <dt>上次登录时间：</dt><dd>${dateViewTools.formatFullDate($!mLastLoginTime)}</dd>
+                    </dl>
+
+                </div>
+
+            </div>
+    </div>
+
+</body>
+</html>

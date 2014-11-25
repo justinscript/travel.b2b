@@ -40,6 +40,9 @@
 	    		<value>/printdoc/*.htm</value>
 	    		<value>/help/*.htm</value>
 	    		<value>/about/*.htm</value>
+	    		<value>/tourIssue/*.htm</value>
+	    		<value>/accountIssue/*.htm</value>
+	    		<value>/orderGuide/*.htm</value>
 	    		<value>/detail/*.htm</value>
 	    		<value>/company_*/*.htm</value>
 	    		<value>/company/column/*.htm</value>
@@ -49,13 +52,9 @@
 		</property>
 		<property name="noCheckUrlList">
 		   <list>
-		   		<value>/index2.htm</value>
-		   	    <value>/register2.htm</value>
-		   	    <value>/about2.htm</value>
-		   	    <value>/line2.htm</value>
 		   	    <value>/userlogin.htm</value>
-		   	    <value>/news2.htm</value>
-		   
+		   	    <value>/loginbox.htm</value>
+		   	    
 		   		<value>/index.htm</value>
 		   		<value>/tour/index.htm</value>
 		   		<value>/doLogin.htm</value>

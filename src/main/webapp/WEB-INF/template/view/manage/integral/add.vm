@@ -54,7 +54,7 @@
         <form id="IntegralForm" method="post" action="/zbmanlogin/addIntegral.htm">
             <table width="100%" class="tab2_1">
             <tr><th width="100">公司名称：</th><td>
-            <span><input type="hidden" value="" name="accountCid" id="cId" datatype="*" nullmsg="您查找的公司不存在"/>
+            <span><input type="hidden" value="" name="cId" id="accountId" datatype="*" nullmsg="您查找的公司不存在"/>
             <input type="text" class="accountName" name="accountName" value="" ></span><div class="Validform_checktip">请输入公司名称关键字</div>
             </td></tr>
             <tr><th>积分：</th><td><span><input type="text" value="" name="iAddintegral" datatype="n" nullmsg="积分不能为空" errormsg="积分必须为数字"/></span><div class="Validform_checktip"></div></td></tr>
@@ -69,7 +69,7 @@
         </form>
     </li>
     <li style="display:none;margin:20px 0;">
-        <form id="TourIntegralForm" method="post" action="/zbmanlogin/addIntegral.htm">
+        <form id="TourIntegralForm" method="post" action="/zbmanlogin/tourAddIntegral.htm">
             <table width="100%" cellpadding="0" cellspacing="0" class="tab2_1">
             <tr><th colspan="2" height="50"><h4>充值方：</h4></th></tr>
             <tr><th width="100">选择商家：</th><td>
@@ -78,13 +78,13 @@
 			</td></tr>
             <tbody class="person" style="display:none;">
 			<tr><th width="100">公司名称：</th><td>
-            <span><input type="hidden" value="" name="accountCid" id="cId" datatype="*" nullmsg="您查找的公司不存在"/><input type="text" class="accountName" name="accountName" value="" datatype="*" nullmsg="批发商不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div>
+            <span><input type="hidden" value="" name="accId" id="accountId2" datatype="*" nullmsg="您查找的公司不存在"/><input type="text" class="accountName2" name="accountName" value="" datatype="*" nullmsg="批发商不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div>
             </td></tr>
 			</tbody>
             <tr><th colspan="2" height="50"><h4>接受方：</h4></th></tr>
             <tr>
             <th width="80" >组团名称：</th>
-            <td><span><input type="hidden" value="" name="tourCid" id="cId" datatype="*" nullmsg="您查找的组团社不存在"/><input type="text" id="tourName" name="tourName" value="" datatype="*" nullmsg="组团社不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div></td>
+            <td><span><input type="hidden" value="" name="cId" id="cId" datatype="*" nullmsg="您查找的组团社不存在"/><input type="text" id="tourName" name="tourName" value="" datatype="*" nullmsg="组团社不能为空"></span><div class="Validform_checktip">请输入公司名称关键字</div></td>
             </tr>
             <tr>
             <th width="80">计调名称：</th>
@@ -93,7 +93,8 @@
             </td>
             </tr>
             <tr><th>积分：</th><td><span><input type="text" value="" name="iAddintegral" datatype="n" nullmsg="充值积分不能为空" errormsg="充值积分必须为数字"/></span></td></tr>
-            <tr>
+            <tr><th>备注：</th><td><input type="text" value="" name="iRemark"/></td></tr>
+			<tr>
             <td></td>
             <td>
             <button class="btn btn-primary" type="submit" onclick="OrgFormH(this)">提交</button>
@@ -131,13 +132,14 @@ $("#tourName").autocomplete("/queryCompanyByConditions.htm?cType=1",{
     formatResult: function(item) {  
     	return item.cName;  
     }  
-     }).result(function(event, item, formatted) {            
+     }).result(function(event, item, formatted) {
+
         $("#cId").val(item.cId);
 		SelectMember(item.cId);
     });  
 
 $(".accountName").autocomplete("/queryCompanyByConditions.htm?cType=2",{
-    dataType:'json',
+     dataType:'json',
     parse:function(da) {
         var parsed = []; 
 		data=da.data;
@@ -159,6 +161,38 @@ $(".accountName").autocomplete("/queryCompanyByConditions.htm?cType=2",{
     formatResult: function(item) {  
     	return item.cName;  
     }  
- });  	
+     }).result(function(event, item, formatted) {
+        $("#accountId").val(item.cId);
+		SelectMember(item.cId);
+    });  
+
+$(".accountName2").autocomplete("/queryCompanyByConditions.htm?cType=2",{
+     dataType:'json',
+    parse:function(da) {
+        var parsed = []; 
+		data=da.data;
+        for (var i = 0; i < data.length; i++) {  
+            parsed[parsed.length] = {  
+            data: data[i],  
+            value: data[i].cId,  
+            result: data[i].cName
+            };  
+        }  
+        return parsed;  
+    },  
+    formatItem: function(item) {
+    	return "<div>"+item.cName+"</div>";  
+     },  
+    formatMatch: function(item) {  
+        return item.cName;  
+    },  
+    formatResult: function(item) {  
+    	return item.cName;  
+    }  
+     }).result(function(event, item, formatted) {
+        $("#accountId2").val(item.cId);
+		SelectMember(item.cId);
+    }); 	
+ 	
 </script>
 </html>

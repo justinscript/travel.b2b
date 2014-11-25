@@ -1,7 +1,6 @@
 <table class="tbl" cellpadding="0" cellspacing="0">
     <tr>
-        <th width="40">
-            <input type="checkbox"></th>
+			<th width="100">团号</th>
             <th width="100">出团日期</th>
             <th width="100">出发/抵达</th>
             <th>线路名称</th>
@@ -13,8 +12,7 @@
 </tr>
 #foreach( $!line in $list ) 
     <tr>
-        <td>
-            <input type="checkbox" value="$!line.lId" name="Lid"></td>
+			<td>$!line.lGroupNumber</td>
             <td>$!line.lGoGroupTimeString</td>
             <td>$!line.lCity/$!line.lArrivalCity</td>
             <td>

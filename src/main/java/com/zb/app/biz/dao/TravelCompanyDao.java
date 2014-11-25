@@ -5,6 +5,8 @@
  */
 package com.zb.app.biz.dao;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import com.zb.app.biz.base.BaseDao;
@@ -45,5 +47,10 @@ public class TravelCompanyDao extends BaseDao<TravelCompanyDO, TravelCompanyMapp
 
 	public Integer countByAccount(TravelCompanyQuery companyQuery) {
 		return m.countByAccount(companyQuery);
+	}
+
+	public List<TravelCompanyDO> listQuery(TravelCompanyQuery query) {
+		// TODO Auto-generated method stub
+		return m.listQuery(query);
 	}
 }

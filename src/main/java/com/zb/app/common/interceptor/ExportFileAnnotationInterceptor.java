@@ -47,6 +47,8 @@ public class ExportFileAnnotationInterceptor extends HandlerInterceptorAdapter {
             if (StringUtils.isEmpty(wordName)) {
                 return;
             }
+            wordName = new String(wordName.getBytes(), "ISO8859-1");
+
             String contentDis = "attachment;filename=" + wordName + ".doc";
             response.setHeader("content-disposition", contentDis);
             response.setContentType("application/msword;");
@@ -60,6 +62,8 @@ public class ExportFileAnnotationInterceptor extends HandlerInterceptorAdapter {
             if (StringUtils.isEmpty(xlsName)) {
                 return;
             }
+            xlsName = new String(xlsName.getBytes(), "UTF-8");
+
             List<?> list = (List<?>) modelAndView.getModel().get("list");
             String[] head = (String[]) modelAndView.getModel().get("head");
             modelAndView.clear();

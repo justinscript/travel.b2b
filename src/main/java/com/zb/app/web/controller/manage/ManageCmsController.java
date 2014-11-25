@@ -62,11 +62,14 @@ public class ManageCmsController extends BaseController {
     public ModelAndView news(ModelAndView mav, @PathVariable("newsType")
     String newsType) {
         mav.setViewName("/manage/news/index");
+        if(newsType == null){
+        	return mav;
+        }
         TravelNewsTypeEnum typeEnum = TravelNewsTypeEnum.getAction(newsType);
         if (typeEnum == null) {
             return mav;
         }
-        PaginationList<TravelNewsDO> list = cmsService.showNewsPagination(new TravelNewsQuery(), new DefaultIpageUrl());
+        PaginationList<TravelNewsDO> list = cmsService.showNewsPagination(new TravelNewsQuery(typeEnum), new DefaultIpageUrl());
         mav.addObject("list", list);
         return mav;
     }

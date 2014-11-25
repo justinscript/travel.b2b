@@ -13,8 +13,6 @@
             <script src="/static/js/jq-zuobian-init.js"></script>
             <script src="/static/js/layer/layer.min.js"></script>
             <script src="/static/js/laydate/laydate.js"></script>
-            <script type="text/javascript" src="/static/js/powerfloat/js/jquery-powerFloat.js"></script>
-            <script type="text/javascript" src="/static/js/laydate/laydate.js"></script>
             <script src="/static/js/common.js"></script>
 			<script type="text/javascript" src="/static/js/jquery.json.min.js"></script>
 	        <script type="text/javascript">

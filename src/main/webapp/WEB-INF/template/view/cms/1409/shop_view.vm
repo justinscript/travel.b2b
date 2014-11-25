@@ -34,7 +34,9 @@
               <dl><dd>礼品编号：</dd><dt>$!gift.gId</dt></dl>
               <dl><dd>市场价格：</dd><dt><del>￥$!gift.gPrice</del></dt></dl>
               <dl><dd>兑换积分：</dd><dt><b>$!gift.gRedemption</b></dt></dl>
-              <a href="/shop_cart.htm?id=$!gift.gId">立即兑换</a>
+			  #if($!{webUser.getCid()}!=0)
+				<a href="/shop_cart.htm?id=$!gift.gId">立即兑换</a>
+			  #end
             </div>
           </div>
           <div class="shop_desc">

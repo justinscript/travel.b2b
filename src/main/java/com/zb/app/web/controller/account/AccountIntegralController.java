@@ -48,7 +48,7 @@ public class AccountIntegralController extends BaseController {
     }
 
     @RequestMapping(value = "/integral/record.htm")
-    public ModelAndView integralrecord(ModelAndView mav, TravelIntegralDealQuery query, Integer page) {
+    public ModelAndView integralrecord(ModelAndView mav, TravelIntegralQuery query, Integer page) {
         TravelIntegralQuery integralQuery = new TravelIntegralQuery();
         integralQuery.setcId(WebUserTools.getCid());
 
@@ -57,9 +57,8 @@ public class AccountIntegralController extends BaseController {
         query.setPageSize(10);
         query.setNowPageIndex(Argument.isNotPositive(page) ? 0 : page - 1);
         query.setcId(WebUserTools.getCid());
-        query.setmId(WebUserTools.getMid());
 
-        PaginationList<TravelIntegralDealDO> list = integralService.listPagination(query, new DefaultIpageUrl());
+        PaginationList<TravelIntegralDO> list = integralService.listPagination(query, new DefaultIpageUrl());
 
         mav.getModel().put(CustomVelocityLayoutView.USE_LAYOUT, "false");
         mav.addObject("tidList", list);

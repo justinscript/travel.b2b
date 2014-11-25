@@ -18,6 +18,7 @@ import com.zb.app.biz.query.TravelLabelCategoryQuery;
 import com.zb.app.biz.query.TravelNewsQuery;
 import com.zb.app.common.pagination.PaginationList;
 import com.zb.app.common.pagination.PaginationParser.IPageUrl;
+import com.zb.app.web.vo.TravelArticlesVO;
 
 /**
  * CMS内容管理 service层 接口
@@ -104,4 +105,6 @@ public interface CmsService extends BaseService {
     boolean updateTravelLabelCategory(TravelLabelCategoryDO ts);
 
     boolean deleteTravelLabelCategory(Long id);
+
+	List<TravelArticlesVO> listQueryVO(TravelArticlesQuery travelArticlesQuery);
 }

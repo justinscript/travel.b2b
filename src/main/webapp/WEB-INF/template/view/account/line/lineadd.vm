@@ -170,11 +170,11 @@
                     <td>
                         <select name="lProvince" id="Province" datatype="*" class="fl m5 w100" $!{disabled}></select>
                         <select name="lCity" id="City" datatype="*" class="fl  m5 w100" $!{disabled}></select>
-                        <select name="lArea" id="County" datatype="*" class="fl m5 w100"  $!{disabled}></select>
+                        <select name="lArea" id="County"  class="fl m5 w100"  $!{disabled}></select>
                         <span class="fl" >至</span>
                         <select name="lArrivalProvince" id="Province2" datatype="*" class="fl m5 w100"  $!{disabled}></select>
                         <select name="lArrivalCity" id="City2" datatype="*" class="fl m5 w100" $!{disabled}></select>
-                        <select name="lArrivalArea" id="County2" datatype="*" class="fl m5 w100" $!{disabled} ></select>
+                        <select name="lArrivalArea" id="County2" class="fl m5 w100" $!{disabled} ></select>
                     </td>
                 </tr>
                 <tr>
@@ -374,33 +374,33 @@
                 <dl>
                     <dd>成人门市价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lCrPrice)}"name="lCrPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lCrPrice)}"#end name="lCrPrice"/>
                     </dt>
                     <dd>儿童门市价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lXhPrice)}"name="lXhPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lXhPrice)}"#end name="lXhPrice"/>
                     </dt>
                     <dd>婴儿门市价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lYPrice)}"name="lYPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lYPrice)}"#end name="lYPrice"/>
                     </dt>
                 </dl>
                 <dl>
                     <dd>成人结算价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJCrPrice)}"name="lJCrPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lJCrPrice)}"#end name="lJCrPrice"/>
                     </dt>
                     <dd>儿童结算价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJXhPrice)}"name="lJXhPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lJXhPrice)}"#end name="lJXhPrice"/>
                     </dt>
                     <dd>婴儿结算价：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lJYPrice)}"name="lJYPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lJYPrice)}"#end name="lJYPrice"/>
                     </dt>
                     <dd>单房差：</dd>
                     <dt>
-                        <input type="text" class=" w100" value="$!{format.formatFloat($!line.lFangPrice)}" name="lFangPrice"/>
+                        <input type="text" class=" w100" #if($type=="update")value="$!{format.formatFloat($!line.lFangPrice)}"#end name="lFangPrice"/>
                     </dt>
                 </dl>
             </div>

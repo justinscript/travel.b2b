@@ -28,10 +28,10 @@ public class TravelIntegralDO implements Serializable {
     private Long              cId;                                   // number(20), --公司id
     private Long              mId;                                   // number(20), --用户id
     private Integer           iSource;                               // number(10), --积分来源(0=消费产品,1=返还积分,2=转入,3=充值)
-    private Long            iBalance;                              // float, --可用积分
-    private Long			  iFrozen;								 // float, --冻结积分
-	private Long			  iAltogether;							 // float, --总积分
-    private Long            iAddintegral;                          // float --本次新增积分
+    private Integer            iBalance;                              // float, --可用积分
+    private Integer			  iFrozen;								 // float, --冻结积分
+	private Integer			  iAltogether;							 // float, --总积分
+    private Integer            iAddintegral;                          // float --本次新增积分
     private Integer           lId;                                   //消费产品ID
     private String            iRemark;                               //备注
 
@@ -83,19 +83,19 @@ public class TravelIntegralDO implements Serializable {
         this.iSource = iSource;
     }
 
-    public Long getiBalance() {
+    public Integer getiBalance() {
         return iBalance;
     }
 
-    public void setiBalance(Long iBalance) {
+    public void setiBalance(Integer iBalance) {
         this.iBalance = iBalance;
     }
 
-    public Long getiAddintegral() {
+    public Integer getiAddintegral() {
         return iAddintegral;
     }
 
-    public void setiAddintegral(Long iAddintegral) {
+    public void setiAddintegral(Integer iAddintegral) {
         this.iAddintegral = iAddintegral;
     }
     
@@ -115,19 +115,19 @@ public class TravelIntegralDO implements Serializable {
     public void setiRemark(String iRemark) {
         this.iRemark = iRemark;
     }
-    public Long getiFrozen() {
+    public Integer getiFrozen() {
 		return iFrozen;
 	}
 
-	public void setiFrozen(Long iFrozen) {
+	public void setiFrozen(Integer iFrozen) {
 		this.iFrozen = iFrozen;
 	}
 
-	public Long getiAltogether() {
+	public Integer getiAltogether() {
 		return iAltogether;
 	}
 
-	public void setiAltogether(Long iAltogether) {
+	public void setiAltogether(Integer iAltogether) {
 		this.iAltogether = iAltogether;
 	}
 

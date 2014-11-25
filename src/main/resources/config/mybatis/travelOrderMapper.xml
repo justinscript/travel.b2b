@@ -231,7 +231,7 @@
 	            and m_ID = #{mId, jdbcType=INTEGER}
 	        </if>
 	        <if test="lId != null">  
-	            and a.l_ID = #{lId, jdbcType=INTEGER}
+	            and l_ID = #{lId, jdbcType=INTEGER}
 	        </if>
 	        <if test="orState != null">  
 	            and OR_STATE = #{orState, jdbcType=INTEGER}

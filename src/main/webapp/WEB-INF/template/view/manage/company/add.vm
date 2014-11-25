@@ -22,7 +22,11 @@ $(function(){
 		}
 	})
 	#if($!type==1  || $!company.cType==1 )
-	DefProvince('','');//默认站点
+		#if($!company.cCityTop)
+			DefProvince('$!company.cMoProvince','$!company.cMoCity');//默认站点
+		#else
+			DefProvince('','');//默认站点
+		#end
 	
      //获取已存站点
        var UserSiteCity="";

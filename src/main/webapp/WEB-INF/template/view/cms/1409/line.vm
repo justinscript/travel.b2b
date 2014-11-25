@@ -18,7 +18,7 @@
     <div class="left">
       <div class="search">
         <div class="tit" style="display:none;">
-			#*#parse("/widget/site/showlinesite.vm")*#
+			<a href="#" class="one hover">周边短线</a><a href="#">国内长线</a><a href="#">国际线路</a>
         <div>
         <span><i class="i1"></i>已订人数：<b>$!{orderGuestCount}人</b></span>
         <span><i class="i2"></i>已有线路：<b>$!{linecount}条</b></span>
@@ -65,13 +65,11 @@
 					<dt class="desc"><b>$!line.lTypeString</b>$!line.lMode</dt>
 					<dt><span>行程天数：<em>$!line.lDay天</em></span></dt>
 					<dt class="time">
-						<span>最近团期：<em>10-1,10-210-1,10-210-1,10-210-1,10-2</em></span>
-						<span class="rili">更多团期</span>
+						<span class="rili"><a href="$url" target="_blank">更多团期</a></span>
 					</dt>
-					<dt class="route">行程概览：<em>苏州 > 上海 > 北京</em></dt>
 				</dl>
-				<div class="price"><span>￥$!{format.formatFloat($!line.lJCrPrice)}起</span></div>
-				<a href="#" class="order">预定</a>
+				<div class="price">￥<em>$!{format.formatFloat($!line.lJCrPrice)}</em>起</div>
+				<a href="$url" target="_blank" class="order">预定</a>
         </div>
 		#end
       </div>
@@ -82,12 +80,13 @@
       <div class="r-column">
         <div class="tit">周边短线</div>
         <div class="list">
-          <a href="#">海南专线</a>
+         <a href="/search/productSearch.htm?tn=line&keyword=&zId=89">温泉专线</a>
+		  <a href="/search/productSearch.htm?tn=line&keyword=&zId=135">滑雪专线</a>
         </div>
       </div>
 
       <div class="rbox">
-        <div class="tit"><span>商家推荐</span><a href="#">更多...</a></div>
+        <div class="tit"><span>商家推荐</span><a href="/company.htm">更多...</a></div>
         <ul>
             #foreach($companyDO in $!companyDOs)
 				<li>

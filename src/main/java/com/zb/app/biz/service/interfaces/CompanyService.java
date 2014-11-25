@@ -38,6 +38,8 @@ public interface CompanyService extends BaseService {
 
     List<TravelCompanyDO> list();
 
+	List<TravelCompanyDO> listQuery(TravelCompanyQuery query);
+
     boolean update(TravelCompanyDO travelCompanyDO);
 
     TravelCompanyDO getById(Long cId);

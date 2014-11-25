@@ -36,6 +36,7 @@ import com.zb.app.biz.query.TravelNewsQuery;
 import com.zb.app.biz.query.TravelOperationLogQuery;
 import com.zb.app.biz.query.TravelOrderQuery;
 import com.zb.app.biz.query.TravelServiceQuery;
+import com.zb.app.common.authority.AuthorityHelper;
 import com.zb.app.common.core.lang.Argument;
 import com.zb.app.common.core.lang.BeanUtils;
 import com.zb.app.common.core.lang.CollectionUtils;
@@ -129,6 +130,11 @@ public class AccountCustomerController extends BaseController {
         travelMemberDO.setmPassword(EncryptBuilder.getInstance().encrypt(travelMemberVO.getmPassword()));
         travelMemberDO.setmUserName(StringUtils.lowerCase(travelMemberVO.getmUserName()));
         travelMemberDO.setcId(WebUserTools.getCid());
+        if (StringUtils.isNotEmpty(travelMemberVO.getmRole())) {
+            String role = travelMemberVO.getmRole();
+            role = AuthorityHelper.makeAuthority(role);
+            travelMemberDO.setmRole(role);
+        }
 
         Integer i = memberService.insert(travelMemberDO);
         return i == 0 ? JsonResultUtils.error(travelMemberDO, "注册失败!") : JsonResultUtils.success(travelMemberDO,
@@ -143,6 +149,10 @@ public class AccountCustomerController extends BaseController {
     @RequestMapping(value = "/ljUpdateUser.htm")
     public ModelAndView ljUpdateUser(ModelAndView mav, Long id) {
         TravelMemberDO memberDO = memberService.getById(id);
+        if (StringUtils.isNotEmpty(memberDO.getmRole())) {
+            String role = AuthorityHelper.createRightStr(memberDO.getmRole());
+            memberDO.setmRole(role);
+        }
         if (StringUtils.isNotEmpty(memberDO.getmPassword())) {
             memberDO.setmPassword(EncryptBuilder.getInstance().decrypt(memberDO.getmPassword()));
         }
@@ -157,6 +167,11 @@ public class AccountCustomerController extends BaseController {
     public JsonResult updateUser(TravelMemberDO memberDO) {
         if (StringUtils.isNotEmpty(memberDO.getmPassword())) {
             memberDO.setmPassword(EncryptBuilder.getInstance().encrypt(memberDO.getmPassword()));
+        }
+        if (StringUtils.isNotEmpty(memberDO.getmRole()) && StringUtils.contains(memberDO.getmRole(), ",")) {
+            String role = memberDO.getmRole();
+            role = AuthorityHelper.makeAuthority(role);
+            memberDO.setmRole(role);
         }
         boolean b = memberService.update(memberDO);
         if (b) {
@@ -468,8 +483,8 @@ public class AccountCustomerController extends BaseController {
         TravelServiceDO serviceDO = new TravelServiceDO();
         BeanUtils.copyProperties(serviceDO, service);
         serviceDO.setcId(WebUserTools.getCid());
-        if(serviceDO.getsIsReceive() == null){
-        	serviceDO.setsIsReceive(0);
+        if (serviceDO.getsIsReceive() == null) {
+            serviceDO.setsIsReceive(0);
         }
         if (service.getsId() != null && service.getsId() > 0) {
             companyService.updateById(serviceDO);

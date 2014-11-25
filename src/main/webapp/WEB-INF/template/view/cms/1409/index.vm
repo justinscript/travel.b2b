@@ -14,19 +14,19 @@
 <body>
 #parse("/widget/common/index1409_header.vm")
 <input type="hidden" id="index" value="0"/>
-<div class="banner c">
+<div class="topimg c">
     <div class="slide_box">
         <div class="slide_list" id="banner">
 			#foreach($ad in $!adList)
             <div>
-    			<a href="$!{ad.link}"><img width="160" height="80" src="$!{ad.pic}"/></a>
+    			<a href="$!{ad.link}"><img width="690" height="315" src="$!{ad.pic}"/></a>
     		</div>
 			#end
         </div>
         <div class="slide_li">
-            <a href="#"><img src="/static/img/1409/show02.jpg"/></a>
-			<a href="#"><img src="/static/img/1409/show02.jpg"/></a>
-			<a href="#"><img src="/static/img/1409/show02.jpg"/></a>
+			#foreach($adf in $!adFooterList)
+    			<a href="$!{adf.link}"><img width="226" height="70" src="$!{adf.pic}"/></a>
+			#end
         </div>
     </div>
     <div class="b_right">
@@ -73,31 +73,30 @@
                 <li style="display:block">
   					#set($shortLineList=$!{columnMap.get(1)})
 					#foreach($!column in $shortLineList) 
-                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+                    <a href="/search/productSearch.htm?zId=$!{column.zId}">$!{column.zName}</a>
 					#end
                 </li>
 				<li>
 					#set($longLineList=$!{columnMap.get(0)})
 					#foreach($!column in $longLineList)
-					<a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+					<a href="/search/productSearch.htm?zId=$!{column.zId}">$!{column.zName}</a>
 					#end
 				</li>				
                 <li>
                     #set($internationalLineList=$!{columnMap.get(2)})
     				#foreach($!column in $internationalLineList) 
-                    <a href="/company/column/$!{column.zId}.htm">$!{column.zName}</a>
+                    <a href="/search/productSearch.htm?zId=$!{column.zId}">$!{column.zName}</a>
     				#end
                 </li>                
             </ul>
         </div>
     </div>
     <div class="rbox">
-        <div class="tit"><span>商家推荐</span><a href="company.htm">更多...</a></div>
+        <div class="tit"><span>商家推荐</span><a href="/company.htm">更多...</a></div>
         <ul>
 			#foreach($companyDO in $!companyDOs)
 				<li>
 					<a href="/company_view/$!{companyDO.cId}.htm">$!companyDO.cName</a>
-					<p>$!companyDO.cAboutus</p>
 				</li>
 			#end        
         </ul>
@@ -107,90 +106,89 @@
 <div class="i_line c">
     <div class="tit">
       <span class="fl" id="ilinetit"><a href="" class="first hover">国内长线</a><a href="">周边线路</a><a href="">国际线路</a></span>
-      <span class="fr"><a href="#">更多...</a></span>
+      <span class="fr"><a href="/line/showline.htm">更多...</a></span>
     </div>
     <div class="list" id="ilineli">
 		<div class="list-li" style="display:block;">
               <div class="pic">
 				#foreach($linevo in $lineMap.get(1))
-				#if($!{velocityCount} < 5)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
-                  <dt>
-                  <p> $linevo.lTile</p>
-                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
-                  </dt>
-                </dl>
-				#end
+    				#if($!{velocityCount} < 5)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                          <dt>
+                          <p> $linevo.lTile</p>
+                          </dt>
+                        </dl>
+    				#end
 				#end
               </div>
               <div class="li">
 				#foreach($linevo in $lineMap.get(1))
-				#if($!{velocityCount} > 4)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dt><a href="${url}">$linevo.lTile></a></dt>
-                  <dd class="desc">$!{linevo.lMode}</dd>
-                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
-                </dl>
-				#end
+    				#if($!{velocityCount} > 4)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dt><a href="${url}" target="_black">$linevo.lTile></a></dt>
+                          <dd class="desc"><b>$!line.lTypeString</b>$!line.lMode</dd>
+                          <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                        </dl>
+    				#end
 				#end
               </div>
 		</div>
 		<div class="list-li" style="display:none;">
               <div class="pic">
 				#foreach($linevo in $lineMap.get(0))
-				#if($!{velocityCount} < 5)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
-                  <dt>
-                  <p>$linevo.lTile</p>
-                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
-                  </dt>
-                </dl>
-				#end
+    				#if($!{velocityCount} < 5)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                          <dt>
+                          <p>$linevo.lTile</p>
+                          <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
+                          </dt>
+                        </dl>
+    				#end
 				#end
               </div>
               <div class="li">
 				#foreach($linevo in $lineMap.get(0))
-				#if($!{velocityCount} > 4)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dt><a href="${url}">$linevo.lTile></a></dt>
-                  <dd class="desc">$!{linevo.lMode}</dd>
-                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
-                </dl>
-				#end
+    				#if($!{velocityCount} > 4)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dt><a href="${url}">$linevo.lTile></a></dt>
+                          <dd class="desc">$!{linevo.lMode}</dd>
+                          <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                        </dl>
+    				#end
 				#end
               </div>
 		</div>
 		<div class="list-li" style="display:none;">
               <div class="pic">
 				#foreach($linevo in $lineMap.get(2))
-				#if($!{velocityCount} < 5)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
-                  <dt>
-                  <p>$linevo.lTile</p>
-                  <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
-                  </dt>
-                </dl>
-				#end
+    				#if($!{velocityCount} < 5)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dd><a href="${url}" target="_black"><img src="$!{linevo.lPhotoCover}" width="230" height="170"/></a></dd>
+                          <dt>
+                          <p>$linevo.lTile</p>
+                          <div><span class="reli"><a href="${url}" target="_black">更多团期</a></span></div>
+                          </dt>
+                        </dl>
+    				#end
 				#end
               </div>
               <div class="li">
 				#foreach($linevo in $lineMap.get(2))
-				#if($!{velocityCount} > 4)
-				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
-                <dl>
-                  <dt><a href="${url}">$linevo.lTile></a></dt>
-                  <dd class="desc">$!{linevo.lMode}</dd>
-                  <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
-                </dl>
-				#end
+    				#if($!{velocityCount} > 4)
+        				#set($url='/line/' + $!{linevo.lGroupNumber} + '.htm')
+                        <dl>
+                          <dt><a href="${url}"  target="_black">$linevo.lTile></a></dt>
+                          <dd class="desc">$!{linevo.lMode}</dd>
+                          <dd class="time"><span class="rili"><a href="${url}" target="_black">更多团期</a></span></dd>
+                        </dl>
+    				#end
 				#end
               </div>
 		</div>
@@ -207,7 +205,7 @@
             showIndex:false,
             normal:{width:'25px',height:'10px',lineHeight:'18px',right:'16px',bottom:'16px',fontSize:'12px',opacity:0.8,background:"#666666",border:"1px solid #999999",color:"#CCCCCC",marginRight:'6px'},
             focus:{background:"#ff8800",border:"1px solid #ff8800",color:"#000000"}
-            }     
+        }     
     });
   })
 </script>

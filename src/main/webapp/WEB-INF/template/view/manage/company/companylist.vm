@@ -16,7 +16,7 @@
         <td>$!company.cRecommend</td>
         <td>
         	#if($!company.cState==0)
-        		<font color="blue">未审核</font><button class="btn btn-mini btn-primary" data-id="$!company.cId" type="button" onclick="CompanyState(this,1)">审核</button>
+        		<font color="blue">未审核</font><button class="btn btn-mini btn-primary" data-id="$!company.cId" type="button" onclick="CompanyState(this,$!company.cId)">审核</button>
             #elseif($!company.cState==1)
                	正常
             #elseif($!company.cState==2)

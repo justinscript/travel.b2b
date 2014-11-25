@@ -44,27 +44,35 @@
                        </div>
                         <table class="tbl table-striped" cellpadding="0" cellspacing="0">
                             <tr>
-                                <th>操作内容</th>
+                                <th>备注</th>
                                 <th width="150">操作时间</th>
                                 <th width="100">类型</th>
 								<th width="100">积分</th>
                             </tr>
                             #foreach($!tid in $tidList)
                             <tr>
-                                <td>$!tid.idRemark</td>
+                                <td>$!tid.iRemark</td>
                                <td>${dateViewTools.formatDate($!tid.gmtCreate)}</td>
                                <td class="blue" >
-							   		#if($!tid.idType==0)
-							   			可用积分
-							   		#else
-							   			冻结积分
+							   		#if($!tid.iSource==0)
+							   			消费产品
+							   		#elseif($!tid.iSource==1)
+							   			返还积分
+									#elseif($!tid.iSource==2)
+							   			转入
+									#elseif($!tid.iSource==3)
+							   			充值
+									#elseif($!tid.iSource==4)
+							   			发布线路
+									#elseif($!tid.iSource==5)
+							   			冻结归还
 							   		#end
 							   </td>
 							   <td class="red">
-							   		#if($!tid.idIntegral>0)
-                               			+$!tid.idIntegral
+							   		#if($!tid.iAddintegral>0)
+                               			+$!tid.iAddintegral
                                		#else
-                               			$!tid.idIntegral
+                               			$!tid.iAddintegral
                                		#end
 							   </td>
                             </tr>

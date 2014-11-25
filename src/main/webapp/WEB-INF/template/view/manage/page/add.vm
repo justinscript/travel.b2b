@@ -16,6 +16,9 @@ var editor = KindEditor.create('.kindcontent', {allowFileManager : true,afterBlu
 					<select name="source" datatype="*" nullmsg="请选择栏目类别">
 						<option value="1" #if($!{page.source}==1) selected #end>关于左边</option>
 						<option value="2" #if($!{page.source}==2) selected #end>帮助中心</option>
+						<option value="3" #if($!{page.source}==3) selected #end>订购指南</option>
+						<option value="4" #if($!{page.source}==4) selected #end>批发商问题</option>
+						<option value="5" #if($!{page.source}==5) selected #end>组团社问题</option>
 					</select>
                 </span>
                 <div class="Validform_checktip"></div>

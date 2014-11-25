@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 import com.zb.app.biz.cons.ArticlesSourceEnum;
 import com.zb.app.biz.cons.CompanyStateEnum;
 import com.zb.app.biz.cons.CompanyTypeEnum;
+import com.zb.app.biz.cons.IntegralSourceEnum;
 import com.zb.app.biz.cons.LineTemplateEnum;
 import com.zb.app.biz.domain.TravelArticlesDO;
 import com.zb.app.biz.domain.TravelCompanyDO;
@@ -252,6 +253,9 @@ public class CMSController extends BaseController {
         integralQuery.setcId(WebUserTools.getCid());
         integralQuery.setmId(WebUserTools.getMid());
         TravelIntegralDO integralDO = integralService.queryBala(integralQuery);
+        if(integralDO == null){
+        	return JsonResultUtils.error(giftOrderDO, "你暂时还没有积分，赶快去消费吧！");
+        }
         mav.addObject("integralDO", integralDO);
         if (giftOrderDO.getGoIntegralCount() > integralDO.getiBalance()) return JsonResultUtils.error(giftOrderDO,
                                                                                                       "积分不够，请改变兑换数量！");
@@ -260,7 +264,21 @@ public class CMSController extends BaseController {
         giftOrderDO.setmId(WebUserTools.getMid());
         giftOrderDO.setGoState(0);
         Integer i = integralService.addTravelGiftOrder(giftOrderDO);
-        return i == 0 ? JsonResultUtils.error(giftOrderDO, "下单失败!") : JsonResultUtils.success(giftOrderDO, "下单成功!");
+        if(i == 0){
+        	return JsonResultUtils.error(giftOrderDO, "下单失败!");
+        }else{
+        	TravelIntegralDO newACC = new TravelIntegralDO();
+	        newACC.setcId(WebUserTools.getCid());
+	        newACC.setmId(WebUserTools.getMid());
+	        newACC.setiSource(IntegralSourceEnum.consumer.value);
+	        newACC.setiAddintegral(0 - giftOrderDO.getGoIntegralCount());
+	        newACC.setiBalance(integralDO.getiBalance() + newACC.getiAddintegral());
+	        newACC.setiFrozen(integralDO.getiFrozen());
+	        newACC.setiAltogether(newACC.getiBalance() + newACC.getiFrozen());
+	        newACC.setiRemark("兑换积分产品");
+	        integralService.addTravelIntegral(newACC);
+	        return JsonResultUtils.success(giftOrderDO, "下单成功!");
+        }
     }
 
     /**
@@ -449,7 +467,7 @@ public class CMSController extends BaseController {
     @RequestMapping(value = "/queryCompanyByConditions.htm", produces = "application/json")
     @ResponseBody
     public JsonResult queryCompanyByConditions(TravelCompanyQuery query, Integer limit) {
-        List<TravelCompanyDO> list = companyService.showCompanyPagination(query);
+        List<TravelCompanyDO> list = companyService.listQuery(query);
 
         List<Map<String, ?>> mapList = CollectionUtils.toMapList(list, "cId", "cName", "cSpell");
         // StringBuilder sb = new StringBuilder();

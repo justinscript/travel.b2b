@@ -114,7 +114,9 @@ CREATE TABLE TRAVEL_SERVICE
    C_ID              NUMBER(20),      	--公司ID
    S_NAME			 VARCHAR2(200),	  	--客服名称
    S_QQ		 		 VARCHAR2(50),  	--客服QQ
-   S_SORT			 NUMBER(9)  		--排序(大号排前)
+   S_SORT			 NUMBER(9),  		--排序(大号排前)
+   S_MOBILE			 VARCHAR2(200),		--客服手机
+   S_ISRECEIVE		 NUMBER(9)			--是否接受信息
 );
 ALTER TABLE TRAVEL_SERVICE ADD CONSTRAINT PK_TRAVEL_SERVICE PRIMARY KEY(S_ID);
 CREATE SEQUENCE TRAVEL_SERVICE_SEQ INCREMENT BY 1 START WITH 1 NOMAXVALUE;
@@ -514,7 +516,7 @@ CREATE TABLE TRAVEL_NEWS
    N_TYPE          	 	NUMBER(9),	      --新闻类型
    N_TITLE			 	VARCHAR2(200),	  --新闻标题
    N_PIC			 	VARCHAR2(2000),  --新闻图片或广告图片
-   N_CONTENT		 	VARCHAR2(2000),  --新闻内容
+   N_CONTENT		 	NCLOB,           --新闻内容
    N_STATE			 	NUMBER(20),      --状态(0=正常,1=停止)
    N_HOTCOUNT	     	NUMBER(20)       --浏览量
 );

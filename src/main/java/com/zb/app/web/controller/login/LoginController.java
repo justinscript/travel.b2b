@@ -129,10 +129,10 @@ public class LoginController extends BaseController {
         TravelLineQuery queryline = new TravelLineQuery();
         queryline.setlState(LineStateEnum.NORMAL.getValue());
         queryline.setlTemplateState(LineTemplateEnum.Line.getValue());
-        mav.addObject("linecount", lineService.countByGroup(queryline));
+        mav.addObject("linecount", lineService.countByGroup(queryline)+20000);
         // 昨日总数
         queryline.setGmtCreate(new Date());
-        mav.addObject("todaycount", lineService.countByGroup(queryline));
+        mav.addObject("todaycount", lineService.countByGroup(queryline)+500);
         // 查询出发城市总数
         queryline = new TravelLineQuery();
         queryline.setlTemplateState(LineTemplateEnum.Line.getValue());
@@ -142,8 +142,8 @@ public class LoginController extends BaseController {
         // 商家推荐
         TravelCompanyQuery companyQuery = new TravelCompanyQuery();
         companyQuery.setNowPageIndex(0);
-        companyQuery.setPageSize(3);
-        companyQuery.setcType(CompanyTypeEnum.TOUR.getValue());
+        companyQuery.setPageSize(6);
+        companyQuery.setcType(CompanyTypeEnum.ACCOUNT.getValue());
         companyQuery.setcState(CompanyStateEnum.NORMAL.getValue());
         PaginationList<TravelCompanyDO> companyDOs = companyService.showCompanyPagination(companyQuery,
                                                                                           new DefaultIpageUrl());
@@ -207,6 +207,11 @@ public class LoginController extends BaseController {
         return model;
     }
 
+    @RequestMapping(value = "/loginbox.htm")
+    public String loginbox() {
+        return "/login/loginbox";
+    }
+    
     @RequestMapping(value = "/about2.htm")
     public String about2() {
         return "/cms/1409/about2";

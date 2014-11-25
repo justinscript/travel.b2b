@@ -57,7 +57,7 @@
             	#if($!type=="update")
             		<span>$!member.mUserName</span>
                 #else
-                	<span><input type="text" name="mUserName" value="$!member.mUserName" datatype="*"  nullmsg="用户名不能为空" ajaxurl="/userNameVerify.htm?type=$!cType"/></span>
+                	<span><input type="text" name="mUserName" value="$!member.mUserName" datatype="username"  nullmsg="用户名不能为空" ajaxurl="/userNameVerify.htm?type=$!cType"/></span>
                 #end
             </td>
         </tr>
@@ -103,16 +103,21 @@
         <tr>
             <th>管理类型：</th>
             <td>
-            	#if($!member.mType!=1)
+            	#if($!member.mType==0)
                 	<label class="rad">
-                    	<input type="radio" name="mType" id="optionsRadios1" value="0" checked />超级管理员</label>
+							<input type="radio" name="mType" id="optionsRadios1" value="0" checked />超级管理员</label>
                 	<label class="rad">
-                    	<input type="radio" name="mType" id="optionsRadios2" value="1" /> 普通管理员</label>
-                #else
+							<input type="radio" name="mType" id="optionsRadios2" value="1"/> 普通管理员</label>
+                #elseif($!member.mType==1)
                 	<label class="rad">
-                    	<input type="radio" name="mType" id="optionsRadios1" value="0" />超级管理员</label>
+							<input type="radio" name="mType" id="optionsRadios1" value="0" />超级管理员</label>
                 	<label class="rad">
                     	<input type="radio" name="mType" id="optionsRadios2" value="1" checked /> 普通管理员</label>
+				#else
+					<label class="rad">
+							<input type="radio" name="mType" id="optionsRadios1" value="0"/>超级管理员</label>
+                	<label class="rad">
+                    	<input type="radio" name="mType" id="optionsRadios2" value="1" checked/> 普通管理员</label>
                 #end
             </td>
         </tr>
@@ -120,7 +125,7 @@
         <th class="valigntop">用户权限 ：</th>
         <td><input type="hidden" name="mRole" id="mRole" value="$!member.mRole"/>
         	<div class="quanxian">
-				#set($allRight=$!{enumViewTools.getAccountRightMenu()})
+				#set($allRight=$!{enumViewTools.getManageRightMenu()})
 				#foreach($rightMenu in $allRight)
         		<dl>
         			<dd>$!{rightMenu.getName()}</dd>
@@ -150,6 +155,7 @@
                 #end
             </td>
         </tr>
+		
         <tr><th></th><td><button class="btn btn-primary" type="submit" >提交</button></td></tr>
     </table>   
 </form>
