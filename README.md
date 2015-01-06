@@ -20,7 +20,9 @@ com.zb.platform
 
 ###目前的框架:
 * 服务器:centos+nginx
-* 后端:springMVC+spring+mybatis+velocity+oracle+redis+tomcat+GraphicsMagick
+* 数据库:oracle
+* 缓存:redis
+* 后端:springMVC+spring+mybatis+velocity+tomcat+GraphicsMagick
 * 前端:jQuery+css+html
 * 项目构建:maven,svn
 * 开发工具:iTerm,vim,eclipse,sublime,chrome
