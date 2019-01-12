@@ -16,7 +16,7 @@ import org.apache.ibatis.type.JdbcType;
 import org.apache.ibatis.type.TypeHandler;
 
 /**
- * @author zxc Jun 25, 2014 1:04:23 PM
+ * @author justinscript Jun 25, 2014 1:04:23 PM
  */
 public class OracleClobTypeHandler implements TypeHandler<Object> {
 
