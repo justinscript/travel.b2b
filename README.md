@@ -33,4 +33,4 @@ com.zb.platform
 * BUG管理工具:Mantis
 * 持续集成:Jenkins
 
-本项目代码已有半年未更新,如需最新代码,可在[博客](http://lawrence-zxc.github.io/)留言
+本项目代码已有半年未更新,如需最新代码,可提issue
