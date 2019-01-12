@@ -10,7 +10,7 @@ import java.util.Date;
 import com.zb.app.common.pagination.Pagination;
 
 /**
- * @author ZhouZhong 2014-8-15 下午5:32:48
+ * @author justinscript 2014-8-15 下午5:32:48
  */
 public class TravelBlackListQuery extends Pagination {
 
