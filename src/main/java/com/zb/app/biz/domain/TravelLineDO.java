@@ -14,7 +14,7 @@ import com.zb.app.common.core.CustomToStringStyle;
 /**
  * 旅游产品
  * 
- * @author zxc Jun 24, 2014 2:33:47 PM
+ * @author justinscript Jun 24, 2014 2:33:47 PM
  */
 public class TravelLineDO extends TravelLineThinDO implements Serializable {
 
