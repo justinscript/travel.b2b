@@ -12,7 +12,7 @@ import com.zb.app.common.pagination.Pagination;
 /**
  * 积分表
  * 
- * @author Administrator 2014-7-24 上午10:46:35
+ * @author justinscript 2014-7-24 上午10:46:35
  */
 public class TravelIntegralQuery extends Pagination {
 
