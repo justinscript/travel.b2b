@@ -1,7 +1,5 @@
-com.zb.platform
+b2b旅游
 ===============
-
-## www.zuobian.com 官网项目,B2B在线旅游 
 
 ### 功能点
 
